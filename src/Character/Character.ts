@@ -218,12 +218,14 @@ export default class Character {
             this.equipment.potion.charges -= 1;
         }
 
+        this.setTarget();
         if (this.ability && this.currentMana >= this.stats.getStat(StatType.ManaCost)) {
             this.ability.func(this);
         }
         else {
             this.turnAttack();
         }
+
         this.addMana(this.stats.getStat(StatType.ManaRegen));
         this.statusEffectManager.onTurnEnd();
     }
@@ -266,7 +268,7 @@ export default class Character {
         return rollDice(dice['1d100']) <= blockChance;
     }
 
-    calcDamageRange({ attackType, damageRange, spellPowerRatio, isOffHand }: { attackType: AttackType, damageRange: DamageRange, spellPowerRatio?: number, isOffHand: boolean }): { min: number, max: number } {
+    calcDamage({ attackType, damage, spellPowerRatio, isOffHand = false, invisibleStacks = 0 }: { attackType: AttackType, damage: number, spellPowerRatio?: number, isOffHand?: boolean, invisibleStacks?: number }): number {
         let damageBonus = this.stats.damage + (isOffHand ? this.stats.getStat(StatType.OffHandDamage) : 0);
         let damagePercent = this.stats.getStat(StatType.DamagePercent);
         switch (attackType) {
@@ -285,17 +287,22 @@ export default class Character {
                 break;
         }
         const spellDamage = spellPowerRatio !== undefined ? this.stats.spellPower * spellPowerRatio : 0;
+        const sneakDamage = Invisible.damage * invisibleStacks;
 
-        const minDamage = (damageRange.min + damageRange.bonus + damageBonus + spellDamage) * (1 + damagePercent);
-        const maxDamage = (damageRange.max + damageRange.bonus + damageBonus + spellDamage) * (1 + damagePercent);
-        return { min: minDamage, max: maxDamage };
+        return (damage + damageBonus + spellDamage + sneakDamage) * (1 + damagePercent);
     }
 
-    attack({ target, attackType, damageRange, spellPowerRatio, isOffHand, abilityName }: { target: Character, attackType: AttackType, damageRange: DamageRange, spellPowerRatio?: number, isOffHand: boolean, abilityName?: string }): boolean {
+    calcDamageRange({ attackType, damageRange, spellPowerRatio, isOffHand = false }: { attackType: AttackType, damageRange: DamageRange, spellPowerRatio?: number, isOffHand?: boolean }): { min: number, max: number } {
+        const min = this.calcDamage({ attackType, damage: damageRange.min + damageRange.bonus, spellPowerRatio, isOffHand });
+        const max = this.calcDamage({ attackType, damage: damageRange.max + damageRange.bonus, spellPowerRatio, isOffHand });
+        return { min, max };
+    }
+
+    attack({ target, attackType, damageRange, spellPowerRatio, isOffHand = false, abilityName }: { target: Character, attackType: AttackType, damageRange: DamageRange, spellPowerRatio?: number, isOffHand?: boolean, abilityName?: string }): boolean {
 
         let hitType: HitType = HitType.Miss;
         let damage: number = 0;
-        let sneakDamage: number = 0;
+        let sneakAttack: boolean = false;
         let blocked: boolean = false;
 
         const hit = this.hitRoll({
@@ -307,34 +314,9 @@ export default class Character {
         // Calculate damage for the attack if hit
         if (hit) {
             hitType = HitType.Hit;
+            if (this.statusEffectManager.getBuffStacks(BuffId.Invisible) > 0) sneakAttack = true;
 
-            damage = damageRoll(damageRange);
-
-            // Add damage bonuses
-            let damageBonus = this.stats.damage + (isOffHand ? this.stats.getStat(StatType.OffHandDamage) : 0);
-            let damagePercent = this.stats.getStat(StatType.DamagePercent);
-            switch (attackType) {
-                case AttackType.MeleeWeapon:
-                    damageBonus += this.stats.meleeWeaponDamage;
-                    damagePercent += this.stats.getStat(StatType.MeleeWeaponDamagePercent);
-                    break;
-                case AttackType.RangedWeapon:
-                    damageBonus += this.stats.rangedWeaponDamage;
-                    damagePercent += this.stats.getStat(StatType.RangedWeaponDamagePercent);
-                    break;
-                case AttackType.Spell:
-                    // do nothing
-                    break;
-                default:
-                    break;
-            }
-            const spellDamage = spellPowerRatio ? Math.floor(this.stats.spellPower * spellPowerRatio) : 0;
-
-            if (this.isInvisible()) {
-                sneakDamage = Invisible.damage * this.statusEffectManager.getBuffStacks(BuffId.Invisible);
-            }
-
-            damage = (damage + damageBonus + spellDamage + sneakDamage) * (1 + (damagePercent));
+            damage = this.calcDamage({ attackType, damage: damageRoll(damageRange), spellPowerRatio, isOffHand, invisibleStacks: this.statusEffectManager.getBuffStacks(BuffId.Invisible) });
 
             const crit = Character.critRoll(this.stats.critChance);
             if (crit) {
@@ -363,7 +345,7 @@ export default class Character {
                 tarName: target.name,
                 hitType,
                 damage,
-                sneak: sneakDamage > 0,
+                sneak: sneakAttack,
                 blocked,
                 abilityName
             });
@@ -384,18 +366,15 @@ export default class Character {
     }
 
     turnAttack(): void {
-        if (!this.battle) return;
-        this.setTarget();
         if (!this.target) {
-            this.battle.ref.log.add(`${this._name} has no target.`);
+            if (this.battle) this.battle.ref.log.add(`${this._name} has no target.`);
             return;
         }
-        if (this.target) {
-            // Main hand attack
-            this.weaponAttack(this.mainHand, this.target, false);
-            // Off-hand attack
-            if (this.equipment.offHandWeapon) this.weaponAttack(this.equipment.offHandWeapon, this.target, false);
-        }
+
+        // Main hand attack
+        this.weaponAttack(this.mainHand, this.target, false);
+        // Off-hand attack
+        if (this.equipment.offHandWeapon) this.weaponAttack(this.equipment.offHandWeapon, this.target, false);
     }
 
     weaponAttack(weapon: Weapon, target: Character, isOffHand: boolean): void {

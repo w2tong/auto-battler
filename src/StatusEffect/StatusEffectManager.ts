@@ -9,14 +9,22 @@ import debuffs from './debuffs';
 
 export default class StatusEffectManager {
     private char: Character;
-    private buffs: { [id in BuffId]?: Buff } = {};
-    private debuffs: { [id in DebuffId]?: Debuff } = {};
+    private _buffs: { [id in BuffId]?: Buff } = {};
+    private _debuffs: { [id in DebuffId]?: Debuff } = {};
 
     private outgoingBuffs: { [key: string]: Buff } = {};
     private outgoingDebuffs: { [key: string]: Debuff } = {};
 
     constructor(char: Character) {
         this.char = char;
+    }
+
+    get buffs() {
+        return this._buffs;
+    }
+
+    get debuffs() {
+        return this._debuffs;
     }
 
     getBuffStacks(id: BuffId) {
@@ -40,6 +48,7 @@ export default class StatusEffectManager {
     }
 
     addBuff(id: BuffId, source: Character, stacks: number) {
+        if (stacks <= 0) return;
         if (!this.buffs[id]) this.buffs[id] = new buffs[id](this.char);
         const buff = this.buffs[id];
         if (!buff) return;
@@ -49,6 +58,7 @@ export default class StatusEffectManager {
     }
 
     addDebuff(id: DebuffId, source: Character, stacks: number) {
+        if (stacks <= 0) return;
         if (!this.debuffs[id]) this.debuffs[id] = new debuffs[id](this.char);
         const debuff = this.debuffs[id];
         if (!debuff) return;
