@@ -11,8 +11,8 @@ function App() {
                 <Header />
                 <Routes>
                     <Route path="" element={<Home />} />
-                    <Route path="battle" element={<Battle />} />
                     <Route path="equipment" element={<Equipment />} />
+                    <Route path="battle" element={<Battle />} />
                 </Routes>
             </BrowserRouter>
         </>
