@@ -3,17 +3,19 @@ import { LocalStorageCharacter } from '../../types/LocalStorage';
 import { AttributeType, EquipSlot } from '@wholesome-sisters/auto-battler';
 import { type Action, CharactersContext, CharactersDispatchContext, SelectedContext } from './CharactersContext';
 
-type CharactersState = LocalStorageCharacter[];
-
 export function CharactersProvider({ children }: { children: ReactNode; }) {
     const lsChars = localStorage.getItem('characters');
-    const initialChars = lsChars ? JSON.parse(lsChars) : {};
+    const initialChars = lsChars ? JSON.parse(lsChars) : [];
     const [characters, dispatch] = useReducer(charactersReducer, initialChars);
-    const [selected, setSelected] = useState<number | null>(null);
+    const [selected, setSelected] = useState<number>(0);
 
     useEffect(() => {
         localStorage.setItem('characters', JSON.stringify(characters));
     }, [characters]);
+
+    useEffect(() => {
+        localStorage.setItem('selected', selected.toString());
+    }, [selected]);
 
     return (
         <CharactersContext.Provider value={characters}>
@@ -26,13 +28,14 @@ export function CharactersProvider({ children }: { children: ReactNode; }) {
     );
 }
 
-function charactersReducer(characters: CharactersState, action: Action): CharactersState {
+function charactersReducer(characters: LocalStorageCharacter[], action: Action): LocalStorageCharacter[] {
     switch (action.type) {
         case 'create': {
             return [
                 ...characters,
                 {
                     name: action.name,
+                    class: action.class,
                     level: 1,
                     exp: 0,
                     equipment: {

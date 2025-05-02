@@ -1,7 +1,8 @@
-import { AttributeType, EquipSlot } from "@wholesome-sisters/auto-battler";
+import { AttributeType, ClassName, EquipSlot } from "@wholesome-sisters/auto-battler";
 
 type LocalStorageCharacter = {
     name: string;
+    class: ClassName;
     level: number;
     exp: number;
     equipment: { [slot in EquipSlot]: string | null; };
@@ -9,7 +10,7 @@ type LocalStorageCharacter = {
 };
 type LocalStorage = {
     characters: LocalStorageCharacter[];
-    selectedCharacter: number;
+    selected: number;
     inventory: { [id: string]: { id: string, inUse: boolean; }; };
 };
 
