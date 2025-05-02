@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useReducer, useState } from 'react';
 import { LocalStorageCharacter } from '../../types/LocalStorage';
-import { AttributeType, EquipSlot } from '@wholesome-sisters/auto-battler';
+import { AttributeType, defaultEquipment, EquipSlot } from '@wholesome-sisters/auto-battler';
 import { type Action, CharactersContext, CharactersDispatchContext, SelectedContext } from './CharactersContext';
 
 export function CharactersProvider({ children }: { children: ReactNode; }) {
@@ -39,16 +39,16 @@ function charactersReducer(characters: LocalStorageCharacter[], action: Action):
                     level: 1,
                     exp: 0,
                     equipment: {
-                        [EquipSlot.MainHand]: null,
-                        [EquipSlot.OffHand]: null,
-                        [EquipSlot.Head]: null,
-                        [EquipSlot.Armour]: null,
-                        [EquipSlot.Hands]: null,
-                        [EquipSlot.Belt]: null,
-                        [EquipSlot.Ring1]: null,
-                        [EquipSlot.Ring2]: null,
-                        [EquipSlot.Potion]: null,
-                        [EquipSlot.Amulet]: null
+                        [EquipSlot.MainHand]: defaultEquipment[action.class][EquipSlot.MainHand]?.id ?? null,
+                        [EquipSlot.OffHand]: defaultEquipment[action.class][EquipSlot.OffHand]?.id ?? null,
+                        [EquipSlot.Head]: defaultEquipment[action.class][EquipSlot.Head]?.id ?? null,
+                        [EquipSlot.Armour]: defaultEquipment[action.class][EquipSlot.Armour]?.id ?? null,
+                        [EquipSlot.Hands]: defaultEquipment[action.class][EquipSlot.Hands]?.id ?? null,
+                        [EquipSlot.Belt]: defaultEquipment[action.class][EquipSlot.Belt]?.id ?? null,
+                        [EquipSlot.Ring1]: defaultEquipment[action.class][EquipSlot.Ring1]?.id ?? null,
+                        [EquipSlot.Ring2]: defaultEquipment[action.class][EquipSlot.Ring2]?.id ?? null,
+                        [EquipSlot.Potion]: defaultEquipment[action.class][EquipSlot.Potion]?.id ?? null,
+                        [EquipSlot.Amulet]: defaultEquipment[action.class][EquipSlot.Amulet]?.id ?? null
                     },
                     attributes: {
                         [AttributeType.Strength]: 0,
