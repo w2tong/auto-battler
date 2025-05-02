@@ -1,24 +1,28 @@
-import { AttributeType, Character, ClassName, StatType } from "@wholesome-sisters/auto-battler";
+import { AttributeType, Character, createEquipmentImport, StatType } from "@wholesome-sisters/auto-battler";
 import CharacterSheet from "../../features/CharacterSheet/CharacterSheet";
 import { WeaponProps } from "../../features/CharacterSheet/components/Weapon";
+import { useCharacters, useSelected } from "../../hooks/Characters/CharactersContext";
 
 function Equipment() {
-    const char = new Character({
-        name: 'Billy',
-        level: 5,
-        className: ClassName.Fighter,
-        attributes: {
-            [AttributeType.Strength]: 2,
-            [AttributeType.Dexterity]: 3,
-            [AttributeType.Perception]: 4,
-            [AttributeType.Constitution]: 5,
-            [AttributeType.Intelligence]: 6,
-            [AttributeType.Wisdom]: 7
-        },
-        statTemplate: {
+    const characters = useCharacters();
+    const { selected } = useSelected();
+    const selectedChar = characters[selected];
 
-        },
-        equipment: {},
+    if (!selectedChar) {
+        return (
+            <>
+                Select a character.
+            </>
+        );
+    }
+
+    const char = new Character({
+        name: selectedChar.name,
+        level: selectedChar.level,
+        className: selectedChar.class,
+        attributes: selectedChar.attributes,
+        statTemplate: {},
+        equipment: createEquipmentImport(selectedChar.equipment)
     });
 
     const mainHand = char.equipment.mainHand;
@@ -57,7 +61,8 @@ function Equipment() {
         <>
             <div>
                 This is the Equipment page.
-                <CharacterSheet name={char.name} level={char.level} className={ClassName.Fighter} exp={50}
+                {/* TODO: change this to use char variable */}
+                <CharacterSheet name={char.name} level={char.level} className={selectedChar.class} exp={50}
                     attributes={{
                         [AttributeType.Strength]: char.attributes.strength,
                         [AttributeType.Dexterity]: char.attributes.dexterity,
