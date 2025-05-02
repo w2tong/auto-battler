@@ -60,8 +60,6 @@ function Equipment() {
     return (
         <>
             <div>
-                This is the Equipment page.
-                {/* TODO: change this to use char variable */}
                 <CharacterSheet name={char.name} level={char.level} className={selectedChar.class} exp={50}
                     attributes={{
                         [AttributeType.Strength]: char.attributes.strength,
