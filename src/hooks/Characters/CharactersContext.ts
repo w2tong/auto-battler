@@ -21,6 +21,6 @@ export function useCharacters() {
 export function useCharactersDispatch() {
     return useContext(CharactersDispatchContext);
 }
-export function useSelectedContext() {
+export function useSelected() {
     return useContext(SelectedContext);
 }

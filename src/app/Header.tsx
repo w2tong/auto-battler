@@ -3,8 +3,8 @@ import CharacterSelect from "../features/CharacterSelect/CharacterSelect";
 
 function Header() {
     return (
-        <div>
-            <nav className={'w-full flex justify-evenly'}>
+        <div className='flex justify-between w-full'>
+            <nav className={'flex grow justify-evenly'}>
                 <NavLink to='/'>Home</NavLink>
                 <NavLink to='/equipment'>Equipment</NavLink>
                 <NavLink to='/battle'>Battle</NavLink>
