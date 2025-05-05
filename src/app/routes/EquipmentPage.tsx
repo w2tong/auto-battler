@@ -2,8 +2,9 @@ import { AttributeType, Character, createEquipmentImport, StatType } from "@whol
 import CharacterSheet from "../../features/CharacterSheet/CharacterSheet";
 import { WeaponProps } from "../../features/CharacterSheet/components/Weapon";
 import { useCharacters, useSelected } from "../../hooks/Characters/CharactersContext";
+import EquipmentInventory from "../../features/EquipmentInventory/EquipmentInventory";
 
-function Equipment() {
+export default function EquipmentPage() {
     const characters = useCharacters();
     const { selected } = useSelected();
     const selectedChar = characters[selected];
@@ -59,6 +60,7 @@ function Equipment() {
 
     return (
         <>
+            <EquipmentInventory />
             <div>
                 <CharacterSheet name={char.name} level={char.level} className={selectedChar.class} exp={50}
                     attributes={{
@@ -125,5 +127,3 @@ function Equipment() {
         </>
     );
 }
-
-export default Equipment;

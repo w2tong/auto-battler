@@ -11,11 +11,11 @@ export default function CharacterSelect() {
             Characters
             {/* TODO: MAKE CLICKING ON SELECTED CHARACTER DO SOMETHING DIFFERENT */}
             <div className=' hover:bg-secondary-hover'>
-                {selectedChar ? <CharacterSelectCard name={selectedChar.name} charClass={selectedChar.class} level={selectedChar.level} exp={selectedChar.exp} index={-1} selected={false} setSelected={() => { }} /> : 'Select a character'}
+                {selectedChar ? <CharacterSelectCard name={selectedChar.name} charClass={selectedChar.class} level={selectedChar.level} exp={selectedChar.exp} index={-1} selected={false} setSelected={() => { }} key={-1} /> : 'Select a character'}
             </div>
             <div className='relative w-max'>
                 <div className='absolute invisible group-hover:visible bg-secondary w-60'>
-                    {characters.map((char, i) => <CharacterSelectCard name={char.name} charClass={char.class} level={char.level} exp={char.exp} index={i} selected={i === selected} setSelected={setSelected} />)}
+                    {characters.map((char, i) => <CharacterSelectCard name={char.name} charClass={char.class} level={char.level} exp={char.exp} index={i} selected={i === selected} setSelected={setSelected} key={i} />)}
                 </div>
             </div>
         </div>

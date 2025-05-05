@@ -62,27 +62,56 @@ function charactersReducer(characters: LocalStorageCharacter[], action: Action):
             ];
         };
         case 'update': {
-            return characters.map((c, i) =>
-                i === action.index
-                    ? {
-                        ...c,
-                        name: action.name ?? c.name,
-                        level: action.level ?? c.level,
-                        exp: action.exp ?? c.exp,
-                        equipment: {
-                            ...c.equipment,
-                            ...action.equipment
-                        },
-                        attributes: {
-                            ...c.attributes,
-                            ...action.attributes
-                        }
+            const c = characters[action.index];
+            return [
+                ...characters.slice(0, action.index),
+                {
+                    ...c,
+                    name: action.name ?? c.name,
+                    level: action.level ?? c.level,
+                    exp: action.exp ?? c.exp,
+                    equipment: {
+                        ...c.equipment,
+                        ...action.equipment
+                    },
+                    attributes: {
+                        ...c.attributes,
+                        ...action.attributes
                     }
-                    : c
-            );
+                },
+                ...characters.slice(action.index + 1)
+            ];
+            // return characters.map((c, i) =>
+            //     i === action.index
+            //         ? {
+            //             ...c,
+            //             name: action.name ?? c.name,
+            //             level: action.level ?? c.level,
+            //             exp: action.exp ?? c.exp,
+            //             equipment: {
+            //                 ...c.equipment,
+            //                 ...action.equipment
+            //             },
+            //             attributes: {
+            //                 ...c.attributes,
+            //                 ...action.attributes
+            //             }
+            //         }
+            //         : c
+            // );
+        }
+        case 'swapEquipment': {
+            const equipment = Object.assign({}, characters[action.index].equipment);
+            [equipment[action.slot1], equipment[action.slot2]] = [equipment[action.slot2], equipment[action.slot1]];
+
+            return [
+                ...characters.slice(0, action.index),
+                Object.assign({}, characters[action.index], { equipment }),
+                ...characters.slice(action.index + 1)
+            ];
         }
         case 'delete': {
-            return [...characters.slice(0, action.index), ...characters.slice(action.index)];
+            return [...characters.slice(0, action.index), ...characters.slice(action.index + 1)];
         }
         default: {
             throw Error('Unknown action: ' + action);

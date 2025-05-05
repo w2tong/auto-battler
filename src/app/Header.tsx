@@ -6,7 +6,7 @@ function Header() {
         <div className='flex justify-between w-full'>
             <nav className={'flex grow justify-evenly'}>
                 <NavLink to='/'>Home</NavLink>
-                <NavLink to='/equipment'>Equipment</NavLink>
+                <NavLink to='/equipment'>Character</NavLink>
                 <NavLink to='/battle'>Battle</NavLink>
                 <NavLink to='/create-character'>Create Character</NavLink>
             </nav>

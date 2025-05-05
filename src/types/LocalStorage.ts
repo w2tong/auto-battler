@@ -11,7 +11,7 @@ type LocalStorageCharacter = {
 type LocalStorage = {
     characters: LocalStorageCharacter[];
     selected: number;
-    inventory: { [id: string]: { id: string, inUse: boolean; }; };
+    inventory: string[];
 };
 
 export default LocalStorage;
