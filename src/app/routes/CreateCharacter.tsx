@@ -23,9 +23,12 @@ export default function CharacterCreator() {
             <div>{Classes[selectedClass].ability.name}</div>
             <div>{Classes[selectedClass].ability.description}</div>
 
-            <div>Name: <input ref={inputRef} className='text-black' type='text' name='name' placeholder='Enter a name' required /></div>
+            <label>
+                Name:
+                <input ref={inputRef} className='ml-2' type='text' name='name' placeholder='Enter a name' required />
+            </label>
             <button onClick={() => {
-                if (inputRef.current && charactersDispatch) {
+                if (inputRef.current && inputRef.current.value.length >= 1 && charactersDispatch) {
                     charactersDispatch({ type: 'create', name: inputRef.current.value, class: selectedClass });
                 }
             }}>
