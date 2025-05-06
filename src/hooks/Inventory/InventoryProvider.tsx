@@ -7,7 +7,7 @@ export function InventoryProvider({ children }: { children: ReactNode; }) {
     const [inventory, dispatch] = useReducer(inventoryReducer, lsInventory ? JSON.parse(lsInventory) : []);
 
     useEffect(() => {
-        localStorage.setItem('characters', JSON.stringify(inventory));
+        localStorage.setItem('inventory', JSON.stringify(inventory));
     }, [inventory]);
 
     return (
