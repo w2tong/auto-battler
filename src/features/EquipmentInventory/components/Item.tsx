@@ -2,6 +2,7 @@ import { equips } from '@wholesome-sisters/auto-battler';
 import { useDraggable, useDndMonitor } from '@dnd-kit/core';
 import { useState } from 'react';
 import { tierBorderColor } from '../../../utils/tierColor';
+import ItemTooltip from '../../../components/ItemTooltip';
 
 export default function Item({ id, itemId, filtered }: { id: string, itemId: string, filtered: boolean; }) {
     const [dragging, setDragging] = useState<boolean>(false);
@@ -25,9 +26,13 @@ export default function Item({ id, itemId, filtered }: { id: string, itemId: str
     );
 
     // TODO: add tooltip (tooltip loads on hoverover and stays in DOM)
+
+
     return (
-        <div className='w-[66px] h-[66px]' id={`${itemId}`} ref={setNodeRef} style={style} {...listeners} {...attributes}>
-            {icon}
-        </div>
+        <ItemTooltip item={item} display={!dragging}>
+            <div className='w-[66px] h-[66px]' id={`${itemId}`} ref={setNodeRef} style={style} {...listeners} {...attributes}>
+                {icon}
+            </div>
+        </ItemTooltip>
     );
 }

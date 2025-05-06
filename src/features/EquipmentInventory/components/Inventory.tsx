@@ -44,7 +44,7 @@ export default function Inventory({ items }: { items: (string | null)[]; }) {
                 </div>
             </div>
 
-            <div className='flex flex-row flex-wrap'>
+            <div className='flex flex-row flex-wrap content-start'>
                 {[...items, null].map((itemId, i) => {
                     let filtered = false;
                     if (itemId) {
