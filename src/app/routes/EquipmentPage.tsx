@@ -75,7 +75,7 @@ export default function EquipmentPage() {
                         [StatType.MaxHealth]: char.stats.maxHealth,
                         [StatType.HealthPercent]: char.stats.getStat(StatType.HealthPercent),
                         [StatType.Armour]: char.stats.getStat(StatType.Armour),
-                        [StatType.Deflection]: char.stats.getStat(StatType.Armour),
+                        [StatType.Deflection]: char.stats.getStat(StatType.Deflection),
                         [StatType.Dodge]: char.stats.dodge,
                         [StatType.StatusResistance]: char.stats.getStat(StatType.StatusResistance),
                         [StatType.Thorns]: char.stats.getStat(StatType.Thorns),
