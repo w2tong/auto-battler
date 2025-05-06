@@ -11,7 +11,7 @@ export default function Tooltip({ children, content, display = true }: { childre
         >
             {children}
             {display && isVisible &&
-                <div className='absolute w-[160px] -top-full bg-black text-white p-2 rounded z-10'>
+                <div className='absolute w-[160px] -top-full bg-black text-white p-2 rounded z-10 inline-block'>
                     {content}
                 </div>
             }

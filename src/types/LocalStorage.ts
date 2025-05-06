@@ -8,11 +8,14 @@ type LocalStorageCharacter = {
     equipment: { [slot in EquipSlot]: string | null; };
     attributes: { [key in AttributeType]: number };
 };
+
+type LocalStorageInventory = (string | null)[];
+
 type LocalStorage = {
     characters: LocalStorageCharacter[];
     selected: number;
-    inventory: string[];
+    inventory: LocalStorageInventory;
 };
 
 export default LocalStorage;
-export type { LocalStorageCharacter };
+export type { LocalStorageCharacter, LocalStorageInventory };

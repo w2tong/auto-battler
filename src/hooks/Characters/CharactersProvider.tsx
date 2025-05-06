@@ -5,8 +5,7 @@ import { type Action, CharactersContext, CharactersDispatchContext, SelectedCont
 
 export function CharactersProvider({ children }: { children: ReactNode; }) {
     const lsChars = localStorage.getItem('characters');
-    const initialChars = lsChars ? JSON.parse(lsChars) : [];
-    const [characters, dispatch] = useReducer(charactersReducer, initialChars);
+    const [characters, dispatch] = useReducer(charactersReducer, lsChars ? JSON.parse(lsChars) : []);
     const [selected, setSelected] = useState<number>(0);
 
     useEffect(() => {
@@ -81,24 +80,6 @@ function charactersReducer(characters: LocalStorageCharacter[], action: Action):
                 },
                 ...characters.slice(action.index + 1)
             ];
-            // return characters.map((c, i) =>
-            //     i === action.index
-            //         ? {
-            //             ...c,
-            //             name: action.name ?? c.name,
-            //             level: action.level ?? c.level,
-            //             exp: action.exp ?? c.exp,
-            //             equipment: {
-            //                 ...c.equipment,
-            //                 ...action.equipment
-            //             },
-            //             attributes: {
-            //                 ...c.attributes,
-            //                 ...action.attributes
-            //             }
-            //         }
-            //         : c
-            // );
         }
         case 'swapEquipment': {
             const equipment = Object.assign({}, characters[action.index].equipment);

@@ -2,53 +2,17 @@ import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import { ActionUpdateEquipment, useCharacters, useCharactersDispatch, useSelected } from "../../hooks/Characters/CharactersContext";
 import Equipment from "./components/Equipment";
 import Inventory from "./components/Inventory";
-import { useEffect, useState } from "react";
 import { equips, EquipSlot, isValidEquip, ItemType, WeaponTypeProperties } from "@wholesome-sisters/auto-battler";
+import { useInventory, useInventoryDispatch } from "../../hooks/Inventory/InventoryContext";
 
 export default function EquipmentInventory() {
     const characters = useCharacters();
-    const dispatch = useCharactersDispatch();
+    const charactersDispatch = useCharactersDispatch();
     const { selected } = useSelected();
     const equipment = characters[selected].equipment;
 
-    const lsInventory = localStorage.getItem('inventory');
-    const [inventory, setInventory] = useState<(string | null)[]>(lsInventory ? JSON.parse(lsInventory) : []);
-
-    function addToInventory(itemId: string | null, index?: number) {
-        console.log('addToInventory', itemId, index);
-        if (itemId === null && index === undefined) return;
-        setInventory(inv => {
-            // Add to specific index
-            if (index !== undefined) {
-                const newInv = inv.slice();
-                newInv[index] = itemId;
-                return newInv;
-            }
-
-            // Add to first empty slot
-            index = inv.indexOf(null);
-            if (index === -1) {
-                return [...inv, itemId];
-            }
-            else {
-                const newInv = inv.slice();
-                newInv[index] = itemId;
-                return newInv;
-            }
-        });
-    }
-
-    function swapInventory(index1: number, index2: number) {
-        setInventory(inv => {
-            const newInv = inv.slice();
-            [newInv[index1], newInv[index2]] = [newInv[index2], newInv[index1]];
-            return newInv;
-        });
-    }
-
-    useEffect(() => {
-        localStorage.setItem('inventory', JSON.stringify(inventory));
-    }, [inventory]);
+    const inventory = useInventory();
+    const inventoryDispatch = useInventoryDispatch();
 
     return (
         <DndContext onDragEnd={handleDragEnd}>
@@ -81,7 +45,7 @@ export default function EquipmentInventory() {
             if (equipment[equipActiveId] && !isValidEquip(equipment[equipActiveId], equipOverId)) return;
             if (equipment[equipOverId] && !isValidEquip(equipment[equipOverId], equipOverId)) return;
 
-            dispatch({ type: 'swapEquipment', index: selected, slot1: equipActiveId, slot2: equipOverId });
+            charactersDispatch({ type: 'swapEquipment', index: selected, slot1: equipActiveId, slot2: equipOverId });
         }
         // Equipment Item dragged to Inventory Slot
         else if (activeIsEquip) {
@@ -93,7 +57,7 @@ export default function EquipmentInventory() {
             if (!equipItem) return;
 
             const equipChanges: ActionUpdateEquipment = { [activeEquipId]: invItem };
-            addToInventory(equipItem, iOverId);
+            inventoryDispatch({ type: 'update', index: iOverId, itemId: equipItem });
 
             if (equipItem && invItem) {
                 if (!isValidEquip(invItem, activeEquipId)) return;
@@ -101,13 +65,13 @@ export default function EquipmentInventory() {
                 if (activeEquipId === EquipSlot.MainHand) {
                     const item = equips[invItem];
                     if (item.itemType === ItemType.Weapon && WeaponTypeProperties[item.type].twoHanded && equipment[EquipSlot.OffHand]) {
-                        addToInventory(equipment[EquipSlot.OffHand]);
+                        inventoryDispatch({ type: 'update', itemId: equipment[EquipSlot.OffHand] });
                         equipChanges[EquipSlot.OffHand] = null;
                     }
                 }
             }
 
-            dispatch({ type: 'update', index: selected, equipment: equipChanges });
+            charactersDispatch({ type: 'update', index: selected, equipment: equipChanges });
         }
         // Inventory Item dragged to Equipment Slot
         else if (overIsEquip) {
@@ -120,13 +84,13 @@ export default function EquipmentInventory() {
             if (!isValidEquip(invItem, overEquipId)) return;
 
             const equipChanges: ActionUpdateEquipment = { [overEquipId]: invItem };
-            addToInventory(equipItem, iActiveId);
+            inventoryDispatch({ type: 'update', index: iActiveId, itemId: equipItem });
 
             // Unequip off hand if equipping two-handed weapon
             if (overEquipId === EquipSlot.MainHand) {
                 const item = equips[invItem];
                 if (item.itemType === ItemType.Weapon && WeaponTypeProperties[item.type].twoHanded && equipment[EquipSlot.OffHand]) {
-                    addToInventory(equipment[EquipSlot.OffHand]);
+                    inventoryDispatch({ type: 'update', itemId: equipment[EquipSlot.OffHand] });
                     equipChanges[EquipSlot.OffHand] = null;
                 }
             }
@@ -134,19 +98,19 @@ export default function EquipmentInventory() {
             else if (overEquipId === EquipSlot.OffHand && equipment[EquipSlot.MainHand]) {
                 const mainHand = equips[equipment[EquipSlot.MainHand]];
                 if (mainHand.itemType === ItemType.Weapon && WeaponTypeProperties[mainHand.type].twoHanded) {
-                    addToInventory(equipment[EquipSlot.MainHand]);
+                    inventoryDispatch({ type: 'update', itemId: equipment[EquipSlot.MainHand] });
                     equipChanges[EquipSlot.MainHand] = null;
                 }
             }
 
-            dispatch({ type: 'update', index: selected, equipment: equipChanges });
+            charactersDispatch({ type: 'update', index: selected, equipment: equipChanges });
         }
         // Inventory Item dragged to Inventory Slot
         else {
             const iActiveId = Number(activeId);
             const iOverId = Number(overId);
 
-            swapInventory(iActiveId, iOverId);
+            inventoryDispatch({ type: 'swap', index1: iActiveId, index2: iOverId });
         }
     }
 }

@@ -4,7 +4,7 @@ import ClassIcon from '../../components/ClassIcon';
 import { useCharactersDispatch } from '../../hooks/Characters/CharactersContext';
 
 export default function CharacterCreator() {
-    const dispatch = useCharactersDispatch();
+    const charactersDispatch = useCharactersDispatch();
     const [selectedClass, setSelectedClass] = useState<ClassName>(ClassName.Fighter);
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -25,8 +25,8 @@ export default function CharacterCreator() {
 
             <div>Name: <input ref={inputRef} className='text-black' type='text' name='name' placeholder='Enter a name' required /></div>
             <button onClick={() => {
-                if (inputRef.current && dispatch) {
-                    dispatch({ type: 'create', name: inputRef.current.value, class: selectedClass });
+                if (inputRef.current && charactersDispatch) {
+                    charactersDispatch({ type: 'create', name: inputRef.current.value, class: selectedClass });
                 }
             }}>
                 Create Character
