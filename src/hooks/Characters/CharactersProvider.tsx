@@ -43,11 +43,11 @@ function charactersReducer(characters: LocalStorageCharacter[], action: Action):
                         [EquipSlot.Head]: defaultEquipment[action.class][EquipSlot.Head]?.id ?? null,
                         [EquipSlot.Armour]: defaultEquipment[action.class][EquipSlot.Armour]?.id ?? null,
                         [EquipSlot.Hands]: defaultEquipment[action.class][EquipSlot.Hands]?.id ?? null,
-                        [EquipSlot.Belt]: defaultEquipment[action.class][EquipSlot.Belt]?.id ?? null,
+                        [EquipSlot.Waist]: defaultEquipment[action.class][EquipSlot.Waist]?.id ?? null,
                         [EquipSlot.Ring1]: defaultEquipment[action.class][EquipSlot.Ring1]?.id ?? null,
                         [EquipSlot.Ring2]: defaultEquipment[action.class][EquipSlot.Ring2]?.id ?? null,
                         [EquipSlot.Potion]: defaultEquipment[action.class][EquipSlot.Potion]?.id ?? null,
-                        [EquipSlot.Amulet]: defaultEquipment[action.class][EquipSlot.Amulet]?.id ?? null
+                        [EquipSlot.Neck]: defaultEquipment[action.class][EquipSlot.Neck]?.id ?? null
                     },
                     attributes: {
                         [AttributeType.Strength]: 0,

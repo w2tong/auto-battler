@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ItemSlot from './ItemSlot';
-import { EquipSlot, ItemType, equips } from '@wholesome-sisters/auto-battler';
+import { ItemType, equips } from '@wholesome-sisters/auto-battler';
 
 const tierOptions = [
     { value: '0', text: 'Tier 0' },
@@ -19,8 +19,8 @@ const itemOptions = [
     { value: ItemType.Hands, text: ItemType.Hands },
     { value: ItemType.Ring, text: ItemType.Ring },
     { value: ItemType.Potion, text: ItemType.Potion },
-    { value: ItemType.Belt, text: ItemType.Belt },
-    { value: ItemType.Amulet, text: ItemType.Amulet }
+    { value: ItemType.Waist, text: ItemType.Waist },
+    { value: ItemType.Neck, text: ItemType.Neck }
 ];
 
 export default function Inventory({ items }: { items: (string | null)[]; }) {

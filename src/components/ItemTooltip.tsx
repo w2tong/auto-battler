@@ -1,4 +1,4 @@
-import { Armour, Belt, Hands, Head, Item, ItemAttributes, ItemStats, ItemType, Potion, Ring, Shield, StatType, Weapon, WeaponTypeProperties } from "@wholesome-sisters/auto-battler";
+import { Armour, Hands, Head, Item, ItemAttributes, ItemStats, ItemType, Potion, Ring, Shield, StatType, Waist, Weapon, WeaponTypeProperties } from "@wholesome-sisters/auto-battler";
 import { tierTextColor } from "../utils/tierColor";
 import { ReactNode, useMemo } from "react";
 import Tooltip from "./Tooltip";
@@ -117,19 +117,19 @@ const itemTypeContentMap: Record<ItemType, (item: Item) => ReactNode> = {
             </>
         );
     },
-    [ItemType.Belt]: (item) => {
-        const belt = item as Belt;
+    [ItemType.Waist]: (item) => {
+        const waist = item as Waist;
         return (
             <>
-                <div>{ItemType.Belt}</div>
-                {createAttributes(belt.attributes)}
-                {createStats(belt.stats)}
+                <div>{ItemType.Waist}</div>
+                {createAttributes(waist.attributes)}
+                {createStats(waist.stats)}
             </>
         );
     },
-    [ItemType.Amulet]: (item) => {
+    [ItemType.Neck]: (item) => {
         console.log(item.name);
-        // TODO: filled out when amulets are added
+        // TODO: filled out when necks are added
         return (
             <>
             </>

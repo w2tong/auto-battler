@@ -3,9 +3,9 @@ import { useDroppable } from '@dnd-kit/core';
 import { EquipSlot } from '@wholesome-sisters/auto-battler';
 import inventorySlot from '../assets/EquipSlotIcons/inventory.png';
 
-import amulet from '../assets/EquipSlotIcons/amulet.png';
+import neck from '../assets/EquipSlotIcons/neck.png';
 import armour from '../assets/EquipSlotIcons/armour.png';
-import belt from '../assets/EquipSlotIcons/belt.png';
+import waist from '../assets/EquipSlotIcons/waist.png';
 import hands from '../assets/EquipSlotIcons/hands.png';
 import head from '../assets/EquipSlotIcons/head.png';
 import mainHand from '../assets/EquipSlotIcons/mainhand.png';
@@ -22,8 +22,8 @@ const icons: { [key in EquipSlot]: string } = {
     [EquipSlot.Ring1]: ring,
     [EquipSlot.Ring2]: ring,
     [EquipSlot.Potion]: potion,
-    [EquipSlot.Belt]: belt,
-    [EquipSlot.Amulet]: amulet
+    [EquipSlot.Waist]: waist,
+    [EquipSlot.Neck]: neck
 };
 
 export default function ItemSlot({ id, itemId, filtered, slot }: { id: string, itemId: string | null, filtered: boolean, slot?: EquipSlot; }) {

@@ -11,13 +11,13 @@ export default function Equipment({ equipment }: { equipment: { [slot in EquipSl
                         <ItemSlot id={EquipSlot.Head} itemId={equipment[EquipSlot.Head]} filtered={false} slot={EquipSlot.Head} />
                         <ItemSlot id={EquipSlot.Armour} itemId={equipment[EquipSlot.Armour]} filtered={false} slot={EquipSlot.Armour} />
                         <ItemSlot id={EquipSlot.Hands} itemId={equipment[EquipSlot.Hands]} filtered={false} slot={EquipSlot.Hands} />
-                        <ItemSlot id={EquipSlot.Belt} itemId={equipment[EquipSlot.Belt]} filtered={false} slot={EquipSlot.Belt} />
+                        <ItemSlot id={EquipSlot.Waist} itemId={equipment[EquipSlot.Waist]} filtered={false} slot={EquipSlot.Waist} />
                     </div>
 
                     <div className='w-[136px] h-[272px] bg-secondary' >Character goes here</div>
 
                     <div className='flex-col'>
-                        <ItemSlot id={EquipSlot.Amulet} itemId={equipment[EquipSlot.Amulet]} filtered={false} slot={EquipSlot.Amulet} />
+                        <ItemSlot id={EquipSlot.Neck} itemId={equipment[EquipSlot.Neck]} filtered={false} slot={EquipSlot.Neck} />
                         <ItemSlot id={EquipSlot.Ring1} itemId={equipment[EquipSlot.Ring1]} filtered={false} slot={EquipSlot.Ring1} />
                         <ItemSlot id={EquipSlot.Ring2} itemId={equipment[EquipSlot.Ring2]} filtered={false} slot={EquipSlot.Ring2} />
                         <ItemSlot id={EquipSlot.Potion} itemId={equipment[EquipSlot.Potion]} filtered={false} slot={EquipSlot.Potion} />
