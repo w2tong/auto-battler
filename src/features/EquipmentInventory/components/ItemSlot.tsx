@@ -26,7 +26,7 @@ const icons: { [key in EquipSlot]: string } = {
     [EquipSlot.Neck]: neck
 };
 
-export default function ItemSlot({ id, itemId, filtered, slot }: { id: string, itemId: string | null, filtered: boolean, slot?: EquipSlot, overItemId: string; }) {
+export default function ItemSlot({ id, itemId, filtered, slot }: { id: string, itemId: string | null, filtered: boolean, slot?: EquipSlot; }) {
     const { isOver, setNodeRef, over, active } = useDroppable({
         id,
         data: { itemId }
