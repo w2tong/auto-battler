@@ -61,69 +61,67 @@ export default function EquipmentPage() {
     return (
         <>
             <EquipmentInventory />
-            <div>
-                <CharacterSheet name={char.name} level={char.level} className={selectedChar.class} exp={selectedChar.exp}
-                    attributes={{
-                        [AttributeType.Strength]: char.attributes.strength,
-                        [AttributeType.Dexterity]: char.attributes.dexterity,
-                        [AttributeType.Perception]: char.attributes.perception,
-                        [AttributeType.Constitution]: char.attributes.constitution,
-                        [AttributeType.Intelligence]: char.attributes.intelligence,
-                        [AttributeType.Wisdom]: char.attributes.wisdom
-                    }}
-                    stats={{
-                        [StatType.MaxHealth]: char.stats.maxHealth,
-                        [StatType.HealthPercent]: char.stats.getStat(StatType.HealthPercent),
-                        [StatType.Armour]: char.stats.getStat(StatType.Armour),
-                        [StatType.Deflection]: char.stats.getStat(StatType.Deflection),
-                        [StatType.Dodge]: char.stats.dodge,
-                        [StatType.StatusResistance]: char.stats.getStat(StatType.StatusResistance),
-                        [StatType.Thorns]: char.stats.getStat(StatType.Thorns),
-                        // Block
-                        [StatType.BlockChance]: char.stats.getStat(StatType.BlockChance),
-                        [StatType.BlockPower]: char.stats.getStat(StatType.BlockPower),
+            <CharacterSheet name={char.name} level={char.level} className={selectedChar.class} exp={selectedChar.exp}
+                attributes={{
+                    [AttributeType.Strength]: char.attributes.strength,
+                    [AttributeType.Dexterity]: char.attributes.dexterity,
+                    [AttributeType.Perception]: char.attributes.perception,
+                    [AttributeType.Constitution]: char.attributes.constitution,
+                    [AttributeType.Intelligence]: char.attributes.intelligence,
+                    [AttributeType.Wisdom]: char.attributes.wisdom
+                }}
+                stats={{
+                    [StatType.MaxHealth]: char.stats.maxHealth,
+                    [StatType.HealthPercent]: char.stats.getStat(StatType.HealthPercent),
+                    [StatType.Armour]: char.stats.getStat(StatType.Armour),
+                    [StatType.Deflection]: char.stats.getStat(StatType.Deflection),
+                    [StatType.Dodge]: char.stats.dodge,
+                    [StatType.StatusResistance]: char.stats.getStat(StatType.StatusResistance),
+                    [StatType.Thorns]: char.stats.getStat(StatType.Thorns),
+                    // Block
+                    [StatType.BlockChance]: char.stats.getStat(StatType.BlockChance),
+                    [StatType.BlockPower]: char.stats.getStat(StatType.BlockPower),
 
-                        // Accuracy
-                        [StatType.Accuracy]: char.stats.getStat(StatType.Accuracy),
-                        [StatType.OffHandAccuracy]: char.stats.getStat(StatType.OffHandAccuracy),
-                        [StatType.MeleeAccuracy]: char.stats.getStat(StatType.MeleeAccuracy),
-                        [StatType.RangedAccuracy]: char.stats.getStat(StatType.RangedAccuracy),
+                    // Accuracy
+                    [StatType.Accuracy]: char.stats.getStat(StatType.Accuracy),
+                    [StatType.OffHandAccuracy]: char.stats.getStat(StatType.OffHandAccuracy),
+                    [StatType.MeleeAccuracy]: char.stats.getStat(StatType.MeleeAccuracy),
+                    [StatType.RangedAccuracy]: char.stats.getStat(StatType.RangedAccuracy),
 
-                        // Damage
-                        [StatType.Damage]: char.stats.getStat(StatType.Damage),
-                        [StatType.DamagePercent]: char.stats.getStat(StatType.DamagePercent),
+                    // Damage
+                    [StatType.Damage]: char.stats.getStat(StatType.Damage),
+                    [StatType.DamagePercent]: char.stats.getStat(StatType.DamagePercent),
 
-                        // Critical
-                        [StatType.CriticalChance]: char.stats.getStat(StatType.CriticalChance),
-                        [StatType.CriticalDamage]: char.stats.getStat(StatType.CriticalDamage),
+                    // Critical
+                    [StatType.CriticalChance]: char.stats.getStat(StatType.CriticalChance),
+                    [StatType.CriticalDamage]: char.stats.getStat(StatType.CriticalDamage),
 
-                        // Defense Reduction
-                        [StatType.ArmourPenetration]: char.stats.getStat(StatType.ArmourPenetration),
-                        [StatType.DodgeReduction]: char.stats.getStat(StatType.DodgeReduction),
+                    // Defense Reduction
+                    [StatType.ArmourPenetration]: char.stats.getStat(StatType.ArmourPenetration),
+                    [StatType.DodgeReduction]: char.stats.getStat(StatType.DodgeReduction),
 
-                        // Spell
-                        [StatType.SpellAccuracy]: char.stats.getStat(StatType.SpellAccuracy),
-                        [StatType.SpellPower]: char.stats.spellPower,
-                        [StatType.SpellPowerPercent]: char.stats.getStat(StatType.SpellPowerPercent),
+                    // Spell
+                    [StatType.SpellAccuracy]: char.stats.getStat(StatType.SpellAccuracy),
+                    [StatType.SpellPower]: char.stats.spellPower,
+                    [StatType.SpellPowerPercent]: char.stats.getStat(StatType.SpellPowerPercent),
 
-                        // Mana
-                        [StatType.ManaCost]: char.stats.getStat(StatType.ManaCost),
-                        [StatType.StartingMana]: char.stats.getStat(StatType.StartingMana),
-                        [StatType.ManaRegen]: char.stats.getStat(StatType.ManaRegen),
-                        [StatType.ManaOnHit]: char.stats.getStat(StatType.ManaOnHit),
+                    // Mana
+                    [StatType.ManaCost]: char.stats.getStat(StatType.ManaCost),
+                    [StatType.StartingMana]: char.stats.getStat(StatType.StartingMana),
+                    [StatType.ManaRegen]: char.stats.getStat(StatType.ManaRegen),
+                    [StatType.ManaOnHit]: char.stats.getStat(StatType.ManaOnHit),
 
-                        // Initiative
-                        [StatType.Initiative]: char.stats.getStat(StatType.Initiative),
+                    // Initiative
+                    [StatType.Initiative]: char.stats.getStat(StatType.Initiative),
 
-                        // Potion
-                        [StatType.PotionCharges]: char.stats.getStat(StatType.PotionCharges),
-                        [StatType.PotionHealing]: char.stats.getStat(StatType.PotionHealing),
-                        [StatType.PotionEffectiveness]: char.stats.getStat(StatType.PotionEffectiveness),
-                    }}
-                    mainHand={mainHandProps}
-                    offHand={offHandProps}
-                />
-            </div>
+                    // Potion
+                    [StatType.PotionCharges]: char.stats.getStat(StatType.PotionCharges),
+                    [StatType.PotionHealing]: char.stats.getStat(StatType.PotionHealing),
+                    [StatType.PotionEffectiveness]: char.stats.getStat(StatType.PotionEffectiveness),
+                }}
+                mainHand={mainHandProps}
+                offHand={offHandProps}
+            />
         </>
     );
 }
