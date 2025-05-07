@@ -26,7 +26,7 @@ export default function EquipmentInventory() {
         </DndContext>
     );
 
-    async function handleDragEnd(event: DragEndEvent) {
+    function handleDragEnd(event: DragEndEvent) {
         if (!event.over || selected < 0) return;
         const equipSlots = Object.values(EquipSlot);
 
