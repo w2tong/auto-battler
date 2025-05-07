@@ -1,6 +1,6 @@
 import Item from './Item';
 import { useDroppable } from '@dnd-kit/core';
-import { EquipSlot } from '@wholesome-sisters/auto-battler';
+import { EquipSlot, isValidEquip } from '@wholesome-sisters/auto-battler';
 import inventorySlot from '../assets/EquipSlotIcons/inventory.png';
 
 import neck from '../assets/EquipSlotIcons/neck.png';
@@ -26,13 +26,22 @@ const icons: { [key in EquipSlot]: string } = {
     [EquipSlot.Neck]: neck
 };
 
-export default function ItemSlot({ id, itemId, filtered, slot }: { id: string, itemId: string | null, filtered: boolean, slot?: EquipSlot; }) {
-    const { isOver, setNodeRef } = useDroppable({
+export default function ItemSlot({ id, itemId, filtered, slot }: { id: string, itemId: string | null, filtered: boolean, slot?: EquipSlot, overItemId: string; }) {
+    const { isOver, setNodeRef, over, active } = useDroppable({
         id,
         data: { itemId }
     });
 
-    const borderColor = isOver ? 'border-white' : 'border-zinc-700';
+    let borderColor = 'border-zinc-700';
+    if (isOver && over && active?.data.current?.itemId) {
+        const activeItemId = active.data.current.itemId;
+        if (isNaN(parseInt(over.id.toString()))) {
+            borderColor = isValidEquip(activeItemId, over.id as EquipSlot) ? 'border-green-700' : 'border-red-700';
+        }
+        else {
+            borderColor = 'border-white';
+        }
+    }
 
     return (
         <div style={{ backgroundImage: `url(${slot ? icons[slot] : inventorySlot})` }} className={`w-[68px] h-[68px] border-2 rounded-sm bg-center bg-no-repeat ${borderColor}`} ref={setNodeRef}>
