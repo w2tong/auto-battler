@@ -1,15 +1,14 @@
 import { Armour, Hands, Head, Item, ItemAttributes, ItemStats, ItemType, Potion, Ring, Shield, StatType, Waist, Weapon, WeaponTypeProperties } from "@wholesome-sisters/auto-battler";
 import { tierTextColor } from "../utils/tierColor";
-import { ReactNode, useMemo } from "react";
+import { type ReactNode } from "react";
 import Tooltip from "./Tooltip";
 import { formatStat } from "../utils/stats";
 
 export default function ItemTooltipContent({ children, item, display = true }: { children: ReactNode, item: Item, display?: boolean; }) {
-    const itemContent = useMemo(() => getItemContent(item), [item]);
     const content =
         <div className='whitespace-nowrap'>
             <div className={`${tierTextColor[item.tier]} font-bold`}>{item.name}</div>
-            {itemContent}
+            {getItemContent(item)}
         </div>;
 
     return (
