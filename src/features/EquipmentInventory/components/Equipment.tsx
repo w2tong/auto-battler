@@ -5,7 +5,7 @@ export default function Equipment({ equipment }: { equipment: { [slot in EquipSl
     return (
         <>
             <h2 className='py-1'>Equipment</h2>
-            <div className='flex-col w-fit'>
+            <div className='flex-col'>
                 <div className='flex flex-row'>
                     <div className='flex-col'>
                         <ItemSlot id={EquipSlot.Head} itemId={equipment[EquipSlot.Head]} filtered={false} slot={EquipSlot.Head} />
