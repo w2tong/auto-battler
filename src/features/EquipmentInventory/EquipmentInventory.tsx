@@ -6,7 +6,6 @@ import { equips, EquipSlot, isValidEquip, ItemType, WeaponTypeProperties } from 
 import { useInventory, useInventoryDispatch } from "../../hooks/Inventory/InventoryContext";
 
 // TODO: add inventory sorting and filtering
-// TODO: add visuals for (in)valid equiping of items
 
 export default function EquipmentInventory() {
     const characters = useCharacters();
