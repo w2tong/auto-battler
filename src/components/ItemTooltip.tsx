@@ -5,10 +5,11 @@ import Tooltip from "./Tooltip";
 import { formatStat } from "../utils/stats";
 
 export default function ItemTooltipContent({ children, item, display = true }: { children: ReactNode, item: Item, display?: boolean; }) {
-    const content = <>
-        <div className={`${tierTextColor[item.tier]} font-bold`}>{item.name}</div>
-        {getItemContent(item)}
-    </>;
+    const content =
+        <div className='whitespace-nowrap'>
+            <div className={`${tierTextColor[item.tier]} font-bold`}>{item.name}</div>
+            {getItemContent(item)}
+        </div>;
 
     return (
         <Tooltip content={content} display={display}>
@@ -20,7 +21,7 @@ export default function ItemTooltipContent({ children, item, display = true }: {
 function createAttributes(attrs?: ItemAttributes) {
     if (attrs === undefined) return null;
     return (<>
-        {Object.entries(attrs).map(([attr, num]) => <div>{num} {attr}</div>)}
+        {Object.entries(attrs).map(([attr, num]) => <div>{`${num} ${attr}`}</div>)}
     </>);
 }
 
@@ -29,7 +30,7 @@ function createStats(stats?: ItemStats) {
     return (<>
         {Object.entries(stats).map(([stat, num]) => {
             const { key, val } = formatStat(stat as StatType, num);
-            return (<div>{val} {key}</div>);
+            return (<div>{`${val} ${key}`}</div>);
         })}
     </>);
 }

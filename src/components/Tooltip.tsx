@@ -5,7 +5,7 @@ export default function Tooltip({ children, content, display = true }: { childre
     return (
         <div className={`group ${display ? 'relative' : ''}`}>
             {children}
-            <div className={`absolute w-fit bottom-full bg-black text-white p-2 rounded z-10 border hidden ${display ? 'group-hover:block' : ''}`}>
+            <div className={`absolute bottom-full bg-black text-white p-2 rounded z-10 border hidden ${display ? 'group-hover:block' : ''}`}>
                 {content}
             </div>
         </div>
