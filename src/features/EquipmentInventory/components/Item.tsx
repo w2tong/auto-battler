@@ -23,8 +23,8 @@ export default function Item({ id, itemId, filtered }: { id: string, itemId: str
 
     return (
         <ItemTooltip item={item} display={!dragging}>
-            <div style={style} className={`w-[64px] h-[64px] box-border border-solid border-2 rounded-xs ${tierBorderColor[item.tier]} ${filtered ? 'opacity-20' : 'opacity-100'}`} ref={setNodeRef} {...listeners} {...attributes}>
-                <img src={`/item-icons/${item.img ? item.img : 'placeholder.png'}`} />
+            <div style={style} className={`z-10 w-[64px] h-[64px] box-border border-solid rounded-xs bg-black ${tierBorderColor[item.tier]} ${filtered ? '' : 'border-2'}`} ref={setNodeRef} {...listeners} {...attributes}>
+                <img src={`/item-icons/${item.img ? item.img : 'placeholder.png'}`} className={filtered ? 'opacity-20' : 'opacity-100'} />
             </div>
         </ItemTooltip>
     );
