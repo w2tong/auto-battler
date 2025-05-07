@@ -1,14 +1,15 @@
 import { Armour, Belt, Hands, Head, Item, ItemAttributes, ItemStats, ItemType, Potion, Ring, Shield, StatType, Weapon, WeaponTypeProperties } from "@wholesome-sisters/auto-battler";
 import { tierTextColor } from "../utils/tierColor";
-import { ReactNode } from "react";
+import { ReactNode, useMemo } from "react";
 import Tooltip from "./Tooltip";
 import { formatStat } from "../utils/stats";
 
 export default function ItemTooltipContent({ children, item, display = true }: { children: ReactNode, item: Item, display?: boolean; }) {
+    const itemContent = useMemo(() => getItemContent(item), [item]);
     const content =
         <div className='whitespace-nowrap'>
             <div className={`${tierTextColor[item.tier]} font-bold`}>{item.name}</div>
-            {getItemContent(item)}
+            {itemContent}
         </div>;
 
     return (
@@ -21,7 +22,7 @@ export default function ItemTooltipContent({ children, item, display = true }: {
 function createAttributes(attrs?: ItemAttributes) {
     if (attrs === undefined) return null;
     return (<>
-        {Object.entries(attrs).map(([attr, num]) => <div>{`${num} ${attr}`}</div>)}
+        {Object.entries(attrs).map(([attr, num]) => <div key={attr}>{`${num} ${attr}`}</div>)}
     </>);
 }
 
@@ -30,100 +31,108 @@ function createStats(stats?: ItemStats) {
     return (<>
         {Object.entries(stats).map(([stat, num]) => {
             const { key, val } = formatStat(stat as StatType, num);
-            return (<div>{`${val} ${key}`}</div>);
+            return (<div key={key}>{`${val} ${key}`}</div>);
         })}
     </>);
 }
 
 function getItemContent(item: Item) {
-    switch (item.itemType) {
-        case (ItemType.Weapon): {
-            const weapon = item as Weapon;
-            const { min, max, bonus } = weapon.damageRange;
-            return (
-                <>
-                    <div>{weapon.type}, {WeaponTypeProperties[weapon.type] ? 'Two-Handed' : 'One-Handed'}</div>
-                    <div>{min + bonus}-{max + bonus} {weapon.damageType} damage</div>
-                    {weapon.onHit ? <div>On Hit: {weapon.onHit.description}</div> : null}
-                    {createAttributes(weapon.attributes)}
-                    {createStats(weapon.stats)}
-                </>
-
-            );
-        }
-        case (ItemType.Shield): {
-            const shield = item as Shield;
-            return (
-                <>
-                    <div>{shield.type} {ItemType.Shield}</div>
-                    {createAttributes(shield.attributes)}
-                    {createStats(shield.stats)}
-                </>
-            );
-        }
-        case (ItemType.Armour): {
-            const armour = item as Armour;
-            return (
-                <>
-                    <div>{armour.type}</div>
-                    {armour.onHit ? <div>On Hit: {armour.onHit.description}</div> : null}
-                    {createAttributes(armour.attributes)}
-                    {createStats(armour.stats)}
-                </>
-            );
-        }
-        case (ItemType.Head): {
-            const head = item as Head;
-            return (
-                <>
-                    <div>{ItemType.Head}</div>
-                    {createAttributes(head.attributes)}
-                    {createStats(head.stats)}
-                </>
-            );
-        }
-        case (ItemType.Hands): {
-            const hands = item as Hands;
-            return (
-                <>
-                    <div>{ItemType.Hands}</div>
-                    {hands.weaponStyle ? <div>{hands.weaponStyle} Style</div> : null}
-                    {createAttributes(hands.attributes)}
-                    {createStats(hands.stats)}
-                </>
-            );
-        }
-        case (ItemType.Ring): {
-            const ring = item as Ring;
-            return (
-                <>
-                    <div>{ItemType.Ring}</div>
-                    {createAttributes(ring.attributes)}
-                    {createStats(ring.stats)}
-                </>
-            );
-        }
-        case (ItemType.Potion): {
-            const potion = item as Potion;
-            return (
-                <>
-                    <div>{ItemType.Potion}</div>
-                    {/* <div><DieRange dice={item.dice} flatBonus={item.bonus} /> Healing</div> */}
-                    <div>{potion.charges} Charge{potion.charges > 1 ? 's' : ''}</div>
-                    {potion.onUse ? <div>On Use: {potion.onUse.description}</div> : null}
-                </>
-            );
-        }
-        case (ItemType.Belt): {
-            const belt = item as Belt;
-            return (
-                <>
-                    <div>{ItemType.Belt}</div>
-                    {createAttributes(belt.attributes)}
-                    {createStats(belt.stats)}
-                </>
-            );
-        }
-    }
-    return null;
+    const renderContent = itemTypeContentMap[item.itemType];
+    return renderContent ? renderContent(item) : null;
 }
+
+const itemTypeContentMap: Record<ItemType, (item: Item) => ReactNode> = {
+    [ItemType.Weapon]: (item) => {
+        const weapon = item as Weapon;
+        const { min, max, bonus } = weapon.damageRange;
+        return (
+            <>
+                <div>{weapon.type}, {WeaponTypeProperties[weapon.type] ? 'Two-Handed' : 'One-Handed'}</div>
+                <div>{min + bonus}-{max + bonus} {weapon.damageType} damage</div>
+                {weapon.onHit ? <div>On Hit: {weapon.onHit.description}</div> : null}
+                {createAttributes(weapon.attributes)}
+                {createStats(weapon.stats)}
+            </>
+        );
+    },
+    [ItemType.Shield]: (item) => {
+        const shield = item as Shield;
+        return (
+            <>
+                <div>{shield.type} {ItemType.Shield}</div>
+                {createAttributes(shield.attributes)}
+                {createStats(shield.stats)}
+            </>
+        );
+    },
+    [ItemType.Armour]: (item) => {
+        const armour = item as Armour;
+        return (
+            <>
+                <div>{armour.type}</div>
+                {armour.onHit ? <div>On Hit: {armour.onHit.description}</div> : null}
+                {createAttributes(armour.attributes)}
+                {createStats(armour.stats)}
+            </>
+        );
+    },
+    [ItemType.Head]: (item) => {
+        const head = item as Head;
+        return (
+            <>
+                <div>{ItemType.Head}</div>
+                {createAttributes(head.attributes)}
+                {createStats(head.stats)}
+            </>
+        );
+    },
+    [ItemType.Hands]: (item) => {
+        const hands = item as Hands;
+        return (
+            <>
+                <div>{ItemType.Hands}</div>
+                {hands.weaponStyle ? <div>{hands.weaponStyle} Style</div> : null}
+                {createAttributes(hands.attributes)}
+                {createStats(hands.stats)}
+            </>
+        );
+    },
+    [ItemType.Ring]: (item) => {
+        const ring = item as Ring;
+        return (
+            <>
+                <div>{ItemType.Ring}</div>
+                {createAttributes(ring.attributes)}
+                {createStats(ring.stats)}
+            </>
+        );
+    },
+    [ItemType.Potion]: (item) => {
+        const potion = item as Potion;
+        return (
+            <>
+                <div>{ItemType.Potion}</div>
+                <div>{potion.charges} Charge{potion.charges > 1 ? 's' : ''}</div>
+                {potion.onUse ? <div>On Use: {potion.onUse.description}</div> : null}
+            </>
+        );
+    },
+    [ItemType.Belt]: (item) => {
+        const belt = item as Belt;
+        return (
+            <>
+                <div>{ItemType.Belt}</div>
+                {createAttributes(belt.attributes)}
+                {createStats(belt.stats)}
+            </>
+        );
+    },
+    [ItemType.Amulet]: (item) => {
+        console.log(item.name);
+        // TODO: filled out when amulets are added
+        return (
+            <>
+            </>
+        );
+    },
+};
