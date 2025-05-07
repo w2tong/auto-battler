@@ -27,7 +27,6 @@ export default function EquipmentInventory() {
     );
 
     async function handleDragEnd(event: DragEndEvent) {
-        // console.log()
         if (!event.over || selected < 0) return;
         const equipSlots = Object.values(EquipSlot);
 
