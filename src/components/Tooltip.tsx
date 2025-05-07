@@ -1,19 +1,13 @@
 import { ReactNode, useState } from "react";
 
 export default function Tooltip({ children, content, display = true }: { children: ReactNode, content: ReactNode, display?: boolean; }) {
-    const [isVisible, setIsVisible] = useState(false);
 
     return (
-        <div className={display ? 'relative' : ''}
-            onMouseEnter={() => setIsVisible(true)}
-            onMouseLeave={() => setIsVisible(false)}
-        >
+        <div className={`group ${display ? 'relative' : ''}`}>
             {children}
-            {display && isVisible &&
-                <div className='absolute w-[160px] bottom-full bg-black text-white p-2 rounded z-10 inline-block border'>
-                    {content}
-                </div>
-            }
+            <div className={`absolute w-fit bottom-full bg-black text-white p-2 rounded z-10 border hidden ${display ? 'group-hover:block' : ''}`}>
+                {content}
+            </div>
         </div>
     );
 }
