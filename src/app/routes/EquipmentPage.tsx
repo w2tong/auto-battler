@@ -62,7 +62,7 @@ export default function EquipmentPage() {
         <>
             <EquipmentInventory />
             <div>
-                <CharacterSheet name={char.name} level={char.level} className={selectedChar.class} exp={50}
+                <CharacterSheet name={char.name} level={char.level} className={selectedChar.class} exp={selectedChar.exp}
                     attributes={{
                         [AttributeType.Strength]: char.attributes.strength,
                         [AttributeType.Dexterity]: char.attributes.dexterity,
