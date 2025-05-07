@@ -5,6 +5,9 @@ import Inventory from "./components/Inventory";
 import { equips, EquipSlot, isValidEquip, ItemType, WeaponTypeProperties } from "@wholesome-sisters/auto-battler";
 import { useInventory, useInventoryDispatch } from "../../hooks/Inventory/InventoryContext";
 
+// TODO: add inventory sorting and filtering
+// TODO: add visuals for (in)valid equiping of items
+
 export default function EquipmentInventory() {
     const characters = useCharacters();
     const charactersDispatch = useCharactersDispatch();

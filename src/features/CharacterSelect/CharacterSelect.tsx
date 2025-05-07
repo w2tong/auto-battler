@@ -7,7 +7,7 @@ export default function CharacterSelect() {
     const selectedChar = characters[selected];
 
     return (
-        <div className='relative flex flex-col group bg-secondary z-50'>
+        <div className='relative flex flex-col group bg-secondary z-10'>
             Characters
             {/* TODO: MAKE CLICKING ON SELECTED CHARACTER DO SOMETHING DIFFERENT */}
             <div className=' hover:bg-secondary-hover'>

@@ -4,8 +4,7 @@ export default function Tooltip({ children, content, display = true }: { childre
     const [isVisible, setIsVisible] = useState(false);
 
     return (
-
-        <div className='relative'
+        <div className={display ? 'relative' : ''}
             onMouseEnter={() => setIsVisible(true)}
             onMouseLeave={() => setIsVisible(false)}
         >

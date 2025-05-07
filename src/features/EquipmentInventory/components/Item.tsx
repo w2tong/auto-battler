@@ -1,6 +1,6 @@
 import { equips } from '@wholesome-sisters/auto-battler';
 import { useDraggable, useDndMonitor } from '@dnd-kit/core';
-import { useState } from 'react';
+import { CSSProperties, useState } from 'react';
 import { tierBorderColor } from '../../../utils/tierColor';
 import ItemTooltip from '../../../components/ItemTooltip';
 
@@ -14,24 +14,17 @@ export default function Item({ id, itemId, filtered }: { id: string, itemId: str
         onDragStart() { setDragging(true); },
         onDragEnd() { setDragging(false); }
     });
-    const style = {
+    const style: CSSProperties = {
         ...(transform && { transform: `translate3d(${transform.x}px, ${transform.y}px, 0)` })
     };
 
     const item = equips[itemId];
-    const icon = (
-        <div className='bg-black'>
-            <div className={`w-[66px] h-[66px] box-border border-solid border-2 rounded-sm ${tierBorderColor[item.tier]} ${filtered ? 'opacity-20' : 'opacity-100'}`} style={{ backgroundImage: `url(/item-icons/${item.img ? item.img : 'placeholder.png'}` }} />
-        </div>
-    );
-
     // TODO: add tooltip (tooltip loads on hoverover and stays in DOM)
-
 
     return (
         <ItemTooltip item={item} display={!dragging}>
-            <div className='w-[66px] h-[66px]' id={`${itemId}`} ref={setNodeRef} style={style} {...listeners} {...attributes}>
-                {icon}
+            <div style={style} className={`w-[64px] h-[64px] box-border border-solid border-2 rounded-xs ${tierBorderColor[item.tier]} ${filtered ? 'opacity-20' : 'opacity-100'}`} ref={setNodeRef} {...listeners} {...attributes}>
+                <img src={`/item-icons/${item.img ? item.img : 'placeholder.png'}`} />
             </div>
         </ItemTooltip>
     );

@@ -32,11 +32,10 @@ export default function ItemSlot({ id, itemId, filtered, slot }: { id: string, i
         data: { itemId }
     });
 
-    const borderColor = isOver ? 'border-primary' : '';
+    const borderColor = isOver ? 'border-green-800' : 'border-zinc-700';
 
     return (
-        // <div className={`w-[68px] h-[68px] border-solid border rounded ${borderColor} ${slot ? icons[slot] : 'bg-[url(/item-slot-icons/inventory.png)]'} bg-center bg-no-repeat`} ref={setNodeRef}>
-        <div style={{ backgroundImage: `url(${slot ? icons[slot] : inventorySlot})` }} className={`w-[68px] h-[68px] border-solid border rounded ${borderColor} bg-center bg-no-repeat`} ref={setNodeRef}>
+        <div style={{ backgroundImage: `url(${slot ? icons[slot] : inventorySlot})` }} className={`w-[68px] h-[68px] border-2 rounded-sm bg-center bg-no-repeat ${borderColor}`} ref={setNodeRef}>
             {itemId ? <Item id={id} itemId={itemId} filtered={filtered} /> : null}
         </div>
     );
