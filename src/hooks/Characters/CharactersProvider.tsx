@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useReducer, useState } from 'react';
 import { LocalStorageCharacter } from '../../types/LocalStorage';
-import { AttributeType, defaultEquipment, EquipSlot } from '@wholesome-sisters/auto-battler';
+import { Attributes, AttributeType, defaultEquipment, EquipSlot } from '@wholesome-sisters/auto-battler';
 import { type Action, CharactersContext, CharactersDispatchContext, SelectedContext } from './CharactersContext';
 
 export function CharactersProvider({ children }: { children: ReactNode; }) {
@@ -50,12 +50,12 @@ function charactersReducer(characters: LocalStorageCharacter[], action: Action):
                         [EquipSlot.Neck]: defaultEquipment[action.class][EquipSlot.Neck]?.id ?? null
                     },
                     attributes: {
-                        [AttributeType.Strength]: 0,
-                        [AttributeType.Dexterity]: 0,
-                        [AttributeType.Perception]: 0,
-                        [AttributeType.Constitution]: 0,
-                        [AttributeType.Intelligence]: 0,
-                        [AttributeType.Wisdom]: 0
+                        [AttributeType.Strength]: Attributes.DEFAULT_VALUE,
+                        [AttributeType.Dexterity]: Attributes.DEFAULT_VALUE,
+                        [AttributeType.Perception]: Attributes.DEFAULT_VALUE,
+                        [AttributeType.Constitution]: Attributes.DEFAULT_VALUE,
+                        [AttributeType.Intelligence]: Attributes.DEFAULT_VALUE,
+                        [AttributeType.Wisdom]: Attributes.DEFAULT_VALUE
                     }
                 }
             ];

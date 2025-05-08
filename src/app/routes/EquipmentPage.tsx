@@ -58,17 +58,24 @@ export default function EquipmentPage() {
         };
     }
 
+    const str = char.attributes[AttributeType.Strength];
+    const dex = char.attributes[AttributeType.Dexterity];
+    const per = char.attributes[AttributeType.Perception];
+    const con = char.attributes[AttributeType.Constitution];
+    const int = char.attributes[AttributeType.Intelligence];
+    const wis = char.attributes[AttributeType.Wisdom];
+
     return (
         <>
             <EquipmentInventory />
             <CharacterSheet name={char.name} level={char.level} className={selectedChar.class} exp={selectedChar.exp}
                 attributes={{
-                    [AttributeType.Strength]: char.attributes.strength,
-                    [AttributeType.Dexterity]: char.attributes.dexterity,
-                    [AttributeType.Perception]: char.attributes.perception,
-                    [AttributeType.Constitution]: char.attributes.constitution,
-                    [AttributeType.Intelligence]: char.attributes.intelligence,
-                    [AttributeType.Wisdom]: char.attributes.wisdom
+                    [AttributeType.Strength]: { base: str.base, bonus: str.bonus },
+                    [AttributeType.Dexterity]: { base: dex.base, bonus: dex.bonus },
+                    [AttributeType.Perception]: { base: per.base, bonus: per.bonus },
+                    [AttributeType.Constitution]: { base: con.base, bonus: con.bonus },
+                    [AttributeType.Intelligence]: { base: int.base, bonus: int.bonus },
+                    [AttributeType.Wisdom]: { base: wis.base, bonus: wis.bonus },
                 }}
                 stats={{
                     [StatType.MaxHealth]: char.stats.maxHealth,

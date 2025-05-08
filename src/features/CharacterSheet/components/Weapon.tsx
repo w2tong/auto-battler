@@ -6,8 +6,8 @@ function Weapon({ name, type, min, max, accuracy }: WeaponProps) {
         <div>
             <div>{name} </div>
             <div>{type}</div>
-            <div>{accuracy} Accuracy</div>
-            <div>{min}-{max} Damage</div>
+            <div>{Number(accuracy.toFixed(1))} Accuracy</div>
+            <div>{Number(min.toFixed(1))}-{Number(max.toFixed(1))} Damage</div>
         </div>
     );
 }

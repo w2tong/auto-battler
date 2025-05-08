@@ -2,8 +2,10 @@
 // import { Character } from '../character-select/character-select-option';
 // import { useEffect, useState } from 'react';
 
-import { AttributeType, ClassName, levelExp, StatType } from "@wholesome-sisters/auto-battler";
+import { AttributeType, ClassName, levelExp, LevelRange, StatType } from "@wholesome-sisters/auto-battler";
 import Weapon, { WeaponProps } from "./components/Weapon";
+import Attributes from "./components/Attributes";
+import Stat from "./components/Stat";
 
 // type CharacterSheetProps = {
 //     character: Character;
@@ -13,7 +15,7 @@ import Weapon, { WeaponProps } from "./components/Weapon";
 // export default function CharacterSheet(props: CharacterSheetProps) {
 export default function CharacterSheet(
     { name, level, className, exp, attributes, stats, mainHand, offHand }:
-        { name: string, level: number, className: ClassName, exp: number, attributes: { [attr in AttributeType]: number }, stats: { [stat in StatType]: number }, mainHand: WeaponProps, offHand?: WeaponProps; }
+        { name: string, level: number, className: ClassName, exp: number, attributes: { [attr in AttributeType]: { base: number, bonus: number; } }, stats: { [stat in StatType]: number }, mainHand: WeaponProps, offHand?: WeaponProps; }
 ) {
     // const { character, equipmentItemIds } = props;
     // const info: CharacterInfo = newPlayerChar('', { name: character.name, level: character.level, class: character.class }, createEquipment(equipmentItemIds)).info();
@@ -23,60 +25,51 @@ export default function CharacterSheet(
             <h1>Character Sheet</h1>
             <h2>{name}</h2>
             <div>Level {level} {className}</div>
-            <div>{exp}/{levelExp[level]} Experience</div>
+            <div>{exp}/{levelExp[level as LevelRange]} Experience</div>
 
             <br />
 
             <div className='flex flex-row space-x-10'>
-                <div>
-                    <h2>Attributes</h2>
-                    <div>Strength: {attributes[AttributeType.Strength]}</div>
-                    <div>Dexterity: {attributes[AttributeType.Dexterity]}</div>
-                    <div>Perception: {attributes[AttributeType.Perception]}</div>
-                    <div>Constitution: {attributes[AttributeType.Constitution]}</div>
-                    <div>Intelligence: {attributes[AttributeType.Intelligence]}</div>
-                    <div>Wisdom: {attributes[AttributeType.Wisdom]}</div>
-                </div>
+                <Attributes level={level} attributes={attributes} />
                 <div>
                     <h2>Stats</h2>
-                    <div>Health: {stats[StatType.MaxHealth]}</div>
-                    <div>Armour: {stats[StatType.Armour]}</div>
-                    <div>Deflection: {stats[StatType.Deflection]}</div>
-                    <div>Dodge: {stats[StatType.Dodge]}</div>
-                    <div>Status Resistance: {stats[StatType.StatusResistance]}</div>
-                    <div>Thorns: {stats[StatType.Thorns]}</div>
+                    <Stat stat={StatType.MaxHealth} num={stats[StatType.MaxHealth]} />
+                    <Stat stat={StatType.Armour} num={stats[StatType.Armour]} />
+                    <Stat stat={StatType.Deflection} num={stats[StatType.Deflection]} />
+                    <Stat stat={StatType.Dodge} num={stats[StatType.Dodge]} />
+                    {/* <Stat stat={StatType.StatusResistance} num={stats[StatType.StatusResistance]} /> */}
+                    <Stat stat={StatType.Thorns} num={stats[StatType.Thorns]} />
 
-                    <div>Block Chance: {stats[StatType.BlockChance]}</div>
-                    <div>Block Power: {stats[StatType.BlockPower]}</div>
+                    <Stat stat={StatType.BlockChance} num={stats[StatType.BlockChance]} />
+                    <Stat stat={StatType.BlockPower} num={stats[StatType.BlockPower]} />
 
-                    <div>Accuracy: {stats[StatType.Accuracy]}</div>
-                    <div>Off-hand Accuracy: {stats[StatType.OffHandAccuracy]}</div>
-                    <div>Melee Accuracy: {stats[StatType.Accuracy]}</div>
-                    <div>Ranged Accuracy: {stats[StatType.RangedAccuracy]}</div>
+                    <Stat stat={StatType.Accuracy} num={stats[StatType.Accuracy]} />
+                    <Stat stat={StatType.OffHandAccuracy} num={stats[StatType.OffHandAccuracy]} />
+                    <Stat stat={StatType.MeleeAccuracy} num={stats[StatType.MeleeAccuracy]} />
+                    <Stat stat={StatType.RangedAccuracy} num={stats[StatType.RangedAccuracy]} />
 
-                    <div>Damage: {stats[StatType.Damage]}</div>
-                    <div>Damage Percent: {stats[StatType.DamagePercent]}</div>
+                    <Stat stat={StatType.Damage} num={stats[StatType.Damage]} />
+                    <Stat stat={StatType.DamagePercent} num={stats[StatType.DamagePercent]} />
 
-                    <div>Critical Chance: {stats[StatType.CriticalChance]}</div>
-                    <div>Critical Damage: {stats[StatType.CriticalDamage]}</div>
+                    <Stat stat={StatType.CriticalChance} num={stats[StatType.CriticalChance]} />
+                    <Stat stat={StatType.CriticalDamage} num={stats[StatType.CriticalDamage]} />
 
-                    <div>Armour Penetration: {stats[StatType.ArmourPenetration]}</div>
-                    <div>Dodge Reduction: {stats[StatType.DodgeReduction]}</div>
+                    <Stat stat={StatType.ArmourPenetration} num={stats[StatType.ArmourPenetration]} />
+                    <Stat stat={StatType.DodgeReduction} num={stats[StatType.DodgeReduction]} />
 
+                    <Stat stat={StatType.SpellAccuracy} num={stats[StatType.SpellAccuracy]} />
+                    <Stat stat={StatType.SpellPower} num={stats[StatType.SpellPower]} />
 
-                    <div>Spell Accuracy: {stats[StatType.SpellAccuracy]}</div>
-                    <div>Spell Power: {stats[StatType.SpellPower]}</div>
+                    <Stat stat={StatType.ManaCost} num={stats[StatType.ManaCost]} />
+                    <Stat stat={StatType.StartingMana} num={stats[StatType.StartingMana]} />
+                    <Stat stat={StatType.ManaRegen} num={stats[StatType.ManaRegen]} />
+                    <Stat stat={StatType.ManaOnHit} num={stats[StatType.ManaOnHit]} />
 
-                    <div>Mana Cost: {stats[StatType.ManaCost]}</div>
-                    <div>Starting Mana: {stats[StatType.StartingMana]}</div>
-                    <div>Mana Regen: {stats[StatType.ManaRegen]}</div>
-                    <div>Mana On Hit: {stats[StatType.ManaOnHit]}</div>
+                    <Stat stat={StatType.Initiative} num={stats[StatType.Initiative]} />
 
-                    <div>Initiative: {stats[StatType.Initiative]}</div>
-
-                    <div>Potion Charges: {stats[StatType.PotionCharges]}</div>
-                    <div>Potion Healing: {stats[StatType.PotionHealing]}</div>
-                    <div>Potion Effectiveness: {stats[StatType.PotionEffectiveness]}</div>
+                    <Stat stat={StatType.PotionCharges} num={stats[StatType.PotionCharges]} />
+                    <Stat stat={StatType.PotionHealing} num={stats[StatType.PotionHealing]} />
+                    <Stat stat={StatType.PotionEffectiveness} num={stats[StatType.PotionEffectiveness]} />
                 </div>
             </div>
 
