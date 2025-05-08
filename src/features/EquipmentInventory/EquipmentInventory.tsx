@@ -16,9 +16,6 @@ export default function EquipmentInventory() {
     const inventory = useInventory();
     const inventoryDispatch = useInventoryDispatch();
 
-    console.log('eq', equipment);
-    console.log('inv', inventory);
-
     return (
         <DndContext onDragEnd={handleDragEnd}>
             <div className='flex flex-row'>
@@ -73,7 +70,6 @@ export default function EquipmentInventory() {
                 }
             }
 
-            // console.log('equipChanges', equipChanges);
             charactersDispatch({ type: 'update', index: selected, equipment: equipChanges });
         }
         // Inventory Item dragged to Equipment Slot
