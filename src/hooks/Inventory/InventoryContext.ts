@@ -1,9 +1,11 @@
 import { createContext, useContext } from "react";
 import { LocalStorageInventory } from "../../types/LocalStorage";
+import type ItemSort from "../../types/ItemSort";
 
 export type Action =
-    { type: 'update'; index?: number, itemId: string | null; } |
-    { type: 'swap'; index1: number, index2: number; };
+    { type: 'update', index?: number, itemId: string | null; } |
+    { type: 'swap', index1: number, index2: number; } |
+    { type: 'sort', sort: ItemSort; };
 
 export const InventoryContext = createContext<LocalStorageInventory>([]);
 export const InventoryDispatchContext = createContext<React.ActionDispatch<[action: Action]>>(() => { });

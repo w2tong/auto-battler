@@ -16,6 +16,9 @@ export default function EquipmentInventory() {
     const inventory = useInventory();
     const inventoryDispatch = useInventoryDispatch();
 
+    console.log('eq', equipment);
+    console.log('inv', inventory);
+
     return (
         <DndContext onDragEnd={handleDragEnd}>
             <div className='flex flex-row'>
@@ -41,8 +44,6 @@ export default function EquipmentInventory() {
             const equipActiveId = activeId as EquipSlot;
             const equipOverId = overId as EquipSlot;
 
-            console.log('equip to equip');
-
             if (equipment[equipActiveId] && !isValidEquip(equipment[equipActiveId], equipOverId)) return;
             if (equipment[equipOverId] && !isValidEquip(equipment[equipOverId], equipOverId)) return;
 
@@ -53,7 +54,7 @@ export default function EquipmentInventory() {
             const activeEquipId = activeId as EquipSlot;
             const iOverId = Number(overId);
             const equipItem = equipment[activeEquipId];
-            const invItem = inventory[iOverId];
+            const invItem = inventory[iOverId] ?? null;
 
             if (!equipItem) return;
 
@@ -72,6 +73,7 @@ export default function EquipmentInventory() {
                 }
             }
 
+            // console.log('equipChanges', equipChanges);
             charactersDispatch({ type: 'update', index: selected, equipment: equipChanges });
         }
         // Inventory Item dragged to Equipment Slot

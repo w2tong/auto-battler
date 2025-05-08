@@ -1,6 +1,8 @@
 import { ReactNode, useEffect, useReducer } from 'react';
 import { InventoryContext, InventoryDispatchContext, Action } from './InventoryContext';
 import { LocalStorageInventory } from '../../types/LocalStorage';
+import { Equip, equips } from '@wholesome-sisters/auto-battler';
+import ItemSort from '../../types/ItemSort';
 
 export function InventoryProvider({ children }: { children: ReactNode; }) {
     const lsInventory = localStorage.getItem('inventory');
@@ -47,11 +49,30 @@ function inventoryReducer(inventory: LocalStorageInventory, action: Action): Loc
         }
         case 'swap': {
             const inv: LocalStorageInventory = structuredClone(inventory);
-            [inv[action.index1], inv[action.index2]] = [inv[action.index2], inv[action.index1]];
+            const item1 = inv[action.index1] ?? null;
+            const item2 = inv[action.index2] ?? null;
+            inv[action.index1] = item2;
+            inv[action.index2] = item1;
             return inv;
+        }
+        case 'sort': {
+            // console.log(inventory);
+            const sortFn = sortCompareFnMap[action.sort];
+            if (sortFn) {
+                const inv = inventory.filter(itemId => itemId !== null).map(itemId => equips[itemId]);
+                return inv.sort(sortFn).map(item => item.id);
+            }
+            return inventory;
         }
         default: {
             throw Error('Unknown action: ' + action);
         }
     }
+};
+
+const sortCompareFnMap: Record<ItemSort, (a: Equip, b: Equip) => number> = {
+    'name': (a, b) => a.name.localeCompare(b.name),
+    'type': (a, b) => a.itemType.localeCompare(b.itemType),
+    'tier-asc': (a, b) => a.tier - b.tier,
+    'tier-desc': (a, b) => b.tier - a.tier
 };
