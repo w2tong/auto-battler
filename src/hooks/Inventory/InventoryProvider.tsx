@@ -56,7 +56,6 @@ function inventoryReducer(inventory: LocalStorageInventory, action: Action): Loc
             return inv;
         }
         case 'sort': {
-            // console.log(inventory);
             const sortFn = sortCompareFnMap[action.sort];
             if (sortFn) {
                 const inv = inventory.filter(itemId => itemId !== null).map(itemId => equips[itemId]);

@@ -2,8 +2,6 @@ import { useState } from 'react';
 import ItemSlot from './ItemSlot';
 import { ItemType, equips } from '@wholesome-sisters/auto-battler';
 import SelectMenu from './SelectMenu';
-import { useInventoryDispatch } from '../../../hooks/Inventory/InventoryContext';
-import ItemSort from '../../../types/ItemSort';
 
 const tierOptions = [
     { value: '0', text: 'Tier 0' },
@@ -33,33 +31,36 @@ const sortOptions = [
     { value: 'tier-desc', text: 'Tier Desc' }
 ];
 
-export default function Inventory({ items }: { items: (string | null)[]; }) {
+export default function Inventory({ items, sort, sortOnChange }: { items: (string | null)[], sort: string, sortOnChange: (val: string) => void; }) {
     const [tierFilter, setTierFilter] = useState<string>('');
     const [typeFilter, setTypeFilter] = useState<string>('');
     const [nameFilter, setNameFilter] = useState<string>('');
-    const inventoryDispatch = useInventoryDispatch();
 
-    function setTier(tier: string) {
+    function updateTier(tier: string) {
         setTierFilter(() => tier);
     }
-    function setType(type: string) {
+    function updateType(type: string) {
         setTypeFilter(() => type);
-    }
-    function setSort(sort: string) {
-        inventoryDispatch({ type: 'sort', sort: sort as ItemSort });
     }
 
     return (
         <div className='flex flex-col'>
+            Tier: {tierFilter}
+            Type: {typeFilter}
+            Name: {nameFilter}
             <div>
                 <h2 className='py-1'>Inventory</h2>
                 <div className='flex flex-row py-1'>
-                    <SelectMenu options={tierOptions} onChange={setTier} id='tier' label='Tier' />
-                    <SelectMenu options={typeOptions} onChange={setType} id='type' label='Type' />
-                    <SelectMenu options={sortOptions} onChange={setSort} id='sort' label='Sort' />
+                    <SelectMenu options={tierOptions} onChange={updateTier} id='tier' label='Tier' value={tierFilter} />
+                    <SelectMenu options={typeOptions} onChange={updateType} id='type' label='Type' value={typeFilter} />
+                    <select id='sort' value={sort} onChange={e => sortOnChange(e.target.value)}>
+                        {[{ value: '', text: '-' }, ...sortOptions].map(opt =>
+                            <option className='bg-black' key={opt.value} value={opt.value}>{opt.text}</option>
+                        )}
+                    </select>
 
                     <input
-                        className='border border-white'
+                        className='border border-white p-2'
                         type='text'
                         placeholder='Filter By Name'
                         value={nameFilter}
@@ -74,9 +75,9 @@ export default function Inventory({ items }: { items: (string | null)[]; }) {
                     if (itemId && (tierFilter !== '' || typeFilter !== '' || nameFilter !== '')) {
                         const equip = equips[itemId];
                         if (
-                            tierFilter !== equip.tier.toString() ||
-                            typeFilter !== equip.itemType ||
-                            !equip.name.toLocaleLowerCase().includes(nameFilter)
+                            tierFilter !== '' && tierFilter !== equip.tier.toString() ||
+                            typeFilter !== '' && typeFilter !== equip.itemType ||
+                            nameFilter !== '' && !equip.name.toLocaleLowerCase().includes(nameFilter.trim().toLocaleLowerCase())
                         ) filtered = true;
                     }
                     return (

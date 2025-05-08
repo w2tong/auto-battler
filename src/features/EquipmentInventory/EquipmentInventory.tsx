@@ -4,6 +4,8 @@ import Equipment from "./components/Equipment";
 import Inventory from "./components/Inventory";
 import { equips, EquipSlot, isValidEquip, ItemType, WeaponTypeProperties } from "@wholesome-sisters/auto-battler";
 import { useInventory, useInventoryDispatch } from "../../hooks/Inventory/InventoryContext";
+import { useState } from "react";
+import ItemSort from "../../types/ItemSort";
 
 // TODO: add inventory sorting and filtering
 
@@ -16,11 +18,22 @@ export default function EquipmentInventory() {
     const inventory = useInventory();
     const inventoryDispatch = useInventoryDispatch();
 
+    const [inventorySort, setInventorySort] = useState<string>('');
+
+    function handleSortOnChange(sort: string) {
+        setInventorySort(() => sort);
+        inventoryDispatch({ type: 'sort', sort: sort as ItemSort });
+    }
+
+    function resetInventorySort() {
+        setInventorySort(() => '');
+    }
+
     return (
         <DndContext onDragEnd={handleDragEnd}>
             <div className='flex flex-row'>
                 <Equipment equipment={equipment} />
-                <Inventory items={inventory} />
+                <Inventory items={inventory} sort={inventorySort} sortOnChange={handleSortOnChange} />
             </div>
         </DndContext>
     );
@@ -56,6 +69,7 @@ export default function EquipmentInventory() {
             if (!equipItem) return;
 
             const equipChanges: ActionUpdateEquipment = { [activeEquipId]: invItem };
+            resetInventorySort();
             inventoryDispatch({ type: 'update', index: iOverId, itemId: equipItem });
 
             if (equipItem && invItem) {
@@ -83,6 +97,7 @@ export default function EquipmentInventory() {
             if (!isValidEquip(invItem, overEquipId)) return;
 
             const equipChanges: ActionUpdateEquipment = { [overEquipId]: invItem };
+            resetInventorySort();
             inventoryDispatch({ type: 'update', index: iActiveId, itemId: equipItem });
 
             // Unequip off hand if equipping two-handed weapon
@@ -108,7 +123,7 @@ export default function EquipmentInventory() {
         else {
             const iActiveId = Number(activeId);
             const iOverId = Number(overId);
-
+            resetInventorySort();
             inventoryDispatch({ type: 'swap', index1: iActiveId, index2: iOverId });
         }
     }
