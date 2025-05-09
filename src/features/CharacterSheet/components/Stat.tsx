@@ -1,11 +1,15 @@
 import { StatType } from "@wholesome-sisters/auto-battler";
-import { formatStat } from "../../../utils/stats";
+import { formatStat, formatStatDescriptionVal } from "../../../utils/stats";
+import StatTooltip from "../../../components/StatTooltip";
 
 export default function Stat({ stat, num }: { stat: StatType, num: number; }) {
     const { key, val } = formatStat(stat, num);
     return (
         <div className='w-full flex justify-between'>
-            <span className='mr-4'>{key}</span> <span>{val}</span>
+            <StatTooltip type={stat} val={formatStatDescriptionVal(stat, num)}>
+                <span className='mr-4 text-tooltip-highlight'>{key}</span>
+            </StatTooltip>
+            <span>{val}</span>
         </div>
     );
 }

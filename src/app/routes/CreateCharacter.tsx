@@ -23,6 +23,8 @@ export default function CharacterCreator() {
             <div>{Classes[selectedClass].ability.name}</div>
             <div>{Classes[selectedClass].ability.description}</div>
 
+            <div>PH - CLASS ATTRIBUTES GO HERE</div>
+
             <label>
                 Name:
                 <input ref={inputRef} className='ml-2' type='text' name='name' placeholder='Enter a name' required />

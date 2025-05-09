@@ -3,6 +3,8 @@ module.exports = {
     theme: {
         extend: {
             colors: {
+                'highlight': '#568ee8',
+
                 'health': '#16a34a',
                 'health-bg': '#450a0a',
 

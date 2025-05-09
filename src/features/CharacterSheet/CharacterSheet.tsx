@@ -91,13 +91,18 @@ export default function CharacterSheet(
                 </div>
             </div>
 
-            {/* {info.potion ?
-                <>
-                    <br />
-                    <CharacterSheetPotion potion={info.potion} potionEFf={info.potionEffectiveness} />
-                </>
-                : null
-            } */}
+            <div>PH - ABILITY GOES HERE</div>
+
+            {
+                <div>PH - POTION GOES HERE</div>
+                /* {info.potion ?
+                    <>
+                        <br />
+                        <CharacterSheetPotion potion={info.potion} potionEFf={info.potionEffectiveness} />
+                    </>
+                    : null
+                } */
+            }
 
         </div>
     );

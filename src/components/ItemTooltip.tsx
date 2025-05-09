@@ -4,7 +4,7 @@ import { type ReactNode } from "react";
 import Tooltip from "./Tooltip";
 import { formatStat } from "../utils/stats";
 
-export default function ItemTooltipContent({ children, item, display = true }: { children: ReactNode, item: Item, display?: boolean; }) {
+export default function ItemTooltip({ children, item, display = true }: { children: ReactNode, item: Item, display?: boolean; }) {
     const content =
         <div className='whitespace-nowrap'>
             <div className={`${tierTextColor[item.tier]} font-bold`}>{item.name}</div>
