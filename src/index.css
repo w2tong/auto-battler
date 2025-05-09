@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+@theme {
+    /* Tooltips */
+    --color-tooltip-highlight: #2d7abd;
+
+    /* Tiers */
+    --color-tier-0: #9d9d9d;
+    --color-tier-1: #ffffff;
+    --color-tier-2: #1eff00;
+    --color-tier-3: #0070dd;
+    --color-tier-4: #a335ee;
+    --color-tier-5: #ff8000;
+
+    /* Health and Mana */
+    --color-health: #16a34a;
+    --color-health-bg: #450a0a;
+    --color-mana: #2563eb;
+    --color-mana-bg: #374151;
+}
+
 :root {
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
@@ -15,6 +34,7 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+/*
 a {
     font-weight: 500;
     color: #646cff;
@@ -64,4 +84,4 @@ button:focus-visible {
     button {
         background-color: #f9f9f9;
     }
-}
+} */
