@@ -7,7 +7,7 @@ export type ActionUpdateEquipment = { [key in EquipSlot]?: string | null };
 export type Action =
     { type: 'create', name: string, class: ClassName; } |
     // TODO: make new types in LocalStorage and import them here for equipment and attributes
-    { type: 'update'; index: number, name?: string, level?: number, exp?: number, equipment?: ActionUpdateEquipment, attributes?: { [key in AttributeType]?: number }; } |
+    { type: 'update', index: number, name?: string, level?: number, exp?: number, equipment?: ActionUpdateEquipment, attributes?: { [key in AttributeType]?: number }; } |
     { type: 'swapEquipment'; index: number, slot1: EquipSlot, slot2: EquipSlot; } |
     { type: 'delete', index: number; };
 

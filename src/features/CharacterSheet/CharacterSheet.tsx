@@ -4,7 +4,7 @@
 
 import { AttributeType, ClassName, levelExp, LevelRange, StatType } from "@wholesome-sisters/auto-battler";
 import Weapon, { WeaponProps } from "./components/Weapon";
-import Attributes from "./components/Attributes";
+import CharacterSheetAttributes from "./components/CharacterSheetAttributes";
 import Stat from "./components/Stat";
 
 // type CharacterSheetProps = {
@@ -30,7 +30,7 @@ export default function CharacterSheet(
             <br />
 
             <div className='flex flex-row space-x-10'>
-                <Attributes level={level} attributes={attributes} />
+                <CharacterSheetAttributes level={level as LevelRange} attributes={attributes} />
                 <div>
                     <h2>Stats</h2>
                     <Stat stat={StatType.MaxHealth} num={stats[StatType.MaxHealth]} />
