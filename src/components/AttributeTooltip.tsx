@@ -9,7 +9,7 @@ export default function AttributeTooltip({ children, type, num, display = true }
             <div className='font-bold'>{type}</div>
             {Object.entries(AttributeStatScaling[type]).map(([stat, scaling]) => {
                 const { key, val } = formatStat(stat as StatType, scaling * (num - Attributes.DEFAULT_VALUE));
-                return (<div>{`${val} ${key}`}</div>);
+                return (<div key={key}>{`${val} ${key}`}</div>);
             }
             )}
         </div>;
