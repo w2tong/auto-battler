@@ -38,7 +38,8 @@ export default function EquipmentPage() {
         type: mainHand.type,
         min,
         max,
-        accuracy: char.stats.getAccuracy(mainHand.attackType)
+        accuracy: char.stats.getAccuracy(mainHand.attackType),
+        damageType: mainHand.damageType
     };
 
     const offHand = char.equipment.offHandWeapon;
@@ -54,7 +55,8 @@ export default function EquipmentPage() {
             type: offHand.type,
             min,
             max,
-            accuracy: char.stats.getAccuracy(offHand.attackType) + char.stats.getStat(StatType.OffHandAccuracy)
+            accuracy: char.stats.getAccuracy(offHand.attackType) + char.stats.getStat(StatType.OffHandAccuracy),
+            damageType: offHand.damageType
         };
     }
 

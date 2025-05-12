@@ -1,13 +1,14 @@
-import { WeaponType } from "@wholesome-sisters/auto-battler";
+import { DamageType, WeaponType } from "@wholesome-sisters/auto-battler";
 
-type WeaponProps = { name: string, type: WeaponType, min: number, max: number, accuracy: number; };
-function Weapon({ name, type, min, max, accuracy }: WeaponProps) {
+type WeaponProps = { name: string, type: WeaponType, min: number, max: number, accuracy: number, damageType: DamageType; };
+function Weapon({ name, type, min, max, accuracy, damageType }: WeaponProps) {
     return (
         <div>
-            <div>{name} </div>
+            <div className='font-medium'>{name}</div>
+            <hr />
             <div>{type}</div>
             <div>{Number(accuracy.toFixed(1))} Accuracy</div>
-            <div>{Number(min.toFixed(1))}-{Number(max.toFixed(1))} Damage</div>
+            <div>{Number(min.toFixed(1))} - {Number(max.toFixed(1))} {damageType} Damage</div>
         </div>
     );
 }
