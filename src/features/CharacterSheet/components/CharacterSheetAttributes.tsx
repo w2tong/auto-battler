@@ -38,7 +38,7 @@ export default function CharacterSheetAttributes({ level, attributes }: { level:
                     <input
                         className='w-8'
                         type='number'
-                        min={5 + bonus}
+                        min={Attributes.MIN_VALUE + bonus}
                         max={Math.min(base + unspent, LEVEL_CAPS[level as LevelRange]) + bonus}
                         value={base + bonus}
                         onChange={e => { handleChange(attr as AttributeType, Number(e.target.value) - bonus); }
