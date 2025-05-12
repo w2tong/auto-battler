@@ -3,7 +3,7 @@ import ItemSlot from './ItemSlot';
 
 export default function Equipment({ equipment }: { equipment: { [slot in EquipSlot]: string | null; }; }) {
     return (
-        <>
+        <div>
             <h2 className='py-1'>Equipment</h2>
             <div className='flex-col'>
                 <div className='flex flex-row'>
@@ -29,6 +29,6 @@ export default function Equipment({ equipment }: { equipment: { [slot in EquipSl
                     <ItemSlot id={EquipSlot.OffHand} itemId={equipment[EquipSlot.OffHand]} filtered={false} slot={EquipSlot.OffHand} />
                 </div>
             </div>
-        </>
+        </div>
     );
 }

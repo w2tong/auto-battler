@@ -22,8 +22,8 @@ export default function CharacterSheet(
 
     return (
         <div>
-            <h1>Character Sheet</h1>
-            <h2>{name}</h2>
+            <h2>Character Sheet</h2>
+            <h3>{name}</h3>
             <div>Level {level} {className}</div>
             <div>{exp}/{levelExp[level as LevelRange]} Experience</div>
 
@@ -37,7 +37,7 @@ export default function CharacterSheet(
             <br />
 
             <div>
-                <h2>Weapons</h2>
+                <h3>Weapons</h3>
                 <div className='flex flex-row space-x-2'>
                     <div>
                         <h3>Main-hand</h3>

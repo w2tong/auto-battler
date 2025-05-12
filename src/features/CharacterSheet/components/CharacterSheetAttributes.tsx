@@ -22,6 +22,7 @@ export default function CharacterSheetAttributes({ level, attributes }: { level:
 
     return (
         <div>
+            <h3>Attributes</h3>
             {Object.entries(attributes).map(([attr, { base, bonus }]) =>
                 <div className='flex justify-between w-full' key={attr}>
                     <AttributeTooltip type={attr as AttributeType} num={base + bonus}>

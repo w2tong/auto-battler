@@ -4,7 +4,7 @@ import Stat from "./Stat";
 export default function CharacterSheetStats({ stats }: { stats: { [stat in StatType]: number }; }) {
     return (
         <div>
-            <h2>Stats</h2>
+            <h3>Stats</h3>
             <Stat stat={StatType.MaxHealth} num={stats[StatType.MaxHealth]} />
             <Stat stat={StatType.Armour} num={stats[StatType.Armour]} />
             <Stat stat={StatType.Deflection} num={stats[StatType.Deflection]} />

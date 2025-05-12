@@ -69,6 +69,7 @@ export default function EquipmentPage() {
 
     return (
         <>
+            <h1>Character Page</h1>
             <EquipmentInventory />
             <CharacterSheet name={char.name} level={char.level} className={selectedChar.class} exp={selectedChar.exp}
                 attributes={{

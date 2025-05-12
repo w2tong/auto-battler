@@ -45,9 +45,6 @@ export default function Inventory({ items, sort, sortOnChange }: { items: (strin
 
     return (
         <div className='flex flex-col'>
-            Tier: {tierFilter}
-            Type: {typeFilter}
-            Name: {nameFilter}
             <div>
                 <h2 className='py-1'>Inventory</h2>
                 <div className='flex flex-row py-1'>
