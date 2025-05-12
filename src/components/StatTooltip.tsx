@@ -5,7 +5,8 @@ import { StatDescriptions, StatType } from "@wholesome-sisters/auto-battler";
 export default function StatTooltip({ children, type, val, display = true }: { children: ReactNode, type: StatType, val: number, display?: boolean; }) {
     const content =
         <div className='w-60'>
-            {StatDescriptions[type](val)}
+            <div className='font-bold'>{type}</div>
+            <div>{StatDescriptions[type](val)}</div>
         </div>;
 
     return (
