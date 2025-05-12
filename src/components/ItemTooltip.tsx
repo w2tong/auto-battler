@@ -44,9 +44,10 @@ const itemTypeContentMap: Record<ItemType, (item: Item) => ReactNode> = {
     [ItemType.Weapon]: (item) => {
         const weapon = item as Weapon;
         const { min, max, bonus } = weapon.damageRange;
+        const { twoHanded, light } = WeaponTypeProperties[weapon.type];
         return (
             <>
-                <div>{weapon.type}, {WeaponTypeProperties[weapon.type].twoHanded ? 'Two-handed' : 'One-handed'}</div>
+                <div>{weapon.type}, {twoHanded ? 'Two-handed' : 'One-handed'}{light ? ', Light' : ''}</div>
                 <div>{min + bonus}-{max + bonus} {weapon.damageType} damage</div>
                 {weapon.onHit ? <div>On Hit: {weapon.onHit.description}</div> : null}
                 {createAttributes(weapon.attributes)}
