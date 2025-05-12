@@ -41,12 +41,12 @@ export default function CharacterSheet(
                 <div className='flex flex-row space-x-2'>
                     <div>
                         <h3>Main-hand</h3>
-                        <Weapon name={mainHand.name} type={mainHand.type} min={mainHand.min} max={mainHand.max} accuracy={mainHand.accuracy} damageType={mainHand.damageType} />
+                        <Weapon name={mainHand.name} type={mainHand.type} min={mainHand.min} max={mainHand.max} accuracy={mainHand.accuracy} damageType={mainHand.damageType} tier={mainHand.tier} />
                     </div>
                     {offHand &&
                         <div>
                             <h3>Off-hand</h3>
-                            <Weapon name={offHand.name} type={offHand.type} min={offHand.min} max={offHand.max} accuracy={offHand.accuracy} damageType={offHand.damageType} />
+                            <Weapon name={offHand.name} type={offHand.type} min={offHand.min} max={offHand.max} accuracy={offHand.accuracy} damageType={offHand.damageType} tier={offHand.tier} />
                         </div>
                     }
                 </div>
