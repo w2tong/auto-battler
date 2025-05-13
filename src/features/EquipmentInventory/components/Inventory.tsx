@@ -31,6 +31,7 @@ const sortOptions = [
     { value: 'tier-desc', text: 'Tier Desc' }
 ];
 
+// TODO: add keywords thats can be used in name filter (e.g. Attributes, Stats, on hit)
 export default function Inventory({ items, sort, sortOnChange }: { items: (string | null)[], sort: string, sortOnChange: (val: string) => void; }) {
     const [tierFilter, setTierFilter] = useState<string>('');
     const [typeFilter, setTypeFilter] = useState<string>('');
