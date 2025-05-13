@@ -25,6 +25,10 @@ const statFormattingRules: { [stat in StatType]?: { key: string; format: (num: n
         key: "Damage",
         format: num => format(num, { suffix: '%', multiplier: 100 })
     },
+    [StatType.Dodge]: {
+        key: StatType.Dodge,
+        format: num => format(num, { suffix: '%' })
+    },
     [StatType.HealthPercent]: {
         key: "Health",
         format: num => format(num, { suffix: '%', multiplier: 100 })
