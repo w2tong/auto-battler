@@ -6,7 +6,9 @@ import { type Action, CharactersContext, CharactersDispatchContext, SelectedCont
 export function CharactersProvider({ children }: { children: ReactNode; }) {
     const lsChars = localStorage.getItem('characters');
     const [characters, dispatch] = useReducer(charactersReducer, lsChars ? JSON.parse(lsChars) : []);
-    const [selected, setSelected] = useState<number>(0);
+
+    const lsSelected = localStorage.getItem('selected');
+    const [selected, setSelected] = useState<number>(lsSelected ? Number(lsSelected) : 0);
 
     useEffect(() => {
         localStorage.setItem('characters', JSON.stringify(characters));
