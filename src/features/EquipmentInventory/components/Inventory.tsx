@@ -32,7 +32,7 @@ const sortOptions = [
 ];
 
 // TODO: add keywords thats can be used in name filter (e.g. Attributes, Stats, on hit)
-export default function Inventory({ items, sort, sortOnChange }: { items: (string | null)[], sort: string, sortOnChange: (val: string) => void; }) {
+export default function Inventory({ items, sort, sortOnChange, className }: { items: (string | null)[], sort: string, sortOnChange: (val: string) => void, className?: string; }) {
     const [tierFilter, setTierFilter] = useState<string>('');
     const [typeFilter, setTypeFilter] = useState<string>('');
     const [nameFilter, setNameFilter] = useState<string>('');
@@ -45,7 +45,7 @@ export default function Inventory({ items, sort, sortOnChange }: { items: (strin
     }
 
     return (
-        <div className='flex flex-col'>
+        <div className={`flex flex-col ${className}`}>
             <div>
                 <h2 className='py-1'>Inventory</h2>
                 <div className='flex flex-row py-1'>

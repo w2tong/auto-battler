@@ -7,9 +7,7 @@ import { useInventory, useInventoryDispatch } from "../../hooks/Inventory/Invent
 import { useState } from "react";
 import ItemSort from "../../types/ItemSort";
 
-// TODO: add inventory sorting and filtering
-
-export default function EquipmentInventory() {
+export default function EquipmentInventory({ className }: { className?: string; }) {
     const characters = useCharacters();
     const charactersDispatch = useCharactersDispatch();
     const { selected } = useSelected();
@@ -30,12 +28,12 @@ export default function EquipmentInventory() {
     }
 
     return (
-        <DndContext onDragEnd={handleDragEnd}>
-            <div className='flex flex-row'>
+        <div className={`flex flex-row space-x-4 ${className}`}>
+            <DndContext onDragEnd={handleDragEnd}>
                 <Equipment equipment={equipment} />
                 <Inventory items={inventory} sort={inventorySort} sortOnChange={handleSortOnChange} />
-            </div>
-        </DndContext>
+            </DndContext>
+        </div >
     );
 
     function handleDragEnd(event: DragEndEvent) {

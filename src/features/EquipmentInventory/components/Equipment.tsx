@@ -1,9 +1,9 @@
 import { EquipSlot } from '@wholesome-sisters/auto-battler';
 import ItemSlot from './ItemSlot';
 
-export default function Equipment({ equipment }: { equipment: { [slot in EquipSlot]: string | null; }; }) {
+export default function Equipment({ equipment, className }: { equipment: { [slot in EquipSlot]: string | null; }, className?: string; }) {
     return (
-        <div>
+        <div className={`${className}`}>
             <h2 className='py-1'>Equipment</h2>
             <div className='flex-col'>
                 <div className='flex flex-row'>
