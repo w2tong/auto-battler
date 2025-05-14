@@ -6,7 +6,7 @@ export default function StatTooltip({ children, type, num, display = true }: { c
     const content =
         <div className='w-max max-w-60 text-pretty'>
             <div className='font-bold'>{type}</div>
-            <div>{StatDescriptions[type](num)}</div>
+            <p className='whitespace-pre-wrap'>{StatDescriptions[type](num)}</p>
         </div>;
 
     return (
