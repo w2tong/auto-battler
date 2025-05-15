@@ -4,42 +4,50 @@ function formatNum(num: number, multiplier = 1): number {
     return Number((num * multiplier).toFixed(1));
 }
 
-function format(num: number, { prefix = '', suffix = '', multiplier = 1 }: { prefix?: string; suffix?: string; multiplier?: number; } = {}): string {
-    return `${prefix}${formatNum(num, multiplier)}${suffix}`;
+function format(num: number, { signed = false, percent = false, multiplier = 1 }: { signed?: boolean; percent?: boolean; multiplier?: number; } = {}): string {
+    return `${signed && num > 0 ? '+' : ''}${formatNum(num, multiplier)}${percent ? '%' : ''}`;
 }
 
 const statFormattingRules: { [stat in StatType]?: { key: string; format: (num: number) => string; } } = {
     [StatType.BlockChance]: {
         key: StatType.BlockChance,
-        format: num => format(num, { suffix: '%' })
+        format: num => format(num, { percent: true })
     },
     [StatType.CriticalChance]: {
         key: StatType.CriticalChance,
-        format: num => format(num, { suffix: '%' })
+        format: num => format(num, { percent: true })
     },
     [StatType.CriticalDamage]: {
         key: StatType.CriticalDamage,
-        format: num => format(num, { suffix: '%', multiplier: 100 })
+        format: num => format(num, { percent: true, multiplier: 100 })
     },
     [StatType.DamagePercent]: {
         key: "Damage",
-        format: num => format(num, { suffix: '%', multiplier: 100 })
+        format: num => format(num, { percent: true, multiplier: 100 })
     },
     [StatType.Dodge]: {
         key: StatType.Dodge,
-        format: num => format(num, { suffix: '%' })
+        format: num => format(num, { percent: true })
     },
     [StatType.HealthPercent]: {
-        key: "Health",
-        format: num => format(num, { suffix: '%', multiplier: 100 })
+        key: "Max Health",
+        format: num => format(num, { percent: true, multiplier: 100 })
+    },
+    [StatType.PotionCharges]: {
+        key: StatType.PotionCharges,
+        format: num => format(num, { signed: true })
     },
     [StatType.PotionEffectiveness]: {
         key: StatType.PotionEffectiveness,
-        format: num => format(num, { suffix: '%', multiplier: 100 })
+        format: num => format(num, { signed: true, percent: true, multiplier: 100 })
+    },
+    [StatType.PotionHealing]: {
+        key: StatType.PotionHealing,
+        format: num => format(num, { signed: true })
     },
     [StatType.SpellPowerPercent]: {
         key: "Spell Power",
-        format: num => format(num, { suffix: '%', multiplier: 100 })
+        format: num => format(num, { percent: true, multiplier: 100 })
     },
 };
 
