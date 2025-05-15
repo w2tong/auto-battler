@@ -3,6 +3,7 @@ import Weapon, { WeaponProps } from "./components/Weapon";
 import CharacterSheetAttributes from "./components/CharacterSheetAttributes";
 import CharacterSheetStats from "./components/CharacterSheetStats";
 import CharacterSheetAbility from "./components/CharacterSheetAbility";
+import CharacterSheetPotion from "./components/CharacterScreenPotion";
 
 export default function CharacterSheet(
     { char, exp }: { char: Character, exp: number; }
@@ -41,6 +42,20 @@ export default function CharacterSheet(
             tier: offHand.tier
         };
     }
+
+    const potion = char.equipment.potion;
+    let potionProps = null;
+    if (potion) {
+        const potHealingRange = char.calcPotionHealingRange(potion?.healingRange);
+        potionProps = {
+            name: potion.name,
+            min: potHealingRange.min,
+            max: potHealingRange.max,
+            charges: potion.charges,
+            tier: potion.tier
+        };
+    }
+
 
     return (
         <div>
@@ -116,7 +131,7 @@ export default function CharacterSheet(
             <div>
                 <h3>Weapons</h3>
                 <div className='flex flex-row space-x-2'>
-                    <div>
+                    <div className='w-1/2'>
                         <h3>Main-hand</h3>
                         <Weapon
                             name={mhProps.name}
@@ -128,7 +143,7 @@ export default function CharacterSheet(
                         />
                     </div>
                     {ohProps &&
-                        <div>
+                        <div className='w-1/2'>
                             <h3>Off-hand</h3>
                             <Weapon
                                 name={ohProps.name}
@@ -145,16 +160,7 @@ export default function CharacterSheet(
 
             {char.ability && <CharacterSheetAbility name={char.ability.name} description={char.ability.description(char)} />}
 
-            {
-                <div>PH - POTION GOES HERE</div>
-                /* {info.potion ?
-                    <>
-                        <br />
-                        <CharacterSheetPotion potion={info.potion} potionEFf={info.potionEffectiveness} />
-                    </>
-                    : null
-                } */
-            }
+            {potionProps && <CharacterSheetPotion name={potionProps.name} min={potionProps.min} max={potionProps.max} charges={potionProps.charges} tier={potionProps.tier} />}
 
         </div>
     );
