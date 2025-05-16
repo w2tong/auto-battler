@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router';
 import Header from './Header';
-import Battle from './routes/Battle';
+import BattlePage from './routes/BattlePage';
 import EquipmentPage from './routes/EquipmentPage';
 import Home from './routes/Home';
 import { CharactersProvider } from '../hooks/Characters/CharactersProvider';
@@ -17,7 +17,7 @@ function App() {
                         <Routes>
                             <Route path="" element={<Home />} />
                             <Route path="equipment" element={<EquipmentPage />} />
-                            <Route path="battle" element={<Battle />} />
+                            <Route path="battle" element={<BattlePage />} />
                             <Route path="create-character" element={<CreateCharacter />} />
                         </Routes>
                     </InventoryProvider>
