@@ -1,4 +1,4 @@
-import { AttributeType, ClassName, EquipSlot } from "@wholesome-sisters/auto-battler";
+import { AttributeType, ClassName, EquipSlot, PetId } from "@wholesome-sisters/auto-battler";
 
 type LocalStorageCharacter = {
     name: string;
@@ -7,6 +7,8 @@ type LocalStorageCharacter = {
     exp: number;
     equipment: { [slot in EquipSlot]: string | null; };
     attributes: { [key in AttributeType]: number };
+    pet: PetId | null;
+    talents: Set<string>;
 };
 
 type LocalStorageInventory = (string | null)[];
