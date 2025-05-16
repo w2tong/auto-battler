@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useReducer, useState } from 'react';
 import { LocalStorageCharacter } from '../../types/LocalStorage';
-import { Attributes, AttributeType, defaultEquipment, EquipSlot } from '@wholesome-sisters/auto-battler';
+import { Attributes, AttributeType, ClassName, EquipSlot, PetId, startingEquipment } from '@wholesome-sisters/auto-battler';
 import { type Action, CharactersContext, CharactersDispatchContext, SelectedContext } from './CharactersContext';
 
 export function CharactersProvider({ children }: { children: ReactNode; }) {
@@ -40,16 +40,16 @@ function charactersReducer(characters: LocalStorageCharacter[], action: Action):
                     level: 1,
                     exp: 0,
                     equipment: {
-                        [EquipSlot.MainHand]: defaultEquipment[action.class][EquipSlot.MainHand]?.id ?? null,
-                        [EquipSlot.OffHand]: defaultEquipment[action.class][EquipSlot.OffHand]?.id ?? null,
-                        [EquipSlot.Head]: defaultEquipment[action.class][EquipSlot.Head]?.id ?? null,
-                        [EquipSlot.Armour]: defaultEquipment[action.class][EquipSlot.Armour]?.id ?? null,
-                        [EquipSlot.Hands]: defaultEquipment[action.class][EquipSlot.Hands]?.id ?? null,
-                        [EquipSlot.Waist]: defaultEquipment[action.class][EquipSlot.Waist]?.id ?? null,
-                        [EquipSlot.Ring1]: defaultEquipment[action.class][EquipSlot.Ring1]?.id ?? null,
-                        [EquipSlot.Ring2]: defaultEquipment[action.class][EquipSlot.Ring2]?.id ?? null,
-                        [EquipSlot.Potion]: defaultEquipment[action.class][EquipSlot.Potion]?.id ?? null,
-                        [EquipSlot.Neck]: defaultEquipment[action.class][EquipSlot.Neck]?.id ?? null
+                        [EquipSlot.MainHand]: startingEquipment[action.class][EquipSlot.MainHand]?.id ?? null,
+                        [EquipSlot.OffHand]: startingEquipment[action.class][EquipSlot.OffHand]?.id ?? null,
+                        [EquipSlot.Head]: startingEquipment[action.class][EquipSlot.Head]?.id ?? null,
+                        [EquipSlot.Armour]: startingEquipment[action.class][EquipSlot.Armour]?.id ?? null,
+                        [EquipSlot.Hands]: startingEquipment[action.class][EquipSlot.Hands]?.id ?? null,
+                        [EquipSlot.Waist]: startingEquipment[action.class][EquipSlot.Waist]?.id ?? null,
+                        [EquipSlot.Ring1]: startingEquipment[action.class][EquipSlot.Ring1]?.id ?? null,
+                        [EquipSlot.Ring2]: startingEquipment[action.class][EquipSlot.Ring2]?.id ?? null,
+                        [EquipSlot.Potion]: startingEquipment[action.class][EquipSlot.Potion]?.id ?? null,
+                        [EquipSlot.Neck]: startingEquipment[action.class][EquipSlot.Neck]?.id ?? null
                     },
                     attributes: {
                         [AttributeType.Strength]: Attributes.DEFAULT_VALUE,
@@ -58,7 +58,9 @@ function charactersReducer(characters: LocalStorageCharacter[], action: Action):
                         [AttributeType.Constitution]: Attributes.DEFAULT_VALUE,
                         [AttributeType.Intelligence]: Attributes.DEFAULT_VALUE,
                         [AttributeType.Wisdom]: Attributes.DEFAULT_VALUE
-                    }
+                    },
+                    pet: action.class === ClassName.Ranger ? PetId.Wolf : null,
+                    talents: new Set()
                 }
             ];
         };
