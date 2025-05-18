@@ -1,5 +1,6 @@
 import { Tier, WeaponType } from "@wholesome-sisters/auto-battler";
 import { tierTextColor } from "../../../utils/tierColor";
+import { formatNum } from "../../../utils/stats";
 
 type WeaponProps = { name: string, type: WeaponType, min: number, max: number, accuracy: number, tier: Tier; };
 function Weapon({ name, type, min, max, accuracy, tier }: WeaponProps) {
@@ -8,8 +9,8 @@ function Weapon({ name, type, min, max, accuracy, tier }: WeaponProps) {
             <div className={`font-bold ${tierTextColor[tier]}`}>{name}</div>
             <hr />
             <div>{type}</div>
-            <div>{Number(accuracy.toFixed(1))} Accuracy</div>
-            <div>{Number(min.toFixed(1))} - {Number(max.toFixed(1))} Damage</div>
+            <div>{formatNum(accuracy)} Accuracy</div>
+            <div>{formatNum(min)} - {formatNum(max)} Damage</div>
         </div>
     );
 }
