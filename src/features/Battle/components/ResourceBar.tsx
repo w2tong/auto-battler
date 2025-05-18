@@ -29,7 +29,7 @@ export default function ResourceBar(props: ResourceBarProps) {
         //     </progress>
         // </div>
         <div className={`w-full ${resource.bgColor} h-6`}>
-            <div className={`${resource.color} h-6`} style={{ width: `${props.curr >= 0 ? props.curr / props.max * 100 : 0}%` }}>{props.curr}/{props.max}</div>
+            <div className={`${resource.color} h-6`} style={{ width: `${props.curr >= 0 ? Math.min(props.curr / props.max * 100, 100) : 0}%` }}>{props.curr}/{props.max}</div>
         </div>
     );
 }

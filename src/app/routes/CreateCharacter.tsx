@@ -21,7 +21,7 @@ export default function CharacterCreator() {
 
             <h3>Special Ability</h3>
             <div>{Classes[selectedClass].ability.name}</div>
-            <div>{Classes[selectedClass].ability.description}</div>
+            <div>{Classes[selectedClass].ability.description()}</div>
 
             <div>PH - CLASS ATTRIBUTES GO HERE</div>
 

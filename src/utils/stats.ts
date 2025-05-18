@@ -72,4 +72,4 @@ function formatStatDescriptionVal(stat: StatType, num: number): number {
     return formatNum(num);
 };
 
-export { formatStat, formatStatDescriptionVal };
+export { formatNum, formatStat, formatStatDescriptionVal };

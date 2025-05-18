@@ -1,4 +1,21 @@
-import { LogLine } from "@wholesome-sisters/auto-battler";
+import { equips, LineType, LogLine } from "@wholesome-sisters/auto-battler";
+
+function lineToString(line: LogLine) {
+    switch (line.type) {
+        case (LineType.Text): {
+            return line.text;
+        }
+        case (LineType.Loot): {
+            return `${line.name} looted ${equips[line.itemId].name}.`;
+        }
+        case (LineType.Exp): {
+            return `${line.name} gained ${line.exp} experience.`;
+        }
+        case (LineType.LevelUp): {
+            return `${line.name} leveled up to level ${line.level}.`;
+        }
+    }
+}
 
 export default function CombatLog({ log, className }: { log: LogLine[], className: string; }) {
     return (
@@ -8,14 +25,13 @@ export default function CombatLog({ log, className }: { log: LogLine[], classNam
                 <div className='flex flex-col'>
                     {log.map((line, i) => {
                         return (
-                            <div key={i}>
-                                {line}<br />
+                            <div key={`logline-${i}`}>
+                                {lineToString(line)}
                             </div>
                         );
                     })}
                 </div>
             </div>
         </div>
-
     );
 }
