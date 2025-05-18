@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useCharacters, useCharactersDispatch, useSelected } from "../../hooks/Characters/CharactersContext";
 import BattleComponent from "../../features/Battle/BattleComponent";
 import { Battle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
@@ -7,6 +7,15 @@ import useInterval from "../../hooks/useInterval";
 import { useParams } from "react-router";
 import Button from "../../components/Button";
 import { useInventoryDispatch } from "../../hooks/Inventory/InventoryContext";
+
+const DEFAULT_DELAY = 1000;
+const SPEEDS = {
+    '0.5x': 0.5,
+    '1x': 1,
+    '2x': 2,
+    '4x': 4,
+    '10x': 10,
+};
 
 export default function BattlePage() {
     const param = useParams();
@@ -17,6 +26,12 @@ export default function BattlePage() {
     const inventoryDispatch = useInventoryDispatch();
     const { selected } = useSelected();
     const lsChar = chars[selected];
+
+    const lsCombatSpeed = localStorage.getItem('combat-speed');
+    const [combatSpeed, setCombatSpeed] = useState(lsCombatSpeed ? Number(lsCombatSpeed) : 1);
+    useEffect(() => {
+        localStorage.setItem('combat-speed', combatSpeed.toString());
+    }, [combatSpeed]);
 
     // Use a ref to hold the mutable battle instance
     const char = new Character({
@@ -40,8 +55,6 @@ export default function BattlePage() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [turn, setTurn] = useState(0);
     const [combat, setCombat] = useState<'before' | 'in' | 'after'>('before');
-    // TODO: add slider or buttons to change combat speed
-    const [delay, setDelay] = useState<number>(1000);
 
     useInterval(() => {
         if (battleRef.current) {
@@ -73,7 +86,7 @@ export default function BattlePage() {
             }
             setTurn(t => t + 1); // Force rerender
         }
-    }, combat === 'in' ? delay : null);
+    }, combat === 'in' ? DEFAULT_DELAY / combatSpeed : null);
 
     if (isNaN(Number(level))) {
         return <div>Invalid level {level}</div>;
@@ -83,6 +96,10 @@ export default function BattlePage() {
     return (
         <div>
             {combat === 'before' && <Button onClick={() => handleStartCombat()}>Start Battle</Button>}
+            <div>
+                <h2>Combat Speed</h2>
+                {Object.entries(SPEEDS).map(([key, val]) => <Button className={`${val === combatSpeed ? 'bg-button-hover' : ''}`} onClick={() => setCombatSpeed(val)}>{key}</Button>)}
+            </div>
             <BattleComponent
                 left={battle.left.map(char => toBattleCharacter(char))}
                 right={battle.right.map(char => toBattleCharacter(char))}

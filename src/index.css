@@ -17,6 +17,10 @@
     --color-health-bg: #450a0a;
     --color-mana: #2563eb;
     --color-mana-bg: #374151;
+
+    /* Buttons */
+    --color-button: oklch(48.8% 0.243 264.376);
+    --color-button-hover: oklch(42.4% 0.199 265.638);
 }
 
 :root {
