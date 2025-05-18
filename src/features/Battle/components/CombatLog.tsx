@@ -1,4 +1,6 @@
 import { equips, LineType, LogLine } from "@wholesome-sisters/auto-battler";
+import ItemTooltip from "../../../components/ItemTooltip";
+import { tierTextColor } from "../../../utils/tierColor";
 
 function lineToString(line: LogLine) {
     switch (line.type) {
@@ -6,7 +8,8 @@ function lineToString(line: LogLine) {
             return line.text;
         }
         case (LineType.Loot): {
-            return `${line.name} looted ${equips[line.itemId].name}.`;
+            const item = equips[line.itemId];
+            return (<>{line.name} looted <ItemTooltip item={item}><span className={`inline-block font-bold ${tierTextColor[item.tier]}`}>[{item.name}]</span></ItemTooltip>.</>);
         }
         case (LineType.Exp): {
             return `${line.name} gained ${line.exp} experience.`;
