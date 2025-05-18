@@ -59,10 +59,9 @@ export default function BattlePage() {
                         newExp = newExp - expReq;
                         newLevel += 1;
                     }
-
+                    battle.log.addExp(char.name, exp);
                     if (newLevel > lsChar.level) battle.log.addLevelUp(char.name, newLevel);
                     characterDispatch({ type: 'update', index: selected, level: newLevel, exp: newExp });
-                    battle.log.addExp(char.name, exp);
 
                     // Add loot
                     const leveledLootTable = lootTables[level];
