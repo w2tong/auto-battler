@@ -1,16 +1,20 @@
 import { useState, useRef } from "react";
-import { useCharacters, useSelected } from "../../hooks/Characters/CharactersContext";
+import { useCharacters, useCharactersDispatch, useSelected } from "../../hooks/Characters/CharactersContext";
 import BattleComponent from "../../features/Battle/BattleComponent";
-import { Battle, Character, createEquipmentImport, getRandomEncounter, LevelRange, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
+import { Battle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
 import BattleCharacter from "../../types/BattleCharacter";
 import useInterval from "../../hooks/useInterval";
 import { useParams } from "react-router";
 import Button from "../../components/Button";
+import { useInventoryDispatch } from "../../hooks/Inventory/InventoryContext";
 
 export default function BattlePage() {
-    const { level } = useParams();
+    const param = useParams();
+    const level: LevelRange = Number(param.level) as LevelRange;
 
     const chars = useCharacters();
+    const characterDispatch = useCharactersDispatch();
+    const inventoryDispatch = useInventoryDispatch();
     const { selected } = useSelected();
     const lsChar = chars[selected];
 
@@ -25,7 +29,7 @@ export default function BattlePage() {
         ability: startingAbility[lsChar.class],
         petId: lsChar.pet ?? undefined
     });
-    const battleRef = useRef<Battle>(new Battle([char], getRandomEncounter(Number(level) as LevelRange)));
+    const battleRef = useRef<Battle>(new Battle([char], getRandomEncounter(level)));
 
     function handleStartCombat() {
         battleRef.current.startCombat();
@@ -43,8 +47,30 @@ export default function BattlePage() {
         if (battleRef.current) {
             const turnRes = battleRef.current.nextTurn();
             if (turnRes.combatEnded) {
-                // Add exp and loot
                 setCombat('after');
+                if (turnRes.winner && char.battle?.side && turnRes.winner === char.battle.side) {
+
+                    // Add exp/level up
+                    const exp = encounterExp[level];
+                    let newExp = lsChar.exp + exp;
+                    let newLevel = lsChar.level;
+                    while (newExp > levelExp[newLevel as LevelRange]) {
+                        const expReq = levelExp[newLevel as LevelRange];
+                        newExp = newExp - expReq;
+                        newLevel += 1;
+                    }
+
+                    if (newLevel > lsChar.level) battle.log.addLevelUp(char.name, newLevel);
+                    characterDispatch({ type: 'update', index: selected, level: newLevel, exp: newExp });
+                    battle.log.addExp(char.name, exp);
+
+                    // Add loot
+                    const leveledLootTable = lootTables[level];
+                    const lootTable = Math.random() <= leveledLootTable.rareChance ? leveledLootTable.rare : leveledLootTable.normal;
+                    const itemId = lootTable[Math.floor(Math.random() * lootTable.length)];
+                    inventoryDispatch({ type: 'update', itemId });
+                    battle.log.addLoot(char.name, itemId);
+                }
             }
             setTurn(t => t + 1); // Force rerender
         }
