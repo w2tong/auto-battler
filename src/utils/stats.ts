@@ -21,9 +21,13 @@ const statFormattingRules: { [stat in StatType]?: { key: string; format: (num: n
         key: StatType.CriticalDamage,
         format: num => format(num, { percent: true, multiplier: 100 })
     },
+    [StatType.Damage]: {
+        key: "Damage",
+        format: num => format(num, { signed: true })
+    },
     [StatType.DamagePercent]: {
         key: "Damage",
-        format: num => format(num, { percent: true, multiplier: 100 })
+        format: num => format(num, { signed: true, percent: true, multiplier: 100 })
     },
     [StatType.Dodge]: {
         key: StatType.Dodge,
