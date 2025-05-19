@@ -1,12 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import { useCharacters, useCharactersDispatch, useSelected } from "../../hooks/Characters/CharactersContext";
 import BattleComponent from "../../features/Battle/BattleComponent";
-import { Battle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
+import { Battle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
 import BattleCharacter from "../../types/BattleCharacter";
 import useInterval from "../../hooks/useInterval";
 import { useParams } from "react-router";
 import Button from "../../components/Button";
 import { useInventoryDispatch } from "../../hooks/Inventory/InventoryContext";
+import Switch from "../../components/Switch";
 
 const DEFAULT_DELAY = 1000;
 const SPEEDS = {
@@ -33,8 +34,14 @@ export default function BattlePage() {
         localStorage.setItem('combat-speed', combatSpeed.toString());
     }, [combatSpeed]);
 
+    const lsAutoCombatStart = localStorage.getItem('auto-combat-start');
+    const [autoStartCombat, setAutoStartCombat] = useState(lsAutoCombatStart === 'true');
+    useEffect(() => {
+        localStorage.setItem('auto-combat-start', autoStartCombat.toString());
+    }, [autoStartCombat]);
+
     // Use a ref to hold the mutable battle instance
-    const char = new Character({
+    const charRef = useRef(new Character({
         name: lsChar.name,
         level: lsChar.level,
         className: lsChar.class,
@@ -43,25 +50,30 @@ export default function BattlePage() {
         equipment: createEquipmentImport(lsChar.equipment),
         ability: startingAbility[lsChar.class],
         petId: lsChar.pet ?? undefined
-    });
-    const battleRef = useRef<Battle>(new Battle([char], getRandomEncounter(level)));
+    }));
+    const battleRef = useRef<Battle | null>(null);
 
-    function handleStartCombat() {
-        battleRef.current.startCombat();
-        setCombat('in');
-    }
+    // Initialize battle on load
+    useEffect(() => {
+        battleRef.current = new Battle([charRef.current], getRandomEncounter(level));
+    }, [level]);
 
     // Use state to trigger rerenders
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [turn, setTurn] = useState(0);
     const [combat, setCombat] = useState<'before' | 'in' | 'after'>('before');
 
+    function startCombat() {
+        battleRef.current?.startCombat();
+        setCombat('in');
+    }
+
     useInterval(() => {
         if (battleRef.current) {
             const turnRes = battleRef.current.nextTurn();
             if (turnRes.combatEnded) {
                 setCombat('after');
-                if (turnRes.winner && char.battle?.side && turnRes.winner === char.battle.side) {
+                if (turnRes.winner && turnRes.winner === Side.Left) {
 
                     // Add exp/level up
                     const exp = encounterExp[level];
@@ -72,8 +84,8 @@ export default function BattlePage() {
                         newExp = newExp - expReq;
                         newLevel += 1;
                     }
-                    battle.log.addExp(char.name, exp);
-                    if (newLevel > lsChar.level) battle.log.addLevelUp(char.name, newLevel);
+                    battleRef.current.log.addExp(lsChar.name, exp);
+                    if (newLevel > lsChar.level) battleRef.current.log.addLevelUp(lsChar.name, newLevel);
                     characterDispatch({ type: 'update', index: selected, level: newLevel, exp: newExp });
 
                     // Add loot
@@ -81,12 +93,18 @@ export default function BattlePage() {
                     const lootTable = Math.random() <= leveledLootTable.rareChance ? leveledLootTable.rare : leveledLootTable.normal;
                     const itemId = lootTable[Math.floor(Math.random() * lootTable.length)];
                     inventoryDispatch({ type: 'update', itemId });
-                    battle.log.addLoot(char.name, itemId);
+                    battleRef.current.log.addLoot(lsChar.name, itemId);
                 }
             }
             setTurn(t => t + 1); // Force rerender
         }
     }, combat === 'in' ? DEFAULT_DELAY / combatSpeed : null);
+
+    useEffect(() => {
+        if (autoStartCombat && combat === 'before') {
+            startCombat();
+        }
+    }, [autoStartCombat, combat]);
 
     if (isNaN(Number(level))) {
         return <div>Invalid level {level}</div>;
@@ -95,18 +113,26 @@ export default function BattlePage() {
     const battle = battleRef.current;
     return (
         <div>
-            {combat === 'before' && <Button onClick={() => handleStartCombat()}>Start Battle</Button>}
-            <div>
-                <h2>Combat Speed</h2>
-                {Object.entries(SPEEDS).map(([key, val]) => <Button className={`${val === combatSpeed ? 'bg-button-hover' : ''}`} onClick={() => setCombatSpeed(val)}>{key}</Button>)}
+            {combat === 'before' && <Button onClick={() => startCombat()}>Start Battle</Button>}
+            <div className='flex flex-row'>
+                <div>
+                    <h2>Combat Speed</h2>
+                    {Object.entries(SPEEDS).map(([key, val]) => <Button className={`${val === combatSpeed ? 'bg-button-hover' : ''}`} onClick={() => setCombatSpeed(val)}>{key}</Button>)}
+                </div>
+                <div>
+                    <h2>Auto Start Combat</h2>
+                    <Switch checked={autoStartCombat} onChange={() => setAutoStartCombat(auto => !auto)} />
+                </div>
             </div>
-            <BattleComponent
-                left={battle.left.map(char => toBattleCharacter(char))}
-                right={battle.right.map(char => toBattleCharacter(char))}
-                turnOrder={battle.turnOrder.map(char => char.char.name)}
-                turnIndex={battle.turnIndex}
-                combatLog={battle.log.flatLog}
-            />
+            {battle && (
+                <BattleComponent
+                    left={battle.left.map(char => toBattleCharacter(char))}
+                    right={battle.right.map(char => toBattleCharacter(char))}
+                    turnOrder={battle.turnOrder.map(char => char.char.name)}
+                    turnIndex={battle.turnIndex}
+                    combatLog={battle.log.flatLog}
+                />
+            )}
         </div>
     );
 }
