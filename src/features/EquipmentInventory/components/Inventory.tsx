@@ -49,13 +49,16 @@ export default function Inventory({ items, sort, sortOnChange, className }: { it
             <div>
                 <h2 className='py-1'>Inventory</h2>
                 <div className='flex flex-row py-1'>
-                    <SelectMenu options={tierOptions} onChange={updateTier} id='tier' label='Tier' value={tierFilter} />
-                    <SelectMenu options={typeOptions} onChange={updateType} id='type' label='Type' value={typeFilter} />
-                    <select id='sort' value={sort} onChange={e => sortOnChange(e.target.value)}>
-                        {[{ value: '', text: '-' }, ...sortOptions].map(opt =>
-                            <option className='bg-black' key={opt.value} value={opt.value}>{opt.text}</option>
-                        )}
-                    </select>
+                    <SelectMenu options={tierOptions} onChange={updateTier} id='tier' label='Filter by Tier' value={tierFilter} />
+                    <SelectMenu options={typeOptions} onChange={updateType} id='type' label='Filter by Type' value={typeFilter} />
+                    <div className='flex flex-col'>
+                        <label htmlFor='sort'>Sort by</label>
+                        <select className='border border-white' id='sort' value={sort} defaultValue='' onChange={e => sortOnChange(e.target.value)}>
+                            {[{ value: '', text: '-' }, ...sortOptions].map(opt =>
+                                <option className='bg-black' key={opt.value} value={opt.value}>{opt.text}</option>
+                            )}
+                        </select>
+                    </div>
 
                     <input
                         className='border border-white p-2'
