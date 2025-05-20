@@ -58,6 +58,22 @@ export default function BattlePage() {
         battleRef.current = new Battle([charRef.current], getRandomEncounter(level));
     }, [level]);
 
+    function newBattle() {
+        charRef.current = new Character({
+            name: lsChar.name,
+            level: lsChar.level,
+            className: lsChar.class,
+            attributes: lsChar.attributes,
+            statTemplate: {},
+            equipment: createEquipmentImport(lsChar.equipment),
+            ability: startingAbility[lsChar.class],
+            petId: lsChar.pet ?? undefined
+        });
+        battleRef.current = new Battle([charRef.current], getRandomEncounter(level));
+        setTurn(0);
+        setCombat('before');
+    }
+
     // Use state to trigger rerenders
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [turn, setTurn] = useState(0);
@@ -113,7 +129,12 @@ export default function BattlePage() {
     const battle = battleRef.current;
     return (
         <div>
-            {combat === 'before' && <Button onClick={() => startCombat()}>Start Battle</Button>}
+            {JSON.stringify(localStorage).length}
+            <div>
+                <Button onClick={() => newBattle()}>New Battle</Button>
+                {combat === 'before' && <Button onClick={() => startCombat()}>Start Battle</Button>}
+            </div>
+
             <div className='flex flex-row'>
                 <div>
                     <h2>Combat Speed</h2>
@@ -124,6 +145,7 @@ export default function BattlePage() {
                     <Switch checked={autoStartCombat} onChange={() => setAutoStartCombat(auto => !auto)} />
                 </div>
             </div>
+
             {battle && (
                 <BattleComponent
                     left={battle.left.map(char => toBattleCharacter(char))}
