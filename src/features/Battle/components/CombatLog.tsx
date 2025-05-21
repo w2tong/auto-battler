@@ -1,6 +1,7 @@
-import { equips, LineType, LogLine } from "@wholesome-sisters/auto-battler";
+import { equips, HitType, LineType, LogLine } from "@wholesome-sisters/auto-battler";
 import ItemTooltip from "../../../components/ItemTooltip";
 import { tierTextColor } from "../../../utils/tierColor";
+import { formatNum } from "../../../utils/stats";
 
 function lineToString(line: LogLine) {
     switch (line.type) {
@@ -9,13 +10,25 @@ function lineToString(line: LogLine) {
         }
         case (LineType.Loot): {
             const item = equips[line.itemId];
-            return (<>{line.name} looted <ItemTooltip item={item}><span className={`inline-block font-bold ${tierTextColor[item.tier]}`}>[{item.name}]</span></ItemTooltip>.</>);
+            return <>{line.name} looted <ItemTooltip item={item}><span className={`inline-block font-bold ${tierTextColor[item.tier]}`}>[{item.name}]</span></ItemTooltip>.</>;
         }
         case (LineType.Exp): {
-            return `${line.name} gained ${line.exp} experience.`;
+            return <><b>{line.name}</b> gained <b>{line.exp}</b> experience.</>;
         }
         case (LineType.LevelUp): {
-            return `${line.name} leveled up to level ${line.level}.`;
+            return <><b>{line.name}</b> leveled up to level {line.level}.`</>;
+        }
+        case (LineType.Attack): {
+            const attackName = line.abilityName ? `used ${line.abilityName} on` : 'attacked';
+            const attack = <><b>{line.name}</b> {attackName} <b>{line.target}</b> and {line.hitType}</>;
+            const damage = line.hitType === HitType.Miss ? null : <> for <b>{formatNum(line.damage)}</b> damage{line.sneak ? ' (Sneak Attack)' : ''}{line.blocked ? ' (Blocked)' : ''}</>;
+            return <>{attack}{damage}.</>;
+        }
+        case (LineType.Damage): {
+            return <>{line.name} took {formatNum(line.damage)} damage from {line.source}.</>;
+        }
+        default: {
+            return `Unknown line: ${line}`;
         }
     }
 }
