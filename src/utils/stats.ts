@@ -9,6 +9,10 @@ function format(num: number, { signed = false, percent = false, multiplier = 1 }
 }
 
 const statFormattingRules: { [stat in StatType]?: { key: string; format: (num: number) => string; } } = {
+    [StatType.Accuracy]: {
+        key: StatType.Accuracy,
+        format: num => format(num, { signed: true })
+    },
     [StatType.BlockChance]: {
         key: StatType.BlockChance,
         format: num => format(num, { percent: true })
