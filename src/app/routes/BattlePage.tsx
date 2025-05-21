@@ -40,6 +40,12 @@ export default function BattlePage() {
         localStorage.setItem('auto-combat-start', autoStartCombat.toString());
     }, [autoStartCombat]);
 
+    const [combat, setCombat] = useState<'before' | 'in' | 'after'>('before');
+
+    // Use state to trigger rerenders
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [turn, setTurn] = useState(-1);
+
     // Use a ref to hold the mutable battle instance
     const charRef = useRef(new Character({
         name: lsChar.name,
@@ -56,6 +62,7 @@ export default function BattlePage() {
     // Initialize battle on load
     useEffect(() => {
         battleRef.current = new Battle([charRef.current], getRandomEncounter(level));
+        setTurn(0);
     }, [level]);
 
     function newBattle() {
@@ -74,11 +81,6 @@ export default function BattlePage() {
         setCombat('before');
     }
 
-    // Use state to trigger rerenders
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [turn, setTurn] = useState(0);
-    const [combat, setCombat] = useState<'before' | 'in' | 'after'>('before');
-
     function startCombat() {
         battleRef.current?.startCombat();
         setCombat('in');
@@ -90,7 +92,6 @@ export default function BattlePage() {
             if (turnRes.combatEnded) {
                 setCombat('after');
                 if (turnRes.winner && turnRes.winner === Side.Left) {
-
                     // Add exp/level up
                     const exp = encounterExp[level];
                     let newExp = lsChar.exp + exp;
@@ -129,19 +130,18 @@ export default function BattlePage() {
     const battle = battleRef.current;
     return (
         <div>
-            {JSON.stringify(localStorage).length}
             <div>
                 <Button onClick={() => newBattle()}>New Battle</Button>
                 {combat === 'before' && <Button onClick={() => startCombat()}>Start Battle</Button>}
             </div>
 
             <div className='flex flex-row'>
-                <div>
-                    <h2>Combat Speed</h2>
+                <div className='flex flex-row items-center'>
+                    <h2 className=''>Combat Speed: </h2>
                     {Object.entries(SPEEDS).map(([key, val]) => <Button className={`${val === combatSpeed ? 'bg-button-hover' : ''}`} onClick={() => setCombatSpeed(val)}>{key}</Button>)}
                 </div>
-                <div>
-                    <h2>Auto Start Combat</h2>
+                <div className='flex flex-row items-center'>
+                    <h2>Auto Start: </h2>
                     <Switch checked={autoStartCombat} onChange={() => setAutoStartCombat(auto => !auto)} />
                 </div>
             </div>
