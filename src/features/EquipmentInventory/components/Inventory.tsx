@@ -53,7 +53,7 @@ export default function Inventory({ items, sort, sortOnChange, className }: { it
                     <SelectMenu options={typeOptions} onChange={updateType} id='type' label='Filter by Type' value={typeFilter} />
                     <div className='flex flex-col'>
                         <label htmlFor='sort'>Sort by</label>
-                        <select className='border border-white' id='sort' value={sort} defaultValue='' onChange={e => sortOnChange(e.target.value)}>
+                        <select className='border border-white' id='sort' value={sort} onChange={e => sortOnChange(e.target.value)}>
                             {[{ value: '', text: '-' }, ...sortOptions].map(opt =>
                                 <option className='bg-black' key={opt.value} value={opt.value}>{opt.text}</option>
                             )}
