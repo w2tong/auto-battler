@@ -1,14 +1,15 @@
 import { Armour, Hands, Head, Item, ItemAttributes, ItemStats, ItemType, Potion, Ring, Shield, StatType, Waist, Weapon, WeaponTypeProperties } from "@wholesome-sisters/auto-battler";
 import { tierTextColor } from "../utils/tierColor";
-import { type ReactNode } from "react";
+import { ReactNode } from "react";
 import Tooltip from "./Tooltip";
 import { formatStat } from "../utils/stats";
 
-export default function ItemTooltip({ children, item, display = true }: { children: ReactNode, item: Item, display?: boolean; }) {
+function ItemTooltip({ children, item, display = true }: { children: ReactNode, item: Item, display?: boolean; }) {
+    const itemContent = getItemContent(item);
     const content =
         <div className='whitespace-nowrap'>
             <div className={`${tierTextColor[item.tier]} font-bold`}>{item.name}</div>
-            {getItemContent(item)}
+            {itemContent}
         </div>;
 
     return (
@@ -17,6 +18,7 @@ export default function ItemTooltip({ children, item, display = true }: { childr
         </Tooltip>
     );
 }
+export default ItemTooltip;
 
 function createAttributes(attrs?: ItemAttributes) {
     if (attrs === undefined) return null;

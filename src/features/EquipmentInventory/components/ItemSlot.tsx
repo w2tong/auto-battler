@@ -1,4 +1,3 @@
-import Item from './Item';
 import { useDroppable } from '@dnd-kit/core';
 import { EquipSlot, isValidEquip } from '@wholesome-sisters/auto-battler';
 import inventorySlot from '../assets/EquipSlotIcons/inventory.png';
@@ -12,6 +11,7 @@ import mainHand from '../assets/EquipSlotIcons/mainhand.png';
 import offHand from '../assets/EquipSlotIcons/offHand.png';
 import potion from '../assets/EquipSlotIcons/potion.png';
 import ring from '../assets/EquipSlotIcons/ring.png';
+import DraggableItem from './DraggableItem';
 
 const icons: { [key in EquipSlot]: string } = {
     [EquipSlot.MainHand]: mainHand,
@@ -45,7 +45,7 @@ export default function ItemSlot({ id, itemId, filtered, slot }: { id: string, i
 
     return (
         <div style={{ backgroundImage: `url(${slot ? icons[slot] : inventorySlot})` }} className={`w-[68px] h-[68px] border-2 rounded-sm bg-center bg-no-repeat ${borderColor}`} ref={setNodeRef}>
-            {itemId ? <Item id={id} itemId={itemId} filtered={filtered} /> : null}
+            {itemId ? <DraggableItem id={id} itemId={itemId} filtered={filtered} /> : null}
         </div>
     );
 }
