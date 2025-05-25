@@ -10,6 +10,16 @@ import burningIconUrl from '../../assets/icons/status-effects/burning.svg';
 import invisibleIconUrl from '../../assets/icons/status-effects/invisible.svg';
 import poisonedIconUrl from '../../assets/icons/status-effects/poisoned.svg';
 
+import roundShieldIconUrl from '../../assets/icons/items/round-shield.svg';
+import spikedShieldIconUrl from '../../assets/icons/items/spiked-shield.svg';
+
+import goblinIconUrl from '../../assets/icons/npcs/goblin.svg';
+import ogreIconUrl from '../../assets/icons/npcs/ogre.svg';
+import orcIconUrl from '../../assets/icons/npcs/orc.svg';
+import ratIconUrl from '../../assets/icons/npcs/rat.svg';
+import wolfIconUrl from '../../assets/icons/npcs/wolf.svg';
+import zombieIconUrl from '../../assets/icons/npcs/zombie.svg';
+
 type CreditProps = {
     src: string,
     alt: string,
@@ -47,6 +57,10 @@ const artists: Record<string, Artist> = {
     CarlOlsen: {
         name: 'Carl Olsen',
         link: 'https://x.com/unstoppableCarl'
+    },
+    Willdabeast: {
+        name: 'Willdabeast',
+        link: 'https://wjbstories.blogspot.com/'
     }
 };
 
@@ -129,11 +143,79 @@ const credits: CreditProps[] = [
     {
         src: poisonedIconUrl,
         alt: 'Poisoned icon',
-        imgName: 'Poison bottle icon',
+        imgName: 'Poison bottle',
         imgLink: 'https://game-icons.net/1x1/lorc/poison-bottle.html',
         artist: artists.Lorc,
         license: licenses.CCBY30
-    }
+    },
+
+    // Items
+    {
+        src: roundShieldIconUrl,
+        alt: 'Round shield icon',
+        imgName: 'Round shield',
+        imgLink: 'https://game-icons.net/1x1/willdabeast/round-shield.html',
+        artist: artists.Willdabeast,
+        license: licenses.CCBY30
+    },
+    {
+        src: spikedShieldIconUrl,
+        alt: 'Spiked shield icon',
+        imgName: 'Spiked shield',
+        imgLink: 'https://game-icons.net/1x1/delapouite/spiked-shield.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
+
+    // NPCS
+    {
+        src: goblinIconUrl,
+        alt: 'Goblin icon',
+        imgName: 'Goblin head',
+        imgLink: 'https://game-icons.net/1x1/delapouite/goblin-head.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
+    {
+        src: ogreIconUrl,
+        alt: 'Ogre icon',
+        imgName: 'Ogre',
+        imgLink: 'https://game-icons.net/1x1/delapouite/ogre.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
+    {
+        src: orcIconUrl,
+        alt: 'Orc icon',
+        imgName: 'Orc head',
+        imgLink: 'https://game-icons.net/1x1/delapouite/orc-head.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
+    {
+        src: ratIconUrl,
+        alt: 'Rat icon',
+        imgName: 'Rat',
+        imgLink: 'https://game-icons.net/1x1/delapouite/rat.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
+    {
+        src: wolfIconUrl,
+        alt: 'Wolf icon',
+        imgName: 'Wolf head',
+        imgLink: 'https://game-icons.net/1x1/lorc/wolf-head.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: zombieIconUrl,
+        alt: 'Zombie icon',
+        imgName: 'Shambling zombie',
+        imgLink: 'https://game-icons.net/1x1/delapouite/shambling-zombie.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
 ];
 
 export default function Credits() {
