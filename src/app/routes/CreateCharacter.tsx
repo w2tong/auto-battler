@@ -12,9 +12,11 @@ export default function CharacterCreator() {
         <div>
             <h2>Choose a Class</h2>
             {Object.values(ClassName).map(charClass =>
-                <button className={`${selectedClass === charClass ? 'opacity-100' : 'opacity-80'} transition duration-300 ease-in-out hover:opacity-100`} key={charClass} onClick={() => setSelectedClass(charClass)}>
-                    <ClassIcon class={charClass} width={64} height={64} />
-                </button>
+                <div className='bg-black inline-block'>
+                    <button className={`${selectedClass === charClass ? 'opacity-100' : 'opacity-25'} transition duration-250 ease-in-out hover:opacity-100`} key={charClass} onClick={() => setSelectedClass(charClass)}>
+                        <ClassIcon class={charClass} width={64} height={64} />
+                    </button>
+                </div>
             )}
             <h3>{selectedClass}</h3>
             <div>{Classes[selectedClass].description}</div>
@@ -23,13 +25,14 @@ export default function CharacterCreator() {
             <div>{Classes[selectedClass].ability.name}</div>
             <div>{Classes[selectedClass].ability.description()}</div>
 
-            <div>PH - CLASS ATTRIBUTES GO HERE</div>
+            <h3>Attributes</h3>
+            <div>{Object.entries(Classes[selectedClass].attributes).map(([attr, value]) => <div>+{value} {attr}</div>)}</div>
 
             <label>
                 Name:
-                <input ref={inputRef} className='ml-2' type='text' name='name' placeholder='Enter a name' required />
+                <input ref={inputRef} className='border border-white ml-2' type='text' name='name' placeholder='Enter a name' required />
             </label>
-            <button onClick={() => {
+            <button className='border border-white cursor-pointer' onClick={() => {
                 if (inputRef.current && inputRef.current.value.length >= 1 && charactersDispatch) {
                     charactersDispatch({ type: 'create', name: inputRef.current.value, class: selectedClass });
                 }
