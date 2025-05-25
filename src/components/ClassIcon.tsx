@@ -1,9 +1,9 @@
 import { ClassName } from '@wholesome-sisters/auto-battler';
-import fighterIconURL from '../assets/ClassIcons/fighter.svg';
-import rangerIconURL from '../assets/ClassIcons/ranger.svg';
-import rogueIconURL from '../assets/ClassIcons/rogue.svg';
-import priestIconURL from '../assets/ClassIcons/priest.svg';
-import wizardIconURL from '../assets/ClassIcons/wizard.svg';
+import fighterIconURL from '../assets/icons/classes/fighter.svg';
+import rangerIconURL from '../assets/icons/classes/ranger.svg';
+import rogueIconURL from '../assets/icons/classes/rogue.svg';
+import priestIconURL from '../assets/icons/classes/priest.svg';
+import wizardIconURL from '../assets/icons/classes/wizard.svg';
 
 type ClassIconProps = {
     class: ClassName;

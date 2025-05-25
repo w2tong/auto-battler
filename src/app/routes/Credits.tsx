@@ -1,8 +1,10 @@
-import fighterIconUrl from '../../assets/ClassIcons/fighter.svg';
-import priestIconUrl from '../../assets/ClassIcons/priest.svg';
-import rangerIconUrl from '../../assets/ClassIcons/ranger.svg';
-import rogueIconUrl from '../../assets/ClassIcons/rogue.svg';
-import wizardIconUrl from '../../assets/ClassIcons/wizard.svg';
+import fighterIconUrl from '../../assets/icons/classes/fighter.svg';
+import priestIconUrl from '../../assets/icons/classes/priest.svg';
+import rangerIconUrl from '../../assets/icons/classes/ranger.svg';
+import rogueIconUrl from '../../assets/icons/classes/rogue.svg';
+import wizardIconUrl from '../../assets/icons/classes/wizard.svg';
+
+import burningIconUrl from '../../assets/icons/statuseffects/burning.svg';
 
 type CreditProps = {
     src: string,
@@ -20,6 +22,7 @@ function Credit({ src, alt, name, href, artist }: CreditProps) {
 }
 
 const credits: CreditProps[] = [
+    // Classes
     {
         src: fighterIconUrl,
         alt: 'Fighter icon',
@@ -54,6 +57,15 @@ const credits: CreditProps[] = [
         name: 'Crystal wand icon',
         href: 'https://lorcblog.blogspot.com/',
         artist: 'Lorc'
+    },
+
+    // Status Effects
+    {
+        src: burningIconUrl,
+        alt: 'Burning icon',
+        name: 'Flame icon',
+        href: 'https://x.com/unstoppableCarl',
+        artist: 'Carl Olsen'
     }
 ];
 
