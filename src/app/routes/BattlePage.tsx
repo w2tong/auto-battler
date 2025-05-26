@@ -162,8 +162,9 @@ export default function BattlePage() {
 function toBattleCharacter(char: Character): BattleCharacter {
     return {
         name: char.name,
-        className: char.className,
         level: char.level,
+        className: char.className,
+        npcId: char.npcId,
         currHealth: char.currentHealth,
         maxHealth: char.stats.maxHealth,
         currMana: char.currentMana,

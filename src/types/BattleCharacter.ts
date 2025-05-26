@@ -1,7 +1,10 @@
+import { ClassName, NpcId } from "@wholesome-sisters/auto-battler";
+
 type BattleCharacter = {
     name: string,
-    className: string | null,
     level: number,
+    className: ClassName | null,
+    npcId: NpcId | null,
     currHealth: number,
     maxHealth: number,
     currMana: number,

@@ -13,70 +13,82 @@ import spikedShieldIconUrl from '../assets/icons/items/shields/spiked-shield.svg
 
 import daggerIconUrl from '../assets/icons/items/weapons/dagger.svg';
 import maceIconUrl from '../assets/icons/items/weapons/mace.svg';
+import Icon from '../types/Icon';
 
 
 // This type will be a union of all the literal 'name' values in equips
 // TODO: add NeckId when implemented
 type ItemId = WeaponId | ArmourId | HandsId | HeadId | PotionId | RingId | ShieldId | WaistId;
 
-const itemIconMap: Record<ItemId, string> = {
+const robeIcon: Icon = { src: robeArmourIconUrl, alt: 'Robe icon' };
+const leatherArmourIcon: Icon = { src: leatherArmourIconUrl, alt: 'Leather Armour icon' };
+const chainmailArmourIcon: Icon = { src: chainmailArmourIconUrl, alt: 'Chainmail Armour icon' };
+const plateArmourIcon: Icon = { src: plateArmourIconUrl, alt: 'Plate Armour icon' };
+const hoodIcon: Icon = { src: hoodIconUrl, alt: 'Cloth Hood icon' };
+const plateHelmetIcon: Icon = { src: plateHelmentIconUrl, alt: 'Plate Helmet icon' };
+const roundShieldIcon: Icon = { src: roundShieldIconUrl, alt: 'Round Shield icon' };
+const spikedShieldIcon: Icon = { src: spikedShieldIconUrl, alt: 'Spiked Shield icon' };
+const daggerIcon: Icon = { src: daggerIconUrl, alt: 'Dagger icon' };
+const maceIcon: Icon = { src: maceIconUrl, alt: 'Mace icon' };
+
+const itemIconMap: Record<ItemId, Icon> = {
     // Armour
-    robe0: robeArmourIconUrl,
-    robe1: robeArmourIconUrl,
-    robe2: robeArmourIconUrl,
-    robe3: robeArmourIconUrl,
-    robe4: robeArmourIconUrl,
-    robe5: robeArmourIconUrl,
-    leatherArmour0: leatherArmourIconUrl,
-    leatherArmour1: leatherArmourIconUrl,
-    leatherArmour2: leatherArmourIconUrl,
-    leatherArmour3: leatherArmourIconUrl,
-    leatherArmour4: leatherArmourIconUrl,
-    leatherArmour5: leatherArmourIconUrl,
-    mailArmour0: chainmailArmourIconUrl,
-    mailArmour1: chainmailArmourIconUrl,
-    mailArmour2: chainmailArmourIconUrl,
-    mailArmour3: chainmailArmourIconUrl,
-    mailArmour4: chainmailArmourIconUrl,
-    mailArmour5: chainmailArmourIconUrl,
-    plateArmour0: plateArmourIconUrl,
-    plateArmour1: plateArmourIconUrl,
-    plateArmour2: plateArmourIconUrl,
-    plateArmour3: plateArmourIconUrl,
-    plateArmour4: plateArmourIconUrl,
-    plateArmour5: plateArmourIconUrl,
+    robe0: robeIcon,
+    robe1: robeIcon,
+    robe2: robeIcon,
+    robe3: robeIcon,
+    robe4: robeIcon,
+    robe5: robeIcon,
+    leatherArmour0: leatherArmourIcon,
+    leatherArmour1: leatherArmourIcon,
+    leatherArmour2: leatherArmourIcon,
+    leatherArmour3: leatherArmourIcon,
+    leatherArmour4: leatherArmourIcon,
+    leatherArmour5: leatherArmourIcon,
+    mailArmour0: chainmailArmourIcon,
+    mailArmour1: chainmailArmourIcon,
+    mailArmour2: chainmailArmourIcon,
+    mailArmour3: chainmailArmourIcon,
+    mailArmour4: chainmailArmourIcon,
+    mailArmour5: chainmailArmourIcon,
+    plateArmour0: plateArmourIcon,
+    plateArmour1: plateArmourIcon,
+    plateArmour2: plateArmourIcon,
+    plateArmour3: plateArmourIcon,
+    plateArmour4: plateArmourIcon,
+    plateArmour5: plateArmourIcon,
 
     // Heads
-    clothHood0: hoodIconUrl,
-    clothHood1: hoodIconUrl,
-    clothHood2: hoodIconUrl,
+    clothHood0: hoodIcon,
+    clothHood1: hoodIcon,
+    clothHood2: hoodIcon,
     // helmet0: '',
     // helmet1: '',
-    helmet2: plateHelmentIconUrl,
+    helmet2: plateHelmetIcon,
 
     // Shields
-    buckler0: roundShieldIconUrl,
-    buckler1: roundShieldIconUrl,
-    buckler2: roundShieldIconUrl,
-    buckler3: roundShieldIconUrl,
-    buckler4: roundShieldIconUrl,
-    buckler5: roundShieldIconUrl,
-    spikedShield0: spikedShieldIconUrl,
-    spikedShield1: spikedShieldIconUrl,
-    spikedShield2: spikedShieldIconUrl,
-    spikedShield3: spikedShieldIconUrl,
-    spikedShield4: spikedShieldIconUrl,
-    spikedShield5: spikedShieldIconUrl,
+    buckler0: roundShieldIcon,
+    buckler1: roundShieldIcon,
+    buckler2: roundShieldIcon,
+    buckler3: roundShieldIcon,
+    buckler4: roundShieldIcon,
+    buckler5: roundShieldIcon,
+    spikedShield0: spikedShieldIcon,
+    spikedShield1: spikedShieldIcon,
+    spikedShield2: spikedShieldIcon,
+    spikedShield3: spikedShieldIcon,
+    spikedShield4: spikedShieldIcon,
+    spikedShield5: spikedShieldIcon,
 
     // Weapons
-    dagger0: daggerIconUrl,
-    dagger1: daggerIconUrl,
-    dagger2: daggerIconUrl,
-    dagger3: daggerIconUrl,
-    dagger4: daggerIconUrl,
-    dagger5: daggerIconUrl,
+    dagger0: daggerIcon,
+    dagger1: daggerIcon,
+    dagger2: daggerIcon,
+    dagger3: daggerIcon,
+    dagger4: daggerIcon,
+    dagger5: daggerIcon,
 
-    mace0: maceIconUrl,
+    mace0: maceIcon,
 };
 
 export { type ItemId, itemIconMap };
