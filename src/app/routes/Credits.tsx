@@ -4,14 +4,28 @@ import rangerIconUrl from '../../assets/icons/classes/ranger.svg';
 import rogueIconUrl from '../../assets/icons/classes/rogue.svg';
 import wizardIconUrl from '../../assets/icons/classes/wizard.svg';
 
+
 import bleedingIconUrl from '../../assets/icons/status-effects/bleeding.svg';
 import blessedIconUrl from '../../assets/icons/status-effects/blessed.svg';
 import burningIconUrl from '../../assets/icons/status-effects/burning.svg';
 import invisibleIconUrl from '../../assets/icons/status-effects/invisible.svg';
 import poisonedIconUrl from '../../assets/icons/status-effects/poisoned.svg';
 
-import roundShieldIconUrl from '../../assets/icons/items/round-shield.svg';
-import spikedShieldIconUrl from '../../assets/icons/items/spiked-shield.svg';
+
+import robeArmourIconUrl from '../../assets/icons/items/armour/robe.svg';
+import leatherArmourIconUrl from '../../assets/icons/items/armour/leather.svg';
+import chainmailArmourIconUrl from '../../assets/icons/items/armour/chainmail.svg';
+import plateArmourIconUrl from '../../assets/icons/items/armour/plate.svg';
+
+import hoodIconUrl from '../../assets/icons/items/heads/hood.svg';
+import plateHelmentIconUrl from '../../assets/icons/items/heads/plate-helmet.svg';
+
+import roundShieldIconUrl from '../../assets/icons/items/shields/round-shield.svg';
+import spikedShieldIconUrl from '../../assets/icons/items/shields/spiked-shield.svg';
+
+import daggerIconUrl from '../../assets/icons/items/weapons/dagger.svg';
+import maceIconUrl from '../../assets/icons/items/weapons/mace.svg';
+
 
 import goblinIconUrl from '../../assets/icons/npcs/goblin.svg';
 import ogreIconUrl from '../../assets/icons/npcs/ogre.svg';
@@ -28,13 +42,6 @@ type CreditProps = {
     artist: Artist,
     license: License,
 };
-function Credit({ src, alt, imgName, imgLink, artist, license }: CreditProps) {
-    return (
-        <div className='flex items-center'>
-            <span><img className='h-4 inline' src={src} alt={alt} /><a className='font-bold text-tooltip-highlight' href={imgLink}>{imgName}</a> by <a className='font-bold text-tooltip-highlight' href={artist.link}> {artist.name}</a> under <a className='font-bold text-tooltip-highlight' href={license.link}>{license.name}</a>.</span>
-        </div>
-    );
-}
 
 type License = { name: string, link: string; };
 const licenses: Record<string, License> = {
@@ -64,8 +71,9 @@ const artists: Record<string, Artist> = {
     }
 };
 
-const credits: CreditProps[] = [
-    // Classes
+// Classes
+const classes: CreditProps[] = [
+
     {
         src: fighterIconUrl,
         alt: 'Fighter icon',
@@ -106,8 +114,10 @@ const credits: CreditProps[] = [
         artist: artists.Lorc,
         license: licenses.CCBY30
     },
+];
 
-    // Status Effects
+// Status Effects
+const statusEffects: CreditProps[] = [
     {
         src: bleedingIconUrl,
         alt: 'Bleeding icon',
@@ -148,8 +158,62 @@ const credits: CreditProps[] = [
         artist: artists.Lorc,
         license: licenses.CCBY30
     },
+];
 
-    // Items
+// Items
+const armour: CreditProps[] = [
+    {
+        src: robeArmourIconUrl,
+        alt: 'Robe Armour icon',
+        imgName: 'Robe',
+        imgLink: 'https://game-icons.net/1x1/lorc/robe.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: leatherArmourIconUrl,
+        alt: 'Leather Armour icon',
+        imgName: 'Leather armor',
+        imgLink: 'https://game-icons.net/1x1/delapouite/leather-armor.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
+    {
+        src: chainmailArmourIconUrl,
+        alt: 'Chainmail Armour icon',
+        imgName: 'Chain mail',
+        imgLink: 'https://game-icons.net/1x1/willdabeast/chain-mail.html',
+        artist: artists.Willdabeast,
+        license: licenses.CCBY30
+    },
+    {
+        src: plateArmourIconUrl,
+        alt: 'Plate Armour icon',
+        imgName: 'Breastplate',
+        imgLink: 'https://game-icons.net/1x1/lorc/breastplate.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+];
+const heads: CreditProps[] = [
+    {
+        src: hoodIconUrl,
+        alt: 'Hood icon',
+        imgName: 'Hood',
+        imgLink: 'https://game-icons.net/1x1/lorc/hood.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: plateHelmentIconUrl,
+        alt: 'Plate Helmet icon',
+        imgName: 'Visored helm',
+        imgLink: 'https://game-icons.net/1x1/lorc/visored-helm.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+];
+const shields: CreditProps[] = [
     {
         src: roundShieldIconUrl,
         alt: 'Round shield icon',
@@ -166,8 +230,28 @@ const credits: CreditProps[] = [
         artist: artists.Delapouite,
         license: licenses.CCBY30
     },
+];
+const weapons: CreditProps[] = [
+    {
+        src: daggerIconUrl,
+        alt: 'Dagger icon',
+        imgName: 'Plain dagger',
+        imgLink: 'https://game-icons.net/1x1/lorc/plain-dagger.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: maceIconUrl,
+        alt: 'Mace icon',
+        imgName: 'Flanged mace',
+        imgLink: 'https://game-icons.net/1x1/lorc/plain-dagger.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
+];
 
-    // NPCS
+// NPCS
+const npcs: CreditProps[] = [
     {
         src: goblinIconUrl,
         alt: 'Goblin icon',
@@ -218,11 +302,34 @@ const credits: CreditProps[] = [
     },
 ];
 
+function Credit({ src, alt, imgName, imgLink, artist, license }: CreditProps) {
+    return (
+        <div className='flex items-center'>
+            <span><img className='h-8 inline' src={src} alt={alt} /><a className='font-bold text-tooltip-highlight' href={imgLink}>{imgName}</a> by <a className='font-bold text-tooltip-highlight' href={artist.link}> {artist.name}</a> under <a className='font-bold text-tooltip-highlight' href={license.link}>{license.name}</a>.</span>
+        </div>
+    );
+}
+
+function CreditsGroup({ name, credits }: { name: string, credits: CreditProps[]; }) {
+    return (
+        <>
+            <h2>{name}</h2>
+            {Object.values(credits).map(props => <Credit {...props} />)}
+        </>
+    );
+}
+
 export default function Credits() {
     return (
         <div>
-            Credits
-            {Object.values(credits).map(props => <Credit {...props} />)}
+            <h1>Credits</h1>
+            <CreditsGroup name={'Classes'} credits={classes} />
+            <CreditsGroup name={'Status Effects'} credits={statusEffects} />
+            <CreditsGroup name={'Armour'} credits={armour} />
+            <CreditsGroup name={'Heads'} credits={heads} />
+            <CreditsGroup name={'Shields'} credits={shields} />
+            <CreditsGroup name={'Weapons'} credits={weapons} />
+            <CreditsGroup name={'NPCs'} credits={npcs} />
         </div>
     );
 }
