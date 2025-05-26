@@ -22,14 +22,13 @@ type ResourceBarProps = {
 
 export default function ResourceBar(props: ResourceBarProps) {
     const resource = ResourceColor[props.resource];
+    const width = `${props.curr >= 0 ? Math.min(props.curr / props.max * 100, 100) : 0}%`;
+
     return (
-        // <div>
-        //     <progress value={props.curr} max={props.max}>
-        //         {props.curr}/{props.max}
-        //     </progress>
-        // </div>
         <div className={`w-full ${resource.bgColor} h-6`}>
-            <div className={`${resource.color} h-6`} style={{ width: `${props.curr >= 0 ? Math.min(props.curr / props.max * 100, 100) : 0}%` }}>{props.curr}/{props.max}</div>
+            <span className='absolute font-bold pl-2'>{`${props.curr} / ${props.max}`}</span>
+            <div className={`${resource.color} h-6`} style={{ width }}>
+            </div>
         </div>
     );
 }
