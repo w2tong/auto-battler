@@ -6,6 +6,7 @@ import { equips, EquipSlot, isValidEquip, ItemType, WeaponTypeProperties } from 
 import { useInventory, useInventoryDispatch } from "../../hooks/Inventory/InventoryContext";
 import { useState } from "react";
 import ItemSort from "../../types/ItemSort";
+import { cn } from "../../utils/utils";
 
 export default function EquipmentInventory({ className }: { className?: string; }) {
     const characters = useCharacters();
@@ -28,7 +29,7 @@ export default function EquipmentInventory({ className }: { className?: string; 
     }
 
     return (
-        <div className={`flex flex-row space-x-4 ${className}`}>
+        <div className={cn('flex flex-row space-x-4', className)}>
             <DndContext onDragEnd={handleDragEnd}>
                 <Equipment equipment={equipment} />
                 <Inventory items={inventory} sort={inventorySort} sortOnChange={handleSortOnChange} />

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import ItemSlot from './ItemSlot';
 import { ItemType, equips } from '@wholesome-sisters/auto-battler';
 import SelectMenu from './SelectMenu';
+import { cn } from '../../../utils/utils';
 
 const tierOptions = [
     { value: '0', text: 'Tier 0' },
@@ -45,7 +46,7 @@ export default function Inventory({ items, sort, sortOnChange, className }: { it
     }
 
     return (
-        <div className={`flex flex-col ${className}`}>
+        <div className={cn('flex flex-col', className)}>
             <div>
                 <h2 className='py-1'>Inventory</h2>
                 <div className='flex flex-row py-1'>

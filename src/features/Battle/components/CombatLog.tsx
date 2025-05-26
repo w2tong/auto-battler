@@ -2,6 +2,7 @@ import { equips, HitType, LineType, LogLine } from "@wholesome-sisters/auto-batt
 import ItemTooltip from "../../../components/ItemTooltip";
 import { tierTextColor } from "../../../utils/tierColor";
 import { formatNum } from "../../../utils/stats";
+import { cn } from "../../../utils/utils";
 
 function lineToString(line: LogLine) {
     switch (line.type) {
@@ -35,7 +36,7 @@ function lineToString(line: LogLine) {
 
 export default function CombatLog({ log, className }: { log: LogLine[], className: string; }) {
     return (
-        <div className={`flex flex-col ${className}`}>
+        <div className={cn('flex flex-col', className)}>
             <h2 className='grow-0'>Combat Log</h2>
             <div className='grow overflow-y-auto flex flex-col-reverse'>
                 <div className='flex flex-col'>
