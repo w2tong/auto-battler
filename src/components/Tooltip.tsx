@@ -1,13 +1,16 @@
 import { ReactNode, useState, useRef, useLayoutEffect } from "react";
+import { cn } from "../utils/utils";
 
 export default function Tooltip({
     children,
     content,
+    className,
     display = true,
     followCursor = true,
 }: {
     children: ReactNode;
     content: ReactNode;
+    className?: string;
     display?: boolean;
     followCursor?: boolean;
 }) {
@@ -40,7 +43,7 @@ export default function Tooltip({
 
     return (
         <div
-            className={`group inline-block ${display ? 'relative' : ''}`}
+            className={cn('group inline-block', display && 'relative')}
             onMouseMove={followCursor ? handleMouseMove : undefined}
             onMouseEnter={followCursor ? () => setHovered(true) : undefined}
             onMouseLeave={followCursor ? () => setHovered(false) : undefined}
@@ -49,18 +52,17 @@ export default function Tooltip({
             {display && followCursor && hovered && (
                 <div
                     ref={tooltipRef}
-                    className="fixed pointer-events-none bg-black text-white px-2 py-1 rounded z-50 border"
+                    className={cn('fixed pointer-events-none bg-black text-white px-2 py-1 rounded z-50 border text-wrap', className)}
                     style={{
                         left,
-                        top,
-                        whiteSpace: 'nowrap',
+                        top
                     }}
                 >
                     {content}
                 </div>
             )}
             {display && !followCursor && (
-                <div className={`absolute bottom-full bg-black text-white px-2 py-1 rounded z-10 border hidden group-hover:block`}>
+                <div className={cn('absolute bottom-full bg-black text-white px-2 py-1 rounded z-10 border hidden group-hover:block text-wrap', className)}>
                     {content}
                 </div>
             )}
