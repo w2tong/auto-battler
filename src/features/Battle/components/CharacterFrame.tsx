@@ -9,7 +9,7 @@ export default function CharacterFrame({ name, level, className, currHealth, max
             <div className='flex flex-row w-full h-18'>
                 <img className='h-full' src={icon.src} alt={icon.alt} />
                 <div className='flex-1 truncate'>
-                    <div className='font-bold truncate'>{name} - Lvl. {level} {className}</div>
+                    <div className='font-bold truncate'>Lvl. {level} {className} - {name}</div>
                     <ResourceBar resource={Resource.Health} curr={formatNum(currHealth)} max={formatNum(maxHealth)} />
                     {manaCost > 0 && <ResourceBar resource={Resource.Mana} curr={formatNum(currMana)} max={formatNum(manaCost)} />}
                 </div>
