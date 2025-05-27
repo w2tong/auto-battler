@@ -10,7 +10,7 @@ export default function CharacterSelectCard({ name, charClass, level, exp, index
             <div className={`flex flex-row p-2 ${selected ? 'bg-primary-active' : ''}`}>
                 <ClassIcon class={charClass} width={64} height={64} />
                 <div className='flex flex-col text-left my-auto ml-4 min-w-0'>
-                    <div className={truncateText}>{name}</div>
+                    <div className={`font-bold text-xl ${truncateText}`}>{name}</div>
                     <div className={truncateText}>Lvl. {level} {charClass}</div>
                     <div className={truncateText}>{exp}/{levelExp[level as LevelRange]} exp</div>
                 </div>
