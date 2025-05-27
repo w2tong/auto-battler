@@ -145,7 +145,7 @@ export default function BattlePage() {
             <div className='flex flex-row'>
                 <div className='flex flex-row items-center'>
                     <h2 className=''>Combat Speed: </h2>
-                    {Object.entries(SPEEDS).map(([key, val]) => <Button className={`${val === combatSpeed ? 'bg-button-hover' : ''}`} onClick={() => setCombatSpeed(val)}>{key}</Button>)}
+                    {Object.entries(SPEEDS).map(([key, val]) => <Button key={key} className={`${val === combatSpeed ? 'bg-button-hover' : ''}`} onClick={() => setCombatSpeed(val)}>{key}</Button>)}
                 </div>
                 <div className='flex flex-row items-center'>
                     <h2>Auto Start: </h2>
