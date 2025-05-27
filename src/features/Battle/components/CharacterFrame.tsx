@@ -4,7 +4,7 @@ import { formatNum } from '../../../utils/stats';
 
 export default function CharacterFrame({ name, level, className, currHealth, maxHealth, currMana, manaCost, buffs, debuffs, icon }: { name: string, level: number, className: string | null, currHealth: number, maxHealth: number, currMana: number, manaCost: number, buffs: string, debuffs: string, icon: { src: string, alt: string; }; }) {
     return (
-        <div className='flex flex-row h-24'>
+        <div className='flex flex-row h-24 bg-primary-hover'>
             <img className='h-full' src={icon.src} alt={icon.alt} />
             <div className='flex-1'>
                 <div>{name}</div>
