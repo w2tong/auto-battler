@@ -10,7 +10,7 @@ function Weapon({ name, type, min, max, accuracy, tier }: WeaponProps) {
             <hr />
             <div>{type}</div>
             <div><span className='font-bold'>{formatNum(accuracy)}</span> Accuracy</div>
-            <div><span className='font-bold'>{formatNum(min)}</span> - <span className='font-bold'>{formatNum(max)}</span> Damage</div>
+            <div><span className='font-bold'>{formatNum(min)} - {formatNum(max)}</span> Damage</div>
         </div>
     );
 }
