@@ -1,12 +1,13 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useCharactersDispatch } from "../../hooks/Characters/CharactersContext";
 import BattleDisplay from "./components/BattleDisplay";
-import { Battle, BuffId, Character, DebuffId, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, StatType } from "@wholesome-sisters/auto-battler";
+import { Battle, BuffId, Character, createEquipmentImport, DebuffId, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
 import BattleCharacter from "../../types/BattleCharacter";
 import useInterval from "../../hooks/useInterval";
 import Button from "../../components/Button";
 import { useInventoryDispatch } from "../../hooks/Inventory/InventoryContext";
 import Switch from "../../components/Switch";
+import { LocalStorageCharacter } from "../../types/LocalStorage";
 
 const DEFAULT_DELAY = 1000;
 const SPEEDS = {
@@ -17,7 +18,7 @@ const SPEEDS = {
     '10x': 10,
 };
 
-export default function BattleWrapper({ char, exp, index, level }: { char: Character, exp: number, index: number, level: LevelRange; }) {
+export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsChar: LocalStorageCharacter, index: number, encounterLevel: LevelRange; }) {
     const characterDispatch = useCharactersDispatch();
     const inventoryDispatch = useInventoryDispatch();
 
@@ -41,17 +42,42 @@ export default function BattleWrapper({ char, exp, index, level }: { char: Chara
 
     // Use a ref to hold the mutable battle instance
     const battleRef = useRef<Battle | null>(null);
-
-    const newBattle = useCallback(function newBattle() {
-        battleRef.current = new Battle([char], getRandomEncounter(level));
-        setTurn(t => t + 1);
-        setCombat('before');
-    }, [char, level]);
+    const playerLevelRef = useRef<LevelRange>(lsChar.level as LevelRange);
 
     // Initialize battle on load
     useEffect(() => {
-        newBattle();
-    }, [newBattle]);
+        const char = new Character({
+            name: lsChar.name,
+            level: playerLevelRef.current,
+            className: lsChar.class,
+            attributes: lsChar.attributes,
+            statTemplate: {},
+            equipment: createEquipmentImport(lsChar.equipment),
+            ability: startingAbility[lsChar.class],
+            petId: lsChar.pet ?? undefined
+        });
+        battleRef.current = new Battle([char], getRandomEncounter(encounterLevel));
+        setTurn(t => t + 1);
+        setCombat('before');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [index]);
+
+    function newBattle() {
+        playerLevelRef.current = lsChar.level as LevelRange;
+        const char = new Character({
+            name: lsChar.name,
+            level: playerLevelRef.current,
+            className: lsChar.class,
+            attributes: lsChar.attributes,
+            statTemplate: {},
+            equipment: createEquipmentImport(lsChar.equipment),
+            ability: startingAbility[lsChar.class],
+            petId: lsChar.pet ?? undefined
+        });
+        battleRef.current = new Battle([char], getRandomEncounter(encounterLevel));
+        setTurn(t => t + 1);
+        setCombat('before');
+    }
 
     function startCombat() {
         battleRef.current?.startCombat();
@@ -65,24 +91,24 @@ export default function BattleWrapper({ char, exp, index, level }: { char: Chara
                 setCombat('after');
                 if (turnRes.winner && turnRes.winner === Side.Left) {
                     // Add exp/level up
-                    const expGain = encounterExp[level];
-                    let newExp = exp + expGain;
-                    let newLevel = char.level;
+                    const expGain = encounterExp[encounterLevel];
+                    let newExp = lsChar.exp + expGain;
+                    let newLevel = lsChar.level;
                     while (newExp > levelExp[newLevel as LevelRange]) {
                         const expReq = levelExp[newLevel as LevelRange];
                         newExp = newExp - expReq;
                         newLevel += 1;
                     }
-                    battleRef.current.log.addExp(char.name, exp);
-                    if (newLevel > char.level) battleRef.current.log.addLevelUp(char.name, newLevel);
+                    battleRef.current.log.addExp(lsChar.name, lsChar.exp);
+                    if (newLevel > lsChar.level) battleRef.current.log.addLevelUp(lsChar.name, newLevel);
                     characterDispatch({ type: 'update', index, level: newLevel, exp: newExp });
 
                     // Add loot
-                    const leveledLootTable = lootTables[level];
+                    const leveledLootTable = lootTables[encounterLevel];
                     const lootTable = Math.random() <= leveledLootTable.rareChance ? leveledLootTable.rare : leveledLootTable.normal;
                     const itemId = lootTable[Math.floor(Math.random() * lootTable.length)];
                     inventoryDispatch({ type: 'update', itemId });
-                    battleRef.current.log.addLoot(char.name, itemId);
+                    battleRef.current.log.addLoot(lsChar.name, itemId);
                 }
             }
             setTurn(t => t + 1); // Force rerender

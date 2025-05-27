@@ -1,5 +1,5 @@
 import { useCharacters, useSelected } from "../../hooks/Characters/CharactersContext";
-import { Character, createEquipmentImport, LevelRange, startingAbility } from "@wholesome-sisters/auto-battler";
+import { LevelRange } from "@wholesome-sisters/auto-battler";
 import { useParams } from "react-router";
 import BattleWrapper from "../../features/Battle/Battle";
 
@@ -11,17 +11,6 @@ export default function BattlePage() {
     const { selected } = useSelected();
     const lsChar = chars[selected];
 
-    const char = new Character({
-        name: lsChar.name,
-        level: lsChar.level,
-        className: lsChar.class,
-        attributes: lsChar.attributes,
-        statTemplate: {},
-        equipment: createEquipmentImport(lsChar.equipment),
-        ability: startingAbility[lsChar.class],
-        petId: lsChar.pet ?? undefined
-    });
-
     if (!lsChar) {
         return 'Select a character to battle.';
     }
@@ -30,10 +19,9 @@ export default function BattlePage() {
     }
     return (
         <BattleWrapper
-            char={char}
-            exp={lsChar.exp}
+            lsChar={lsChar}
             index={selected}
-            level={level}
+            encounterLevel={level}
         />
     );
 }
