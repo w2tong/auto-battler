@@ -11,7 +11,7 @@ function lineToString(line: LogLine) {
         }
         case (LineType.Loot): {
             const item = equips[line.itemId];
-            return <>{line.name} looted <ItemTooltip item={item}><span className={`inline-block font-bold ${tierTextColor[item.tier]}`}>[{item.name}]</span></ItemTooltip>.</>;
+            return <><b>{line.name}</b> looted <ItemTooltip item={item}><span className={`inline-block font-bold ${tierTextColor[item.tier]}`}>[{item.name}]</span></ItemTooltip>.</>;
         }
         case (LineType.Exp): {
             return <><b>{line.name}</b> gained <b>{line.exp}</b> experience.</>;
@@ -26,7 +26,7 @@ function lineToString(line: LogLine) {
             return <>{attack}{damage}.</>;
         }
         case (LineType.Damage): {
-            return <>{line.name} took {formatNum(line.damage)} damage from {line.source}.</>;
+            return <><b>{line.name}</b> took <b>{formatNum(line.damage)}</b> damage from <b>{line.source}</b>.</>;
         }
         default: {
             return `Unknown line: ${line}`;
