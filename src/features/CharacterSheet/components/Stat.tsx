@@ -1,9 +1,9 @@
 import { StatType } from "@wholesome-sisters/auto-battler";
-import { formatStat, formatStatDescriptionVal } from "../../../utils/stats";
+import { formatCharacterSheetStat, formatStatDescriptionVal } from "../../../utils/stats";
 import StatTooltip from "../../../components/StatTooltip";
 
 export default function Stat({ stat, num }: { stat: StatType, num: number; }) {
-    const { key, val } = formatStat(stat, num);
+    const { key, val } = formatCharacterSheetStat(stat, num);
     return (
         <div className='w-full flex justify-between'>
             <StatTooltip type={stat} num={formatStatDescriptionVal(stat, num)}>

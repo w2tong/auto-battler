@@ -1,14 +1,14 @@
 import { ReactNode } from "react";
 import Tooltip from "./Tooltip";
 import { Attributes, AttributeStatScaling, AttributeType, StatType } from "@wholesome-sisters/auto-battler";
-import { formatStat } from "../utils/stats";
+import { formatItemStat } from "../utils/stats";
 
 export default function AttributeTooltip({ children, type, num, display = true }: { children: ReactNode, type: AttributeType, num: number, display?: boolean; }) {
     const content =
         <div className='whitespace-nowrap'>
             <div className='font-bold'>{type}</div>
             {Object.entries(AttributeStatScaling[type]).map(([stat, scaling], i) => {
-                const { key, val } = formatStat(stat as StatType, scaling * (num - Attributes.DEFAULT_VALUE));
+                const { key, val } = formatItemStat(stat as StatType, scaling * (num - Attributes.DEFAULT_VALUE));
                 return (<div key={i}>{`${val} ${key}`}</div>);
             }
             )}
