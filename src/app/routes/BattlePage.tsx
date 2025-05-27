@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useCharacters, useCharactersDispatch, useSelected } from "../../hooks/Characters/CharactersContext";
 import BattleComponent from "../../features/Battle/BattleComponent";
-import { Battle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
+import { Battle, BuffId, Character, createEquipmentImport, DebuffId, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
 import BattleCharacter from "../../types/BattleCharacter";
 import useInterval from "../../hooks/useInterval";
 import { useParams } from "react-router";
@@ -48,6 +48,7 @@ export default function BattlePage() {
     const [turn, setTurn] = useState(-1);
 
     // Use a ref to hold the mutable battle instance
+    // TODO: update charRef when switching characters
     const charRef = useRef<Character | null>(lsChar ? new Character({
         name: lsChar.name,
         level: lsChar.level,
@@ -166,6 +167,17 @@ export default function BattlePage() {
 }
 
 function toBattleCharacter(char: Character): BattleCharacter {
+    const buffs: Partial<Record<BuffId, number>> = {};
+    for (const buffId of Object.values(BuffId)) {
+        const stacks = char.statusEffectManager.getBuffStacks(buffId);
+        if (stacks > 0) buffs[buffId] = stacks;
+    }
+    const debuffs: Partial<Record<DebuffId, number>> = {};
+    for (const debuffId of Object.values(DebuffId)) {
+        const stacks = char.statusEffectManager.getDebuffStacks(debuffId);
+        if (stacks > 0) debuffs[debuffId] = stacks;
+    }
+
     return {
         name: char.name,
         level: char.level,
@@ -175,7 +187,7 @@ function toBattleCharacter(char: Character): BattleCharacter {
         maxHealth: char.stats.maxHealth,
         currMana: char.currentMana,
         manaCost: char.stats.getStat(StatType.ManaCost),
-        buffs: '', // PH
-        debuffs: ''
+        buffs,
+        debuffs
     };
 }

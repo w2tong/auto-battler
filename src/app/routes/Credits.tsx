@@ -8,6 +8,7 @@ import wizardIconUrl from '../../assets/icons/classes/wizard.svg';
 import bleedingIconUrl from '../../assets/icons/status-effects/bleeding.svg';
 import blessedIconUrl from '../../assets/icons/status-effects/blessed.svg';
 import burningIconUrl from '../../assets/icons/status-effects/burning.svg';
+import frozenIconUrl from '../../assets/icons/status-effects/frozen.svg';
 import invisibleIconUrl from '../../assets/icons/status-effects/invisible.svg';
 import poisonedIconUrl from '../../assets/icons/status-effects/poisoned.svg';
 
@@ -142,6 +143,14 @@ const statusEffects: CreditProps[] = [
         imgName: 'Flame',
         imgLink: 'https://game-icons.net/1x1/carl-olsen/flame.html',
         artist: artists.CarlOlsen,
+        license: licenses.CCBY30
+    },
+    {
+        src: frozenIconUrl,
+        alt: 'Frozen icon',
+        imgName: 'Frozen body',
+        imgLink: 'https://game-icons.net/1x1/delapouite/frozen-body.html',
+        artist: artists.Delapouite,
         license: licenses.CCBY30
     },
     {
