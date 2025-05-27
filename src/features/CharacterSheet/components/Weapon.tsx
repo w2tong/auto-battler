@@ -9,8 +9,8 @@ function Weapon({ name, type, min, max, accuracy, tier }: WeaponProps) {
             <div className={`font-bold ${tierTextColor[tier]}`}>{name}</div>
             <hr />
             <div>{type}</div>
-            <div>{formatNum(accuracy)} Accuracy</div>
-            <div>{formatNum(min)} - {formatNum(max)} Damage</div>
+            <div><span className='font-bold'>{formatNum(accuracy)}</span> Accuracy</div>
+            <div><span className='font-bold'>{formatNum(min)}</span> - <span className='font-bold'>{formatNum(max)}</span> Damage</div>
         </div>
     );
 }
