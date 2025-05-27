@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+/* 
+242424 - Black/Gray
+42BFDD - Blue
+B23A48 - Red
+FCDC4D - Yellow
+F5853F - Orange
+417B5A - Green
+*/
+
 @theme {
     /* Background Colors */
     --color-primary: #242424;
@@ -11,9 +20,9 @@
     --color-secondary-active: #60a5fa;
 
     /* Text Colors */
-    --color-primary-text: #ffffff;
-    --color-primary-text-hover: #e0e7ef;
-    --color-primary-text-active: #bfc9d9;
+    --color-primary-text: #b5b5b5;
+    --color-primary-text-hover: #e8e8e8;
+    --color-primary-text-active: #ffffff;
 
     --color-secondary-text: #42BFDD;
     --color-secondary-text-hover: #e0e7ef;
