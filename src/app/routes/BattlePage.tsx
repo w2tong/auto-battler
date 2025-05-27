@@ -27,6 +27,7 @@ export default function BattlePage() {
     const inventoryDispatch = useInventoryDispatch();
     const { selected } = useSelected();
     const lsChar = chars[selected];
+    // TODO: fix for case where lsChar is undefined (when no character is selected)
 
     const lsCombatSpeed = localStorage.getItem('combat-speed');
     const [combatSpeed, setCombatSpeed] = useState(lsCombatSpeed ? Number(lsCombatSpeed) : 1);
@@ -47,7 +48,7 @@ export default function BattlePage() {
     const [turn, setTurn] = useState(-1);
 
     // Use a ref to hold the mutable battle instance
-    const charRef = useRef(new Character({
+    const charRef = useRef<Character | null>(lsChar ? new Character({
         name: lsChar.name,
         level: lsChar.level,
         className: lsChar.class,
@@ -56,12 +57,14 @@ export default function BattlePage() {
         equipment: createEquipmentImport(lsChar.equipment),
         ability: startingAbility[lsChar.class],
         petId: lsChar.pet ?? undefined
-    }));
+    }) : null);
     const battleRef = useRef<Battle | null>(null);
 
     // Initialize battle on load
     useEffect(() => {
-        battleRef.current = new Battle([charRef.current], getRandomEncounter(level));
+        if (charRef.current) {
+            battleRef.current = new Battle([charRef.current], getRandomEncounter(level));
+        }
         setTurn(0);
     }, [level]);
 
@@ -128,6 +131,9 @@ export default function BattlePage() {
     }
 
     const battle = battleRef.current;
+    if (!lsChar) {
+        return 'Select a character to battle.';
+    }
     return (
         <div>
             <div>
