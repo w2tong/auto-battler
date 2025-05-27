@@ -16,17 +16,18 @@ function App() {
                 <CharactersProvider>
                     <InventoryProvider>
                         <Header />
-                        <Routes>
-                            <Route index element={<Home />} />
-                            <Route path="equipment" element={<EquipmentPage />} />
-
-                            <Route path="battle">
-                                <Route index element={<BattleSelector />} />
-                                <Route path=":level" element={<BattlePage />} />
-                            </Route>
-                            <Route path="create-character" element={<CreateCharacter />} />
-                            <Route path="credits" element={<Credits />} />
-                        </Routes>
+                        <div className='px-4'>
+                            <Routes>
+                                <Route index element={<Home />} />
+                                <Route path="equipment" element={<EquipmentPage />} />
+                                <Route path="battle">
+                                    <Route index element={<BattleSelector />} />
+                                    <Route path=":level" element={<BattlePage />} />
+                                </Route>
+                                <Route path="create-character" element={<CreateCharacter />} />
+                                <Route path="credits" element={<Credits />} />
+                            </Routes>
+                        </div>
                     </InventoryProvider>
                 </CharactersProvider>
             </BrowserRouter>
