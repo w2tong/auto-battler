@@ -12,7 +12,9 @@ import roundShieldIconUrl from '../assets/icons/items/shields/round-shield.svg';
 import spikedShieldIconUrl from '../assets/icons/items/shields/spiked-shield.svg';
 
 import daggerIconUrl from '../assets/icons/items/weapons/dagger.svg';
+import greatswordIconUrl from '../assets/icons/items/weapons/greatsword.svg';
 import maceIconUrl from '../assets/icons/items/weapons/mace.svg';
+import wandIconUrl from '../assets/icons/items/weapons/wand.svg';
 import Icon from '../types/Icon';
 
 
@@ -28,8 +30,11 @@ const hoodIcon: Icon = { src: hoodIconUrl, alt: 'Cloth Hood icon' };
 const plateHelmetIcon: Icon = { src: plateHelmentIconUrl, alt: 'Plate Helmet icon' };
 const roundShieldIcon: Icon = { src: roundShieldIconUrl, alt: 'Round Shield icon' };
 const spikedShieldIcon: Icon = { src: spikedShieldIconUrl, alt: 'Spiked Shield icon' };
+
 const daggerIcon: Icon = { src: daggerIconUrl, alt: 'Dagger icon' };
+const greatswordIcon: Icon = { src: greatswordIconUrl, alt: 'Greatsword icon' };
 const maceIcon: Icon = { src: maceIconUrl, alt: 'Mace icon' };
+const wandIcon: Icon = { src: wandIconUrl, alt: 'Wand icon' };
 
 const itemIconMap: Record<ItemId, Icon> = {
     // Armour
@@ -88,7 +93,21 @@ const itemIconMap: Record<ItemId, Icon> = {
     dagger4: daggerIcon,
     dagger5: daggerIcon,
 
+    greatsword0: greatswordIcon,
+    greatsword1: greatswordIcon,
+    greatsword2: greatswordIcon,
+    greatsword3: greatswordIcon,
+    greatsword4: greatswordIcon,
+    greatsword5: greatswordIcon,
+
     mace0: maceIcon,
+
+    wand0: wandIcon,
+    wand1: wandIcon,
+    wand2: wandIcon,
+    wand3: wandIcon,
+    wand4: wandIcon,
+    wand5: wandIcon,
 };
 
 export { type ItemId, itemIconMap };

@@ -24,7 +24,9 @@ import roundShieldIconUrl from '../../assets/icons/items/shields/round-shield.sv
 import spikedShieldIconUrl from '../../assets/icons/items/shields/spiked-shield.svg';
 
 import daggerIconUrl from '../../assets/icons/items/weapons/dagger.svg';
+import greatswordIconUrl from '../../assets/icons/items/weapons/greatsword.svg';
 import maceIconUrl from '../../assets/icons/items/weapons/mace.svg';
+import wandIconUrl from '../../assets/icons/items/weapons/wand.svg';
 
 
 import goblinIconUrl from '../../assets/icons/npcs/goblin.svg';
@@ -241,11 +243,27 @@ const weapons: CreditProps[] = [
         license: licenses.CCBY30
     },
     {
+        src: greatswordIconUrl,
+        alt: 'Greatsword icon',
+        imgName: 'Two handed sword',
+        imgLink: 'https://game-icons.net/1x1/delapouite/two-handed-sword.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
+    {
         src: maceIconUrl,
         alt: 'Mace icon',
         imgName: 'Flanged mace',
         imgLink: 'https://game-icons.net/1x1/lorc/plain-dagger.html',
         artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
+    {
+        src: wandIconUrl,
+        alt: 'Wand icon',
+        imgName: 'Orb wand',
+        imgLink: 'https://game-icons.net/1x1/willdabeast/orb-wand.html',
+        artist: artists.Willdabeast,
         license: licenses.CCBY30
     },
 ];
