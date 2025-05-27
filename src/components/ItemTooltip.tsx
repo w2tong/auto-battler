@@ -69,7 +69,6 @@ const itemTypeContentMap: Record<ItemType, (item: Item) => ReactNode> = {
         return (
             <>
                 <div>{shield.type} {ItemType.Shield}</div>
-                <hr />
                 {createAttributes(shield.attributes)}
                 {createStats(shield.stats)}
             </>
