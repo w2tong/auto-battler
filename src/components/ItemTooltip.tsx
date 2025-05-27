@@ -25,7 +25,7 @@ function createAttributes(attrs?: ItemAttributes) {
     return (<>
         {Object.entries(attrs).map(([attr, num]) => {
             const positive = num > 0;
-            const textColor = positive ? 'text-green-500' : 'text-red-500';
+            const textColor = positive ? 'text-positive' : 'text-negative';
             return <div className={`font-bold ${textColor}`} key={attr}>{`${positive ? '+' : ''}${num} ${attr}`}</div>;
         })}
     </>);
@@ -36,7 +36,7 @@ function createStats(stats?: ItemStats) {
     return (<>
         {Object.entries(stats).map(([stat, num]) => {
             const positive = num > 0;
-            const textColor = stat === StatType.ManaCost ? positive ? 'text-red-500' : 'text-green-500' : positive ? 'text-green-500' : 'text-red-500';
+            const textColor = stat === StatType.ManaCost ? positive ? 'text-negative' : 'text-positive' : positive ? 'text-positive' : 'text-negative';
             const { key, val } = formatItemStat(stat as StatType, num);
             return (<div className={textColor} key={key}>{`${val} ${key}`}</div>);
         })}
