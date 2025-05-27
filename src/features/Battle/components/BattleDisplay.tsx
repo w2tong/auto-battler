@@ -1,14 +1,14 @@
 'use client';
 
 import { LogLine } from '@wholesome-sisters/auto-battler';
-import type BattleCharacter from '../../types/BattleCharacter';
-import CharacterFrame from './components/CharacterFrame';
-import CombatLog from './components/CombatLog';
-import TurnOrder from './components/TurnOrder';
-import { npcIconMap } from '../../utils/npcIcon';
-import classIconMap from '../../utils/classIconMap';
+import type BattleCharacter from '../../../types/BattleCharacter';
+import CharacterFrame from './CharacterFrame';
+import CombatLog from './CombatLog';
+import TurnOrder from './TurnOrder';
+import { npcIconMap } from '../../../utils/npcIcon';
+import classIconMap from '../../../utils/classIconMap';
 
-export default function Battle({ left, right, combatLog, turnOrder, turnIndex }: { left: BattleCharacter[], right: BattleCharacter[], turnOrder: string[], turnIndex: number, combatLog: LogLine[]; }) {
+export default function BattleDisplay({ left, right, combatLog, turnOrder, turnIndex }: { left: BattleCharacter[], right: BattleCharacter[], turnOrder: string[], turnIndex: number, combatLog: LogLine[]; }) {
     return (
         <div className='h-full flex flex-col sm:flex-row'>
             <div className='flex flex-col grow'>
