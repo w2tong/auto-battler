@@ -12,7 +12,7 @@ export default function CharacterCreator() {
         <div>
             <h2>Choose a Class</h2>
             {Object.values(ClassName).map(charClass =>
-                <div className='bg-black inline-block'>
+                <div key={charClass} className='bg-black inline-block'>
                     <button className={`${selectedClass === charClass ? 'opacity-100' : 'opacity-25'} transition duration-250 ease-in-out hover:opacity-100`} key={charClass} onClick={() => setSelectedClass(charClass)}>
                         <ClassIcon class={charClass} width={64} height={64} />
                     </button>
@@ -26,7 +26,7 @@ export default function CharacterCreator() {
             <div>{Classes[selectedClass].ability.description()}</div>
 
             <h3>Attributes</h3>
-            <div>{Object.entries(Classes[selectedClass].attributes).map(([attr, value]) => <div>+{value} {attr}</div>)}</div>
+            <div>{Object.entries(Classes[selectedClass].attributes).map(([attr, value]) => <div key={attr}>+{value} {attr}</div>)}</div>
 
             <label>
                 Name:

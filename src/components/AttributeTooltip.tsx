@@ -7,9 +7,9 @@ export default function AttributeTooltip({ children, type, num, display = true }
     const content =
         <div className='whitespace-nowrap'>
             <div className='font-bold'>{type}</div>
-            {Object.entries(AttributeStatScaling[type]).map(([stat, scaling]) => {
+            {Object.entries(AttributeStatScaling[type]).map(([stat, scaling], i) => {
                 const { key, val } = formatStat(stat as StatType, scaling * (num - Attributes.DEFAULT_VALUE));
-                return (<div key={key}>{`${val} ${key}`}</div>);
+                return (<div key={i}>{`${val} ${key}`}</div>);
             }
             )}
         </div>;
