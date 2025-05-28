@@ -17,7 +17,7 @@ function lineToString(line: LogLine) {
             return <><b>{line.name}</b> gained <b>{line.exp}</b> experience.</>;
         }
         case (LineType.LevelUp): {
-            return <><b>{line.name}</b> leveled up to level {line.level}.</>;
+            return <><b>{line.name}</b> leveled up to level <b>{line.level}</b>.</>;
         }
         case (LineType.Attack): {
             const attackName = line.abilityName ? `used ${line.abilityName} on` : 'attacked';
