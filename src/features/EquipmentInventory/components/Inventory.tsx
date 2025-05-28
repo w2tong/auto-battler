@@ -4,6 +4,7 @@ import { ItemType, equips } from '@wholesome-sisters/auto-battler';
 import SelectMenu from './SelectMenu';
 import { cn } from '../../../utils/utils';
 import Switch from '../../../components/Switch';
+import InfoTooltip from '../../../components/InfoTooltip';
 
 const tierOptions = [
     { value: '0', text: 'Tier 0' },
@@ -70,7 +71,8 @@ export default function Inventory({ items, sort, sortOnChange, className, onItem
                         onChange={(e) => setNameFilter(e.target.value)}
                     />
                     <div className='flex flex-row items-center'>
-                        Delete Mode: <Switch checked={sellMode} onChange={setSellMode} className='ml-2' />
+                        <span>Delete Mode<InfoTooltip content={'Enables deleting items from your Inventory with right click.'} />:</span>
+                        <Switch checked={sellMode} onChange={setSellMode} className='ml-2' />
                     </div>
                 </div>
             </div>
