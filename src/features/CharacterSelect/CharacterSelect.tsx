@@ -1,10 +1,10 @@
-import { useCharacters, useSelected } from '../../hooks/Characters/CharactersContext';
+import { useCharacters, useCharactersDispatch } from '../../hooks/Characters/CharactersContext';
 import CharacterSelectCard from './components/CharacterSelectCard';
 
 export default function CharacterSelect() {
-    const characters = useCharacters();
-    const { selected, setSelected } = useSelected();
-    const selectedChar = characters[selected];
+    const { list, selected } = useCharacters();
+    const characterDispatch = useCharactersDispatch();
+    const selectedChar = list[selected];
 
     return (
         <div className='relative flex flex-col group bg-primary z-10 w-60'>
@@ -13,7 +13,7 @@ export default function CharacterSelect() {
             </div>
             <div className='relative'>
                 <div className='absolute invisible group-hover:visible bg-primary w-60'>
-                    {characters.map((char, i) => <CharacterSelectCard name={char.name} charClass={char.class} level={char.level} exp={char.exp} index={i} selected={i === selected} setSelected={setSelected} key={i} />)}
+                    {list.map((char, i) => <CharacterSelectCard name={char.name} charClass={char.class} level={char.level} exp={char.exp} index={i} selected={i === selected} setSelected={() => characterDispatch({ type: 'select', index: i })} key={i} />)}
                 </div>
             </div>
         </div>

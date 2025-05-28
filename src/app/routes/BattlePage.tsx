@@ -1,4 +1,4 @@
-import { useCharacters, useSelected } from "../../hooks/Characters/CharactersContext";
+import { useCharacters } from "../../hooks/Characters/CharactersContext";
 import { LevelRange } from "@wholesome-sisters/auto-battler";
 import { useParams } from "react-router";
 import BattleWrapper from "../../features/Battle/Battle";
@@ -7,9 +7,8 @@ export default function BattlePage() {
     const param = useParams();
     const level: LevelRange = Number(param.level) as LevelRange;
 
-    const chars = useCharacters();
-    const { selected } = useSelected();
-    const lsChar = chars[selected];
+    const { list, selected } = useCharacters();
+    const lsChar = list[selected];
 
     if (!lsChar) {
         return 'Select a character to battle.';

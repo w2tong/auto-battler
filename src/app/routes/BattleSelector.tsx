@@ -1,12 +1,11 @@
 import { useState } from "react";
 import Button from "../../components/Button";
-import { useCharacters, useSelected } from "../../hooks/Characters/CharactersContext";
+import { useCharacters } from "../../hooks/Characters/CharactersContext";
 import { NavLink } from "react-router";
 
 export default function BattlePage() {
-    const chars = useCharacters();
-    const { selected } = useSelected();
-    const lsChar = chars[selected];
+    const { list, selected } = useCharacters();
+    const lsChar = list[selected];
 
     const [levelInput, setLevelInput] = useState<number>(lsChar.level);
     function handleLevelInputChange(e: React.ChangeEvent<HTMLInputElement>) {

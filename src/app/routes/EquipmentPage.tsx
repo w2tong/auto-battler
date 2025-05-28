@@ -1,16 +1,15 @@
 import { Character, createEquipmentImport, startingAbility } from "@wholesome-sisters/auto-battler";
 import CharacterSheet from "../../features/CharacterSheet/CharacterSheet";
-import { useCharacters, useCharactersDispatch, useSelected } from "../../hooks/Characters/CharactersContext";
+import { useCharacters, useCharactersDispatch } from "../../hooks/Characters/CharactersContext";
 import EquipmentInventory from "../../features/EquipmentInventory/EquipmentInventory";
 import Button from "../../components/Button";
 import Modal from "../../components/Modal";
 import { useState } from "react";
 
 export default function EquipmentPage() {
-    const characters = useCharacters();
+    const { list, selected } = useCharacters();
     const charactersDispatch = useCharactersDispatch();
-    const { selected } = useSelected();
-    const selectedChar = characters[selected];
+    const selectedChar = list[selected];
 
     const [modalOpen, setModalOpen] = useState(false);
 
