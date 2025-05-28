@@ -32,7 +32,12 @@ export default function EquipmentInventory({ className }: { className?: string; 
         <div className={cn('flex flex-row space-x-4', className)}>
             <DndContext onDragEnd={handleDragEnd}>
                 <Equipment equipment={equipment} />
-                <Inventory items={inventory} sort={inventorySort} sortOnChange={handleSortOnChange} />
+                <Inventory
+                    items={inventory}
+                    sort={inventorySort}
+                    sortOnChange={handleSortOnChange}
+                    onItemRightClick={handleItemRightClick}
+                />
             </DndContext>
         </div >
     );
@@ -124,6 +129,12 @@ export default function EquipmentInventory({ className }: { className?: string; 
             const iOverId = Number(overId);
             resetInventorySort();
             inventoryDispatch({ type: 'swap', index1: iActiveId, index2: iOverId });
+        }
+    }
+
+    function handleItemRightClick(index: number) {
+        if (inventory[index] != null) {
+            inventoryDispatch({ type: 'update', index, itemId: null });
         }
     }
 }
