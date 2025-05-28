@@ -32,7 +32,6 @@ function StatusEffect({ icon, stacks, positive, name, description }: { icon: Ico
     );
 }
 
-// TODO: have StatusEffectBar take a fixed amount of space to prevent layout shifting
 export default function StatusEffectBar({ buffs, debuffs }: { buffs: BuffBar, debuffs: DebuffBar; }) {
     return (
         <div className='h-16'>

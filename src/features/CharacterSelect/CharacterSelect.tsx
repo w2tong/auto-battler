@@ -8,7 +8,6 @@ export default function CharacterSelect() {
 
     return (
         <div className='relative flex flex-col group bg-primary z-10 w-60'>
-            {/* TODO: MAKE CLICKING ON SELECTED CHARACTER DO SOMETHING DIFFERENT */}
             <div className=' hover:bg-primary-hover'>
                 {selectedChar ? <CharacterSelectCard name={selectedChar.name} charClass={selectedChar.class} level={selectedChar.level} exp={selectedChar.exp} index={-1} selected={false} setSelected={() => { }} key={-1} /> : 'Select a character'}
             </div>
