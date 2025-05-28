@@ -135,6 +135,7 @@ export default function EquipmentInventory({ className }: { className?: string; 
     function handleItemRightClick(index: number) {
         if (inventory[index] != null) {
             inventoryDispatch({ type: 'update', index, itemId: null });
+            resetInventorySort();
         }
     }
 }
