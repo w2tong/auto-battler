@@ -11,13 +11,11 @@ type LocalStorageCharacter = {
     talents: Set<string>;
 };
 
-type LocalStorageInventory = (string | null)[];
-
-type LocalStorage = {
-    characters: LocalStorageCharacter[];
+type LocalStorageCharacters = {
+    list: LocalStorageCharacter[];
     selected: number;
-    inventory: LocalStorageInventory;
 };
 
-export default LocalStorage;
-export type { LocalStorageCharacter, LocalStorageInventory };
+type LocalStorageInventory = (string | null)[];
+
+export type { LocalStorageCharacter, LocalStorageCharacters, LocalStorageInventory };

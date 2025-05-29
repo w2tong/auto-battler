@@ -1,3 +1,5 @@
+import { cn } from "../utils/utils";
+
 interface SwitchToggleProps {
     checked: boolean;
     onChange: (checked: boolean) => void;
@@ -7,7 +9,7 @@ interface SwitchToggleProps {
 
 export default function Switch({ checked, onChange, label, className = "" }: SwitchToggleProps) {
     return (
-        <label className={`inline-flex items-center cursor-pointer ${className}`}>
+        <label className={cn('inline-flex items-center cursor-pointer', className)}>
             <input
                 type="checkbox"
                 className="sr-only peer"

@@ -6,8 +6,8 @@ export default function CharacterSheetPotion({ name, min, max, charges, tier }: 
         <div>
             <h4>Potion</h4>
             <div className={`font-bold ${tierTextColor[tier]}`}>{name}</div>
-            <div>{min} - {max} Healing</div>
-            <div>{`${charges} charge${charges > 1 ? 's' : ''}`}</div>
+            <div><span className='font-bold'>{min} - {max}</span> healing</div>
+            <div><span className='font-bold'>{charges}</span> charge{charges > 1 ? 's' : ''}</div>
         </div>
     );
 }

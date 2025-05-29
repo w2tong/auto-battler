@@ -1,14 +1,15 @@
 import { Armour, Hands, Head, Item, ItemAttributes, ItemStats, ItemType, Potion, Ring, Shield, StatType, Waist, Weapon, WeaponTypeProperties } from "@wholesome-sisters/auto-battler";
 import { tierTextColor } from "../utils/tierColor";
-import { type ReactNode } from "react";
+import { ReactNode } from "react";
 import Tooltip from "./Tooltip";
-import { formatStat } from "../utils/stats";
+import { formatItemStat } from "../utils/stats";
 
-export default function ItemTooltip({ children, item, display = true }: { children: ReactNode, item: Item, display?: boolean; }) {
+function ItemTooltip({ children, item, display = true }: { children: ReactNode, item: Item, display?: boolean; }) {
+    const itemContent = getItemContent(item);
     const content =
         <div className='whitespace-nowrap'>
             <div className={`${tierTextColor[item.tier]} font-bold`}>{item.name}</div>
-            {getItemContent(item)}
+            {itemContent}
         </div>;
 
     return (
@@ -17,11 +18,16 @@ export default function ItemTooltip({ children, item, display = true }: { childr
         </Tooltip>
     );
 }
+export default ItemTooltip;
 
 function createAttributes(attrs?: ItemAttributes) {
     if (attrs === undefined) return null;
     return (<>
-        {Object.entries(attrs).map(([attr, num]) => <div key={attr}>{`${num} ${attr}`}</div>)}
+        {Object.entries(attrs).map(([attr, num]) => {
+            const positive = num > 0;
+            const textColor = positive ? 'text-positive' : 'text-negative';
+            return <div className={`font-bold ${textColor}`} key={attr}>{`${positive ? '+' : ''}${num} ${attr}`}</div>;
+        })}
     </>);
 }
 
@@ -29,8 +35,10 @@ function createStats(stats?: ItemStats) {
     if (stats === undefined) return null;
     return (<>
         {Object.entries(stats).map(([stat, num]) => {
-            const { key, val } = formatStat(stat as StatType, num);
-            return (<div key={key}>{`${val} ${key}`}</div>);
+            const positive = num > 0;
+            const textColor = stat === StatType.ManaCost ? positive ? 'text-negative' : 'text-positive' : positive ? 'text-positive' : 'text-negative';
+            const { key, val } = formatItemStat(stat as StatType, num);
+            return (<div className={textColor} key={key}>{`${val} ${key}`}</div>);
         })}
     </>);
 }
@@ -47,8 +55,9 @@ const itemTypeContentMap: Record<ItemType, (item: Item) => ReactNode> = {
         const { twoHanded, light } = WeaponTypeProperties[weapon.type];
         return (
             <>
+                <div>{weapon.attackType}</div>
                 <div>{weapon.type}, {twoHanded ? 'Two-handed' : 'One-handed'}{light ? ', Light' : ''}</div>
-                <div>{min + bonus}-{max + bonus} damage</div>
+                <div><span className='font-bold'>{min + bonus} - {max + bonus}</span> damage</div>
                 {weapon.onHit ? <div>On Hit: {weapon.onHit.description}</div> : null}
                 {createAttributes(weapon.attributes)}
                 {createStats(weapon.stats)}

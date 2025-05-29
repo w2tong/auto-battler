@@ -8,7 +8,15 @@ function format(num: number, { signed = false, percent = false, multiplier = 1 }
     return `${signed && num > 0 ? '+' : ''}${formatNum(num, multiplier)}${percent ? '%' : ''}`;
 }
 
-const statFormattingRules: { [stat in StatType]?: { key: string; format: (num: number) => string; } } = {
+function formatSigned(num: number, { percent = false, multiplier = 1 }: { percent?: boolean; multiplier?: number; } = {}): string {
+    return format(num, { signed: true, percent, multiplier });
+};
+
+const characterSheetStatFormattingRules: { [stat in StatType]?: { key: string; format: (num: number) => string; } } = {
+    [StatType.Accuracy]: {
+        key: StatType.Accuracy,
+        format: num => format(num, { signed: true })
+    },
     [StatType.BlockChance]: {
         key: StatType.BlockChance,
         format: num => format(num, { percent: true })
@@ -55,11 +63,49 @@ const statFormattingRules: { [stat in StatType]?: { key: string; format: (num: n
     },
 };
 
-function formatStat(stat: StatType, num: number): { key: string, val: string; } {
-    const rule = statFormattingRules[stat];
+function formatCharacterSheetStat(stat: StatType, num: number): { key: string, val: string; } {
+    const rule = characterSheetStatFormattingRules[stat];
     if (rule) return { key: rule.key, val: rule.format(num) };
     // Default formatting for unhandled stat types
     return { key: stat, val: format(num) };
+}
+
+const itemStatFormattingRules: { [stat in StatType]?: { key: string; format: (num: number) => string; } } = {
+    [StatType.BlockChance]: {
+        key: StatType.BlockChance,
+        format: num => formatSigned(num, { percent: true })
+    },
+    [StatType.CriticalDamage]: {
+        key: StatType.CriticalDamage,
+        format: num => formatSigned(num, { percent: true, multiplier: 100 })
+    },
+    [StatType.DamagePercent]: {
+        key: "Damage",
+        format: num => formatSigned(num, { percent: true, multiplier: 100 })
+    },
+    [StatType.Dodge]: {
+        key: StatType.Dodge,
+        format: num => formatSigned(num, { percent: true })
+    },
+    [StatType.HealthPercent]: {
+        key: "Max Health",
+        format: num => formatSigned(num, { percent: true, multiplier: 100 })
+    },
+    [StatType.PotionEffectiveness]: {
+        key: StatType.PotionEffectiveness,
+        format: num => formatSigned(num, { percent: true, multiplier: 100 })
+    },
+    [StatType.SpellPowerPercent]: {
+        key: "Spell Power",
+        format: num => formatSigned(num, { percent: true, multiplier: 100 })
+    },
+};
+
+function formatItemStat(stat: StatType, num: number): { key: string, val: string; } {
+    const rule = itemStatFormattingRules[stat];
+    if (rule) return { key: rule.key, val: rule.format(num) };
+    // Default formatting for unhandled stat types
+    return { key: stat, val: formatSigned(num) };
 }
 
 const descriptionFormattingRules: { [stat in StatType]?: (num: number) => number; } = {
@@ -76,4 +122,4 @@ function formatStatDescriptionVal(stat: StatType, num: number): number {
     return formatNum(num);
 };
 
-export { formatNum, formatStat, formatStatDescriptionVal };
+export { formatNum, formatCharacterSheetStat, formatItemStat, formatStatDescriptionVal };

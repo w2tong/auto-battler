@@ -2,6 +2,9 @@ import { useState } from 'react';
 import ItemSlot from './ItemSlot';
 import { ItemType, equips } from '@wholesome-sisters/auto-battler';
 import SelectMenu from './SelectMenu';
+import { cn } from '../../../utils/utils';
+import Switch from '../../../components/Switch';
+import InfoTooltip from '../../../components/InfoTooltip';
 
 const tierOptions = [
     { value: '0', text: 'Tier 0' },
@@ -32,10 +35,11 @@ const sortOptions = [
 ];
 
 // TODO: add keywords thats can be used in name filter (e.g. Attributes, Stats, on hit)
-export default function Inventory({ items, sort, sortOnChange, className }: { items: (string | null)[], sort: string, sortOnChange: (val: string) => void, className?: string; }) {
+export default function Inventory({ items, sort, sortOnChange, className, onItemRightClick }: { items: (string | null)[], sort: string, sortOnChange: (val: string) => void, className?: string; onItemRightClick?: (index: number) => void; }) {
     const [tierFilter, setTierFilter] = useState<string>('');
     const [typeFilter, setTypeFilter] = useState<string>('');
     const [nameFilter, setNameFilter] = useState<string>('');
+    const [sellMode, setSellMode] = useState(false);
 
     function updateTier(tier: string) {
         setTierFilter(() => tier);
@@ -45,10 +49,10 @@ export default function Inventory({ items, sort, sortOnChange, className }: { it
     }
 
     return (
-        <div className={`flex flex-col ${className}`}>
+        <div className={cn('flex flex-col', className)}>
             <div>
                 <h2 className='py-1'>Inventory</h2>
-                <div className='flex flex-row py-1'>
+                <div className='flex flex-row py-1 items-center'>
                     <SelectMenu options={tierOptions} onChange={updateTier} id='tier' label='Filter by Tier' value={tierFilter} />
                     <SelectMenu options={typeOptions} onChange={updateType} id='type' label='Filter by Type' value={typeFilter} />
                     <div className='flex flex-col'>
@@ -59,7 +63,6 @@ export default function Inventory({ items, sort, sortOnChange, className }: { it
                             )}
                         </select>
                     </div>
-
                     <input
                         className='border border-white p-2'
                         type='text'
@@ -67,6 +70,10 @@ export default function Inventory({ items, sort, sortOnChange, className }: { it
                         value={nameFilter}
                         onChange={(e) => setNameFilter(e.target.value)}
                     />
+                    <div className='flex flex-row items-center'>
+                        <span>Delete Mode<InfoTooltip content={'Enables deleting items from your Inventory with right click.'} />:</span>
+                        <Switch checked={sellMode} onChange={setSellMode} className='ml-2' />
+                    </div>
                 </div>
             </div>
 
@@ -82,7 +89,18 @@ export default function Inventory({ items, sort, sortOnChange, className }: { it
                         ) filtered = true;
                     }
                     return (
-                        <ItemSlot id={`${i}`} key={i} itemId={itemId} filtered={filtered} />
+                        <ItemSlot
+                            id={`${i}`}
+                            key={i}
+                            itemId={itemId}
+                            filtered={filtered}
+                            onRightClick={onItemRightClick ? (e) => {
+                                if (sellMode) {
+                                    e.preventDefault();
+                                    onItemRightClick(i);
+                                }
+                            } : undefined}
+                        />
                     );
                 }
                 )}

@@ -7,6 +7,7 @@ import { CharactersProvider } from '../hooks/Characters/CharactersProvider';
 import CreateCharacter from './routes/CreateCharacter';
 import { InventoryProvider } from '../hooks/Inventory/InventoryProvider';
 import BattleSelector from './routes/BattleSelector';
+import Credits from './routes/Credits';
 
 function App() {
     return (
@@ -15,16 +16,18 @@ function App() {
                 <CharactersProvider>
                     <InventoryProvider>
                         <Header />
-                        <Routes>
-                            <Route index element={<Home />} />
-                            <Route path="equipment" element={<EquipmentPage />} />
-
-                            <Route path="battle">
-                                <Route index element={<BattleSelector />} />
-                                <Route path=":level" element={<BattlePage />} />
-                            </Route>
-                            <Route path="create-character" element={<CreateCharacter />} />
-                        </Routes>
+                        <div className='px-4'>
+                            <Routes>
+                                <Route index element={<Home />} />
+                                <Route path="equipment" element={<EquipmentPage />} />
+                                <Route path="battle">
+                                    <Route index element={<BattleSelector />} />
+                                    <Route path=":level" element={<BattlePage />} />
+                                </Route>
+                                <Route path="create-character" element={<CreateCharacter />} />
+                                <Route path="credits" element={<Credits />} />
+                            </Routes>
+                        </div>
                     </InventoryProvider>
                 </CharactersProvider>
             </BrowserRouter>
