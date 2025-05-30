@@ -11,12 +11,10 @@ export default function CharacterSheetAttributes({ level, attributes }: { level:
 
     function handleChange(attr: AttributeType, num: number): void {
         let val = num;
-        // Minimum of Attributes.MIN_VALUE
-        val = Math.max(val, Attributes.MIN_VALUE);
-        // Maximum of  LEVEL_CAPS[level]
-        val = Math.min(val, LEVEL_CAPS[level]);
-        // Prevent val from using more unspent than available
-        val = Math.min(unspent + attributes[attr].base, val);
+        val = Math.max(val, Attributes.MIN_VALUE); // Minimum of Attributes.MIN_VALUE
+        val = Math.min(val, LEVEL_CAPS[level]); // Maximum of  LEVEL_CAPS[level]
+        val = Math.min(unspent + attributes[attr].base, val); // Prevent val from using more unspent than available
+
         if (val === attributes[attr].base) return;
         dispatch({ type: 'update', index: selected, attributes: { [attr]: val } });
     }
