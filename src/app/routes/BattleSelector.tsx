@@ -7,7 +7,7 @@ export default function BattlePage() {
     const { list, selected } = useCharacters();
     const lsChar = list[selected];
 
-    const [levelInput, setLevelInput] = useState<number>(lsChar.level);
+    const [levelInput, setLevelInput] = useState<number>(lsChar?.level ?? 1);
     function handleLevelInputChange(e: React.ChangeEvent<HTMLInputElement>) {
         let level = Number(e.target.value);
         if (level > 20) level = 20;
@@ -15,6 +15,9 @@ export default function BattlePage() {
         setLevelInput(() => Number(level));
     }
 
+    if (!lsChar) return (
+        'Select a character for entering a battle.'
+    );
     return (
         <div className='flex flex-col'>
             <h1>Battle</h1>
