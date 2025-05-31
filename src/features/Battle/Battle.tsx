@@ -188,6 +188,11 @@ function toBattleCharacter(char: Character): BattleCharacter {
         currMana: char.currentMana,
         manaCost: char.stats.getStat(StatType.ManaCost),
         buffs,
-        debuffs
+        debuffs,
+        stats: {
+            [StatType.Accuracy]: char.stats.getAccuracy(char.equipment.mainHand.attackType),
+            [StatType.Dodge]: char.stats.dodge,
+            [StatType.Armour]: char.stats.getStat(StatType.Armour)
+        }
     };
 }

@@ -16,7 +16,9 @@ export default function BattleDisplay({ left, right, combatLog, turnOrder, turnI
                 <div className='flex flex-row'>
                     <div className='flex-1 flex-col p-2 space-y-1 w-1/2'>
                         <h2 className='text-center'>Left</h2>
-                        {left.map((char, i) => <CharacterFrame key={`left-${i}`} {...char} icon={char.npcId ? npcIconMap[char.npcId] : char.className ? classIconMap[char.className] : { src: '/item-icons/placeholder.png', alt: 'placeholder' }} />)}
+                        {left.map((char, i) =>
+                            <CharacterFrame key={`left-${i}`} {...char} icon={char.npcId ? npcIconMap[char.npcId] : char.className ? classIconMap[char.className] : { src: '/item-icons/placeholder.png', alt: 'placeholder' }} />)
+                        }
                     </div>
                     <div className='flex-1 flex-col p-2 space-y-1 w-1/2'>
                         <h2 className='text-center'>Right</h2>

@@ -43,7 +43,7 @@ export default function Tooltip({
 
     return (
         <div
-            className={cn('group inline-block', display && 'relative')}
+            className={cn('w-full group inline-block', display && 'relative')}
             onMouseMove={followCursor ? handleMouseMove : undefined}
             onMouseEnter={followCursor ? () => setHovered(true) : undefined}
             onMouseLeave={followCursor ? () => setHovered(false) : undefined}
