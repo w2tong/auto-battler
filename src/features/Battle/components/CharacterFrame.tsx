@@ -4,17 +4,18 @@ import { formatNum } from '../../../utils/stats';
 import { BuffBar, DebuffBar } from '../../../types/StatusEffectBar';
 import { cn } from '../../../utils/utils';
 import CharacterFrameTooltip from './CharacterFrameTooltip';
-import CharacterFrameStats from '../../../types/CharacterFrameStats';
+import CharacterFrameStats from '../types/CharacterFrameStats';
 import { StatType } from '@wholesome-sisters/auto-battler';
+import CharacterFrameAttributes from '../types/CharacterFrameAttributes';
 
-type CharacterFrameProps = { name: string, level: number, className: string | null, currHealth: number, maxHealth: number, currMana: number, manaCost: number, buffs: BuffBar, debuffs: DebuffBar, icon: { src: string, alt: string; }, stats: CharacterFrameStats; };
+type CharacterFrameProps = { name: string, level: number, className: string | null, currHealth: number, maxHealth: number, currMana: number, manaCost: number, buffs: BuffBar, debuffs: DebuffBar, icon: { src: string, alt: string; }, attr: CharacterFrameAttributes, stats: CharacterFrameStats; };
 
-export default function CharacterFrame({ name, level, className, currHealth, maxHealth, currMana, manaCost, buffs, debuffs, icon, stats }: CharacterFrameProps) {
+export default function CharacterFrame({ name, level, className, currHealth, maxHealth, currMana, manaCost, buffs, debuffs, icon, attr, stats }: CharacterFrameProps) {
     const isDead = currHealth <= 0;
 
     return (
         <div className='w-full'>
-            <CharacterFrameTooltip name={name} stats={{
+            <CharacterFrameTooltip name={name} attr={attr} stats={{
                 Accuracy: stats[StatType.Accuracy],
                 Dodge: stats[StatType.Dodge],
                 Armour: stats[StatType.Armour]

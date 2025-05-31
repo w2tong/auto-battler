@@ -1,6 +1,7 @@
 import { ClassName, NpcId } from "@wholesome-sisters/auto-battler";
-import { BuffBar, DebuffBar } from "./StatusEffectBar";
+import { BuffBar, DebuffBar } from "../../../types/StatusEffectBar";
 import CharacterFrameStats from "./CharacterFrameStats";
+import CharacterFrameAttributes from "./CharacterFrameAttributes";
 
 type BattleCharacter = {
     name: string,
@@ -13,6 +14,7 @@ type BattleCharacter = {
     manaCost: number,
     buffs: BuffBar,
     debuffs: DebuffBar;
+    attr: CharacterFrameAttributes;
     stats: CharacterFrameStats;
 };
 

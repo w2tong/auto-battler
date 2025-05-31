@@ -1,7 +1,7 @@
 'use client';
 
 import { LogLine } from '@wholesome-sisters/auto-battler';
-import type BattleCharacter from '../../../types/BattleCharacter';
+import type BattleCharacter from '../types/BattleCharacter';
 import CharacterFrame from './CharacterFrame';
 import CombatLog from './CombatLog';
 import TurnOrder from './TurnOrder';

@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { useCharactersDispatch } from "../../hooks/Characters/CharactersContext";
 import BattleDisplay from "./components/BattleDisplay";
-import { Battle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
-import BattleCharacter from "../../types/BattleCharacter";
+import { AttributeType, Battle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
+import BattleCharacter from "./types/BattleCharacter";
 import useInterval from "../../hooks/useInterval";
 import Button from "../../components/Button";
 import { useInventoryDispatch } from "../../hooks/Inventory/InventoryContext";
@@ -189,6 +189,14 @@ function toBattleCharacter(char: Character): BattleCharacter {
         manaCost: char.stats.getStat(StatType.ManaCost),
         buffs,
         debuffs,
+        attr: {
+            [AttributeType.Strength]: char.attributes.strength,
+            [AttributeType.Dexterity]: char.attributes.dexterity,
+            [AttributeType.Constitution]: char.attributes.constitution,
+            [AttributeType.Perception]: char.attributes.perception,
+            [AttributeType.Intelligence]: char.attributes.intelligence,
+            [AttributeType.Wisdom]: char.attributes.wisdom
+        },
         stats: {
             [StatType.Accuracy]: char.stats.getAccuracy(char.equipment.mainHand.attackType),
             [StatType.Dodge]: char.stats.dodge,
