@@ -24,9 +24,13 @@ import plateHelmentIconUrl from '../../assets/icons/items/heads/plate-helmet.svg
 import roundShieldIconUrl from '../../assets/icons/items/shields/round-shield.svg';
 import spikedShieldIconUrl from '../../assets/icons/items/shields/spiked-shield.svg';
 
+import biteIconUrl from '../../assets/icons/items/weapons/bite.svg';
 import daggerIconUrl from '../../assets/icons/items/weapons/dagger.svg';
+import fistIconUrl from '../../assets/icons/items/weapons/fist.svg';
 import greatswordIconUrl from '../../assets/icons/items/weapons/greatsword.svg';
+import longbowIconUrl from '../../assets/icons/items/weapons/longbow.svg';
 import maceIconUrl from '../../assets/icons/items/weapons/mace.svg';
+import poisonBiteIconUrl from '../../assets/icons/items/weapons/poison-bite.svg';
 import wandIconUrl from '../../assets/icons/items/weapons/wand.svg';
 
 
@@ -71,6 +75,10 @@ const artists: Record<string, Artist> = {
     Willdabeast: {
         name: 'Willdabeast',
         link: 'https://wjbstories.blogspot.com/'
+    },
+    JohnRedman: {
+        name: 'John Redman',
+        link: 'http://www.uniquedicetowers.com/'
     }
 };
 
@@ -244,11 +252,27 @@ const shields: CreditProps[] = [
 ];
 const weapons: CreditProps[] = [
     {
+        src: biteIconUrl,
+        alt: 'Bite icon',
+        imgName: 'Front teeth',
+        imgLink: 'https://game-icons.net/1x1/lorc/front-teeth.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
         src: daggerIconUrl,
         alt: 'Dagger icon',
         imgName: 'Plain dagger',
         imgLink: 'https://game-icons.net/1x1/lorc/plain-dagger.html',
         artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: fistIconUrl,
+        alt: 'Fist icon',
+        imgName: 'Rock',
+        imgLink: 'https://game-icons.net/1x1/john-redman/rock.html',
+        artist: artists.JohnRedman,
         license: licenses.CCBY30
     },
     {
@@ -260,11 +284,27 @@ const weapons: CreditProps[] = [
         license: licenses.CCBY30
     },
     {
+        src: longbowIconUrl,
+        alt: 'Longbow icon',
+        imgName: 'Pocket bow',
+        imgLink: 'https://game-icons.net/1x1/lorc/pocket-bow.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
         src: maceIconUrl,
         alt: 'Mace icon',
         imgName: 'Flanged mace',
         imgLink: 'https://game-icons.net/1x1/lorc/plain-dagger.html',
         artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
+    {
+        src: poisonBiteIconUrl,
+        alt: 'Poison bite icon',
+        imgName: 'Front teeth',
+        imgLink: 'https://game-icons.net/1x1/lorc/front-teeth.html',
+        artist: artists.Lorc,
         license: licenses.CCBY30
     },
     {

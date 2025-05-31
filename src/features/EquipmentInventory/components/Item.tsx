@@ -13,7 +13,7 @@ function Item({ itemId, filtered, dragging }: { itemId: string, filtered: boolea
     return (
         <ItemTooltip item={item} display={!dragging}>
             <div className={`z-10 w-[64px] h-[64px] box-border border-solid rounded-xs bg-black ${tierBorderColor[item.tier]} ${filtered ? '' : 'border-2'}`}>
-                <img src={icon ? icon.src : `/item-icons/${item.img ? item.img : 'placeholder.png'}`} alt={icon ? icon.alt : 'placholder icon'} className={filtered ? 'opacity-20' : 'opacity-100'} />
+                <img src={icon ? icon.src : '/item-icons/placeholder.png'} alt={icon ? icon.alt : 'placholder icon'} className={filtered ? 'opacity-20' : 'opacity-100'} />
             </div>
         </ItemTooltip>
     );

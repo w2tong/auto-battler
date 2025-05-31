@@ -1,4 +1,4 @@
-import { BuffId, DebuffId } from "@wholesome-sisters/auto-battler";
+import { Buff, Debuff } from "@wholesome-sisters/auto-battler";
 
-export type BuffBar = Partial<Record<BuffId, number>>;
-export type DebuffBar = Partial<Record<DebuffId, number>>;
+export type BuffBar = Buff[];
+export type DebuffBar = Debuff[];

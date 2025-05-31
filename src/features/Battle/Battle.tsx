@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useCharactersDispatch } from "../../hooks/Characters/CharactersContext";
 import BattleDisplay from "./components/BattleDisplay";
-import { Battle, BuffId, Character, createEquipmentImport, DebuffId, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
+import { Battle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
 import BattleCharacter from "../../types/BattleCharacter";
 import useInterval from "../../hooks/useInterval";
 import Button from "../../components/Button";
@@ -9,6 +9,7 @@ import { useInventoryDispatch } from "../../hooks/Inventory/InventoryContext";
 import Switch from "../../components/Switch";
 import { LocalStorageCharacter } from "../../types/LocalStorage";
 import { cn } from "../../utils/utils";
+import { BuffBar, DebuffBar } from "../../types/StatusEffectBar";
 
 const DEFAULT_DELAY = 1000;
 const SPEEDS = {
@@ -163,15 +164,18 @@ export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsCha
 }
 
 function toBattleCharacter(char: Character): BattleCharacter {
-    const buffs: Partial<Record<BuffId, number>> = {};
-    for (const buffId of Object.values(BuffId)) {
-        const stacks = char.statusEffectManager.getBuffStacks(buffId);
-        if (stacks > 0) buffs[buffId] = stacks;
+    const buffs: BuffBar = [];
+    for (const buffGroup of Object.values(char.statusEffectManager.buffs)) {
+        for (const buff of Object.values(buffGroup)) {
+            buffs.push(buff);
+        }
     }
-    const debuffs: Partial<Record<DebuffId, number>> = {};
-    for (const debuffId of Object.values(DebuffId)) {
-        const stacks = char.statusEffectManager.getDebuffStacks(debuffId);
-        if (stacks > 0) debuffs[debuffId] = stacks;
+
+    const debuffs: DebuffBar = [];
+    for (const debuffGroup of Object.values(char.statusEffectManager.debuffs)) {
+        for (const debuff of Object.values(debuffGroup)) {
+            debuffs.push(debuff);
+        }
     }
 
     return {
