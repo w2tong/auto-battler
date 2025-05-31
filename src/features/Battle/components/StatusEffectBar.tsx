@@ -1,28 +1,47 @@
-import { BuffId, DebuffId } from "@wholesome-sisters/auto-battler";
+import { Bleeding, Blessed, Buff, BuffId, Burning, Debuff, DebuffId, Invisible, Poisoned, StatType } from "@wholesome-sisters/auto-battler";
 import Icon from "../../../types/Icon";
 import { buffIconMap, debuffIconMap } from "../../../utils/statusEffectIcon";
 import { BuffBar, DebuffBar } from "../../../types/StatusEffectBar";
 import Tooltip from "../../../components/Tooltip";
 import { cn } from "../../../utils/utils";
 import { ReactNode } from "react";
+import { formatNum } from "../../../utils/stats";
 
-const buffDescriptions: Record<BuffId, ReactNode> = {
-    [BuffId.Blessed]: 'Increases Accuracy and Damage.',
-    [BuffId.Invisible]: 'Cannot be attacked while Invisible. Next attack deal extra damage.',
+const buffDescriptions: Record<BuffId, (buff: Buff) => string> = {
+    [BuffId.Blessed]: (buff: Buff) => {
+        const blessed = buff as Blessed;
+        const accuracy = formatNum(blessed.stats[StatType.Accuracy] ?? 0);
+        const damage = formatNum(blessed.stats[StatType.Damage] ?? 0);
+        return `Increases Accuracy by ${accuracy} and Damage by ${damage}.`;
+    },
+    [BuffId.Invisible]: (buff: Buff) => {
+        const damage = formatNum(buff.stacks * Invisible.damage);
+        return `Cannot be attacked while Invisible. Next attack deal +${damage} extra damage.`;
+    },
 };
-const debuffDescriptions: Record<DebuffId, ReactNode> = {
-    [DebuffId.Bleeding]: 'Deals damage based on the initial damage taken on end of turn.',
-    [DebuffId.Burning]: 'Deals damage on end of turn.',
-    [DebuffId.Frozen]: 'Prevents character from performing actions.',
-    [DebuffId.Poisoned]: 'Deals damage based on the character\'s current health on end of turn.',
+const debuffDescriptions: Record<DebuffId, (debuff: Debuff) => string> = {
+    [DebuffId.Bleeding]: (debuff: Debuff) => {
+        const damage = formatNum((debuff as Bleeding).getDamageTaken());
+        return `Deals ${damage} damage on end of turn.`;
+    },
+    [DebuffId.Burning]: (debuff: Debuff) => {
+        const damage = formatNum((debuff as Burning).getDamageTaken());
+        return `Deals ${damage} damage on end of turn.`;
+    },
+    [DebuffId.Frozen]: () => 'Prevents character from performing actions.',
+    [DebuffId.Poisoned]: (debuff: Debuff) => {
+        const damage = formatNum((debuff as Poisoned).getDamageTaken());
+        return `Deals ${damage} damage on end of turn.`;
+    },
 };
 
 // TODO: scale image/text based via media queries
-function StatusEffect({ icon, stacks, positive, name, description }: { icon: Icon, stacks: number, positive: boolean, name: string, description: ReactNode; }) {
+type StatusEffectProps = { icon: Icon, stacks: number, positive: boolean, name: string, description: ReactNode, source: string; };
+function StatusEffect({ icon, stacks, positive, name, description, source }: StatusEffectProps) {
     return (
         <div className='flex flex-row items-center h-8'>
             <Tooltip className={'max-w-60'} content={<>
-                <b>{name}</b>
+                <b>{name}</b> ({stacks}) [{source}]
                 <p>{description}</p>
             </>}>
                 <img className={cn('border w-8', positive ? 'border-positive' : 'border-negative')} src={icon.src} alt={icon.alt} />
@@ -33,28 +52,37 @@ function StatusEffect({ icon, stacks, positive, name, description }: { icon: Ico
 }
 
 export default function StatusEffectBar({ buffs, debuffs }: { buffs: BuffBar, debuffs: DebuffBar; }) {
+
+
+
     return (
-        <div className='h-16'>
-            {Object.entries(buffs).map(([buffId, stacks]) =>
-                <StatusEffect
-                    key={buffId}
-                    icon={buffIconMap[buffId as BuffId]}
-                    stacks={stacks}
-                    positive={true}
-                    name={buffId}
-                    description={buffDescriptions[buffId as BuffId]}
-                />
-            )}
-            {Object.entries(debuffs).map(([debuffId, stacks]) =>
-                <StatusEffect
-                    key={debuffId}
-                    icon={debuffIconMap[debuffId as DebuffId]}
-                    stacks={stacks}
-                    positive={false}
-                    name={debuffId}
-                    description={debuffDescriptions[debuffId as DebuffId]}
-                />
-            )}
+        <div className='h-16 flex flex-col'>
+            <div className='flex flex-row'>
+                {buffs.map(buff =>
+                    <StatusEffect
+                        key={buff.source.name + buff.id}
+                        icon={buffIconMap[buff.id as BuffId]}
+                        stacks={buff.stacks}
+                        positive={true}
+                        name={buff.id}
+                        description={buffDescriptions[buff.id as BuffId](buff)}
+                        source={buff.source.name}
+                    />
+                )}
+            </div>
+            <div className='flex flex-row'>
+                {debuffs.map(debuff =>
+                    <StatusEffect
+                        key={debuff.source.name + debuff.id}
+                        icon={debuffIconMap[debuff.id as DebuffId]}
+                        stacks={debuff.stacks}
+                        positive={false}
+                        name={debuff.id}
+                        description={debuffDescriptions[debuff.id as DebuffId](debuff)}
+                        source={debuff.source.name}
+                    />
+                )}
+            </div>
         </div>
     );
 }

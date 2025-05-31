@@ -4,7 +4,9 @@ import { formatNum } from '../../../utils/stats';
 import { BuffBar, DebuffBar } from '../../../types/StatusEffectBar';
 import { cn } from '../../../utils/utils';
 
-export default function CharacterFrame({ name, level, className, currHealth, maxHealth, currMana, manaCost, buffs, debuffs, icon }: { name: string, level: number, className: string | null, currHealth: number, maxHealth: number, currMana: number, manaCost: number, buffs: BuffBar, debuffs: DebuffBar, icon: { src: string, alt: string; }; }) {
+type CharacterFrameProps = { name: string, level: number, className: string | null, currHealth: number, maxHealth: number, currMana: number, manaCost: number, buffs: BuffBar, debuffs: DebuffBar, icon: { src: string, alt: string; }; };
+
+export default function CharacterFrame({ name, level, className, currHealth, maxHealth, currMana, manaCost, buffs, debuffs, icon }: CharacterFrameProps) {
     const isDead = currHealth <= 0;
 
     return (
