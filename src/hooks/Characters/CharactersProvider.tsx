@@ -5,7 +5,7 @@ import { type Action, CharactersContext, CharactersDispatchContext } from './Cha
 
 export function CharactersProvider({ children }: { children: ReactNode; }) {
     const lsChars = localStorage.getItem('characters');
-    const [characters, dispatch] = useReducer(charactersReducer, lsChars ? JSON.parse(lsChars) : { chars: [], selected: 0 });
+    const [characters, dispatch] = useReducer(charactersReducer, lsChars ? JSON.parse(lsChars) : { list: [], selected: 0 });
 
     useEffect(() => {
         localStorage.setItem('characters', JSON.stringify(characters));
