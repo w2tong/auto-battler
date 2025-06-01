@@ -15,25 +15,32 @@ type CharacterFrameTooltipProps = {
     ability: { name: string, description: string; } | null;
     children: ReactNode;
 };
+
+function Stat({ name, value }: { name: string, value: number | string; }) {
+    return <div className='flex flex-row justify-between'>
+        <b>{name}</b> {value}
+    </div>;
+}
+
 export default function CharacterFrameTooltip({ name, attr, stats, mainHandDamage, offHandDamage, onHit, ability, children }: CharacterFrameTooltipProps) {
     const content =
         <div className='w-60 space-y-2'>
             <b>{name}</b>
             <hr />
             <div className='grid grid-cols-3 gap-x-0.5 text-center'>
-                <span>{attr[AttributeType.Strength]} STR</span>
-                <span>{attr[AttributeType.Dexterity]} DEX</span>
-                <span>{attr[AttributeType.Constitution]} CON</span>
-                <span>{attr[AttributeType.Perception]} PER</span>
-                <span>{attr[AttributeType.Intelligence]} INT</span>
-                <span>{attr[AttributeType.Wisdom]} WIS</span>
+                <span>{attr[AttributeType.Strength]} <b>STR</b></span>
+                <span>{attr[AttributeType.Dexterity]} <b>DEX</b></span>
+                <span>{attr[AttributeType.Constitution]} <b>CON</b></span>
+                <span>{attr[AttributeType.Perception]} <b>PER</b></span>
+                <span>{attr[AttributeType.Intelligence]} <b>INT</b></span>
+                <span>{attr[AttributeType.Wisdom]} <b>WIS</b></span>
             </div>
             <hr />
-            <div>
-                <p>{formatNum(stats[StatType.Accuracy])} {[StatType.Accuracy]}</p>
-                <p>{formatNum(stats[StatType.Dodge])}% {[StatType.Dodge]}</p>
-                <p>{formatNum(stats[StatType.Armour])} {[StatType.Armour]}</p>
-                <p>{formatNum(stats[StatType.Deflection])} {[StatType.Deflection]}</p>
+            <div className='grid grid-cols-2 gap-x-8 text-right'>
+                <Stat name={StatType.Accuracy} value={formatNum(stats[StatType.Accuracy])} />
+                <Stat name={StatType.Dodge} value={`${formatNum(stats[StatType.Dodge])}%`} />
+                <Stat name={StatType.Armour} value={formatNum(stats[StatType.Armour])} />
+                <Stat name={StatType.Deflection} value={formatNum(stats[StatType.Deflection])} />
             </div>
             <hr />
             <div className='flex flex-row justify-between'>
