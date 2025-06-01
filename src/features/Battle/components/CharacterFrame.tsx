@@ -28,8 +28,8 @@ export default function CharacterFrame({ name, level, className, currHealth, max
                         {manaCost > 0 && <ResourceBar resource={Resource.Mana} curr={formatNum(currMana)} max={formatNum(manaCost)} />}
                     </div>
                 </div>
-                <StatusEffectBar buffs={buffs} debuffs={debuffs} />
             </CharacterFrameTooltip>
+            <StatusEffectBar buffs={buffs} debuffs={debuffs} />
         </div>
     );
 }
