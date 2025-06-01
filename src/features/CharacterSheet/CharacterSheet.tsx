@@ -4,6 +4,7 @@ import CharacterSheetAttributes from "./components/CharacterSheetAttributes";
 import CharacterSheetStats from "./components/CharacterSheetStats";
 import CharacterSheetAbility from "./components/CharacterSheetAbility";
 import CharacterSheetPotion from "./components/CharacterScreenPotion";
+import { classTextColor } from "../../utils/classColour";
 
 export default function CharacterSheet(
     { char, exp }: { char: Character, exp: number; }
@@ -56,13 +57,14 @@ export default function CharacterSheet(
         };
     }
 
+    const classColor = char.className ? classTextColor[char.className] : '';
 
     return (
         <div>
             <h2>Character Sheet</h2>
-            <h3>{char.name}</h3>
-            <div>Level {char.level} {char.className}</div>
-            <div>{exp}/{levelExp[char.level as LevelRange]} Experience</div>
+            <h3 className={classColor}>{char.name}</h3>
+            <div>Level {char.level} <b className={classColor}>{char.className}</b></div>
+            <div>{exp}/{levelExp[char.level as LevelRange]} <b>Experience</b></div>
 
             <br />
 
