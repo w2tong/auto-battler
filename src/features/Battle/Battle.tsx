@@ -202,6 +202,8 @@ function toBattleCharacter(char: Character): BattleCharacter {
             [StatType.Dodge]: char.stats.dodge,
             [StatType.Armour]: char.stats.getStat(StatType.Armour),
             [StatType.Deflection]: char.stats.getStat(StatType.Deflection),
-        }
+        },
+        onHit: char.equipment.mainHand.onHit ? char.equipment.mainHand.onHit.description : null,
+        ability: char.ability ? { name: char.ability.name, description: char.ability.description(char) } : null
     };
 }

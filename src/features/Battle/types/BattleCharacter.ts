@@ -16,6 +16,8 @@ type BattleCharacter = {
     debuffs: DebuffBar;
     attr: CharacterFrameAttributes;
     stats: CharacterFrameStats;
+    onHit: string | null;
+    ability: { name: string, description: string; } | null;
 };
 
 export default BattleCharacter;

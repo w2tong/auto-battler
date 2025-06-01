@@ -1,20 +1,19 @@
 import ResourceBar, { Resource } from './ResourceBar';
 import StatusEffectBar from './StatusEffectBar';
 import { formatNum } from '../../../utils/stats';
-import { BuffBar, DebuffBar } from '../../../types/StatusEffectBar';
 import { cn } from '../../../utils/utils';
 import CharacterFrameTooltip from './CharacterFrameTooltip';
-import CharacterFrameStats from '../types/CharacterFrameStats';
-import CharacterFrameAttributes from '../types/CharacterFrameAttributes';
+import BattleCharacter from '../types/BattleCharacter';
+import classIconMap from '../../../utils/classIconMap';
+import { npcIconMap } from '../../../utils/npcIcon';
 
-type CharacterFrameProps = { name: string, level: number, className: string | null, currHealth: number, maxHealth: number, currMana: number, manaCost: number, buffs: BuffBar, debuffs: DebuffBar, icon: { src: string, alt: string; }, attr: CharacterFrameAttributes, stats: CharacterFrameStats; };
-
-export default function CharacterFrame({ name, level, className, currHealth, maxHealth, currMana, manaCost, buffs, debuffs, icon, attr, stats }: CharacterFrameProps) {
+export default function CharacterFrame({ name, level, className, npcId, currHealth, maxHealth, currMana, manaCost, buffs, debuffs, attr, stats, onHit, ability }: BattleCharacter) {
     const isDead = currHealth <= 0;
+    const icon = npcId ? npcIconMap[npcId] : className ? classIconMap[className] : { src: '/item-icons/placeholder.png', alt: 'Placeholder icon' };
 
     return (
         <div className='w-full'>
-            <CharacterFrameTooltip name={name} attr={attr} stats={stats}>
+            <CharacterFrameTooltip name={name} attr={attr} stats={stats} onHit={onHit} ability={ability}>
                 <div className='flex flex-row w-full h-18'>
                     <div className='relative h-full'>
                         <img className='h-full' src={icon.src} alt={icon.alt} />
