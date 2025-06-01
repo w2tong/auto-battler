@@ -1,29 +1,33 @@
 import ResourceBar, { Resource } from './ResourceBar';
 import StatusEffectBar from './StatusEffectBar';
 import { formatNum } from '../../../utils/stats';
-import { BuffBar, DebuffBar } from '../../../types/StatusEffectBar';
 import { cn } from '../../../utils/utils';
+import CharacterFrameTooltip from './CharacterFrameTooltip';
+import BattleCharacter from '../types/BattleCharacter';
+import classIconMap from '../../../utils/classIconMap';
+import { npcIconMap } from '../../../utils/npcIcon';
 
-type CharacterFrameProps = { name: string, level: number, className: string | null, currHealth: number, maxHealth: number, currMana: number, manaCost: number, buffs: BuffBar, debuffs: DebuffBar, icon: { src: string, alt: string; }; };
-
-export default function CharacterFrame({ name, level, className, currHealth, maxHealth, currMana, manaCost, buffs, debuffs, icon }: CharacterFrameProps) {
+export default function CharacterFrame({ name, level, className, npcId, currHealth, maxHealth, currMana, manaCost, buffs, debuffs, attr, stats, mainHandDamage, offHandDamage, onHit, ability }: BattleCharacter) {
     const isDead = currHealth <= 0;
+    const icon = npcId ? npcIconMap[npcId] : className ? classIconMap[className] : { src: '/item-icons/placeholder.png', alt: 'Placeholder icon' };
 
     return (
-        <div>
-            <div className='flex flex-row w-full h-18'>
-                <div className='relative h-full'>
-                    <img className='h-full' src={icon.src} alt={icon.alt} />
-                    {isDead && (
-                        <div className="absolute inset-0 bg-negative opacity-50 pointer-events-none" />
-                    )}
+        <div className='w-full'>
+            <CharacterFrameTooltip name={name} attr={attr} stats={stats} mainHandDamage={mainHandDamage} offHandDamage={offHandDamage} onHit={onHit} ability={ability}>
+                <div className='flex flex-row w-full h-18'>
+                    <div className='relative h-full'>
+                        <img className='h-full' src={icon.src} alt={icon.alt} />
+                        {isDead && (
+                            <div className="absolute inset-0 bg-negative opacity-50 pointer-events-none" />
+                        )}
+                    </div>
+                    <div className='flex-1 truncate'>
+                        <div className={cn('font-bold truncate', isDead && 'text-negative')}>Lvl. {level} {className} - {name}</div>
+                        <ResourceBar resource={Resource.Health} curr={formatNum(currHealth)} max={formatNum(maxHealth)} />
+                        {manaCost > 0 && <ResourceBar resource={Resource.Mana} curr={formatNum(currMana)} max={formatNum(manaCost)} />}
+                    </div>
                 </div>
-                <div className='flex-1 truncate'>
-                    <div className={cn('font-bold truncate', isDead && 'text-negative')}>Lvl. {level} {className} - {name}</div>
-                    <ResourceBar resource={Resource.Health} curr={formatNum(currHealth)} max={formatNum(maxHealth)} />
-                    {manaCost > 0 && <ResourceBar resource={Resource.Mana} curr={formatNum(currMana)} max={formatNum(manaCost)} />}
-                </div>
-            </div>
+            </CharacterFrameTooltip>
             <StatusEffectBar buffs={buffs} debuffs={debuffs} />
         </div>
     );

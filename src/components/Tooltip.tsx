@@ -43,7 +43,7 @@ export default function Tooltip({
 
     return (
         <div
-            className={cn('group inline-block', display && 'relative')}
+            className={cn('group inline-block', display && 'relative', className)}
             onMouseMove={followCursor ? handleMouseMove : undefined}
             onMouseEnter={followCursor ? () => setHovered(true) : undefined}
             onMouseLeave={followCursor ? () => setHovered(false) : undefined}
@@ -52,7 +52,7 @@ export default function Tooltip({
             {display && followCursor && hovered && (
                 <div
                     ref={tooltipRef}
-                    className={cn('fixed pointer-events-none bg-black text-white px-2 py-1 rounded z-50 border text-wrap', className)}
+                    className={cn('fixed pointer-events-none bg-black text-white px-2 py-1 rounded z-50 border text-wrap')}
                     style={{
                         left,
                         top
@@ -62,7 +62,7 @@ export default function Tooltip({
                 </div>
             )}
             {display && !followCursor && (
-                <div className={cn('absolute bottom-full bg-black text-white px-2 py-1 rounded z-10 border hidden group-hover:block text-wrap', className)}>
+                <div className={cn('absolute bottom-full bg-black text-white px-2 py-1 rounded z-10 border hidden group-hover:block text-wrap')}>
                     {content}
                 </div>
             )}

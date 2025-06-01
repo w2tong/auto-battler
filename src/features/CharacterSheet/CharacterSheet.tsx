@@ -32,7 +32,7 @@ export default function CharacterSheet(
     const offHand = char.equipment.offHandWeapon;
     let ohProps: WeaponProps | null = null;
     if (offHand) {
-        const ohDamageRange = char.calcDamageRange({ damageRange: mainHand.damageRange, weaponAttack: true, spellPowerRatio: mainHand.spellPowerRatio });
+        const ohDamageRange = char.calcDamageRange({ damageRange: offHand.damageRange, weaponAttack: true, spellPowerRatio: offHand.spellPowerRatio });
         ohProps = {
             name: offHand.name,
             type: offHand.type,

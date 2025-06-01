@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { useCharactersDispatch } from "../../hooks/Characters/CharactersContext";
 import BattleDisplay from "./components/BattleDisplay";
-import { Battle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
-import BattleCharacter from "../../types/BattleCharacter";
+import { AttributeType, Battle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
+import BattleCharacter from "./types/BattleCharacter";
 import useInterval from "../../hooks/useInterval";
 import Button from "../../components/Button";
 import { useInventoryDispatch } from "../../hooks/Inventory/InventoryContext";
@@ -178,6 +178,12 @@ function toBattleCharacter(char: Character): BattleCharacter {
         }
     }
 
+    const mainHand = char.equipment.mainHand;
+    const mainHandDamage = char.calcDamageRange({ damageRange: mainHand.damageRange, weaponAttack: true, spellPowerRatio: mainHand.spellPowerRatio });
+
+    const offHand = char.equipment.offHandWeapon;
+    const offHandDamage = offHand ? char.calcDamageRange({ damageRange: offHand.damageRange, weaponAttack: true, spellPowerRatio: offHand.spellPowerRatio }) : null;
+
     return {
         name: char.name,
         level: char.level,
@@ -188,6 +194,24 @@ function toBattleCharacter(char: Character): BattleCharacter {
         currMana: char.currentMana,
         manaCost: char.stats.getStat(StatType.ManaCost),
         buffs,
-        debuffs
+        debuffs,
+        attr: {
+            [AttributeType.Strength]: char.attributes.strength,
+            [AttributeType.Dexterity]: char.attributes.dexterity,
+            [AttributeType.Constitution]: char.attributes.constitution,
+            [AttributeType.Perception]: char.attributes.perception,
+            [AttributeType.Intelligence]: char.attributes.intelligence,
+            [AttributeType.Wisdom]: char.attributes.wisdom
+        },
+        stats: {
+            [StatType.Accuracy]: char.stats.getAccuracy(char.equipment.mainHand.attackType),
+            [StatType.Dodge]: char.stats.dodge,
+            [StatType.Armour]: char.stats.getStat(StatType.Armour),
+            [StatType.Deflection]: char.stats.getStat(StatType.Deflection),
+        },
+        mainHandDamage,
+        offHandDamage,
+        onHit: char.equipment.mainHand.onHit ? char.equipment.mainHand.onHit.description : null,
+        ability: char.ability ? { name: char.ability.name, description: char.ability.description(char) } : null
     };
 }
