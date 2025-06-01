@@ -11,7 +11,7 @@ interface Armour extends Item {
     onHit?: {
         func: (self: Character, target: Character) => void;
         description: string;
-    }
+    };
 }
 
 enum ArmourType {
@@ -21,21 +21,20 @@ enum ArmourType {
     Heavy = 'Heavy Armour',
 }
 
-type ArmourId = 
-'robe0' | 'robe1' | 'robe2' | 'robe3' | 'robe4' | 'robe5' |
-'leatherArmour0' | 'leatherArmour1' | 'leatherArmour2' | 'leatherArmour3' | 'leatherArmour4' | 'leatherArmour5' |
-'mailArmour0' | 'mailArmour1' | 'mailArmour2' | 'mailArmour3' | 'mailArmour4' | 'mailArmour5' |
-'plateArmour0' | 'plateArmour1' |  'plateArmour2' |  'plateArmour3' |  'plateArmour4' |  'plateArmour5'
-;
+type ArmourId =
+    'robe0' | 'robe1' | 'robe2' | 'robe3' | 'robe4' | 'robe5' |
+    'leatherArmour0' | 'leatherArmour1' | 'leatherArmour2' | 'leatherArmour3' | 'leatherArmour4' | 'leatherArmour5' |
+    'mailArmour0' | 'mailArmour1' | 'mailArmour2' | 'mailArmour3' | 'mailArmour4' | 'mailArmour5' |
+    'plateArmour0' | 'plateArmour1' | 'plateArmour2' | 'plateArmour3' | 'plateArmour4' | 'plateArmour5'
+    ;
 
-const armour: {[id in ArmourId]: Armour} = {
+const armour: { [id in ArmourId]: Armour } = {
     // Robes
     robe0: {
         id: 'robe0',
         itemType: ItemType.Armour,
         name: 'Robe',
         tier: 0,
-        img: 'armour-robe.png',
 
         type: ArmourType.Unarmoured,
         attributes: {
@@ -50,7 +49,6 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Robe +1',
         tier: 1,
-        img: 'armour-robe.png',
 
         type: ArmourType.Unarmoured,
         attributes: {
@@ -65,7 +63,6 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Robe +2',
         tier: 2,
-        img: 'armour-robe.png',
 
         type: ArmourType.Unarmoured,
         attributes: {
@@ -80,7 +77,6 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Robe +3',
         tier: 3,
-        img: 'armour-robe.png',
 
         type: ArmourType.Unarmoured,
         attributes: {
@@ -95,7 +91,6 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Robe +4',
         tier: 4,
-        img: 'armour-robe.png',
 
         type: ArmourType.Unarmoured,
         attributes: {
@@ -110,7 +105,6 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Robe +5',
         tier: 5,
-        img: 'armour-robe.png',
 
         type: ArmourType.Unarmoured,
         attributes: {
@@ -127,7 +121,6 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Leather Armour',
         tier: 0,
-        img: 'armour-leather.png',
 
         type: ArmourType.Light,
         stats: {
@@ -139,7 +132,6 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Leather Armour +1',
         tier: 1,
-        img: 'armour-leather.png',
 
         type: ArmourType.Light,
         stats: {
@@ -151,7 +143,6 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Leather Armour +2',
         tier: 2,
-        img: 'armour-leather.png',
 
         type: ArmourType.Light,
         stats: {
@@ -163,7 +154,6 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Leather Armour +3',
         tier: 3,
-        img: 'armour-leather.png',
 
         type: ArmourType.Light,
         stats: {
@@ -175,7 +165,6 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Leather Armour +4',
         tier: 4,
-        img: 'armour-leather.png',
 
         type: ArmourType.Light,
         stats: {
@@ -187,7 +176,6 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Leather Armour +5',
         tier: 5,
-        img: 'armour-leather.png',
 
         type: ArmourType.Light,
         stats: {
@@ -201,12 +189,11 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Chainmail',
         tier: 0,
-        img: 'armour-chainmail.png',
 
         type: ArmourType.Medium,
         stats: {
             [StatType.Armour]: 30,
-            [StatType.Deflection]: 1
+            [StatType.Deflection]: 0.5
         }
     },
     mailArmour1: {
@@ -214,12 +201,11 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Chainmail +1',
         tier: 1,
-        img: 'armour-chainmail.png',
 
         type: ArmourType.Medium,
         stats: {
             [StatType.Armour]: 35,
-            [StatType.Deflection]: 2
+            [StatType.Deflection]: 1
         }
     },
     mailArmour2: {
@@ -227,12 +213,11 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Chainmail +2',
         tier: 2,
-        img: 'armour-chainmail.png',
 
         type: ArmourType.Medium,
         stats: {
             [StatType.Armour]: 40,
-            [StatType.Deflection]: 3
+            [StatType.Deflection]: 1.5
         }
     },
     mailArmour3: {
@@ -240,12 +225,11 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Chainmail +3',
         tier: 3,
-        img: 'armour-chainmail.png',
 
         type: ArmourType.Medium,
         stats: {
             [StatType.Armour]: 45,
-            [StatType.Deflection]: 4
+            [StatType.Deflection]: 2
         }
     },
     mailArmour4: {
@@ -253,12 +237,11 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Chainmail +4',
         tier: 4,
-        img: 'armour-chainmail.png',
 
         type: ArmourType.Medium,
         stats: {
             [StatType.Armour]: 50,
-            [StatType.Deflection]: 5
+            [StatType.Deflection]: 2.5
         }
     },
     mailArmour5: {
@@ -266,12 +249,11 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Chainmail +5',
         tier: 5,
-        img: 'armour-chainmail.png',
 
         type: ArmourType.Medium,
         stats: {
             [StatType.Armour]: 55,
-            [StatType.Deflection]: 6
+            [StatType.Deflection]: 3
         }
     },
 
@@ -281,12 +263,11 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Plate Armour',
         tier: 0,
-        img: 'armour-plate.png',
 
         type: ArmourType.Heavy,
         stats: {
             [StatType.Armour]: 40,
-            [StatType.Deflection]: 2
+            [StatType.Deflection]: 1
         }
     },
     plateArmour1: {
@@ -294,12 +275,11 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Plate Armour +1',
         tier: 1,
-        img: 'armour-plate.png',
 
         type: ArmourType.Heavy,
         stats: {
             [StatType.Armour]: 46,
-            [StatType.Deflection]: 4
+            [StatType.Deflection]: 2
         }
     },
     plateArmour2: {
@@ -307,12 +287,11 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Plate Armour +2',
         tier: 2,
-        img: 'armour-plate.png',
 
         type: ArmourType.Heavy,
         stats: {
             [StatType.Armour]: 52,
-            [StatType.Deflection]: 6
+            [StatType.Deflection]: 3
         }
     },
     plateArmour3: {
@@ -320,12 +299,11 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Plate Armour +3',
         tier: 3,
-        img: 'armour-plate.png',
 
         type: ArmourType.Heavy,
         stats: {
             [StatType.Armour]: 58,
-            [StatType.Deflection]: 8
+            [StatType.Deflection]: 4
         }
     },
     plateArmour4: {
@@ -333,12 +311,11 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Plate Armour +4',
         tier: 4,
-        img: 'armour-plate.png',
 
         type: ArmourType.Heavy,
         stats: {
             [StatType.Armour]: 64,
-            [StatType.Deflection]: 10
+            [StatType.Deflection]: 5
         }
     },
     plateArmour5: {
@@ -346,12 +323,11 @@ const armour: {[id in ArmourId]: Armour} = {
         itemType: ItemType.Armour,
         name: 'Plate Armour +5',
         tier: 5,
-        img: 'armour-plate.png',
 
         type: ArmourType.Heavy,
         stats: {
             [StatType.Armour]: 70,
-            [StatType.Deflection]: 12
+            [StatType.Deflection]: 6
         }
     },
 } as const;
