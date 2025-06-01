@@ -5,7 +5,6 @@ import { BuffBar, DebuffBar } from '../../../types/StatusEffectBar';
 import { cn } from '../../../utils/utils';
 import CharacterFrameTooltip from './CharacterFrameTooltip';
 import CharacterFrameStats from '../types/CharacterFrameStats';
-import { StatType } from '@wholesome-sisters/auto-battler';
 import CharacterFrameAttributes from '../types/CharacterFrameAttributes';
 
 type CharacterFrameProps = { name: string, level: number, className: string | null, currHealth: number, maxHealth: number, currMana: number, manaCost: number, buffs: BuffBar, debuffs: DebuffBar, icon: { src: string, alt: string; }, attr: CharacterFrameAttributes, stats: CharacterFrameStats; };
@@ -15,11 +14,7 @@ export default function CharacterFrame({ name, level, className, currHealth, max
 
     return (
         <div className='w-full'>
-            <CharacterFrameTooltip name={name} attr={attr} stats={{
-                Accuracy: stats[StatType.Accuracy],
-                Dodge: stats[StatType.Dodge],
-                Armour: stats[StatType.Armour]
-            }}>
+            <CharacterFrameTooltip name={name} attr={attr} stats={stats}>
                 <div className='flex flex-row w-full h-18'>
                     <div className='relative h-full'>
                         <img className='h-full' src={icon.src} alt={icon.alt} />

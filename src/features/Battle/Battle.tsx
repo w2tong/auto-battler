@@ -200,7 +200,8 @@ function toBattleCharacter(char: Character): BattleCharacter {
         stats: {
             [StatType.Accuracy]: char.stats.getAccuracy(char.equipment.mainHand.attackType),
             [StatType.Dodge]: char.stats.dodge,
-            [StatType.Armour]: char.stats.getStat(StatType.Armour)
+            [StatType.Armour]: char.stats.getStat(StatType.Armour),
+            [StatType.Deflection]: char.stats.getStat(StatType.Deflection),
         }
     };
 }
