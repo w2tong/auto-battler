@@ -178,6 +178,12 @@ function toBattleCharacter(char: Character): BattleCharacter {
         }
     }
 
+    const mainHand = char.equipment.mainHand;
+    const mainHandDamage = char.calcDamageRange({ damageRange: mainHand.damageRange, weaponAttack: true, spellPowerRatio: mainHand.spellPowerRatio });
+
+    const offHand = char.equipment.offHandWeapon;
+    const offHandDamage = offHand ? char.calcDamageRange({ damageRange: offHand.damageRange, weaponAttack: true, spellPowerRatio: offHand.spellPowerRatio }) : null;
+
     return {
         name: char.name,
         level: char.level,
@@ -203,6 +209,8 @@ function toBattleCharacter(char: Character): BattleCharacter {
             [StatType.Armour]: char.stats.getStat(StatType.Armour),
             [StatType.Deflection]: char.stats.getStat(StatType.Deflection),
         },
+        mainHandDamage,
+        offHandDamage,
         onHit: char.equipment.mainHand.onHit ? char.equipment.mainHand.onHit.description : null,
         ability: char.ability ? { name: char.ability.name, description: char.ability.description(char) } : null
     };

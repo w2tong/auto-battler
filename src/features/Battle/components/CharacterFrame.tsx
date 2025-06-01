@@ -7,13 +7,13 @@ import BattleCharacter from '../types/BattleCharacter';
 import classIconMap from '../../../utils/classIconMap';
 import { npcIconMap } from '../../../utils/npcIcon';
 
-export default function CharacterFrame({ name, level, className, npcId, currHealth, maxHealth, currMana, manaCost, buffs, debuffs, attr, stats, onHit, ability }: BattleCharacter) {
+export default function CharacterFrame({ name, level, className, npcId, currHealth, maxHealth, currMana, manaCost, buffs, debuffs, attr, stats, mainHandDamage, offHandDamage, onHit, ability }: BattleCharacter) {
     const isDead = currHealth <= 0;
     const icon = npcId ? npcIconMap[npcId] : className ? classIconMap[className] : { src: '/item-icons/placeholder.png', alt: 'Placeholder icon' };
 
     return (
         <div className='w-full'>
-            <CharacterFrameTooltip name={name} attr={attr} stats={stats} onHit={onHit} ability={ability}>
+            <CharacterFrameTooltip name={name} attr={attr} stats={stats} mainHandDamage={mainHandDamage} offHandDamage={offHandDamage} onHit={onHit} ability={ability}>
                 <div className='flex flex-row w-full h-18'>
                     <div className='relative h-full'>
                         <img className='h-full' src={icon.src} alt={icon.alt} />

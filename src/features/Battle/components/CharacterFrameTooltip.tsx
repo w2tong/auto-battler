@@ -9,13 +9,15 @@ type CharacterFrameTooltipProps = {
     name: string,
     attr: CharacterFrameAttributes,
     stats: CharacterFrameStats,
+    mainHandDamage: { min: number, max: number; },
+    offHandDamage: { min: number, max: number; } | null,
     onHit: string | null,
     ability: { name: string, description: string; } | null;
     children: ReactNode;
 };
-export default function CharacterFrameTooltip({ name, attr, stats, onHit, ability, children }: CharacterFrameTooltipProps) {
+export default function CharacterFrameTooltip({ name, attr, stats, mainHandDamage, offHandDamage, onHit, ability, children }: CharacterFrameTooltipProps) {
     const content =
-        <div className='space-y-2'>
+        <div className='w-60 space-y-2'>
             <b>{name}</b>
             <hr />
             <div className='grid grid-cols-3 gap-x-0.5 text-center'>
@@ -33,9 +35,22 @@ export default function CharacterFrameTooltip({ name, attr, stats, onHit, abilit
                 <p>{formatNum(stats[StatType.Armour])} {[StatType.Armour]}</p>
                 <p>{formatNum(stats[StatType.Deflection])} {[StatType.Deflection]}</p>
             </div>
-
-            <div>Weapon Attack damage range here (e.g. 1-5 damage)</div>
-
+            <hr />
+            <div className='flex flex-row justify-between'>
+                <div>
+                    <div className='font-bold'>Main-hand</div>
+                    <div>{formatNum(mainHandDamage.min)} - {formatNum(mainHandDamage.max)}</div>
+                </div>
+                <div>
+                    {offHandDamage &&
+                        <>
+                            <div className='font-bold'>Off-hand</div>
+                            <div>{formatNum(offHandDamage.min)} - {formatNum(offHandDamage.max)}</div>
+                        </>
+                    }
+                </div>
+            </div>
+            <hr />
             {onHit &&
                 <div><b>On Hit</b>: {onHit}</div>
             }

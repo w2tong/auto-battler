@@ -16,6 +16,8 @@ type BattleCharacter = {
     debuffs: DebuffBar;
     attr: CharacterFrameAttributes;
     stats: CharacterFrameStats;
+    mainHandDamage: { min: number, max: number; };
+    offHandDamage: { min: number, max: number; } | null;
     onHit: string | null;
     ability: { name: string, description: string; } | null;
 };
