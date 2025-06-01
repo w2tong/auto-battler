@@ -21,8 +21,8 @@ function lineToString(line: LogLine) {
         }
         case (LineType.Attack): {
             const attackName = line.abilityName ? `used ${line.abilityName} on` : 'attacked';
-            const attack = <><b>{line.name}</b> {attackName} <b>{line.target}</b> and {line.hitType}</>;
-            const damage = line.hitType === HitType.Miss ? null : <> for <b>{formatNum(line.damage)}</b> damage{line.sneak ? ' (Sneak Attack)' : ''}{line.blocked ? ' (Blocked)' : ''}</>;
+            const attack = <><b>{line.name}</b> {attackName} <b>{line.target}</b> and <b>{line.hitType}</b></>;
+            const damage = line.hitType === HitType.Miss ? null : <> for <b>{formatNum(line.damage)}</b> damage{line.sneak ? ' (Sneak Attack) ' : ''}{line.blocked ? ' (Blocked)' : ''}</>;
             return <>{attack}{damage}.</>;
         }
         case (LineType.Damage): {
