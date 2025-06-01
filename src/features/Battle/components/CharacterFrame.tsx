@@ -6,14 +6,25 @@ import CharacterFrameTooltip from './CharacterFrameTooltip';
 import BattleCharacter from '../types/BattleCharacter';
 import classIconMap from '../../../utils/classIconMap';
 import { npcIconMap } from '../../../utils/npcIcon';
+import { classTextColor } from '../../../utils/classColour';
 
 export default function CharacterFrame({ name, level, className, npcId, currHealth, maxHealth, currMana, manaCost, buffs, debuffs, attr, stats, mainHandDamage, offHandDamage, onHit, ability }: BattleCharacter) {
     const isDead = currHealth <= 0;
     const icon = npcId ? npcIconMap[npcId] : className ? classIconMap[className] : { src: '/item-icons/placeholder.png', alt: 'Placeholder icon' };
+    const classColor = className ? classTextColor[className] : '';
 
     return (
         <div className='w-full'>
-            <CharacterFrameTooltip name={name} attr={attr} stats={stats} mainHandDamage={mainHandDamage} offHandDamage={offHandDamage} onHit={onHit} ability={ability}>
+            <CharacterFrameTooltip
+                name={name}
+                attr={attr}
+                stats={stats}
+                mainHandDamage={mainHandDamage}
+                offHandDamage={offHandDamage}
+                onHit={onHit}
+                ability={ability}
+                classColor={classColor}
+            >
                 <div className='flex flex-row w-full h-18'>
                     <div className='relative h-full'>
                         <img className='h-full' src={icon.src} alt={icon.alt} />
@@ -22,7 +33,9 @@ export default function CharacterFrame({ name, level, className, npcId, currHeal
                         )}
                     </div>
                     <div className='flex-1 truncate'>
-                        <div className={cn('font-bold truncate', isDead && 'text-negative')}>Lvl. {level} {className} - {name}</div>
+                        <div className={cn('font-bold truncate', isDead && 'text-negative')}>
+                            Lvl. {level} <span className={classColor}>{className}</span> - <span className={classColor}>{name}</span>
+                        </div>
                         <ResourceBar resource={Resource.Health} curr={formatNum(currHealth)} max={formatNum(maxHealth)} />
                         {manaCost > 0 && <ResourceBar resource={Resource.Mana} curr={formatNum(currMana)} max={formatNum(manaCost)} />}
                     </div>

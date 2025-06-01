@@ -52,6 +52,13 @@ F5853F - Orange
     /* Buttons */
     --color-button: oklch(48.8% 0.243 264.376);
     --color-button-hover: oklch(42.4% 0.199 265.638);
+
+    /* Class Colours */
+    --color-fighter: #C69B6D;
+    --color-priest: #FFFFFF;
+    --color-ranger: #AAD372;
+    --color-rogue: #FFF468;
+    --color-wizard: #3FC7EB;
 }
 
 :root {

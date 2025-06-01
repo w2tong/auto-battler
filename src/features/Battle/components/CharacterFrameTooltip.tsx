@@ -12,7 +12,8 @@ type CharacterFrameTooltipProps = {
     mainHandDamage: { min: number, max: number; },
     offHandDamage: { min: number, max: number; } | null,
     onHit: string | null,
-    ability: { name: string, description: string; } | null;
+    ability: { name: string, description: string; } | null,
+    classColor: string,
     children: ReactNode;
 };
 
@@ -22,11 +23,11 @@ function Stat({ name, value }: { name: string, value: number | string; }) {
     </div>;
 }
 
-export default function CharacterFrameTooltip({ name, attr, stats, mainHandDamage, offHandDamage, onHit, ability, children }: CharacterFrameTooltipProps) {
+export default function CharacterFrameTooltip({ name, attr, stats, mainHandDamage, offHandDamage, onHit, ability, classColor, children }: CharacterFrameTooltipProps) {
     const content =
         <div className='w-60 space-y-2'>
-            <b>{name}</b>
-            <hr />
+            <b className={classColor}>{name}</b>
+            <hr className='mt-1' />
             <div className='grid grid-cols-3 gap-x-0.5 text-center'>
                 <span>{attr[AttributeType.Strength]} <b>STR</b></span>
                 <span>{attr[AttributeType.Dexterity]} <b>DEX</b></span>
