@@ -25,7 +25,7 @@ export default function CharacterFrameTooltip({ name, attr, stats, children }: C
         </div>;
 
     return (
-        <Tooltip content={content}>
+        <Tooltip className='w-full' content={content}>
             {children}
         </Tooltip>
     );
