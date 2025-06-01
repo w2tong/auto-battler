@@ -101,7 +101,7 @@ export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsCha
                         newExp = newExp - expReq;
                         newLevel += 1;
                     }
-                    battleRef.current.log.addExp(lsChar.name, lsChar.exp);
+                    battleRef.current.log.addExp(lsChar.name, expGain);
                     if (newLevel > lsChar.level) battleRef.current.log.addLevelUp(lsChar.name, newLevel);
                     characterDispatch({ type: 'update', index, level: newLevel, exp: newExp });
 
