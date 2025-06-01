@@ -50,14 +50,20 @@ export default function CharacterFrameTooltip({ name, attr, stats, mainHandDamag
                     }
                 </div>
             </div>
-            <hr />
+
             {onHit &&
-                <div><b>On Hit</b>: {onHit}</div>
+                <>
+                    <hr />
+                    <div><b>On Hit</b>: {onHit}</div>
+                </>
             }
             {ability &&
-                <div><b>Ability: {ability.name}</b>
-                    <p>{ability.description}</p>
-                </div>
+                <>
+                    <hr />
+                    <div><b>Ability: {ability.name}</b>
+                        <p>{ability.description}</p>
+                    </div>
+                </>
             }
 
         </div>;
