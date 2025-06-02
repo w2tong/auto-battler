@@ -10,6 +10,7 @@ import Switch from "../../components/Switch";
 import { LocalStorageCharacter } from "../../types/LocalStorage";
 import { cn } from "../../utils/utils";
 import { BuffBar, DebuffBar } from "../../types/StatusEffectBar";
+import PauseButton from "./components/PauseButton";
 
 const DEFAULT_DELAY = 1000;
 const SPEEDS = {
@@ -23,6 +24,8 @@ const SPEEDS = {
 export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsChar: LocalStorageCharacter, index: number, encounterLevel: LevelRange; }) {
     const characterDispatch = useCharactersDispatch();
     const inventoryDispatch = useInventoryDispatch();
+
+    const [paused, setPaused] = useState<boolean>(false);
 
     const lsCombatSpeed = localStorage.getItem('combat-speed');
     const [combatSpeed, setCombatSpeed] = useState(lsCombatSpeed ? Number(lsCombatSpeed) : 1);
@@ -115,7 +118,7 @@ export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsCha
             }
             setTurn(t => t + 1); // Force rerender
         }
-    }, combat === 'in' ? DEFAULT_DELAY / combatSpeed : null);
+    }, combat === 'in' && !paused ? DEFAULT_DELAY / combatSpeed : null);
 
     useEffect(() => {
         if (autoStartCombat && combat === 'before') {
@@ -132,6 +135,11 @@ export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsCha
             </div>
 
             <div className='flex flex-row'>
+
+                {/* Pause Button */}
+                <PauseButton className='w-12 h-12' paused={paused} onClick={() => setPaused(prev => !prev)} />
+
+                {/* Combat Speed */}
                 <div className='flex flex-row items-center'>
                     <h2 className=''>Combat Speed: </h2>
                     {Object.entries(SPEEDS).map(([key, val], i) =>
@@ -144,6 +152,8 @@ export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsCha
                         </Button>
                     )}
                 </div>
+
+                {/* Auto Start Toggle */}
                 <div className='flex flex-row items-center'>
                     <h2>Auto Start: </h2>
                     <Switch checked={autoStartCombat} onChange={() => setAutoStartCombat(auto => !auto)} />
