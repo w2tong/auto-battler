@@ -1,15 +1,14 @@
-import { ReactNode, useEffect, useReducer } from 'react';
-import { LocalStorageCharacters } from '../../types/LocalStorage';
+import { ReactNode } from 'react';
+import { LocalStorageCharacters, LocalStorageKey } from '../../types/LocalStorage';
 import { Attributes, AttributeType, ClassName, EquipSlot, PetId, startingEquipment } from '@wholesome-sisters/auto-battler';
 import { type Action, CharactersContext, CharactersDispatchContext } from './CharactersContext';
+import { useLocalStorage } from 'usehooks-ts';
 
 export function CharactersProvider({ children }: { children: ReactNode; }) {
-    const lsChars = localStorage.getItem('characters');
-    const [characters, dispatch] = useReducer(charactersReducer, lsChars ? JSON.parse(lsChars) : { list: [], selected: 0 });
-
-    useEffect(() => {
-        localStorage.setItem('characters', JSON.stringify(characters));
-    }, [characters]);
+    const [characters, setCharacters] = useLocalStorage<LocalStorageCharacters>(LocalStorageKey.Characters, { list: [], selected: 0 });
+    function dispatch(action: Action) {
+        setCharacters(prev => charactersReducer(prev, action));
+    }
 
     return (
         <CharactersContext.Provider value={characters}>

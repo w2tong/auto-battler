@@ -1,16 +1,15 @@
-import { ReactNode, useEffect, useReducer } from 'react';
+import { ReactNode } from 'react';
 import { InventoryContext, InventoryDispatchContext, Action } from './InventoryContext';
-import { LocalStorageInventory } from '../../types/LocalStorage';
+import { LocalStorageInventory, LocalStorageKey } from '../../types/LocalStorage';
 import { Equip, equips } from '@wholesome-sisters/auto-battler';
 import ItemSort from '../../types/ItemSort';
+import { useLocalStorage } from 'usehooks-ts';
 
 export function InventoryProvider({ children }: { children: ReactNode; }) {
-    const lsInventory = localStorage.getItem('inventory');
-    const [inventory, dispatch] = useReducer(inventoryReducer, lsInventory ? JSON.parse(lsInventory) : []);
-
-    useEffect(() => {
-        localStorage.setItem('inventory', JSON.stringify(inventory));
-    }, [inventory]);
+    const [inventory, setInventory] = useLocalStorage<LocalStorageInventory>(LocalStorageKey.Inventory, []);
+    function dispatch(action: Action) {
+        setInventory(prev => inventoryReducer(prev, action));
+    }
 
     return (
         <InventoryContext.Provider value={inventory}>

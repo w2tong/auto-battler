@@ -7,10 +7,11 @@ import useInterval from "../../hooks/useInterval";
 import Button from "../../components/Button";
 import { useInventoryDispatch } from "../../hooks/Inventory/InventoryContext";
 import Switch from "../../components/Switch";
-import { LocalStorageCharacter } from "../../types/LocalStorage";
+import { LocalStorageCharacter, LocalStorageKey } from "../../types/LocalStorage";
 import { cn } from "../../utils/utils";
 import { BuffBar, DebuffBar } from "../../types/StatusEffectBar";
 import PauseButton from "./components/PauseButton";
+import { useLocalStorage } from "usehooks-ts";
 
 const DEFAULT_DELAY = 1000;
 const SPEEDS = {
@@ -27,17 +28,8 @@ export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsCha
 
     const [paused, setPaused] = useState<boolean>(false);
 
-    const lsCombatSpeed = localStorage.getItem('combat-speed');
-    const [combatSpeed, setCombatSpeed] = useState(lsCombatSpeed ? Number(lsCombatSpeed) : 1);
-    useEffect(() => {
-        localStorage.setItem('combat-speed', combatSpeed.toString());
-    }, [combatSpeed]);
-
-    const lsAutoCombatStart = localStorage.getItem('auto-combat-start');
-    const [autoStartCombat, setAutoStartCombat] = useState(lsAutoCombatStart === 'true');
-    useEffect(() => {
-        localStorage.setItem('auto-combat-start', autoStartCombat.toString());
-    }, [autoStartCombat]);
+    const [battleSpeed, setBattleSpeed] = useLocalStorage<number>(LocalStorageKey.BattleSpeed, SPEEDS['1x']);
+    const [battleAutoStart, setBattleAutoStart] = useLocalStorage<boolean>(LocalStorageKey.BattleAutoStart, false);
 
     const [combat, setCombat] = useState<'before' | 'in' | 'after'>('before');
 
@@ -118,13 +110,13 @@ export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsCha
             }
             setTurn(t => t + 1); // Force rerender
         }
-    }, combat === 'in' && !paused ? DEFAULT_DELAY / combatSpeed : null);
+    }, combat === 'in' && !paused ? DEFAULT_DELAY / battleSpeed : null);
 
     useEffect(() => {
-        if (autoStartCombat && combat === 'before') {
+        if (battleAutoStart && combat === 'before') {
             startCombat();
         }
-    }, [autoStartCombat, combat]);
+    }, [battleAutoStart, combat]);
 
     const battle = battleRef.current;
     return (
@@ -145,8 +137,8 @@ export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsCha
                     {Object.entries(SPEEDS).map(([key, val], i) =>
                         <Button
                             key={key}
-                            className={cn(i === 0 && 'rounded-l-xl', i === Object.values(SPEEDS).length - 1 && 'rounded-r-xl', val === combatSpeed && 'bg-button-hover')}
-                            onClick={() => setCombatSpeed(val)}
+                            className={cn(i === 0 && 'rounded-l-xl', i === Object.values(SPEEDS).length - 1 && 'rounded-r-xl', val === battleSpeed && 'bg-button-hover')}
+                            onClick={() => setBattleSpeed(val)}
                         >
                             {key}
                         </Button>
@@ -156,7 +148,7 @@ export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsCha
                 {/* Auto Start Toggle */}
                 <div className='flex flex-row items-center'>
                     <h2>Auto Start: </h2>
-                    <Switch checked={autoStartCombat} onChange={() => setAutoStartCombat(auto => !auto)} />
+                    <Switch checked={battleAutoStart} onChange={() => setBattleAutoStart(auto => !auto)} />
                 </div>
             </div>
 
