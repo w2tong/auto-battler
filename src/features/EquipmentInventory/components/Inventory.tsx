@@ -5,6 +5,7 @@ import SelectMenu from './SelectMenu';
 import { cn } from '../../../utils/utils';
 import Switch from '../../../components/Switch';
 import InfoTooltip from '../../../components/InfoTooltip';
+import { useDebounceValue } from 'usehooks-ts';
 
 const tierOptions = [
     { value: '0', text: 'Tier 0' },
@@ -38,7 +39,7 @@ const sortOptions = [
 export default function Inventory({ items, sort, sortOnChange, className, onItemRightClick }: { items: (string | null)[], sort: string, sortOnChange: (val: string) => void, className?: string; onItemRightClick?: (index: number) => void; }) {
     const [tierFilter, setTierFilter] = useState<string>('');
     const [typeFilter, setTypeFilter] = useState<string>('');
-    const [nameFilter, setNameFilter] = useState<string>('');
+    const [nameFilter, setNameFilter] = useDebounceValue<string>('', 100);
     const [sellMode, setSellMode] = useState(false);
 
     function updateTier(tier: string) {
@@ -67,8 +68,7 @@ export default function Inventory({ items, sort, sortOnChange, className, onItem
                         className='border border-white p-2'
                         type='text'
                         placeholder='Filter By Name'
-                        value={nameFilter}
-                        onChange={(e) => setNameFilter(e.target.value)}
+                        onChange={e => setNameFilter(e.target.value)}
                     />
                     <div className='flex flex-row items-center'>
                         <span>Delete Mode<InfoTooltip content={'Enables deleting items from your Inventory with right click.'} />:</span>
