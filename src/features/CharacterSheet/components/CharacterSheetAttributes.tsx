@@ -31,7 +31,7 @@ export default function CharacterSheetAttributes({ level, attributes }: { level:
                             <span className='mr-4 text-tooltip-highlight font-medium'>{attr}</span>
                         </AttributeTooltip>
                         <input
-                            className='w-10 text-right border border-white p-0.5'
+                            className='w-12 text-right border border-white p-0.5'
                             type='number'
                             min={min}
                             max={max}
