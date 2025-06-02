@@ -11,8 +11,6 @@ type LocalStorageCharacter = {
     talents: Set<string>;
 };
 
-type LocalStorageBattleAutoStart = boolean;
-type LocalStorageBattleSpeed = number;
 type LocalStorageCharacters = {
     list: LocalStorageCharacter[];
     selected: number;
@@ -26,12 +24,5 @@ enum LocalStorageKey {
     Inventory = 'inventory',
 }
 
-type LocalStorage = {
-    [LocalStorageKey.BattleAutoStart]: LocalStorageBattleAutoStart,
-    [LocalStorageKey.BattleSpeed]: LocalStorageBattleSpeed,
-    [LocalStorageKey.Characters]: LocalStorageCharacters,
-    [LocalStorageKey.Inventory]: LocalStorageInventory,
-};
-
 export { LocalStorageKey };
-export type { LocalStorageCharacter, LocalStorageCharacters, LocalStorageInventory, LocalStorage };
+export type { LocalStorageCharacter, LocalStorageCharacters, LocalStorageInventory };

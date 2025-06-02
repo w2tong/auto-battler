@@ -1,8 +1,8 @@
 import { equips, HitType, LineType, LogLine } from "@wholesome-sisters/auto-battler";
-import ItemTooltip from "../../../components/ItemTooltip";
-import { tierTextColor } from "../../../utils/tierColor";
-import { formatNum } from "../../../utils/stats";
-import { cn } from "../../../utils/utils";
+import ItemTooltip from "@components/ItemTooltip";
+import { tierTextColor } from "@utils/tierColor";
+import { formatNum } from "@utils/stats";
+import { cn } from "@utils/utils";
 
 function lineToString(line: LogLine) {
     switch (line.type) {

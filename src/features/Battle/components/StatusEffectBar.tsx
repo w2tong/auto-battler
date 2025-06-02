@@ -1,11 +1,11 @@
 import { Bleeding, Blessed, Buff, BuffId, Burning, Debuff, DebuffId, Invisible, Poisoned, StatType } from "@wholesome-sisters/auto-battler";
 import Icon from "../../../types/Icon";
-import { buffIconMap, debuffIconMap } from "../../../utils/statusEffectIcon";
+import { buffIconMap, debuffIconMap } from "@utils/statusEffectIcon";
 import { BuffBar, DebuffBar } from "../../../types/StatusEffectBar";
-import Tooltip from "../../../components/Tooltip";
-import { cn } from "../../../utils/utils";
+import Tooltip from "@components/Tooltip";
+import { cn } from "@utils/utils";
 import { ReactNode } from "react";
-import { formatNum } from "../../../utils/stats";
+import { formatNum } from "@utils/stats";
 
 const buffDescriptions: Record<BuffId, (buff: Buff) => string> = {
     [BuffId.Blessed]: (buff: Buff) => {

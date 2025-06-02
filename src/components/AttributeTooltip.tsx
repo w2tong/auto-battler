@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import Tooltip from "./Tooltip";
 import { Attributes, AttributeStatScaling, AttributeType, StatType } from "@wholesome-sisters/auto-battler";
-import { formatItemStat } from "../utils/stats";
+import { formatItemStat } from "@utils/stats";
 
 export default function AttributeTooltip({ children, type, num, display = true }: { children: ReactNode, type: AttributeType, num: number, display?: boolean; }) {
     const content =

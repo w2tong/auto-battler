@@ -1,12 +1,12 @@
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
-import { ActionUpdateEquipment, useCharacters, useCharactersDispatch } from "../../hooks/Characters/CharactersContext";
+import { ActionUpdateEquipment, useCharacters, useCharactersDispatch } from "@contexts/Characters/CharactersContext";
 import Equipment from "./components/Equipment";
 import Inventory from "./components/Inventory";
 import { equips, EquipSlot, isValidEquip, ItemType, WeaponTypeProperties } from "@wholesome-sisters/auto-battler";
-import { useInventory, useInventoryDispatch } from "../../hooks/Inventory/InventoryContext";
+import { useInventory, useInventoryDispatch } from "@contexts/Inventory/InventoryContext";
 import { useState } from "react";
 import ItemSort from "../../types/ItemSort";
-import { cn } from "../../utils/utils";
+import { cn } from "@utils/utils";
 
 export default function EquipmentInventory({ className }: { className?: string; }) {
     const { list, selected } = useCharacters();

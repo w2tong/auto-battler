@@ -1,8 +1,8 @@
 import { ClassName, levelExp, LevelRange } from "@wholesome-sisters/auto-battler";
-import ClassIcon from "../../../components/ClassIcon";
+import ClassIcon from "@components/ClassIcon";
 import { Dispatch, SetStateAction } from "react";
-import { cn } from "../../../utils/utils";
-import { classTextColor } from "../../../utils/classColour";
+import { cn } from "@utils/utils";
+import { classTextColor } from "@utils/classColour";
 
 export default function CharacterSelectCard({ name, charClass, level, exp, index, selected, setSelected }: { name: string, charClass: ClassName, level: number, exp: number, index: number, selected: boolean, setSelected: Dispatch<SetStateAction<number>>; }) {
     return (

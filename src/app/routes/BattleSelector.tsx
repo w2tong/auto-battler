@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Button from "../../components/Button";
-import { useCharacters } from "../../hooks/Characters/CharactersContext";
+import Button from "@components/Button";
+import { useCharacters } from "@contexts/Characters/CharactersContext";
 import { NavLink } from "react-router";
 
 export default function BattlePage() {

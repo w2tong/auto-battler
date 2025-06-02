@@ -1,45 +1,45 @@
-import fighterIconUrl from '../../assets/icons/classes/fighter.svg';
-import priestIconUrl from '../../assets/icons/classes/priest.svg';
-import rangerIconUrl from '../../assets/icons/classes/ranger.svg';
-import rogueIconUrl from '../../assets/icons/classes/rogue.svg';
-import wizardIconUrl from '../../assets/icons/classes/wizard.svg';
+import fighterIconUrl from '@assets/icons/classes/fighter.svg';
+import priestIconUrl from '@assets/icons/classes/priest.svg';
+import rangerIconUrl from '@assets/icons/classes/ranger.svg';
+import rogueIconUrl from '@assets/icons/classes/rogue.svg';
+import wizardIconUrl from '@assets/icons/classes/wizard.svg';
 
 
-import bleedingIconUrl from '../../assets/icons/status-effects/bleeding.svg';
-import blessedIconUrl from '../../assets/icons/status-effects/blessed.svg';
-import burningIconUrl from '../../assets/icons/status-effects/burning.svg';
-import frozenIconUrl from '../../assets/icons/status-effects/frozen.svg';
-import invisibleIconUrl from '../../assets/icons/status-effects/invisible.svg';
-import poisonedIconUrl from '../../assets/icons/status-effects/poisoned.svg';
+import bleedingIconUrl from '@assets/icons/status-effects/bleeding.svg';
+import blessedIconUrl from '@assets/icons/status-effects/blessed.svg';
+import burningIconUrl from '@assets/icons/status-effects/burning.svg';
+import frozenIconUrl from '@assets/icons/status-effects/frozen.svg';
+import invisibleIconUrl from '@assets/icons/status-effects/invisible.svg';
+import poisonedIconUrl from '@assets/icons/status-effects/poisoned.svg';
 
 
-import robeArmourIconUrl from '../../assets/icons/items/armour/robe.svg';
-import leatherArmourIconUrl from '../../assets/icons/items/armour/leather.svg';
-import chainmailArmourIconUrl from '../../assets/icons/items/armour/chainmail.svg';
-import plateArmourIconUrl from '../../assets/icons/items/armour/plate.svg';
+import robeArmourIconUrl from '@assets/icons/items/armour/robe.svg';
+import leatherArmourIconUrl from '@assets/icons/items/armour/leather.svg';
+import chainmailArmourIconUrl from '@assets/icons/items/armour/chainmail.svg';
+import plateArmourIconUrl from '@assets/icons/items/armour/plate.svg';
 
-import hoodIconUrl from '../../assets/icons/items/heads/hood.svg';
-import plateHelmentIconUrl from '../../assets/icons/items/heads/plate-helmet.svg';
+import hoodIconUrl from '@assets/icons/items/heads/hood.svg';
+import plateHelmentIconUrl from '@assets/icons/items/heads/plate-helmet.svg';
 
-import roundShieldIconUrl from '../../assets/icons/items/shields/round-shield.svg';
-import spikedShieldIconUrl from '../../assets/icons/items/shields/spiked-shield.svg';
+import roundShieldIconUrl from '@assets/icons/items/shields/round-shield.svg';
+import spikedShieldIconUrl from '@assets/icons/items/shields/spiked-shield.svg';
 
-import biteIconUrl from '../../assets/icons/items/weapons/bite.svg';
-import daggerIconUrl from '../../assets/icons/items/weapons/dagger.svg';
-import fistIconUrl from '../../assets/icons/items/weapons/fist.svg';
-import greatswordIconUrl from '../../assets/icons/items/weapons/greatsword.svg';
-import longbowIconUrl from '../../assets/icons/items/weapons/longbow.svg';
-import maceIconUrl from '../../assets/icons/items/weapons/mace.svg';
-import poisonBiteIconUrl from '../../assets/icons/items/weapons/poison-bite.svg';
-import wandIconUrl from '../../assets/icons/items/weapons/wand.svg';
+import biteIconUrl from '@assets/icons/items/weapons/bite.svg';
+import daggerIconUrl from '@assets/icons/items/weapons/dagger.svg';
+import fistIconUrl from '@assets/icons/items/weapons/fist.svg';
+import greatswordIconUrl from '@assets/icons/items/weapons/greatsword.svg';
+import longbowIconUrl from '@assets/icons/items/weapons/longbow.svg';
+import maceIconUrl from '@assets/icons/items/weapons/mace.svg';
+import poisonBiteIconUrl from '@assets/icons/items/weapons/poison-bite.svg';
+import wandIconUrl from '@assets/icons/items/weapons/wand.svg';
 
 
-import goblinIconUrl from '../../assets/icons/npcs/goblin.svg';
-import ogreIconUrl from '../../assets/icons/npcs/ogre.svg';
-import orcIconUrl from '../../assets/icons/npcs/orc.svg';
-import ratIconUrl from '../../assets/icons/npcs/rat.svg';
-import wolfIconUrl from '../../assets/icons/npcs/wolf.svg';
-import zombieIconUrl from '../../assets/icons/npcs/zombie.svg';
+import goblinIconUrl from '@assets/icons/npcs/goblin.svg';
+import ogreIconUrl from '@assets/icons/npcs/ogre.svg';
+import orcIconUrl from '@assets/icons/npcs/orc.svg';
+import ratIconUrl from '@assets/icons/npcs/rat.svg';
+import wolfIconUrl from '@assets/icons/npcs/wolf.svg';
+import zombieIconUrl from '@assets/icons/npcs/zombie.svg';
 
 type CreditProps = {
     src: string,

@@ -1,16 +1,16 @@
 import { useDroppable } from '@dnd-kit/core';
 import { EquipSlot, isValidEquip } from '@wholesome-sisters/auto-battler';
-import inventorySlot from '../assets/EquipSlotIcons/inventory.png';
+import inventorySlot from '../assets/inventory.png';
 
-import neck from '../assets/EquipSlotIcons/neck.png';
-import armour from '../assets/EquipSlotIcons/armour.png';
-import waist from '../assets/EquipSlotIcons/waist.png';
-import hands from '../assets/EquipSlotIcons/hands.png';
-import head from '../assets/EquipSlotIcons/head.png';
-import mainHand from '../assets/EquipSlotIcons/mainhand.png';
-import offHand from '../assets/EquipSlotIcons/offHand.png';
-import potion from '../assets/EquipSlotIcons/potion.png';
-import ring from '../assets/EquipSlotIcons/ring.png';
+import neck from '../assets/neck.png';
+import armour from '../assets/armour.png';
+import waist from '../assets/waist.png';
+import hands from '../assets/hands.png';
+import head from '../assets/head.png';
+import mainHand from '../assets/mainhand.png';
+import offHand from '../assets/offHand.png';
+import potion from '../assets/potion.png';
+import ring from '../assets/ring.png';
 import DraggableItem from './DraggableItem';
 
 const icons: { [key in EquipSlot]: string } = {

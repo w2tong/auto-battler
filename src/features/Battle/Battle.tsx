@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
-import { useCharactersDispatch } from "../../hooks/Characters/CharactersContext";
+import { useCharactersDispatch } from "@contexts/Characters/CharactersContext";
 import BattleDisplay from "./components/BattleDisplay";
 import { AttributeType, Battle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
 import BattleCharacter from "./types/BattleCharacter";
-import Button from "../../components/Button";
-import { useInventoryDispatch } from "../../hooks/Inventory/InventoryContext";
-import Switch from "../../components/Switch";
+import Button from "@components/Button";
+import { useInventoryDispatch } from "@contexts/Inventory/InventoryContext";
+import Switch from "@components/Switch";
 import { LocalStorageCharacter, LocalStorageKey } from "../../types/LocalStorage";
-import { cn } from "../../utils/utils";
+import { cn } from "@utils/utils";
 import { BuffBar, DebuffBar } from "../../types/StatusEffectBar";
 import PauseButton from "./components/PauseButton";
 import { useInterval, useLocalStorage } from "usehooks-ts";

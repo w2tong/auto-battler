@@ -3,11 +3,12 @@ import Header from './Header';
 import BattlePage from './routes/BattlePage';
 import EquipmentPage from './routes/EquipmentPage';
 import Home from './routes/Home';
-import { CharactersProvider } from '../hooks/Characters/CharactersProvider';
+import { CharactersProvider } from '@contexts/Characters/CharactersProvider';
 import CreateCharacter from './routes/CreateCharacter';
-import { InventoryProvider } from '../hooks/Inventory/InventoryProvider';
+import { InventoryProvider } from '@contexts/Inventory/InventoryProvider';
 import BattleSelector from './routes/BattleSelector';
 import Credits from './routes/Credits';
+import Account from './routes/Account';
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                                     <Route path=":level" element={<BattlePage />} />
                                 </Route>
                                 <Route path="create-character" element={<CreateCharacter />} />
+                                <Route path="account" element={<Account />} />
                                 <Route path="credits" element={<Credits />} />
                             </Routes>
                         </div>

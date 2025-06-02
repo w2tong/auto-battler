@@ -2,57 +2,57 @@ import { ArmourId, HandsId, HeadId, PotionId, RingId, ShieldId, WaistId, WeaponI
 import Icon from '../types/Icon';
 
 // Armour
-import robeArmourIconUrl from '../assets/icons/items/armour/robe.svg';
-import leatherArmourIconUrl from '../assets/icons/items/armour/leather.svg';
-import chainmailArmourIconUrl from '../assets/icons/items/armour/chainmail.svg';
-import plateArmourIconUrl from '../assets/icons/items/armour/plate.svg';
+import robeArmourIconUrl from '@assets/icons/items/armour/robe.svg';
+import leatherArmourIconUrl from '@assets/icons/items/armour/leather.svg';
+import chainmailArmourIconUrl from '@assets/icons/items/armour/chainmail.svg';
+import plateArmourIconUrl from '@assets/icons/items/armour/plate.svg';
 
 // Hands
-import dualWieldGlovesIconUrl from '../assets/icons/items/hands/dual-wield-gloves.png';
-import oneHandGlovesIconUrl from '../assets/icons/items/hands/one-hand-gloves.png';
-import twoHandGlovesIconUrl from '../assets/icons/items/hands/two-hand-gloves.png';
+import dualWieldGlovesIconUrl from '@assets/icons/items/hands/dual-wield-gloves.png';
+import oneHandGlovesIconUrl from '@assets/icons/items/hands/one-hand-gloves.png';
+import twoHandGlovesIconUrl from '@assets/icons/items/hands/two-hand-gloves.png';
 
 // Head
-import hoodIconUrl from '../assets/icons/items/heads/hood.svg';
-import leatherHelmetIconUrl from '../assets/icons/items/heads/leather-helmet.png';
-import mailCoifIconUrl from '../assets/icons/items/heads/mail-coif.png';
-import plateHelmetIconUrl from '../assets/icons/items/heads/plate-helmet.svg';
+import hoodIconUrl from '@assets/icons/items/heads/hood.svg';
+import leatherHelmetIconUrl from '@assets/icons/items/heads/leather-helmet.png';
+import mailCoifIconUrl from '@assets/icons/items/heads/mail-coif.png';
+import plateHelmetIconUrl from '@assets/icons/items/heads/plate-helmet.svg';
 
 // Potion
-import healingPotionIconUrl from '../assets/icons/items/potion/healing-potion.png';
+import healingPotionIconUrl from '@assets/icons/items/potion/healing-potion.png';
 
 // Ring
-import blackRingIconUrl from '../assets/icons/items/ring/black-ring.png';
-import blueRingIconUrl from '../assets/icons/items/ring/blue-ring.png';
-import greyRingIconUrl from '../assets/icons/items/ring/grey-ring.png';
-import orangeRingIconUrl from '../assets/icons/items/ring/orange-ring.png';
-import purpleRingIconUrl from '../assets/icons/items/ring/purple-ring.png';
-import redRingIconUrl from '../assets/icons/items/ring/red-ring.png';
-import shieldRingIconUrl from '../assets/icons/items/ring/shield-ring.png';
-import tealRingIconUrl from '../assets/icons/items/ring/teal-ring.png';
-import thornsRingIconUrl from '../assets/icons/items/ring/thorns-ring.png';
+import blackRingIconUrl from '@assets/icons/items/ring/black-ring.png';
+import blueRingIconUrl from '@assets/icons/items/ring/blue-ring.png';
+import greyRingIconUrl from '@assets/icons/items/ring/grey-ring.png';
+import orangeRingIconUrl from '@assets/icons/items/ring/orange-ring.png';
+import purpleRingIconUrl from '@assets/icons/items/ring/purple-ring.png';
+import redRingIconUrl from '@assets/icons/items/ring/red-ring.png';
+import shieldRingIconUrl from '@assets/icons/items/ring/shield-ring.png';
+import tealRingIconUrl from '@assets/icons/items/ring/teal-ring.png';
+import thornsRingIconUrl from '@assets/icons/items/ring/thorns-ring.png';
 
 // Shield
-import roundShieldIconUrl from '../assets/icons/items/shields/round-shield.svg';
-import spikedShieldIconUrl from '../assets/icons/items/shields/spiked-shield.svg';
-import towerShieldIconUrl from '../assets/icons/items/shields/tower-shield.png';
+import roundShieldIconUrl from '@assets/icons/items/shields/round-shield.svg';
+import spikedShieldIconUrl from '@assets/icons/items/shields/spiked-shield.svg';
+import towerShieldIconUrl from '@assets/icons/items/shields/tower-shield.png';
 
 // Waist
-import greenPotBeltIconUrl from '../assets/icons/items/waist/green-pot-belt.png';
-import multiRedPotBeltIconUrl from '../assets/icons/items/waist/multi-red-pot-belt.png';
-import redPotBeltIconUrl from '../assets/icons/items/waist/red-pot-belt.png';
+import greenPotBeltIconUrl from '@assets/icons/items/waist/green-pot-belt.png';
+import multiRedPotBeltIconUrl from '@assets/icons/items/waist/multi-red-pot-belt.png';
+import redPotBeltIconUrl from '@assets/icons/items/waist/red-pot-belt.png';
 
 // Weapon
-import biteIconUrl from '../assets/icons/items/weapons/bite.svg';
-import daggerIconUrl from '../assets/icons/items/weapons/dagger.svg';
-import fistIconUrl from '../assets/icons/items/weapons/fist.svg';
-import greatswordIconUrl from '../assets/icons/items/weapons/greatsword.svg';
-import longbowIconUrl from '../assets/icons/items/weapons/longbow.svg';
-import longswordIconUrl from '../assets/icons/items/weapons/longsword.png';
-import maceIconUrl from '../assets/icons/items/weapons/mace.svg';
-import poisonBiteIconUrl from '../assets/icons/items/weapons/poison-bite.svg';
-import quarterIconUrl from '../assets/icons/items/weapons/quarterstaff.png';
-import wandIconUrl from '../assets/icons/items/weapons/wand.svg';
+import biteIconUrl from '@assets/icons/items/weapons/bite.svg';
+import daggerIconUrl from '@assets/icons/items/weapons/dagger.svg';
+import fistIconUrl from '@assets/icons/items/weapons/fist.svg';
+import greatswordIconUrl from '@assets/icons/items/weapons/greatsword.svg';
+import longbowIconUrl from '@assets/icons/items/weapons/longbow.svg';
+import longswordIconUrl from '@assets/icons/items/weapons/longsword.png';
+import maceIconUrl from '@assets/icons/items/weapons/mace.svg';
+import poisonBiteIconUrl from '@assets/icons/items/weapons/poison-bite.svg';
+import quarterIconUrl from '@assets/icons/items/weapons/quarterstaff.png';
+import wandIconUrl from '@assets/icons/items/weapons/wand.svg';
 
 // This type will be a union of all the literal 'name' values in equips
 // TODO: add NeckId when implemented

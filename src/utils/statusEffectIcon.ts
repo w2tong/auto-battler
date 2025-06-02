@@ -1,13 +1,13 @@
 import { BuffId, DebuffId } from "@wholesome-sisters/auto-battler";
 import Icon from "../types/Icon";
 
-import blessedIconUrl from '../assets/icons/status-effects/blessed.svg';
-import invisbleIconUrl from '../assets/icons/status-effects/invisible.svg';
+import blessedIconUrl from '@assets/icons/status-effects/blessed.svg';
+import invisbleIconUrl from '@assets/icons/status-effects/invisible.svg';
 
-import bleedingIconUrl from '../assets/icons/status-effects/bleeding.svg';
-import burningIconUrl from '../assets/icons/status-effects/burning.svg';
-import frozenIconUrl from '../assets/icons/status-effects/bleeding.svg';
-import poisonedIconUrl from '../assets/icons/status-effects/poisoned.svg';
+import bleedingIconUrl from '@assets/icons/status-effects/bleeding.svg';
+import burningIconUrl from '@assets/icons/status-effects/burning.svg';
+import frozenIconUrl from '@assets/icons/status-effects/bleeding.svg';
+import poisonedIconUrl from '@assets/icons/status-effects/poisoned.svg';
 
 const buffIconMap: Record<BuffId, Icon> = {
     [BuffId.Blessed]: { src: blessedIconUrl, alt: 'Blessed icon' },

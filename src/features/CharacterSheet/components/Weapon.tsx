@@ -1,6 +1,6 @@
 import { Tier, WeaponType } from "@wholesome-sisters/auto-battler";
-import { tierTextColor } from "../../../utils/tierColor";
-import { formatNum } from "../../../utils/stats";
+import { tierTextColor } from "@utils/tierColor";
+import { formatNum } from "@utils/stats";
 
 type WeaponProps = { name: string, type: WeaponType, min: number, max: number, accuracy: number, tier: Tier; };
 function Weapon({ name, type, min, max, accuracy, tier }: WeaponProps) {

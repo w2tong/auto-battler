@@ -1,4 +1,4 @@
-import { useCharacters, useCharactersDispatch } from '../../hooks/Characters/CharactersContext';
+import { useCharacters, useCharactersDispatch } from '@contexts/Characters/CharactersContext';
 import CharacterSelectCard from './components/CharacterSelectCard';
 
 export default function CharacterSelect() {

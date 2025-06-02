@@ -1,17 +1,17 @@
 import { NpcId } from "@wholesome-sisters/auto-battler";
 import Icon from "../types/Icon";
 
-import fighterIconUrl from '../assets/icons/classes/fighter.svg';
-import rogueIconUrl from '../assets/icons/classes/rogue.svg';
-import wizardIconUrl from '../assets/icons/classes/wizard.svg';
+import fighterIconUrl from '@assets/icons/classes/fighter.svg';
+import rogueIconUrl from '@assets/icons/classes/rogue.svg';
+import wizardIconUrl from '@assets/icons/classes/wizard.svg';
 
-import goblinIconUrl from '../assets/icons/npcs/goblin.svg';
-import orcIconUrl from '../assets/icons/npcs/orc.svg';
-import ogreIconUrl from '../assets/icons/npcs/ogre.svg';
-import ratIconUrl from '../assets/icons/npcs/rat.svg';
-import zombieIconUrl from '../assets/icons/npcs/zombie.svg';
+import goblinIconUrl from '@assets/icons/npcs/goblin.svg';
+import orcIconUrl from '@assets/icons/npcs/orc.svg';
+import ogreIconUrl from '@assets/icons/npcs/ogre.svg';
+import ratIconUrl from '@assets/icons/npcs/rat.svg';
+import zombieIconUrl from '@assets/icons/npcs/zombie.svg';
 
-import wolfIconUrl from '../assets/icons/npcs/wolf.svg';
+import wolfIconUrl from '@assets/icons/npcs/wolf.svg';
 
 const goblinIcon: Icon = { src: goblinIconUrl, alt: 'Goblin icon' };
 

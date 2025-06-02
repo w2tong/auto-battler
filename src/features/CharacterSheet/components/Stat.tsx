@@ -1,6 +1,6 @@
 import { StatType } from "@wholesome-sisters/auto-battler";
-import { formatCharacterSheetStat, formatStatDescriptionVal } from "../../../utils/stats";
-import StatTooltip from "../../../components/StatTooltip";
+import { formatCharacterSheetStat, formatStatDescriptionVal } from "@utils/stats";
+import StatTooltip from "@components/StatTooltip";
 
 export default function Stat({ stat, num }: { stat: StatType, num: number; }) {
     const { key, val } = formatCharacterSheetStat(stat, num);

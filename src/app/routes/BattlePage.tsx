@@ -1,7 +1,7 @@
-import { useCharacters } from "../../hooks/Characters/CharactersContext";
+import { useCharacters } from "@contexts/Characters/CharactersContext";
 import { LevelRange } from "@wholesome-sisters/auto-battler";
 import { useParams } from "react-router";
-import BattleWrapper from "../../features/Battle/Battle";
+import BattleWrapper from "@features/Battle/Battle";
 
 export default function BattlePage() {
     const param = useParams();

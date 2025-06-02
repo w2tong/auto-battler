@@ -1,5 +1,5 @@
 import { ClassName } from '@wholesome-sisters/auto-battler';
-import classIconMap from '../utils/classIconMap';
+import classIconMap from '@utils/classIconMap';
 
 type ClassIconProps = {
     class: ClassName;

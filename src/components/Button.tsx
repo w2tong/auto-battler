@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { cn } from "../utils/utils";
+import { cn } from "@utils/utils";
 
 export default function Button({ className, disabled = false, onClick, children }: { className?: string, disabled?: boolean, onClick?: React.MouseEventHandler<HTMLButtonElement>, children: ReactNode; }) {
     return (

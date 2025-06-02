@@ -1,8 +1,8 @@
 import { Armour, Hands, Head, Item, ItemAttributes, ItemStats, ItemType, Potion, Ring, Shield, StatType, Waist, Weapon, WeaponTypeProperties } from "@wholesome-sisters/auto-battler";
-import { tierTextColor } from "../utils/tierColor";
+import { tierTextColor } from "@utils/tierColor";
 import { ReactNode } from "react";
 import Tooltip from "./Tooltip";
-import { formatItemStat } from "../utils/stats";
+import { formatItemStat } from "@utils/stats";
 
 function ItemTooltip({ children, item, display = true }: { children: ReactNode, item: Item, display?: boolean; }) {
     const itemContent = getItemContent(item);

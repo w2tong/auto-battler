@@ -1,12 +1,12 @@
 import ResourceBar, { Resource } from './ResourceBar';
 import StatusEffectBar from './StatusEffectBar';
-import { formatNum } from '../../../utils/stats';
-import { cn } from '../../../utils/utils';
+import { formatNum } from '@/utils/stats';
+import { cn } from '@utils/utils';
 import CharacterFrameTooltip from './CharacterFrameTooltip';
 import BattleCharacter from '../types/BattleCharacter';
-import classIconMap from '../../../utils/classIconMap';
-import { npcIconMap } from '../../../utils/npcIcon';
-import { classTextColor } from '../../../utils/classColour';
+import classIconMap from '@utils/classIconMap';
+import { npcIconMap } from '@utils/npcIcon';
+import { classTextColor } from '@utils/classColour';
 
 export default function CharacterFrame({ name, level, className, npcId, currHealth, maxHealth, currMana, manaCost, buffs, debuffs, attr, stats, mainHandDamage, offHandDamage, onHit, ability }: BattleCharacter) {
     const isDead = currHealth <= 0;

@@ -2,9 +2,9 @@ import { useState } from 'react';
 import ItemSlot from './ItemSlot';
 import { ItemType, equips } from '@wholesome-sisters/auto-battler';
 import SelectMenu from './SelectMenu';
-import { cn } from '../../../utils/utils';
-import Switch from '../../../components/Switch';
-import InfoTooltip from '../../../components/InfoTooltip';
+import { cn } from '@utils/utils';
+import Switch from '@components/Switch';
+import InfoTooltip from '@components/InfoTooltip';
 import { useDebounceValue } from 'usehooks-ts';
 
 const tierOptions = [
