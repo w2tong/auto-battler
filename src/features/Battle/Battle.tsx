@@ -3,7 +3,6 @@ import { useCharactersDispatch } from "../../hooks/Characters/CharactersContext"
 import BattleDisplay from "./components/BattleDisplay";
 import { AttributeType, Battle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
 import BattleCharacter from "./types/BattleCharacter";
-import useInterval from "../../hooks/useInterval";
 import Button from "../../components/Button";
 import { useInventoryDispatch } from "../../hooks/Inventory/InventoryContext";
 import Switch from "../../components/Switch";
@@ -11,7 +10,7 @@ import { LocalStorageCharacter, LocalStorageKey } from "../../types/LocalStorage
 import { cn } from "../../utils/utils";
 import { BuffBar, DebuffBar } from "../../types/StatusEffectBar";
 import PauseButton from "./components/PauseButton";
-import { useLocalStorage } from "usehooks-ts";
+import { useInterval, useLocalStorage } from "usehooks-ts";
 
 const DEFAULT_DELAY = 1000;
 const SPEEDS = {
