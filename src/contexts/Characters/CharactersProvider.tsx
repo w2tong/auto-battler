@@ -110,6 +110,12 @@ function charactersReducer(characters: LocalStorageCharacters, action: Action): 
                 selected: action.index
             };
         }
+        case 'import': {
+            return {
+                list: action.characters,
+                selected: 0
+            };
+        }
         default: {
             throw Error('Unknown action: ' + action);
         }

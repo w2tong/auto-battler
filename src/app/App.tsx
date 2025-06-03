@@ -8,7 +8,7 @@ import CreateCharacter from './routes/CreateCharacter';
 import { InventoryProvider } from '@contexts/Inventory/InventoryProvider';
 import BattleSelector from './routes/BattleSelector';
 import Credits from './routes/Credits';
-import Account from './routes/Account';
+import AccountPage from './routes/AccountPage';
 import { Toaster } from '@/components/ui/sonner';
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
             <BrowserRouter>
                 <CharactersProvider>
                     <InventoryProvider>
-                        <Toaster />
+                        <Toaster position='top-center' />
                         <Header />
                         <div className='px-4'>
                             <Routes>
@@ -28,7 +28,7 @@ function App() {
                                     <Route path=":level" element={<BattlePage />} />
                                 </Route>
                                 <Route path="create-character" element={<CreateCharacter />} />
-                                <Route path="account" element={<Account />} />
+                                <Route path="account" element={<AccountPage />} />
                                 <Route path="credits" element={<Credits />} />
                             </Routes>
                         </div>
