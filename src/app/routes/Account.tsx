@@ -1,8 +1,9 @@
 import Button from "@components/Button";
 import { useCharacters } from "@contexts/Characters/CharactersContext";
 import { useInventory } from "@contexts/Inventory/InventoryContext";
-import { classTextColor } from "../../utils/classColour";
+import { classTextColor } from "@/utils/classColour";
 import { LocalStorageCharacter, LocalStorageInventory, LocalStorageKey } from "../../types/LocalStorage";
+import { toast } from "sonner";
 
 type ImportExport = {
     [LocalStorageKey.Characters]: LocalStorageCharacter[],
@@ -23,6 +24,7 @@ export default function Account() {
             [LocalStorageKey.Inventory]: inventory,
         };
         navigator.clipboard.writeText(JSON.stringify(accountExport));
+        toast('Export copied to clipboard.');
     }
 
     return (

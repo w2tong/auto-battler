@@ -9,6 +9,7 @@ import { InventoryProvider } from '@contexts/Inventory/InventoryProvider';
 import BattleSelector from './routes/BattleSelector';
 import Credits from './routes/Credits';
 import Account from './routes/Account';
+import { Toaster } from '@/components/ui/sonner';
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
             <BrowserRouter>
                 <CharactersProvider>
                     <InventoryProvider>
+                        <Toaster />
                         <Header />
                         <div className='px-4'>
                             <Routes>
