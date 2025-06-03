@@ -39,7 +39,7 @@ export default function AccountImportExport() {
     return (
         <>
             <ImportDialog title='Import Account' description='Paste your account export string below.' warning='This will overwrite your current account data.' onImport={handleImport}>
-                <div>Import Account</div>
+                <Button>Import Account</Button>
             </ImportDialog>
             <Button onClick={() => exportAccount()}>Export Account</Button>
         </>

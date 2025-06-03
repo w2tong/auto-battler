@@ -30,7 +30,7 @@ export default function AccountCharacterList() {
     return (
         <>
             <ImportDialog title='Import Character' description='Paste your character export string below.' onImport={importCharacter}>
-                <div>Import Character</div>
+                <Button>Import Character</Button>
             </ImportDialog>
             <div>
                 {characters.list.map((char, i) =>

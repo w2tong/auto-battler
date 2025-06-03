@@ -9,7 +9,7 @@ export default function ImportAlertDialog({ title, description, warning, onImpor
 
     return (
         <AlertDialog>
-            <AlertDialogTrigger className='cursor-pointer border'>
+            <AlertDialogTrigger asChild>
                 {children}
             </AlertDialogTrigger>
             <AlertDialogContent>
