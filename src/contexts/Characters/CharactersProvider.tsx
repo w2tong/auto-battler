@@ -85,7 +85,7 @@ function charactersReducer(characters: LocalStorageCharacters, action: Action): 
             };
         }
         case 'swapEquipment': {
-            const equipment = Object.assign({}, list[action.index].equipment);
+            const equipment = { ...list[action.index].equipment } as Record<string, string | null>;
             [equipment[action.slot1], equipment[action.slot2]] = [equipment[action.slot2], equipment[action.slot1]];
 
             return {

@@ -1,8 +1,19 @@
-import { ClassName, EquipSlot, AttributeType } from "@wholesome-sisters/auto-battler";
+import { ClassName, EquipSlot, AttributeType, NeckId, ArmourId, HandsId, HeadId, PotionId, RingId, ShieldId, WaistId, WeaponId } from "@wholesome-sisters/auto-battler";
 import { createContext, Dispatch, SetStateAction, useContext } from "react";
 import { LocalStorageCharacter, LocalStorageCharacters } from "../../types/LocalStorage";
 
-export type ActionUpdateEquipment = { [key in EquipSlot]?: string | null };
+export type ActionUpdateEquipment = {
+    [EquipSlot.Armour]?: ArmourId | null;
+    [EquipSlot.Hands]?: HandsId | null;
+    [EquipSlot.Head]?: HeadId | null;
+    [EquipSlot.MainHand]?: WeaponId | null;
+    [EquipSlot.Neck]?: NeckId | null;
+    [EquipSlot.OffHand]?: WeaponId | ShieldId | null;
+    [EquipSlot.Potion]?: PotionId | null;
+    [EquipSlot.Ring1]?: RingId | null;
+    [EquipSlot.Ring2]?: RingId | null;
+    [EquipSlot.Waist]?: WaistId | null;
+};
 
 export type Action =
     { type: 'create', name: string, class: ClassName; } |
