@@ -4,19 +4,20 @@ import { classTextColor } from "@/utils/classColour";
 import DeleteCharacterDialog from "./DeleteCharacterDialog";
 import { toast } from "sonner";
 import ImportDialog from "./ImportDialog";
+import { parseCharacter } from "../utils/importValidator";
 
 export default function AccountCharacterList() {
     const characters = useCharacters();
     const dispatch = useCharactersDispatch();
 
-    function importCharacter(json: string) {
-        console.log('import character');
-    }
-
     function handleImport(json: string) {
-        console.log('handleImport called');
-        if (validateImportString(json)) {
-            // importCharacter(json);
+        const data = parseCharacter(json);
+        if (data === undefined) {
+            console.log(parseCharacter.message); // error message from the last parse call
+            console.log(parseCharacter.position); // error position in string
+        }
+        else {
+            dispatch({ type: 'importCharacter', character: data });
         }
     }
 
@@ -29,7 +30,7 @@ export default function AccountCharacterList() {
 
     return (
         <>
-            <ImportDialog title='Import Character' description='Paste your character export string below.' onImport={importCharacter}>
+            <ImportDialog title='Import Character' description='Paste your character export string below.' onImport={handleImport}>
                 <Button>Import Character</Button>
             </ImportDialog>
             <div>
@@ -44,11 +45,4 @@ export default function AccountCharacterList() {
 
         </>
     );
-}
-
-function validateImportString(json: string): boolean {
-    // Check if the string is valid
-    const valid = false;
-
-    return valid;
 }

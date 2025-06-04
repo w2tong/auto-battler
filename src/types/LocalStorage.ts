@@ -8,7 +8,7 @@ type LocalStorageCharacter = {
     equipment: { [slot in EquipSlot]: string | null; };
     attributes: { [key in AttributeType]: number };
     pet: PetId | null;
-    talents: Set<string>;
+    talents: Record<string, number>;
 };
 
 type LocalStorageCharacters = {

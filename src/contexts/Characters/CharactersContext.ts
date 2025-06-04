@@ -11,7 +11,8 @@ export type Action =
     { type: 'swapEquipment'; index: number, slot1: EquipSlot, slot2: EquipSlot; } |
     { type: 'delete', index: number; } |
     { type: 'select', index: number; } |
-    { type: 'import', characters: LocalStorageCharacter[]; };
+    { type: 'importAccount', characters: LocalStorageCharacter[]; } |
+    { type: 'importCharacter', character: LocalStorageCharacter; };
 
 export const CharactersContext = createContext<LocalStorageCharacters>({ list: [], selected: 0 });
 export const CharactersDispatchContext = createContext<React.ActionDispatch<[action: Action]>>(() => { });

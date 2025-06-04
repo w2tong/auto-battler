@@ -53,7 +53,7 @@ function charactersReducer(characters: LocalStorageCharacters, action: Action): 
                             [AttributeType.Wisdom]: Attributes.DEFAULT_VALUE
                         },
                         pet: action.class === ClassName.Ranger ? PetId.Wolf : null,
-                        talents: new Set()
+                        talents: {}
                     }
                 ],
                 selected: list.length
@@ -110,10 +110,19 @@ function charactersReducer(characters: LocalStorageCharacters, action: Action): 
                 selected: action.index
             };
         }
-        case 'import': {
+        case 'importAccount': {
             return {
                 list: action.characters,
                 selected: 0
+            };
+        }
+        case 'importCharacter': {
+            return {
+                list: [
+                    ...list,
+                    action.character
+                ],
+                selected: list.length
             };
         }
         default: {

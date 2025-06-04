@@ -1,11 +1,12 @@
+import Button from "@/components/Button";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@components/ui/alert-dialog";
 
 type ImportAlertDialog = { name: string, onDelete: () => void; };
 export default function ImportAlertDialog({ name, onDelete }: ImportAlertDialog) {
     return (
         <AlertDialog>
-            <AlertDialogTrigger>
-                Delete
+            <AlertDialogTrigger asChild>
+                <Button>Delete</Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
