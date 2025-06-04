@@ -27,7 +27,7 @@ export default function CharacterSheetAttributes({ level, attributes }: { level:
                 const max = Math.min(base + unspent, LEVEL_CAPS[level as LevelRange]) + bonus;
                 return (
                     <div className='flex justify-between w-full' key={attr}>
-                        <AttributeTooltip type={attr as AttributeType} num={base + bonus}>
+                        <AttributeTooltip type={attr as AttributeType} base={base} bonus={bonus}>
                             <span className='mr-4 text-tooltip-highlight font-medium'>{attr}</span>
                         </AttributeTooltip>
                         <input
