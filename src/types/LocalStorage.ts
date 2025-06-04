@@ -1,4 +1,4 @@
-import { ArmourId, AttributeType, ClassName, EquipSlot, HandsId, HeadId, NeckId, PetId, PotionId, RingId, ShieldId, WaistId, WeaponId } from "@wholesome-sisters/auto-battler";
+import { ArmourId, AttributeType, ClassName, EquipSlot, HandsId, HeadId, ItemId, NeckId, PetId, PotionId, RingId, ShieldId, WaistId, WeaponId } from "@wholesome-sisters/auto-battler";
 
 type LocalStorageCharacter = {
     name: string;
@@ -26,7 +26,7 @@ type LocalStorageCharacters = {
     list: LocalStorageCharacter[];
     selected: number;
 };
-type LocalStorageInventory = (string | null)[];
+type LocalStorageInventory = (ItemId | null)[];
 
 enum LocalStorageKey {
     BattleAutoStart = 'battle-auto-start',

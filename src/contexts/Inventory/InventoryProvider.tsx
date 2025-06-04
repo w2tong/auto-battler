@@ -62,6 +62,9 @@ function inventoryReducer(inventory: LocalStorageInventory, action: Action): Loc
             }
             return inventory;
         }
+        case 'import': {
+            return action.inventory;
+        }
         default: {
             throw Error('Unknown action: ' + action);
         }

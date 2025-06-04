@@ -3,7 +3,8 @@ import ImportDialog from "./ImportDialog";
 import { LocalStorageCharacter, LocalStorageInventory, LocalStorageKey } from "@/types/LocalStorage";
 import { toast } from "sonner";
 import { useCharacters, useCharactersDispatch } from "@/contexts/Characters/CharactersContext";
-import { useInventory } from "@/contexts/Inventory/InventoryContext";
+import { useInventory, useInventoryDispatch } from "@/contexts/Inventory/InventoryContext";
+import { validateAccount } from "../utils/importValidator";
 
 type ImportExport = {
     [LocalStorageKey.Characters]: LocalStorageCharacter[],
@@ -14,16 +15,19 @@ export default function AccountImportExport() {
     const characters = useCharacters();
     const charactersDispatch = useCharactersDispatch();
     const inventory = useInventory();
-
-    function importAccount(json: string) {
-        const characters = JSON.parse(json) as LocalStorageCharacter[];
-        charactersDispatch({ type: 'import', characters });
-    }
+    const inventoryDispatch = useInventoryDispatch();
 
     function handleImport(json: string) {
-        console.log('handleImport called');
-        if (validateImportString(json)) {
-            // importAccount(json);
+        const data = JSON.parse(json);
+        const valid = validateAccount(data);
+        if (!valid && validateAccount.errors) {
+            for (const err of validateAccount.errors) {
+                console.log(err);
+            }
+        }
+        else {
+            charactersDispatch({ type: 'importAccount', characters: data[LocalStorageKey.Characters] });
+            inventoryDispatch({ type: 'import', inventory: data[LocalStorageKey.Inventory] });
         }
     }
 
@@ -44,11 +48,4 @@ export default function AccountImportExport() {
             <Button onClick={() => exportAccount()}>Export Account</Button>
         </>
     );
-}
-
-function validateImportString(json: string): boolean {
-    // Check if the string is valid
-    const valid = false;
-
-    return valid;
 }

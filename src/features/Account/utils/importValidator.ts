@@ -1,5 +1,5 @@
-import { LocalStorageCharacter } from "@/types/LocalStorage";
-import { EquipSlot, AttributeType, ClassName, PetId, armour, ArmourId, hands, HandsId, heads, HeadId, weapons, WeaponId, shields, ShieldId, potions, PotionId, RingId, rings, waists, WaistId, Attributes, NeckId, necks } from "@wholesome-sisters/auto-battler";
+import { LocalStorageCharacter, LocalStorageInventory } from "@/types/LocalStorage";
+import { EquipSlot, AttributeType, ClassName, PetId, armour, ArmourId, hands, HandsId, heads, HeadId, weapons, WeaponId, shields, ShieldId, potions, PotionId, RingId, rings, waists, WaistId, Attributes, NeckId, necks, equips } from "@wholesome-sisters/auto-battler";
 import Ajv, { JSONSchemaType } from "ajv";
 
 const characterSchema: JSONSchemaType<LocalStorageCharacter> = {
@@ -77,7 +77,24 @@ const characterSchema: JSONSchemaType<LocalStorageCharacter> = {
     additionalProperties: false
 };
 
+const accountSchema: JSONSchemaType<{ characters: LocalStorageCharacter[], inventory: LocalStorageInventory; }> = {
+    type: "object",
+    properties: {
+        characters: {
+            type: "array",
+            items: characterSchema,
+        },
+        inventory: {
+            type: "array",
+            items: { type: "string", nullable: true, enum: [...Object.keys(equips), null] },
+        }
+    },
+    required: ["characters", "inventory"],
+    additionalProperties: false
+};
+
 const ajv = new Ajv({ allErrors: true });
 const validateCharacter = ajv.compile<LocalStorageCharacter>(characterSchema);
+const validateAccount = ajv.compile<{ characters: LocalStorageCharacter[], inventory: LocalStorageInventory; }>(accountSchema);
 
-export { validateCharacter };
+export { validateCharacter, validateAccount };
