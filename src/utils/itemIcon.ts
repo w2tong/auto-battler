@@ -1,4 +1,4 @@
-import { ArmourId, HandsId, HeadId, PotionId, RingId, ShieldId, WaistId, WeaponId } from '@wholesome-sisters/auto-battler';
+import { ArmourId, HandsId, HeadId, ItemId, NeckId, PotionId, RingId, ShieldId, WaistId, WeaponId } from '@wholesome-sisters/auto-battler';
 import Icon from '../types/Icon';
 
 // Armour
@@ -17,6 +17,14 @@ import hoodIconUrl from '@assets/icons/items/heads/hood.svg';
 import leatherHelmetIconUrl from '@assets/icons/items/heads/leather-helmet.png';
 import mailCoifIconUrl from '@assets/icons/items/heads/mail-coif.png';
 import plateHelmetIconUrl from '@assets/icons/items/heads/plate-helmet.svg';
+
+// Neck
+import blackNecklaceIconUrl from '@assets/icons/items/neck/black-necklace.svg';
+import blueNecklaceIconUrl from '@assets/icons/items/neck/blue-necklace.svg';
+import greenNecklaceIconUrl from '@assets/icons/items/neck/green-necklace.svg';
+import orangeNecklaceIconUrl from '@assets/icons/items/neck/orange-necklace.svg';
+import purpleNecklaceIconUrl from '@assets/icons/items/neck/purple-necklace.svg';
+import redNecklaceIconUrl from '@assets/icons/items/neck/red-necklace.svg';
 
 // Potion
 import healingPotionIconUrl from '@assets/icons/items/potion/healing-potion.png';
@@ -54,10 +62,6 @@ import poisonBiteIconUrl from '@assets/icons/items/weapons/poison-bite.svg';
 import quarterIconUrl from '@assets/icons/items/weapons/quarterstaff.png';
 import wandIconUrl from '@assets/icons/items/weapons/wand.svg';
 
-// This type will be a union of all the literal 'name' values in equips
-// TODO: add NeckId when implemented
-type ItemId = WeaponId | ArmourId | HandsId | HeadId | PotionId | RingId | ShieldId | WaistId;
-
 // Armour
 const robeIcon: Icon = { src: robeArmourIconUrl, alt: 'Robe icon' };
 const leatherArmourIcon: Icon = { src: leatherArmourIconUrl, alt: 'Leather Armour icon' };
@@ -74,6 +78,14 @@ const hoodIcon: Icon = { src: hoodIconUrl, alt: 'Cloth Hood icon' };
 const leatherHelmetIcon: Icon = { src: leatherHelmetIconUrl, alt: 'Mail Coif icon' };
 const mailCoifIcon: Icon = { src: mailCoifIconUrl, alt: 'Mail Coif icon' };
 const plateHelmetIcon: Icon = { src: plateHelmetIconUrl, alt: 'Plate Helmet icon' };
+
+// Neck
+const strengthNecklaceIcon: Icon = { src: redNecklaceIconUrl, alt: 'Strength Necklace icon' };
+const dexterityNecklaceIcon: Icon = { src: greenNecklaceIconUrl, alt: 'Dexterity Necklace icon' };
+const perceptionNecklaceIcon: Icon = { src: blackNecklaceIconUrl, alt: 'Perception Necklace icon' };
+const constitutionNecklaceIcon: Icon = { src: orangeNecklaceIconUrl, alt: 'Constitution Necklace icon' };
+const intelligenceNecklaceIcon: Icon = { src: blueNecklaceIconUrl, alt: 'Intelligence Necklace icon' };
+const wisdomNecklaceIcon: Icon = { src: purpleNecklaceIconUrl, alt: 'Wisdom Necklace icon' };
 
 // Potions
 const healingPotionIcon: Icon = { src: healingPotionIconUrl, alt: 'Healing Potion icon' };
@@ -167,6 +179,37 @@ const headIconsMap: Record<HeadId, Icon> = {
     helmet2: plateHelmetIcon,
 } as const;
 
+// Neck
+const neckIconMap: Record<NeckId, Icon> = {
+    strNeck0: strengthNecklaceIcon,
+    strNeck1: strengthNecklaceIcon,
+    strNeck2: strengthNecklaceIcon,
+    dexNeck0: dexterityNecklaceIcon,
+    dexNeck1: dexterityNecklaceIcon,
+    dexNeck2: dexterityNecklaceIcon,
+    perNeck0: perceptionNecklaceIcon,
+    perNeck1: perceptionNecklaceIcon,
+    perNeck2: perceptionNecklaceIcon,
+    conNeck0: constitutionNecklaceIcon,
+    conNeck1: constitutionNecklaceIcon,
+    conNeck2: constitutionNecklaceIcon,
+    intNeck0: intelligenceNecklaceIcon,
+    intNeck1: intelligenceNecklaceIcon,
+    intNeck2: intelligenceNecklaceIcon,
+    wisNeck0: wisdomNecklaceIcon,
+    wisNeck1: wisdomNecklaceIcon,
+    wisNeck2: wisdomNecklaceIcon,
+};
+
+// Potion
+const potionIconsMap: Record<PotionId, Icon> = {
+    healingPotion0: healingPotionIcon,
+    healingPotion1: healingPotionIcon,
+    healingPotion2: healingPotionIcon,
+    healingPotion3: healingPotionIcon,
+    healingPotion4: healingPotionIcon,
+};
+
 // Ring
 const ringIconMap: Record<RingId, Icon> = {
     accRing0: accuracyRingIcon,
@@ -204,15 +247,6 @@ const ringIconMap: Record<RingId, Icon> = {
     mpCostRing0: mpCostRingIcon,
     mpCostRing1: mpCostRingIcon,
     mpCostRing2: mpCostRingIcon,
-};
-
-// Potion
-const potionIconsMap: Record<PotionId, Icon> = {
-    healingPotion0: healingPotionIcon,
-    healingPotion1: healingPotionIcon,
-    healingPotion2: healingPotionIcon,
-    healingPotion3: healingPotionIcon,
-    healingPotion4: healingPotionIcon,
 };
 
 // Shield
@@ -319,6 +353,7 @@ const itemIconMap: Record<ItemId, Icon> = {
     ...armourIconMap,
     ...handsIconMap,
     ...headIconsMap,
+    ...neckIconMap,
     ...potionIconsMap,
     ...shieldIconMap,
     ...ringIconMap,
@@ -326,4 +361,4 @@ const itemIconMap: Record<ItemId, Icon> = {
     ...weaponIconMap,
 };
 
-export { type ItemId, itemIconMap };
+export { itemIconMap };

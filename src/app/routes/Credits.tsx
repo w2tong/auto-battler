@@ -21,6 +21,14 @@ import plateArmourIconUrl from '@assets/icons/items/armour/plate.svg';
 import hoodIconUrl from '@assets/icons/items/heads/hood.svg';
 import plateHelmentIconUrl from '@assets/icons/items/heads/plate-helmet.svg';
 
+// Neck
+import blackNecklaceIconUrl from '@assets/icons/items/neck/black-necklace.svg';
+import blueNecklaceIconUrl from '@assets/icons/items/neck/blue-necklace.svg';
+import greenNecklaceIconUrl from '@assets/icons/items/neck/green-necklace.svg';
+import orangeNecklaceIconUrl from '@assets/icons/items/neck/orange-necklace.svg';
+import purpleNecklaceIconUrl from '@assets/icons/items/neck/purple-necklace.svg';
+import redNecklaceIconUrl from '@assets/icons/items/neck/red-necklace.svg';
+
 import roundShieldIconUrl from '@assets/icons/items/shields/round-shield.svg';
 import spikedShieldIconUrl from '@assets/icons/items/shields/spiked-shield.svg';
 
@@ -232,6 +240,59 @@ const heads: CreditProps[] = [
         license: licenses.CCBY30
     },
 ];
+const necks: CreditProps[] = [
+    {
+        src: redNecklaceIconUrl,
+        alt: 'Strength Necklace icon',
+        imgName: 'Gem pendant',
+        imgLink: 'https://game-icons.net/1x1/lorc/gem-pendant.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: greenNecklaceIconUrl,
+        alt: 'Dexterity Necklace icon',
+        imgName: 'Gem pendant',
+        imgLink: 'https://game-icons.net/1x1/lorc/gem-pendant.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: blackNecklaceIconUrl,
+        alt: 'Perception Necklace icon',
+        imgName: 'Gem pendant',
+        imgLink: 'https://game-icons.net/1x1/lorc/gem-pendant.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: orangeNecklaceIconUrl,
+        alt: 'Constitution Necklace icon',
+        imgName: 'Gem pendant',
+        imgLink: 'https://game-icons.net/1x1/lorc/gem-pendant.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: blueNecklaceIconUrl,
+        alt: 'Intelligence Necklace icon',
+        imgName: 'Gem pendant',
+        imgLink: 'https://game-icons.net/1x1/lorc/gem-pendant.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: purpleNecklaceIconUrl,
+        alt: 'Wisdom Necklace icon',
+        imgName: 'Gem pendant',
+        imgLink: 'https://game-icons.net/1x1/lorc/gem-pendant.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+
+
+
+];
 const shields: CreditProps[] = [
     {
         src: roundShieldIconUrl,
@@ -394,6 +455,7 @@ export default function Credits() {
             <CreditsGroup name={'Status Effects'} credits={statusEffects} />
             <CreditsGroup name={'Armour'} credits={armour} />
             <CreditsGroup name={'Heads'} credits={heads} />
+            <CreditsGroup name={'Necks'} credits={necks} />
             <CreditsGroup name={'Shields'} credits={shields} />
             <CreditsGroup name={'Weapons'} credits={weapons} />
             <CreditsGroup name={'NPCs'} credits={npcs} />

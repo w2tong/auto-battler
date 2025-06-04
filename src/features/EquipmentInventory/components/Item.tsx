@@ -1,9 +1,9 @@
-import { equips } from '@wholesome-sisters/auto-battler';
+import { equips, ItemId } from '@wholesome-sisters/auto-battler';
 
 import { tierBorderColor } from '@utils/tierColor';
 import ItemTooltip from '@components/ItemTooltip';
 import { memo } from 'react';
-import { itemIconMap, ItemId } from '@utils/itemIcon';
+import { itemIconMap } from '@utils/itemIcon';
 
 function Item({ itemId, filtered, dragging }: { itemId: string, filtered: boolean, dragging: boolean; }) {
     const item = equips[itemId];
