@@ -11,15 +11,20 @@ export default function AccountCharacterList() {
     const dispatch = useCharactersDispatch();
 
     function handleImport(json: string) {
-        const data = JSON.parse(json);
-        const valid = validateCharacter(data);
-        if (!valid && validateCharacter.errors) {
-            for (const err of validateCharacter.errors) {
-                console.log(err);
+        try {
+            const data = JSON.parse(json);
+            const valid = validateCharacter(data);
+
+            if (!valid && validateCharacter.errors && validateCharacter.errors.length > 0) {
+                throw (validateCharacter.errors[0].message);
+            }
+            else {
+                dispatch({ type: 'importCharacter', character: data });
+                toast('Character import successful.');
             }
         }
-        else {
-            dispatch({ type: 'importCharacter', character: data });
+        catch (error) {
+            throw new Error(`${error}`);
         }
     }
 

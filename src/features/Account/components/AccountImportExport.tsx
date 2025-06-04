@@ -17,17 +17,22 @@ export default function AccountImportExport() {
     const inventory = useInventory();
     const inventoryDispatch = useInventoryDispatch();
 
-    function handleImport(json: string) {
-        const data = JSON.parse(json);
-        const valid = validateAccount(data);
-        if (!valid && validateAccount.errors) {
-            for (const err of validateAccount.errors) {
-                console.log(err);
+    function handleImport(json: string): string | void {
+        try {
+            const data = JSON.parse(json);
+            const valid = validateAccount(data);
+
+            if (!valid && validateAccount.errors && validateAccount.errors.length > 0) {
+                throw new Error(validateAccount.errors[0].message);
+            }
+            else {
+                charactersDispatch({ type: 'importAccount', characters: data[LocalStorageKey.Characters] });
+                inventoryDispatch({ type: 'import', inventory: data[LocalStorageKey.Inventory] });
+                toast('Account import successful.');
             }
         }
-        else {
-            charactersDispatch({ type: 'importAccount', characters: data[LocalStorageKey.Characters] });
-            inventoryDispatch({ type: 'import', inventory: data[LocalStorageKey.Inventory] });
+        catch (error) {
+            throw new Error(`${error}`);
         }
     }
 

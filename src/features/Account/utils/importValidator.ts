@@ -1,6 +1,7 @@
-import { LocalStorageCharacter, LocalStorageInventory } from "@/types/LocalStorage";
+import { LocalStorageCharacter, LocalStorageInventory, LocalStorageKey } from "@/types/LocalStorage";
 import { EquipSlot, AttributeType, ClassName, PetId, armour, ArmourId, hands, HandsId, heads, HeadId, weapons, WeaponId, shields, ShieldId, potions, PotionId, RingId, rings, waists, WaistId, Attributes, NeckId, necks, equips } from "@wholesome-sisters/auto-battler";
 import Ajv, { JSONSchemaType } from "ajv";
+import ajvErrors from "ajv-errors";
 
 const characterSchema: JSONSchemaType<LocalStorageCharacter> = {
     type: "object",
@@ -8,7 +9,7 @@ const characterSchema: JSONSchemaType<LocalStorageCharacter> = {
         name: { type: "string" },
         class: { type: "string", enum: Object.values(ClassName) },
         level: { type: "integer", minimum: 1, maximum: 20 },
-        exp: { type: "integer" },
+        exp: { type: "integer", minimum: 0 },
         equipment: {
             type: "object",
             properties: {
@@ -74,26 +75,50 @@ const characterSchema: JSONSchemaType<LocalStorageCharacter> = {
         "pet",
         "talents"
     ],
-    additionalProperties: false
+    additionalProperties: false,
+    errorMessage: {
+        properties: {
+            name: "Character name is required.",
+            class: "Invalid class.",
+            level: "Level must be between 1 and 20.",
+            exp: "Experience points must be a non-negative integer.",
+            equipment: "Invalid equipment data.",
+            attributes: "Invalid attributes data.",
+            pet: "Invalid pet ID.",
+            talents: "Invalid talents data."
+        }
+    }
 };
 
 const accountSchema: JSONSchemaType<{ characters: LocalStorageCharacter[], inventory: LocalStorageInventory; }> = {
     type: "object",
     properties: {
-        characters: {
+        [LocalStorageKey.Characters]: {
             type: "array",
             items: characterSchema,
         },
-        inventory: {
+        [LocalStorageKey.Inventory]: {
             type: "array",
-            items: { type: "string", nullable: true, enum: [...Object.keys(equips), null] },
+            items: {
+                type: "string",
+                nullable: true,
+                enum: [...Object.keys(equips), null],
+            },
         }
     },
     required: ["characters", "inventory"],
-    additionalProperties: false
+    additionalProperties: false,
+    errorMessage: {
+        properties: {
+            [LocalStorageKey.Characters]: "Invalid characters data.",
+            [LocalStorageKey.Inventory]: "Invalid inventory data."
+        }
+    }
 };
 
 const ajv = new Ajv({ allErrors: true });
+ajvErrors(ajv);
+
 const validateCharacter = ajv.compile<LocalStorageCharacter>(characterSchema);
 const validateAccount = ajv.compile<{ characters: LocalStorageCharacter[], inventory: LocalStorageInventory; }>(accountSchema);
 
