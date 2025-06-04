@@ -2,7 +2,7 @@ import { Armour, Hands, Head, Item, ItemAttributes, ItemStats, ItemType, Neck, P
 import { tierTextColor } from "@utils/tierColor";
 import { ReactNode } from "react";
 import Tooltip from "./Tooltip";
-import { formatItemStat } from "@utils/stats";
+import { formatItemStat, formatNum } from "@utils/stats";
 
 function ItemTooltip({ children, item, display = true }: { children: ReactNode, item: Item, display?: boolean; }) {
     const itemContent = getItemContent(item);
@@ -57,7 +57,9 @@ const itemTypeContentMap: Record<ItemType, (item: Item) => ReactNode> = {
             <>
                 <div>{weapon.attackType}</div>
                 <div>{weapon.type}, {twoHanded ? 'Two-handed' : 'One-handed'}{light ? ', Light' : ''}</div>
-                <div><span className='font-bold'>{min + bonus} - {max + bonus}</span> damage</div>
+                <div>
+                    <span className='font-bold'>{min + bonus} - {max + bonus}</span>{weapon.spellPowerRatio && <span className='font-bold text-tooltip-highlight'> (+{formatNum(weapon.spellPowerRatio * 100)}% SP)</span>} damage
+                </div>
                 {weapon.onHit ? <div>On Hit: {weapon.onHit.description}</div> : null}
                 {createAttributes(weapon.attributes)}
                 {createStats(weapon.stats)}
