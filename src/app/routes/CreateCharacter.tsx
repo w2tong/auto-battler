@@ -1,8 +1,8 @@
 import { Classes, ClassName } from '@wholesome-sisters/auto-battler';
 import { useRef, useState } from 'react';
-import ClassIcon from '../../components/ClassIcon';
-import { useCharactersDispatch } from '../../hooks/Characters/CharactersContext';
-import { classTextColor } from '../../utils/classColour';
+import ClassIcon from '@components/ClassIcon';
+import { useCharactersDispatch } from '@contexts/Characters/CharactersContext';
+import { classTextColor } from '@utils/classColour';
 
 export default function CharacterCreator() {
     const charactersDispatch = useCharactersDispatch();

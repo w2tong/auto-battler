@@ -1,5 +1,5 @@
 import { ReactNode, useState, useRef, useLayoutEffect } from "react";
-import { cn } from "../utils/utils";
+import { cn } from "@utils/utils";
 
 export default function Tooltip({
     children,

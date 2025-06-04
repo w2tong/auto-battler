@@ -1,7 +1,7 @@
 import { AttributeType, POINTS_PER_LEVEL, STARTING_POINTS, LEVEL_CAPS, LevelRange, Attributes } from "@wholesome-sisters/auto-battler";
-import { useCharacters, useCharactersDispatch } from "../../../hooks/Characters/CharactersContext";
-import AttributeTooltip from "../../../components/AttributeTooltip";
-import { cn } from "../../../utils/utils";
+import { useCharacters, useCharactersDispatch } from "@contexts/Characters/CharactersContext";
+import AttributeTooltip from "@components/AttributeTooltip";
+import { cn } from "@utils/utils";
 
 export default function CharacterSheetAttributes({ level, attributes }: { level: LevelRange, attributes: { [key in AttributeType]: { base: number, bonus: number; } }; }) {
     const { selected } = useCharacters();
@@ -27,11 +27,11 @@ export default function CharacterSheetAttributes({ level, attributes }: { level:
                 const max = Math.min(base + unspent, LEVEL_CAPS[level as LevelRange]) + bonus;
                 return (
                     <div className='flex justify-between w-full' key={attr}>
-                        <AttributeTooltip type={attr as AttributeType} num={base + bonus}>
+                        <AttributeTooltip type={attr as AttributeType} base={base} bonus={bonus}>
                             <span className='mr-4 text-tooltip-highlight font-medium'>{attr}</span>
                         </AttributeTooltip>
                         <input
-                            className='w-10 text-right border border-white p-0.5'
+                            className='w-12 text-right border border-white p-0.5'
                             type='number'
                             min={min}
                             max={max}

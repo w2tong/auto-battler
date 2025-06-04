@@ -1,5 +1,5 @@
 import { Tier } from "@wholesome-sisters/auto-battler";
-import { tierTextColor } from "../../../utils/tierColor";
+import { tierTextColor } from "@utils/tierColor";
 
 export default function CharacterSheetPotion({ name, min, max, charges, tier }: { name: string, min: number, max: number, charges: number, tier: Tier; }) {
     return (

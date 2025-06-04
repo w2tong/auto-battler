@@ -1,15 +1,16 @@
 import { useState, useRef, useEffect } from "react";
-import { useCharactersDispatch } from "../../hooks/Characters/CharactersContext";
+import { useCharactersDispatch } from "@contexts/Characters/CharactersContext";
 import BattleDisplay from "./components/BattleDisplay";
 import { AttributeType, Battle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
 import BattleCharacter from "./types/BattleCharacter";
-import useInterval from "../../hooks/useInterval";
-import Button from "../../components/Button";
-import { useInventoryDispatch } from "../../hooks/Inventory/InventoryContext";
-import Switch from "../../components/Switch";
-import { LocalStorageCharacter } from "../../types/LocalStorage";
-import { cn } from "../../utils/utils";
+import Button from "@components/Button";
+import { useInventoryDispatch } from "@contexts/Inventory/InventoryContext";
+import Switch from "@components/Switch";
+import { LocalStorageCharacter, LocalStorageKey } from "../../types/LocalStorage";
+import { cn } from "@utils/utils";
 import { BuffBar, DebuffBar } from "../../types/StatusEffectBar";
+import PauseButton from "./components/PauseButton";
+import { useInterval, useLocalStorage } from "usehooks-ts";
 
 const DEFAULT_DELAY = 1000;
 const SPEEDS = {
@@ -24,17 +25,10 @@ export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsCha
     const characterDispatch = useCharactersDispatch();
     const inventoryDispatch = useInventoryDispatch();
 
-    const lsCombatSpeed = localStorage.getItem('combat-speed');
-    const [combatSpeed, setCombatSpeed] = useState(lsCombatSpeed ? Number(lsCombatSpeed) : 1);
-    useEffect(() => {
-        localStorage.setItem('combat-speed', combatSpeed.toString());
-    }, [combatSpeed]);
+    const [paused, setPaused] = useState<boolean>(false);
 
-    const lsAutoCombatStart = localStorage.getItem('auto-combat-start');
-    const [autoStartCombat, setAutoStartCombat] = useState(lsAutoCombatStart === 'true');
-    useEffect(() => {
-        localStorage.setItem('auto-combat-start', autoStartCombat.toString());
-    }, [autoStartCombat]);
+    const [battleSpeed, setBattleSpeed] = useLocalStorage<number>(LocalStorageKey.BattleSpeed, SPEEDS['1x']);
+    const [battleAutoStart, setBattleAutoStart] = useLocalStorage<boolean>(LocalStorageKey.BattleAutoStart, false);
 
     const [combat, setCombat] = useState<'before' | 'in' | 'after'>('before');
 
@@ -101,7 +95,7 @@ export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsCha
                         newExp = newExp - expReq;
                         newLevel += 1;
                     }
-                    battleRef.current.log.addExp(lsChar.name, lsChar.exp);
+                    battleRef.current.log.addExp(lsChar.name, expGain);
                     if (newLevel > lsChar.level) battleRef.current.log.addLevelUp(lsChar.name, newLevel);
                     characterDispatch({ type: 'update', index, level: newLevel, exp: newExp });
 
@@ -115,13 +109,13 @@ export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsCha
             }
             setTurn(t => t + 1); // Force rerender
         }
-    }, combat === 'in' ? DEFAULT_DELAY / combatSpeed : null);
+    }, combat === 'in' && !paused ? DEFAULT_DELAY / battleSpeed : null);
 
     useEffect(() => {
-        if (autoStartCombat && combat === 'before') {
+        if (battleAutoStart && combat === 'before') {
             startCombat();
         }
-    }, [autoStartCombat, combat]);
+    }, [battleAutoStart, combat]);
 
     const battle = battleRef.current;
     return (
@@ -132,21 +126,28 @@ export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsCha
             </div>
 
             <div className='flex flex-row'>
+
+                {/* Pause Button */}
+                <PauseButton className='w-12 h-12' paused={paused} onClick={() => setPaused(prev => !prev)} />
+
+                {/* Combat Speed */}
                 <div className='flex flex-row items-center'>
                     <h2 className=''>Combat Speed: </h2>
                     {Object.entries(SPEEDS).map(([key, val], i) =>
                         <Button
                             key={key}
-                            className={cn(i === 0 && 'rounded-l-xl', i === Object.values(SPEEDS).length - 1 && 'rounded-r-xl', val === combatSpeed && 'bg-button-hover')}
-                            onClick={() => setCombatSpeed(val)}
+                            className={cn(i === 0 && 'rounded-l-xl', i === Object.values(SPEEDS).length - 1 && 'rounded-r-xl', val === battleSpeed && 'bg-button-hover')}
+                            onClick={() => setBattleSpeed(val)}
                         >
                             {key}
                         </Button>
                     )}
                 </div>
+
+                {/* Auto Start Toggle */}
                 <div className='flex flex-row items-center'>
                     <h2>Auto Start: </h2>
-                    <Switch checked={autoStartCombat} onChange={() => setAutoStartCombat(auto => !auto)} />
+                    <Switch checked={battleAutoStart} onChange={() => setBattleAutoStart(auto => !auto)} />
                 </div>
             </div>
 

@@ -1,17 +1,18 @@
 import { NavLink } from "react-router";
-import CharacterSelect from "../features/CharacterSelect/CharacterSelect";
-import { cn } from "../utils/utils";
+import CharacterSelect from "@features/CharacterSelect/CharacterSelect";
+import { cn } from "@utils/utils";
 
 const navLinks: { to: string, text: string; }[] = [
     { to: '/', text: 'Home' },
     { to: '/equipment', text: 'Equipment' },
     { to: '/battle', text: 'Battle' },
     { to: '/create-character', text: 'Create Character' },
+    { to: '/account', text: 'Account' },
 ];
 
 function Header() {
     return (
-        <div className='flex justify-between w-full shadow-2xl'>
+        <div className='flex justify-between w-full bg-secondary'>
             <nav className={'flex grow'}>
                 {navLinks.map(({ to, text }, i) =>
                     // <NavLink key={i} to={to} className={({ isActive }) => `${isActive ? 'text-primary-active' : ''} flex-1 h-full hover:text-primary-hover`}>

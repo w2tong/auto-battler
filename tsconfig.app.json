@@ -22,7 +22,28 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@assets/*": [
+        "src/assets/*"
+      ],
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@contexts/*": [
+        "src/contexts/*"
+      ],
+      "@features/*": [
+        "src/features/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ]
+    }
   },
   "include": [
     "src"

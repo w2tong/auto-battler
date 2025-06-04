@@ -1,6 +1,6 @@
 import { EquipSlot } from '@wholesome-sisters/auto-battler';
 import ItemSlot from './ItemSlot';
-import { cn } from '../../../utils/utils';
+import { cn } from '@utils/utils';
 
 export default function Equipment({ equipment, className }: { equipment: { [slot in EquipSlot]: string | null; }, className?: string; }) {
     return (
