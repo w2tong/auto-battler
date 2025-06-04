@@ -4,17 +4,19 @@ import { classTextColor } from "@/utils/classColour";
 import DeleteCharacterDialog from "./DeleteCharacterDialog";
 import { toast } from "sonner";
 import ImportDialog from "./ImportDialog";
-import { parseCharacter } from "../utils/importValidator";
+import { validateCharacter } from "../utils/importValidator";
 
 export default function AccountCharacterList() {
     const characters = useCharacters();
     const dispatch = useCharactersDispatch();
 
     function handleImport(json: string) {
-        const data = parseCharacter(json);
-        if (data === undefined) {
-            console.log(parseCharacter.message); // error message from the last parse call
-            console.log(parseCharacter.position); // error position in string
+        const data = JSON.parse(json);
+        const valid = validateCharacter(data);
+        if (!valid && validateCharacter.errors) {
+            for (const err of validateCharacter.errors) {
+                console.log(err);
+            }
         }
         else {
             dispatch({ type: 'importCharacter', character: data });
