@@ -5,8 +5,8 @@ type LocalStorageCharacter = {
     class: ClassName;
     level: number;
     exp: number;
-    equipment: { [slot in EquipSlot]: string | null; };
-    attributes: { [key in AttributeType]: number };
+    equipment: Record<EquipSlot, string | null>;
+    attributes: Record<AttributeType, number>;
     pet: PetId | null;
     talents: Record<string, number>;
 };
