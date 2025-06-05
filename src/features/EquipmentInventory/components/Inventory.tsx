@@ -6,6 +6,7 @@ import { cn } from '@utils/utils';
 import Switch from '@components/Switch';
 import InfoTooltip from '@components/InfoTooltip';
 import { useDebounceValue } from 'usehooks-ts';
+import { Input } from '@/components/ui/input';
 
 const tierOptions = [
     { value: '0', text: 'Tier 0' },
@@ -53,7 +54,7 @@ export default function Inventory({ items, sort, sortOnChange, className, onItem
         <div className={cn('flex flex-col', className)}>
             <div>
                 <h2 className='py-1'>Inventory</h2>
-                <div className='flex flex-row py-1 items-center'>
+                <div className='flex flex-row py-1 items-end space-x-2'>
                     <SelectMenu options={tierOptions} onChange={updateTier} id='tier' label='Filter by Tier' value={tierFilter} />
                     <SelectMenu options={typeOptions} onChange={updateType} id='type' label='Filter by Type' value={typeFilter} />
                     <div className='flex flex-col'>
@@ -64,8 +65,8 @@ export default function Inventory({ items, sort, sortOnChange, className, onItem
                             )}
                         </select>
                     </div>
-                    <input
-                        className='border border-white p-2'
+                    <Input
+                        className='min-w-30 max-w-48'
                         type='text'
                         placeholder='Filter By Name'
                         onChange={e => setNameFilter(e.target.value)}
