@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ItemSlot from './ItemSlot';
-import { ItemType, equips } from '@wholesome-sisters/auto-battler';
+import { ItemId, ItemType, equips } from '@wholesome-sisters/auto-battler';
 import SelectMenu from './SelectMenu';
 import { cn } from '@utils/utils';
 import Switch from '@components/Switch';
@@ -82,7 +82,7 @@ export default function Inventory({ items, sort, sortOnChange, className, onItem
                 {[...items, null].map((itemId, i) => {
                     let filtered = false;
                     if (itemId && (tierFilter !== '' || typeFilter !== '' || nameFilter !== '')) {
-                        const equip = equips[itemId];
+                        const equip = equips[itemId as ItemId];
                         if (
                             tierFilter !== '' && tierFilter !== equip.tier.toString() ||
                             typeFilter !== '' && typeFilter !== equip.itemType ||
