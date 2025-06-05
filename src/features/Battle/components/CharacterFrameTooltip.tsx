@@ -4,6 +4,8 @@ import { AttributeType, StatType } from "@wholesome-sisters/auto-battler";
 import CharacterFrameStats from "../types/CharacterFrameStats";
 import CharacterFrameAttributes from "../types/CharacterFrameAttributes";
 import { formatNum } from "@utils/stats";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/utils/utils";
 
 type CharacterFrameTooltipProps = {
     name: string,
@@ -25,9 +27,9 @@ function Stat({ name, value }: { name: string, value: number | string; }) {
 
 export default function CharacterFrameTooltip({ name, attr, stats, mainHandDamage, offHandDamage, onHit, ability, classColor, children }: CharacterFrameTooltipProps) {
     const content =
-        <div className='w-60 space-y-2'>
-            <b className={classColor}>{name}</b>
-            <hr className='mt-1' />
+        <div className='w-60 space-y-2 p-1'>
+            <div className={cn('font-extrabold', classColor)}>{name}</div>
+            <Separator />
             <div className='grid grid-cols-3 gap-x-0.5 text-center'>
                 <span>{attr[AttributeType.Strength]} <b>STR</b></span>
                 <span>{attr[AttributeType.Dexterity]} <b>DEX</b></span>
@@ -36,14 +38,14 @@ export default function CharacterFrameTooltip({ name, attr, stats, mainHandDamag
                 <span>{attr[AttributeType.Intelligence]} <b>INT</b></span>
                 <span>{attr[AttributeType.Wisdom]} <b>WIS</b></span>
             </div>
-            <hr />
+            <Separator />
             <div className='grid grid-cols-2 gap-x-8 text-right'>
                 <Stat name={StatType.Accuracy} value={formatNum(stats[StatType.Accuracy])} />
                 <Stat name={StatType.Dodge} value={`${formatNum(stats[StatType.Dodge])}%`} />
                 <Stat name={StatType.Armour} value={formatNum(stats[StatType.Armour])} />
                 <Stat name={StatType.Deflection} value={formatNum(stats[StatType.Deflection])} />
             </div>
-            <hr />
+            <Separator />
             <div className='flex flex-row justify-between'>
                 <div>
                     <div className='font-bold'>Main-hand</div>
@@ -61,13 +63,13 @@ export default function CharacterFrameTooltip({ name, attr, stats, mainHandDamag
 
             {onHit &&
                 <>
-                    <hr />
+                    <Separator />
                     <div><b>On Hit</b>: {onHit}</div>
                 </>
             }
             {ability &&
                 <>
-                    <hr />
+                    <Separator />
                     <div><b>Ability: {ability.name}</b>
                         <p>{ability.description}</p>
                     </div>
