@@ -6,20 +6,14 @@ import BattleCharacter from "./types/BattleCharacter";
 import { useInventoryDispatch } from "@contexts/Inventory/InventoryContext";
 import Switch from "@components/Switch";
 import { LocalStorageCharacter, LocalStorageKey } from "../../types/LocalStorage";
-import { cn } from "@utils/utils";
 import { BuffBar, DebuffBar } from "../../types/StatusEffectBar";
 import PauseButton from "./components/PauseButton";
 import { useInterval, useLocalStorage } from "usehooks-ts";
 import { Button } from "@/components/ui/button";
+import { BATTLE_SPEEDS } from "@/utils/constants";
+import BattleSpeed from "./components/BattleSpeed";
 
 const DEFAULT_DELAY = 1000;
-const SPEEDS = {
-    '0.5x': 0.5,
-    '1x': 1,
-    '2x': 2,
-    '4x': 4,
-    '10x': 10,
-};
 
 export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsChar: LocalStorageCharacter, index: number, encounterLevel: LevelRange; }) {
     const characterDispatch = useCharactersDispatch();
@@ -27,7 +21,7 @@ export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsCha
 
     const [paused, setPaused] = useState<boolean>(false);
 
-    const [battleSpeed, setBattleSpeed] = useLocalStorage<number>(LocalStorageKey.BattleSpeed, SPEEDS['1x']);
+    const [battleSpeed, setBattleSpeed] = useLocalStorage<number>(LocalStorageKey.BattleSpeed, BATTLE_SPEEDS['1x']);
     const [battleAutoStart, setBattleAutoStart] = useLocalStorage<boolean>(LocalStorageKey.BattleAutoStart, false);
 
     const [combat, setCombat] = useState<'before' | 'in' | 'after'>('before');
@@ -130,19 +124,7 @@ export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsCha
                 {/* Pause Button */}
                 <PauseButton className='w-12 h-12' paused={paused} onClick={() => setPaused(prev => !prev)} />
 
-                {/* Combat Speed */}
-                <div className='flex flex-row items-center'>
-                    <h2 className=''>Combat Speed: </h2>
-                    {Object.entries(SPEEDS).map(([key, val], i) =>
-                        <Button
-                            key={key}
-                            className={cn(i === 0 && 'rounded-l-xl', i === Object.values(SPEEDS).length - 1 && 'rounded-r-xl', val === battleSpeed && 'bg-primary/50')}
-                            onClick={() => setBattleSpeed(val)}
-                        >
-                            {key}
-                        </Button>
-                    )}
-                </div>
+                <BattleSpeed speed={battleSpeed} onClick={setBattleSpeed} />
 
                 {/* Auto Start Toggle */}
                 <div className='flex flex-row items-center'>
