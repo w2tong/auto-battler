@@ -1,14 +1,18 @@
 import { Classes, ClassName } from '@wholesome-sisters/auto-battler';
 import { useRef, useState } from 'react';
 import ClassIcon from '@components/ClassIcon';
-import { useCharactersDispatch } from '@contexts/Characters/CharactersContext';
+import { useCharacters, useCharactersDispatch } from '@contexts/Characters/CharactersContext';
 import { classTextColor } from '@utils/classColour';
 
 export default function CharacterCreator() {
+    const characters = useCharacters();
     const charactersDispatch = useCharactersDispatch();
     const [selectedClass, setSelectedClass] = useState<ClassName>(ClassName.Fighter);
     const inputRef = useRef<HTMLInputElement>(null);
 
+    if (characters.list.length >= 10) {
+        return <div>You have reached the maximum number of characters allowed.</div>;
+    }
     return (
         <div className='space-y-4'>
             <h2>Choose a Class</h2>
@@ -42,7 +46,7 @@ export default function CharacterCreator() {
                     <input ref={inputRef} className='border border-white ml-2' type='text' name='name' placeholder='Enter a name' required />
                 </label>
                 <button className='border border-white cursor-pointer' onClick={() => {
-                    if (inputRef.current && inputRef.current.value.length >= 1 && charactersDispatch) {
+                    if (inputRef.current && inputRef.current.value.length >= 1) {
                         charactersDispatch({ type: 'create', name: inputRef.current.value, class: selectedClass });
                     }
                 }}>

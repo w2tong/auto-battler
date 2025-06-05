@@ -5,6 +5,7 @@ import DeleteCharacterDialog from "./DeleteCharacterDialog";
 import { toast } from "sonner";
 import ImportDialog from "./ImportDialog";
 import { validateCharacter } from "../utils/importValidator";
+import { MAX_CHARACTERS } from "@/utils/constants";
 
 export default function AccountCharacterList() {
     const characters = useCharacters();
@@ -16,9 +17,10 @@ export default function AccountCharacterList() {
             const valid = validateCharacter(data);
 
             if (!valid && validateCharacter.errors && validateCharacter.errors.length > 0) {
-                throw (validateCharacter.errors[0].message);
+                throw new Error(validateCharacter.errors[0].message);
             }
             else {
+                if (characters.list.length >= MAX_CHARACTERS) throw new Error('You have reached the maximum number of characters allowed.');
                 dispatch({ type: 'importCharacter', character: data });
                 toast('Character import successful.');
             }
