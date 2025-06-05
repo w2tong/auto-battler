@@ -4,7 +4,6 @@ import BattlePage from './routes/BattlePage';
 import EquipmentPage from './routes/EquipmentPage';
 import Home from './routes/Home';
 import { CharactersProvider } from '@contexts/Characters/CharactersProvider';
-import CreateCharacter from './routes/CreateCharacter';
 import { InventoryProvider } from '@contexts/Inventory/InventoryProvider';
 import BattleSelector from './routes/BattleSelector';
 import Credits from './routes/Credits';
@@ -27,7 +26,6 @@ function App() {
                                     <Route index element={<BattleSelector />} />
                                     <Route path=":level" element={<BattlePage />} />
                                 </Route>
-                                <Route path="create-character" element={<CreateCharacter />} />
                                 <Route path="account" element={<AccountPage />} />
                                 <Route path="credits" element={<Credits />} />
                             </Routes>

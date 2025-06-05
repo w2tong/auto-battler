@@ -6,7 +6,6 @@ const navLinks: { to: string, text: string; }[] = [
     { to: '/', text: 'Home' },
     { to: '/equipment', text: 'Equipment' },
     { to: '/battle', text: 'Battle' },
-    { to: '/create-character', text: 'Create Character' },
     { to: '/account', text: 'Account' },
 ];
 

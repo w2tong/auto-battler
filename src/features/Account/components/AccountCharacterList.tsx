@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import ImportDialog from "./ImportDialog";
 import { validateCharacter } from "../utils/importValidator";
 import { MAX_CHARACTERS } from "@/utils/constants";
+import CreateCharacterDialog from "./CreateCharacterDialog";
 
 export default function AccountCharacterList() {
     const characters = useCharacters();
@@ -39,9 +40,15 @@ export default function AccountCharacterList() {
 
     return (
         <>
-            <ImportDialog title='Import Character' description='Paste your character export string below.' onImport={handleImport}>
-                <Button>Import Character</Button>
-            </ImportDialog>
+            {characters.list.length < MAX_CHARACTERS &&
+                <>
+                    <ImportDialog title='Import Character' description='Paste your character export string below.' onImport={handleImport}>
+                        <Button>Import Character</Button>
+                    </ImportDialog>
+                    <CreateCharacterDialog />
+                </>
+            }
+
             <div>
                 {characters.list.map((char, i) =>
                     <div key={i}>
@@ -51,7 +58,6 @@ export default function AccountCharacterList() {
                     </div>
                 )}
             </div>
-
         </>
     );
 }

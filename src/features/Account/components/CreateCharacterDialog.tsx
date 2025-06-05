@@ -1,0 +1,81 @@
+import { Classes, ClassName } from '@wholesome-sisters/auto-battler';
+import { useRef, useState } from 'react';
+import ClassIcon from '@components/ClassIcon';
+import { useCharactersDispatch } from '@contexts/Characters/CharactersContext';
+import { classTextColor } from '@utils/classColour';
+import Button from '@/components/Button';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
+
+export default function CreateCharacterDialog() {
+    const charactersDispatch = useCharactersDispatch();
+    const [selectedClass, setSelectedClass] = useState<ClassName>(ClassName.Fighter);
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    function handleClick() {
+        if (inputRef.current && inputRef.current.value.length >= 1) {
+            charactersDispatch({ type: 'create', name: inputRef.current.value, class: selectedClass });
+        }
+    }
+
+    const content = (
+        <div className='space-y-4'>
+            <div>
+                <h3>Choose a Class</h3>
+                <div className='flex flex-row justify-center sm:justify-start'>
+                    {Object.values(ClassName).map(charClass =>
+                        <div key={charClass} className='bg-black'>
+                            <button className={`${selectedClass === charClass ? 'opacity-100' : 'opacity-25'} transition duration-250 ease-in-out hover:opacity-100`} key={charClass} onClick={() => setSelectedClass(charClass)}>
+                                <ClassIcon class={charClass} width={64} height={64} />
+                            </button>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            <div>
+                <h3 className={classTextColor[selectedClass]}>{selectedClass}</h3>
+                <div className='text-foreground'>{Classes[selectedClass].description}</div>
+            </div>
+
+            <div>
+                <h3>Ability: {Classes[selectedClass].ability.name}</h3>
+                <div className='font-bold'></div>
+                <div className='text-foreground'>{Classes[selectedClass].ability.description()}</div>
+            </div>
+
+            <div>
+                <h3>Attributes</h3>
+                <div>{Object.entries(Classes[selectedClass].attributes).map(([attr, value]) => <div key={attr}>+{value} <b>{attr}</b></div>)}</div>
+            </div>
+
+            <div className='mt-auto'>
+                <label>
+                    <h3>Name:
+                        <input ref={inputRef} className='border border-white ml-2' type='text' name='name' placeholder='Enter a name' required />
+                    </h3>
+                </label>
+            </div>
+        </div>
+    );
+
+    return (
+        <AlertDialog>
+            <AlertDialogTrigger asChild>
+                <Button>Create Character</Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent className='min-h-170'>
+                <AlertDialogHeader>
+                    <AlertDialogTitle>Create Character</AlertDialogTitle>
+                    <AlertDialogDescription>
+                        Choose a class and a name for your new character.
+                    </AlertDialogDescription>
+                    {content}
+                </AlertDialogHeader>
+                <AlertDialogFooter className='mt-auto'>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction onClick={handleClick}>Create</AlertDialogAction>
+                </AlertDialogFooter>
+            </AlertDialogContent>
+        </AlertDialog>
+    );
+}
