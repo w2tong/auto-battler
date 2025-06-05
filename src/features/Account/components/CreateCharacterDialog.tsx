@@ -5,6 +5,7 @@ import { useCharactersDispatch } from '@contexts/Characters/CharactersContext';
 import { classTextColor } from '@utils/classColour';
 import Button from '@/components/Button';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
+import { Input } from '@/components/ui/input';
 
 export default function CreateCharacterDialog() {
     const charactersDispatch = useCharactersDispatch();
@@ -48,12 +49,9 @@ export default function CreateCharacterDialog() {
                 <div>{Object.entries(Classes[selectedClass].attributes).map(([attr, value]) => <div key={attr}>+{value} <b>{attr}</b></div>)}</div>
             </div>
 
-            <div className='mt-auto'>
-                <label>
-                    <h3>Name:
-                        <input ref={inputRef} className='border border-white ml-2' type='text' name='name' placeholder='Enter a name' required />
-                    </h3>
-                </label>
+            <div className='mt-auto font-bold flex flex-col sm:flex-row items-center'>
+                <label className='text-2xl mr-2' htmlFor='name'>Name</label>
+                <Input className='shrink' id='name' ref={inputRef} type='text' name='name' placeholder='Enter a name' required />
             </div>
         </div>
     );
