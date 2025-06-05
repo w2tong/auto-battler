@@ -2,12 +2,16 @@ import { LocalStorageCharacter, LocalStorageInventory, LocalStorageKey } from "@
 import { EquipSlot, AttributeType, ClassName, PetId, armour, ArmourId, hands, HandsId, heads, HeadId, weapons, WeaponId, shields, ShieldId, potions, PotionId, RingId, rings, waists, WaistId, Attributes, NeckId, necks, equips } from "@wholesome-sisters/auto-battler";
 import Ajv, { JSONSchemaType } from "ajv";
 import ajvErrors from "ajv-errors";
-import { MAX_CHARACTERS } from "@/utils/constants";
+import { MAX_CHARACTERS, NAME_MAX_LENGTH } from "@/utils/constants";
 
 const characterSchema: JSONSchemaType<LocalStorageCharacter> = {
     type: "object",
     properties: {
-        name: { type: "string" },
+        name: {
+            type: "string",
+            maxLength: NAME_MAX_LENGTH,
+            errorMessage: { maxLength: "Character name must be 20 characters or less." }
+        },
         class: { type: "string", enum: Object.values(ClassName) },
         level: { type: "integer", minimum: 1, maximum: 20 },
         exp: { type: "integer", minimum: 0 },

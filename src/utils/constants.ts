@@ -1,3 +1,4 @@
 const MAX_CHARACTERS = 10;
+const NAME_MAX_LENGTH = 20;
 
-export { MAX_CHARACTERS };
+export { MAX_CHARACTERS, NAME_MAX_LENGTH };
