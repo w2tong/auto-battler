@@ -3,10 +3,10 @@ import { useRef, useState } from 'react';
 import ClassIcon from '@components/ClassIcon';
 import { useCharactersDispatch } from '@contexts/Characters/CharactersContext';
 import { classTextColor } from '@utils/classColour';
-import Button from '@/components/Button';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { Input } from '@/components/ui/input';
 import { NAME_MAX_LENGTH } from '@/utils/constants';
+import { Button } from '@/components/ui/button';
 
 export default function CreateCharacterDialog() {
     const charactersDispatch = useCharactersDispatch();

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Button from "@components/Button";
 import { useCharacters } from "@contexts/Characters/CharactersContext";
 import { NavLink } from "react-router";
+import { Button } from "@/components/ui/button";
 
 export default function BattlePage() {
     const { list, selected } = useCharacters();

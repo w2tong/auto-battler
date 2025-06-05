@@ -1,4 +1,3 @@
-import Button from "@/components/Button";
 import { useCharacters, useCharactersDispatch } from "@/contexts/Characters/CharactersContext";
 import { classTextColor } from "@/utils/classColour";
 import DeleteCharacterDialog from "./DeleteCharacterDialog";
@@ -7,6 +6,7 @@ import ImportDialog from "./ImportDialog";
 import { validateCharacter } from "../utils/importValidator";
 import { MAX_CHARACTERS } from "@/utils/constants";
 import CreateCharacterDialog from "./CreateCharacterDialog";
+import { Button } from "@/components/ui/button";
 
 export default function AccountCharacterList() {
     const characters = useCharacters();
@@ -39,25 +39,25 @@ export default function AccountCharacterList() {
     }
 
     return (
-        <>
+        <div className='space-y-4'>
             {characters.list.length < MAX_CHARACTERS &&
-                <>
+                <div className='space-x-1'>
                     <ImportDialog title='Import Character' description='Paste your character export string below.' onImport={handleImport}>
                         <Button>Import Character</Button>
                     </ImportDialog>
                     <CreateCharacterDialog />
-                </>
+                </div>
             }
 
-            <div>
+            <div className='space-y-1'>
                 {characters.list.map((char, i) =>
-                    <div key={i}>
+                    <div className='space-x-1' key={i}>
                         <span className={classTextColor[char.class]}>{char.name}</span>
                         <DeleteCharacterDialog name={char.name} onDelete={() => dispatch({ type: 'delete', index: i })} />
                         <Button onClick={() => exportCharacter(i)}>Export</Button>
                     </div>
                 )}
             </div>
-        </>
+        </div>
     );
 }

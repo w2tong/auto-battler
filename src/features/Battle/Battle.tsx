@@ -3,7 +3,6 @@ import { useCharactersDispatch } from "@contexts/Characters/CharactersContext";
 import BattleDisplay from "./components/BattleDisplay";
 import { AttributeType, Battle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
 import BattleCharacter from "./types/BattleCharacter";
-import Button from "@components/Button";
 import { useInventoryDispatch } from "@contexts/Inventory/InventoryContext";
 import Switch from "@components/Switch";
 import { LocalStorageCharacter, LocalStorageKey } from "../../types/LocalStorage";
@@ -11,6 +10,7 @@ import { cn } from "@utils/utils";
 import { BuffBar, DebuffBar } from "../../types/StatusEffectBar";
 import PauseButton from "./components/PauseButton";
 import { useInterval, useLocalStorage } from "usehooks-ts";
+import { Button } from "@/components/ui/button";
 
 const DEFAULT_DELAY = 1000;
 const SPEEDS = {
@@ -136,7 +136,7 @@ export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsCha
                     {Object.entries(SPEEDS).map(([key, val], i) =>
                         <Button
                             key={key}
-                            className={cn(i === 0 && 'rounded-l-xl', i === Object.values(SPEEDS).length - 1 && 'rounded-r-xl', val === battleSpeed && 'bg-button-hover')}
+                            className={cn(i === 0 && 'rounded-l-xl', i === Object.values(SPEEDS).length - 1 && 'rounded-r-xl', val === battleSpeed && 'bg-primary/50')}
                             onClick={() => setBattleSpeed(val)}
                         >
                             {key}
