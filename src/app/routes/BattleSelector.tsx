@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useCharacters } from "@contexts/Characters/CharactersContext";
 import { NavLink } from "react-router";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export default function BattlePage() {
     const { list, selected } = useCharacters();
@@ -21,11 +22,14 @@ export default function BattlePage() {
     return (
         <div className='flex flex-col'>
             <h1>Battle</h1>
-            <div>
-                <NavLink to={`/battle/${levelInput}`}>
-                    <Button>Normal Encounter</Button>
+            <div className='w-80 flex flex-row items-center space-x-2'>
+                <NavLink className='grow' to={`/battle/${levelInput}`}>
+                    <Button className='w-full'>Normal Encounter</Button>
                 </NavLink>
-                <input
+                <label htmlFor='normal-level'>Level</label>
+                <Input
+                    id='normal-level'
+                    className='w-16'
                     type='number'
                     value={levelInput}
                     min={1}
@@ -33,7 +37,7 @@ export default function BattlePage() {
                     onChange={handleLevelInputChange}
                 />
             </div>
-            <Button disabled>Boss Encounter</Button>
-        </div>
+            <Button className='w-80' disabled>Boss Encounter</Button>
+        </div >
     );
 }
