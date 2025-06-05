@@ -46,7 +46,7 @@ export default function AccountImportExport() {
     }
 
     return (
-        <div className='space-x-1'>
+        <div className='flex flex-col sm:flex-row space-y-1 sm:space-x-1'>
             <ImportDialog title='Import Account' description='Paste your account export string below.' warning='This will overwrite your current account data.' onImport={handleImport}>
                 <Button>Import Account</Button>
             </ImportDialog>

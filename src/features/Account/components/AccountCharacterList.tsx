@@ -7,6 +7,7 @@ import { validateCharacter } from "../utils/importValidator";
 import { MAX_CHARACTERS } from "@/utils/constants";
 import CreateCharacterDialog from "./CreateCharacterDialog";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/utils/utils";
 
 export default function AccountCharacterList() {
     const characters = useCharacters();
@@ -41,7 +42,7 @@ export default function AccountCharacterList() {
     return (
         <div className='space-y-4'>
             {characters.list.length < MAX_CHARACTERS &&
-                <div className='space-x-1'>
+                <div className='flex flex-col sm:flex-row space-y-1 sm:space-x-1'>
                     <ImportDialog title='Import Character' description='Paste your character export string below.' onImport={handleImport}>
                         <Button>Import Character</Button>
                     </ImportDialog>
@@ -49,10 +50,10 @@ export default function AccountCharacterList() {
                 </div>
             }
 
-            <div className='space-y-1'>
+            <div className='space-y-4'>
                 {characters.list.map((char, i) =>
-                    <div className='space-x-1' key={i}>
-                        <span className={classTextColor[char.class]}>{char.name}</span>
+                    <div className='flex flex-col sm:flex-row sm:space-x-1' key={i}>
+                        <span className={cn('inline-block text-lg font-bold max-w-68 flex-1 truncate', classTextColor[char.class])}>Lvl. {char.level} - {char.name}</span>
                         <DeleteCharacterDialog name={char.name} onDelete={() => dispatch({ type: 'delete', index: i })} />
                         <Button onClick={() => exportCharacter(i)}>Export</Button>
                     </div>
