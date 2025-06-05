@@ -12,7 +12,7 @@ export default function ImportAlertDialog({ name, onDelete }: ImportAlertDialog)
                 <AlertDialogHeader>
                     <AlertDialogTitle>Delete {name}?</AlertDialogTitle>
                     <AlertDialogDescription>
-                        Are you sure you want to delete {name}?
+                        Are you sure you want to delete {name}? This action cannot be undone.
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
