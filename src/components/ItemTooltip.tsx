@@ -3,6 +3,7 @@ import { tierTextColor } from "@utils/tierColor";
 import { ReactNode } from "react";
 import Tooltip from "./Tooltip";
 import { formatItemStat, formatNum } from "@utils/stats";
+import { Separator } from "@components/ui/separator";
 
 function ItemTooltip({ children, item, display = true }: { children: ReactNode, item: Item, display?: boolean; }) {
     const itemContent = getItemContent(item);
@@ -56,7 +57,16 @@ const itemTypeContentMap: Record<ItemType, (item: Item) => ReactNode> = {
         return (
             <>
                 <div>{weapon.attackType}</div>
-                <div>{weapon.type}, {twoHanded ? 'Two-handed' : 'One-handed'}{light ? ', Light' : ''}</div>
+                <div className='flex flex-row h-4 space-x-1.5 items-center mt-1 mb-2'>
+                    <span className='inline-flex'>{weapon.type}</span>
+                    <Separator orientation='vertical' />
+                    <span>{twoHanded ? 'Two-handed' : 'One-handed'}</span>
+                    {light && <>
+                        <Separator orientation='vertical' />
+                        <span>Light</span>
+                    </>}
+                </div>
+                <Separator className='my-1' />
                 <div>
                     <span className='font-bold'>{min + bonus} - {max + bonus}</span>{weapon.spellPowerRatio && <span className='font-bold text-tooltip-highlight'> (+{formatNum(weapon.spellPowerRatio * 100)}% SP)</span>} damage
                 </div>
@@ -71,6 +81,7 @@ const itemTypeContentMap: Record<ItemType, (item: Item) => ReactNode> = {
         return (
             <>
                 <div>{shield.type} {ItemType.Shield}</div>
+                <Separator className='my-1' />
                 {createAttributes(shield.attributes)}
                 {createStats(shield.stats)}
             </>
@@ -81,6 +92,7 @@ const itemTypeContentMap: Record<ItemType, (item: Item) => ReactNode> = {
         return (
             <>
                 <div>{armour.type}</div>
+                <Separator className='my-1' />
                 {armour.onHit ? <div>On Hit: {armour.onHit.description}</div> : null}
                 {createAttributes(armour.attributes)}
                 {createStats(armour.stats)}
@@ -92,6 +104,7 @@ const itemTypeContentMap: Record<ItemType, (item: Item) => ReactNode> = {
         return (
             <>
                 <div>{ItemType.Head}</div>
+                <Separator className='my-1' />
                 {createAttributes(head.attributes)}
                 {createStats(head.stats)}
             </>
@@ -103,6 +116,7 @@ const itemTypeContentMap: Record<ItemType, (item: Item) => ReactNode> = {
             <>
                 <div>{ItemType.Hands}</div>
                 {hands.weaponStyle ? <div>{hands.weaponStyle} Style</div> : null}
+                <Separator className='my-1' />
                 {createAttributes(hands.attributes)}
                 {createStats(hands.stats)}
             </>
@@ -113,6 +127,7 @@ const itemTypeContentMap: Record<ItemType, (item: Item) => ReactNode> = {
         return (
             <>
                 <div>{ItemType.Ring}</div>
+                <Separator className='my-1' />
                 {createAttributes(ring.attributes)}
                 {createStats(ring.stats)}
             </>
@@ -123,6 +138,7 @@ const itemTypeContentMap: Record<ItemType, (item: Item) => ReactNode> = {
         return (
             <>
                 <div>{ItemType.Potion}</div>
+                <Separator className='my-1' />
                 <div>{potion.charges} Charge{potion.charges > 1 ? 's' : ''}</div>
                 {potion.onUse ? <div>On Use: {potion.onUse.description}</div> : null}
             </>
@@ -133,6 +149,7 @@ const itemTypeContentMap: Record<ItemType, (item: Item) => ReactNode> = {
         return (
             <>
                 <div>{ItemType.Waist}</div>
+                <Separator className='my-1' />
                 {createAttributes(waist.attributes)}
                 {createStats(waist.stats)}
             </>
@@ -143,7 +160,9 @@ const itemTypeContentMap: Record<ItemType, (item: Item) => ReactNode> = {
         return (
             <>
                 <div>{ItemType.Neck}</div>
+                <Separator className='my-1' />
                 {createAttributes(neck.attributes)}
+                {createStats(neck.stats)}
             </>
         );
     },
