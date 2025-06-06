@@ -46,7 +46,7 @@ export default function ItemSlot({ id, itemId, filtered, slot, onRightClick }: {
     return (
         <div
             style={{ backgroundImage: `url(${slot ? icons[slot] : inventorySlot})` }}
-            className={`w-[36px] h-[36px] lg:w-[52px] lg:h-[52px] xl:w-[68px] xl:h-[68px] border-2 rounded-sm bg-center bg-no-repeat ${borderColor}`}
+            className={`bg-cover w-[36px] h-[36px] lg:w-[52px] lg:h-[52px] xl:w-[68px] xl:h-[68px] border-2 rounded-sm bg-center bg-no-repeat ${borderColor}`}
             ref={setNodeRef}
             onContextMenu={onRightClick}
         >
