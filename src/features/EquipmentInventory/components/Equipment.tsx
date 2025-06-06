@@ -7,7 +7,7 @@ export default function Equipment({ equipment, className }: { equipment: { [slot
         <div className={cn(className)}>
             <h2 className='py-1'>Equipment</h2>
             <div className='flex-col'>
-                <div className='flex flex-row'>
+                <div className='flex flex-row justify-center'>
                     <div className='flex-col'>
                         <ItemSlot id={EquipSlot.Head} itemId={equipment[EquipSlot.Head]} filtered={false} slot={EquipSlot.Head} />
                         <ItemSlot id={EquipSlot.Armour} itemId={equipment[EquipSlot.Armour]} filtered={false} slot={EquipSlot.Armour} />
@@ -15,7 +15,7 @@ export default function Equipment({ equipment, className }: { equipment: { [slot
                         <ItemSlot id={EquipSlot.Waist} itemId={equipment[EquipSlot.Waist]} filtered={false} slot={EquipSlot.Waist} />
                     </div>
 
-                    <div className='w-[136px] h-[272px] bg-secondary' >Character goes here</div>
+                    {/* <div className='w-[136px] h-[272px] bg-secondary' >Character goes here</div> */}
 
                     <div className='flex-col'>
                         <ItemSlot id={EquipSlot.Neck} itemId={equipment[EquipSlot.Neck]} filtered={false} slot={EquipSlot.Neck} />

@@ -53,7 +53,13 @@ export default function Inventory({ items, sort, sortOnChange, className, onItem
     return (
         <div className={cn('flex flex-col', className)}>
             <div>
-                <h2 className='py-1'>Inventory</h2>
+                <div className='flex flex-row'>
+                    <h2 className='py-1'>Inventory</h2>
+                    <div className='flex flex-row items-center'>
+                        <span>Delete Mode<InfoTooltip content={'Enables deleting items from your Inventory with right click.'} />:</span>
+                        <Switch checked={sellMode} onChange={setSellMode} className='ml-2' />
+                    </div>
+                </div>
                 <div className='flex flex-row py-1 items-end space-x-2'>
                     <SelectMenu options={tierOptions} onChange={updateTier} id='tier' label='Filter by Tier' value={tierFilter} />
                     <SelectMenu options={typeOptions} onChange={updateType} id='type' label='Filter by Type' value={typeFilter} />
@@ -71,10 +77,7 @@ export default function Inventory({ items, sort, sortOnChange, className, onItem
                         placeholder='Filter By Name'
                         onChange={e => setNameFilter(e.target.value)}
                     />
-                    <div className='flex flex-row items-center'>
-                        <span>Delete Mode<InfoTooltip content={'Enables deleting items from your Inventory with right click.'} />:</span>
-                        <Switch checked={sellMode} onChange={setSellMode} className='ml-2' />
-                    </div>
+
                 </div>
             </div>
 

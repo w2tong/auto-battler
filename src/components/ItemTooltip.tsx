@@ -5,7 +5,7 @@ import Tooltip from "./Tooltip";
 import { formatItemStat, formatNum } from "@utils/stats";
 import { Separator } from "@components/ui/separator";
 
-function ItemTooltip({ children, item, display = true }: { children: ReactNode, item: Item, display?: boolean; }) {
+function ItemTooltip({ children, item, display = true, className }: { children: ReactNode, item: Item, display?: boolean, className?: string; }) {
     const itemContent = getItemContent(item);
     const content =
         <div className='whitespace-nowrap'>
@@ -14,7 +14,7 @@ function ItemTooltip({ children, item, display = true }: { children: ReactNode, 
         </div>;
 
     return (
-        <Tooltip content={content} display={display}>
+        <Tooltip content={content} display={display} className={className}>
             {children}
         </Tooltip>
     );

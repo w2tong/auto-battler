@@ -17,7 +17,7 @@ export default function DraggableItem({ id, itemId, filtered }: { id: string, it
     };
 
     return (
-        <div ref={setNodeRef} {...listeners} {...attributes} style={style}>
+        <div className='w-full h-full' ref={setNodeRef} {...listeners} {...attributes} style={style}>
             <Item itemId={itemId} filtered={filtered} dragging={dragging} />
         </div>
     );
