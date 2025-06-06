@@ -56,13 +56,13 @@ export default function Inventory({ items, sort, sortOnChange, className, onItem
                 <div className='flex flex-row'>
                     <h2 className='py-1'>Inventory</h2>
                     <div className='flex flex-row items-center'>
-                        <span>Delete Mode<InfoTooltip content={'Enables deleting items from your Inventory with right click.'} />:</span>
+                        <span>Delete Mode <InfoTooltip content={'Enables deleting items from your Inventory with right click.'} /></span>
                         <Switch checked={sellMode} onChange={setSellMode} className='ml-2' />
                     </div>
                 </div>
-                <div className='flex flex-row py-1 items-end space-x-2'>
-                    <SelectMenu options={tierOptions} onChange={updateTier} id='tier' label='Filter by Tier' value={tierFilter} />
-                    <SelectMenu options={typeOptions} onChange={updateType} id='type' label='Filter by Type' value={typeFilter} />
+                <div className='flex flex-row py-1 items-end space-x-2 text-sm'>
+                    <SelectMenu options={tierOptions} onChange={updateTier} id='tier' label='Tier Filter' value={tierFilter} />
+                    <SelectMenu options={typeOptions} onChange={updateType} id='type' label='Type Filter' value={typeFilter} />
                     <div className='flex flex-col'>
                         <label htmlFor='sort'>Sort by</label>
                         <select className='border border-white' id='sort' value={sort} onChange={e => sortOnChange(e.target.value)}>
