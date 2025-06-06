@@ -36,7 +36,7 @@ export default function ItemSlot({ id, itemId, filtered, slot, onRightClick }: {
     if (isOver && over && active?.data.current?.itemId) {
         const activeItemId = active.data.current.itemId;
         if (isNaN(parseInt(over.id.toString()))) {
-            borderColor = isValidEquip(activeItemId, over.id as EquipSlot) ? 'border-green-700' : 'border-red-700';
+            borderColor = isValidEquip(activeItemId, over.id as EquipSlot) ? 'border-positive' : 'border-negative';
         }
         else {
             borderColor = 'border-white';
