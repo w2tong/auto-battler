@@ -30,7 +30,7 @@ export default function EquipmentPage() {
             <div className='flex flex-row'>
                 <h1>Character Page</h1>
             </div>
-            <div className='flex flex-row space-x-4'>
+            <div className='flex flex-col space-x-4'>
                 <EquipmentInventory />
                 <CharacterSheet char={char} exp={selectedChar.exp} />
             </div>
