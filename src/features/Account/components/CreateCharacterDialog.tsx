@@ -1,4 +1,4 @@
-import { Classes, ClassName } from '@wholesome-sisters/auto-battler';
+import { classes, ClassName } from '@wholesome-sisters/auto-battler';
 import { useRef, useState } from 'react';
 import ClassIcon from '@components/ClassIcon';
 import { useCharactersDispatch } from '@contexts/Characters/CharactersContext';
@@ -10,12 +10,13 @@ import { Button } from '@/components/ui/button';
 
 export default function CreateCharacterDialog() {
     const charactersDispatch = useCharactersDispatch();
-    const [selectedClass, setSelectedClass] = useState<ClassName>(ClassName.Fighter);
+    const [selectedClassName, setSelectedClassName] = useState<ClassName>(ClassName.Fighter);
     const inputRef = useRef<HTMLInputElement>(null);
+    const selectedClass = classes[selectedClassName];
 
     function handleClick() {
         if (inputRef.current && inputRef.current.value.length >= 1) {
-            charactersDispatch({ type: 'create', name: inputRef.current.value, class: selectedClass });
+            charactersDispatch({ type: 'create', name: inputRef.current.value, class: selectedClassName });
         }
     }
 
@@ -26,7 +27,7 @@ export default function CreateCharacterDialog() {
                 <div className='flex flex-row justify-center sm:justify-start'>
                     {Object.values(ClassName).map(charClass =>
                         <div key={charClass} className='bg-black'>
-                            <button className={`${selectedClass === charClass ? 'opacity-100' : 'opacity-25'} transition duration-250 ease-in-out hover:opacity-100`} key={charClass} onClick={() => setSelectedClass(charClass)}>
+                            <button className={`${selectedClassName === charClass ? 'opacity-100' : 'opacity-25'} transition duration-250 ease-in-out hover:opacity-100`} key={charClass} onClick={() => setSelectedClassName(charClass)}>
                                 <ClassIcon class={charClass} width={64} height={64} />
                             </button>
                         </div>
@@ -35,19 +36,25 @@ export default function CreateCharacterDialog() {
             </div>
 
             <div>
-                <h3 className={classTextColor[selectedClass]}>{selectedClass}</h3>
-                <div className='text-foreground'>{Classes[selectedClass].description}</div>
+                <h3 className={classTextColor[selectedClassName]}>{selectedClassName}</h3>
+                <div className='text-foreground'>{selectedClass.description}</div>
             </div>
 
             <div>
-                <h3>Ability: {Classes[selectedClass].ability.name}</h3>
-                <div className='font-bold'></div>
-                <div className='text-foreground'>{Classes[selectedClass].ability.description()}</div>
+                <h3 className={classTextColor[selectedClassName]}>Abilities</h3>
+                <ul className='space-y-1'>
+                    {selectedClass.abilities.map(ability =>
+                        <li key={ability.name}>
+                            <h4>{ability.name}</h4>
+                            <div className='text-foreground'>{ability.description()}</div>
+                        </li>
+                    )}
+                </ul>
             </div>
 
             <div>
-                <h3>Attributes</h3>
-                <div>{Object.entries(Classes[selectedClass].attributes).map(([attr, value]) => <div key={attr}>+{value} <b>{attr}</b></div>)}</div>
+                <h3 className={classTextColor[selectedClassName]}>Attributes</h3>
+                <div>{Object.entries(selectedClass.attributes).map(([attr, value]) => <div key={attr}>+{value} <b>{attr}</b></div>)}</div>
             </div>
 
             <div className='mt-auto font-bold flex flex-col sm:flex-row items-center'>
