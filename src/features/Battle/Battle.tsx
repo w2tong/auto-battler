@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useCharactersDispatch } from "@contexts/Characters/CharactersContext";
 import BattleDisplay from "./components/BattleDisplay";
-import { AttributeType, Battle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
+import { abilities, AttributeType, Battle as AutoBattle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
 import BattleCharacter from "./types/BattleCharacter";
 import { useInventoryDispatch } from "@contexts/Inventory/InventoryContext";
 import Switch from "@components/Switch";
@@ -15,7 +15,7 @@ import BattleSpeed from "./components/BattleSpeed";
 
 const DEFAULT_DELAY = 1000;
 
-export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsChar: LocalStorageCharacter, index: number, encounterLevel: LevelRange; }) {
+export default function Battle({ lsChar, index, encounterLevel }: { lsChar: LocalStorageCharacter, index: number, encounterLevel: LevelRange; }) {
     const characterDispatch = useCharactersDispatch();
     const inventoryDispatch = useInventoryDispatch();
 
@@ -31,7 +31,7 @@ export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsCha
     const [_turn, setTurn] = useState(-1);
 
     // Use a ref to hold the mutable battle instance
-    const battleRef = useRef<Battle | null>(null);
+    const battleRef = useRef<AutoBattle | null>(null);
     const playerLevelRef = useRef<LevelRange>(lsChar.level as LevelRange);
 
     // Initialize battle on load
@@ -46,7 +46,7 @@ export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsCha
             ability: startingAbility[lsChar.class],
             petId: lsChar.pet ?? undefined
         });
-        battleRef.current = new Battle([char], getRandomEncounter(encounterLevel));
+        battleRef.current = new AutoBattle([char], getRandomEncounter(encounterLevel));
         setTurn(t => t + 1);
         setCombat('before');
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -61,10 +61,10 @@ export default function BattleWrapper({ lsChar, index, encounterLevel }: { lsCha
             attributes: lsChar.attributes,
             statTemplate: {},
             equipment: createEquipmentImport(lsChar.equipment),
-            ability: startingAbility[lsChar.class],
+            ability: abilities[lsChar.ability],
             petId: lsChar.pet ?? undefined
         });
-        battleRef.current = new Battle([char], getRandomEncounter(encounterLevel));
+        battleRef.current = new AutoBattle([char], getRandomEncounter(encounterLevel));
         setTurn(t => t + 1);
         setCombat('before');
     }

@@ -1,5 +1,5 @@
 import { LocalStorageCharacter, LocalStorageInventory, LocalStorageKey } from "@/types/LocalStorage";
-import { EquipSlot, AttributeType, ClassName, PetId, armour, ArmourId, hands, HandsId, heads, HeadId, weapons, WeaponId, shields, ShieldId, potions, PotionId, RingId, rings, waists, WaistId, Attributes, NeckId, necks, equips } from "@wholesome-sisters/auto-battler";
+import { EquipSlot, AttributeType, ClassName, PetId, armour, ArmourId, hands, HandsId, heads, HeadId, weapons, WeaponId, shields, ShieldId, potions, PotionId, RingId, rings, waists, WaistId, Attributes, NeckId, necks, equips, AbilityId } from "@wholesome-sisters/auto-battler";
 import Ajv, { JSONSchemaType } from "ajv";
 import ajvErrors from "ajv-errors";
 import { MAX_CHARACTERS, NAME_MAX_LENGTH } from "@/utils/constants";
@@ -151,6 +151,10 @@ const characterSchema: JSONSchemaType<LocalStorageCharacter> = {
                 }
             },
         },
+        ability: {
+            type: "string",
+            enum: [...Object.values(AbilityId)]
+        },
         pet: {
             type: "string",
             enum: [...Object.values(PetId), null],
@@ -169,6 +173,7 @@ const characterSchema: JSONSchemaType<LocalStorageCharacter> = {
         "exp",
         "equipment",
         "attributes",
+        "ability",
         "pet",
         "talents"
     ],
@@ -181,6 +186,7 @@ const characterSchema: JSONSchemaType<LocalStorageCharacter> = {
             exp: "Experience points must be a non-negative integer.",
             equipment: "Invalid equipment data.",
             attributes: "Invalid attributes data.",
+            ability: "Invalid ability ID.",
             pet: "Invalid pet ID.",
             talents: "Invalid talents data."
         }
