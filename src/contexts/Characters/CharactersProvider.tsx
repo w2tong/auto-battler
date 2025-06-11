@@ -79,7 +79,8 @@ function charactersReducer(characters: LocalStorageCharacters, action: Action): 
                         attributes: {
                             ...c.attributes,
                             ...action.attributes
-                        }
+                        },
+                        ability: action.ability ?? c.ability
                     },
                     ...list.slice(action.index + 1)
                 ]

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useCharactersDispatch } from "@contexts/Characters/CharactersContext";
 import BattleDisplay from "./components/BattleDisplay";
-import { abilities, AttributeType, Battle as AutoBattle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, startingAbility, StatType } from "@wholesome-sisters/auto-battler";
+import { abilities, AttributeType, Battle as AutoBattle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, StatType } from "@wholesome-sisters/auto-battler";
 import BattleCharacter from "./types/BattleCharacter";
 import { useInventoryDispatch } from "@contexts/Inventory/InventoryContext";
 import Switch from "@components/Switch";
@@ -43,7 +43,7 @@ export default function Battle({ lsChar, index, encounterLevel }: { lsChar: Loca
             attributes: lsChar.attributes,
             statTemplate: {},
             equipment: createEquipmentImport(lsChar.equipment),
-            ability: startingAbility[lsChar.class],
+            ability: abilities[lsChar.ability],
             petId: lsChar.pet ?? undefined
         });
         battleRef.current = new AutoBattle([char], getRandomEncounter(encounterLevel));

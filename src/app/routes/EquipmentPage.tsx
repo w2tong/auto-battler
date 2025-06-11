@@ -1,4 +1,4 @@
-import { Character, createEquipmentImport, startingAbility } from "@wholesome-sisters/auto-battler";
+import { abilities, Character, createEquipmentImport } from "@wholesome-sisters/auto-battler";
 import CharacterSheet from "@features/CharacterSheet/CharacterSheet";
 import { useCharacters } from "@contexts/Characters/CharactersContext";
 import EquipmentInventory from "@features/EquipmentInventory/EquipmentInventory";
@@ -22,7 +22,7 @@ export default function EquipmentPage() {
         attributes: selectedChar.attributes,
         statTemplate: {},
         equipment: createEquipmentImport(selectedChar.equipment),
-        ability: startingAbility[selectedChar.class]
+        ability: abilities[selectedChar.ability]
     });
 
     return (

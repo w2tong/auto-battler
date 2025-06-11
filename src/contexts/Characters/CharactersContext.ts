@@ -1,4 +1,4 @@
-import { ClassName, EquipSlot, AttributeType, NeckId, ArmourId, HandsId, HeadId, PotionId, RingId, ShieldId, WaistId, WeaponId } from "@wholesome-sisters/auto-battler";
+import { ClassName, EquipSlot, AttributeType, NeckId, ArmourId, HandsId, HeadId, PotionId, RingId, ShieldId, WaistId, WeaponId, AbilityId } from "@wholesome-sisters/auto-battler";
 import { createContext, Dispatch, SetStateAction, useContext } from "react";
 import { LocalStorageCharacter, LocalStorageCharacters } from "../../types/LocalStorage";
 
@@ -18,7 +18,7 @@ export type ActionUpdateEquipment = {
 export type Action =
     { type: 'create', name: string, class: ClassName; } |
     // TODO: make new types in LocalStorage and import them here for equipment and attributes
-    { type: 'update', index: number, name?: string, level?: number, exp?: number, equipment?: ActionUpdateEquipment, attributes?: { [key in AttributeType]?: number }; } |
+    { type: 'update', index: number, name?: string, level?: number, exp?: number, equipment?: ActionUpdateEquipment, attributes?: { [key in AttributeType]?: number }, ability?: AbilityId; } |
     { type: 'swapEquipment'; index: number, slot1: EquipSlot, slot2: EquipSlot; } |
     { type: 'delete', index: number; } |
     { type: 'select', index: number; } |

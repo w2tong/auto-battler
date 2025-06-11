@@ -5,6 +5,7 @@ import CharacterSheetStats from "./components/CharacterSheetStats";
 import CharacterSheetAbility from "./components/CharacterSheetAbility";
 import CharacterSheetPotion from "./components/CharacterScreenPotion";
 import { classTextColor } from "../../utils/classColour";
+import AbilitySelector from "./components/AbilitySelector";
 
 export default function CharacterSheet(
     { char, exp }: { char: Character, exp: number; }
@@ -66,8 +67,6 @@ export default function CharacterSheet(
             <div>Level {char.level} <b className={classColor}>{char.className}</b></div>
             <div>{exp}/{levelExp[char.level as LevelRange]} <b>Experience</b></div>
 
-            <br />
-
             <div className='flex flex-row space-x-10'>
                 <CharacterSheetAttributes level={char.level as LevelRange} attributes={{
                     [AttributeType.Strength]: { base: str.base, bonus: str.bonus },
@@ -128,8 +127,9 @@ export default function CharacterSheet(
                 }} />
             </div>
 
-            <br />
+            {char.className && <AbilitySelector char={char} className={char.className} />}
 
+            {/* Weapons */}
             <div>
                 <h3>Weapons</h3>
                 <div className='flex flex-row space-x-2'>
