@@ -11,6 +11,10 @@ import burningIconUrl from '@assets/icons/status-effects/burning.svg';
 import frozenIconUrl from '@assets/icons/status-effects/frozen.svg';
 import invisibleIconUrl from '@assets/icons/status-effects/invisible.svg';
 import poisonedIconUrl from '@assets/icons/status-effects/poisoned.svg';
+import envemomWeaponIconUrl from '@assets/icons/status-effects/envenom-weapon.svg';
+import shieldWallIconUrl from '@assets/icons/status-effects/shield-wall.svg';
+import stunnedIconUrl from '@assets/icons/status-effects/stunned.svg';
+import smoteIconUrl from '@assets/icons/status-effects/smote.svg';
 
 
 import robeArmourIconUrl from '@assets/icons/items/armour/robe.svg';
@@ -67,7 +71,8 @@ const licenses: Record<string, License> = {
 };
 
 type Artist = { name: string, link: string; };
-const artists: Record<string, Artist> = {
+type ArtistId = 'Lorc' | 'Delapouite' | 'CarlOlsen' | 'Willdabeast' | 'JohnRedman' | 'HeavenlyDog';
+const artists: Record<ArtistId, Artist> = {
     Lorc: {
         name: 'Lorc',
         link: 'https://lorcblog.blogspot.com/'
@@ -87,8 +92,12 @@ const artists: Record<string, Artist> = {
     JohnRedman: {
         name: 'John Redman',
         link: 'http://www.uniquedicetowers.com/'
-    }
-};
+    },
+    HeavenlyDog: {
+        name: 'HeavenlyDog',
+        link: 'https://gnomosygoblins.blogspot.com/'
+    },
+} as const;
 
 // Classes
 const classes: CreditProps[] = [
@@ -182,6 +191,38 @@ const statusEffects: CreditProps[] = [
         alt: 'Poisoned icon',
         imgName: 'Poison bottle',
         imgLink: 'https://game-icons.net/1x1/lorc/poison-bottle.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: envemomWeaponIconUrl,
+        alt: 'Envenom Weapon icon',
+        imgName: 'Machete',
+        imgLink: 'https://game-icons.net/1x1/lorc/machete.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: shieldWallIconUrl,
+        alt: 'Shield Wall icon',
+        imgName: 'Defensive wall',
+        imgLink: 'https://game-icons.net/1x1/heavenly-dog/defensive-wall.html',
+        artist: artists.HeavenlyDog,
+        license: licenses.CCBY30
+    },
+    {
+        src: stunnedIconUrl,
+        alt: 'Stunned icon',
+        imgName: 'Star swirl',
+        imgLink: 'https://game-icons.net/1x1/lorc/star-swirl.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: smoteIconUrl,
+        alt: 'Smote icon',
+        imgName: 'Thunder struck',
+        imgLink: 'https://game-icons.net/1x1/lorc/thunder-struck.html',
         artist: artists.Lorc,
         license: licenses.CCBY30
     },

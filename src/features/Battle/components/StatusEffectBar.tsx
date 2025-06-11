@@ -1,4 +1,4 @@
-import { Bleeding, Blessed, Buff, BuffId, Burning, Debuff, DebuffId, Invisible, Poisoned, StatType } from "@wholesome-sisters/auto-battler";
+import { Bleeding, Blessed, Buff, BuffId, Burning, Debuff, DebuffId, EnvenomWeapon, Invisible, Poisoned, ShieldWall, Smote, StatType } from "@wholesome-sisters/auto-battler";
 import Icon from "../../../types/Icon";
 import { buffIconMap, debuffIconMap } from "@utils/statusEffectIcon";
 import { BuffBar, DebuffBar } from "../../../types/StatusEffectBar";
@@ -14,10 +14,19 @@ const buffDescriptions: Record<BuffId, (buff: Buff) => string> = {
         const damage = formatNum(blessed.stats[StatType.Damage] ?? 0);
         return `Increases Accuracy by ${accuracy} and Damage by ${damage}.`;
     },
+    [BuffId.EnvenomWeapon]: (buff: Buff) => {
+        return `Your next ${buff.stacks} hits applies ${EnvenomWeapon.POISONED_STACKS} ${Poisoned.name}`;
+    },
     [BuffId.Invisible]: (buff: Buff) => {
         const damage = formatNum(buff.stacks * Invisible.damage);
         return `Cannot be attacked while Invisible. Next attack deal +${damage} extra damage.`;
     },
+    [BuffId.ShieldWall]: (buff: Buff) => {
+        const shieldWall = buff as ShieldWall;
+        const blockChance = formatNum(shieldWall.stats[StatType.BlockChance] ?? 0);
+        const thorns = formatNum(shieldWall.stats[StatType.Thorns] ?? 0);
+        return `Increases Block Chance by ${blockChance}% and Thorns by ${thorns}.`;
+    }
 };
 const debuffDescriptions: Record<DebuffId, (debuff: Debuff) => string> = {
     [DebuffId.Bleeding]: (debuff: Debuff) => {
@@ -28,11 +37,18 @@ const debuffDescriptions: Record<DebuffId, (debuff: Debuff) => string> = {
         const damage = formatNum((debuff as Burning).getDamageTaken());
         return `Deals ${damage} damage on end of turn.`;
     },
-    [DebuffId.Frozen]: () => 'Prevents character from performing actions.',
+    [DebuffId.Frozen]: () => 'Skips turn.',
     [DebuffId.Poisoned]: (debuff: Debuff) => {
         const damage = formatNum((debuff as Poisoned).getDamageTaken());
         return `Deals ${damage} damage on end of turn.`;
     },
+    [DebuffId.Smote]: (debuff: Debuff) => {
+        const smote = debuff as Smote;
+        const accuracy = formatNum(smote.stats[StatType.Accuracy] ?? 0);
+        const damage = formatNum(smote.stats[StatType.Damage] ?? 0);
+        return `Reduces Accuracy by ${-accuracy} and Damage by ${-damage}.`;
+    },
+    [DebuffId.Stunned]: () => 'Skips turn.',
 };
 
 // TODO: scale image/text based via media queries
