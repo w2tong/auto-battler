@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import ItemSlot from './ItemSlot';
-import { ItemType, equips } from '@wholesome-sisters/auto-battler';
+import { ItemId, ItemType, equips } from '@wholesome-sisters/auto-battler';
 import SelectMenu from './SelectMenu';
 import { cn } from '@utils/utils';
 import Switch from '@components/Switch';
 import InfoTooltip from '@components/InfoTooltip';
 import { useDebounceValue } from 'usehooks-ts';
+import { Input } from '@/components/ui/input';
 
 const tierOptions = [
     { value: '0', text: 'Tier 0' },
@@ -52,10 +53,16 @@ export default function Inventory({ items, sort, sortOnChange, className, onItem
     return (
         <div className={cn('flex flex-col', className)}>
             <div>
-                <h2 className='py-1'>Inventory</h2>
-                <div className='flex flex-row py-1 items-center'>
-                    <SelectMenu options={tierOptions} onChange={updateTier} id='tier' label='Filter by Tier' value={tierFilter} />
-                    <SelectMenu options={typeOptions} onChange={updateType} id='type' label='Filter by Type' value={typeFilter} />
+                <div className='flex flex-row'>
+                    <h2 className='py-1'>Inventory</h2>
+                    <div className='flex flex-row items-center'>
+                        <span>Delete Mode <InfoTooltip content={'Enables deleting items from your Inventory with right click.'} /></span>
+                        <Switch checked={sellMode} onChange={setSellMode} className='ml-2' />
+                    </div>
+                </div>
+                <div className='flex flex-row py-1 items-end space-x-2 text-sm'>
+                    <SelectMenu options={tierOptions} onChange={updateTier} id='tier' label='Tier Filter' value={tierFilter} />
+                    <SelectMenu options={typeOptions} onChange={updateType} id='type' label='Type Filter' value={typeFilter} />
                     <div className='flex flex-col'>
                         <label htmlFor='sort'>Sort by</label>
                         <select className='border border-white' id='sort' value={sort} onChange={e => sortOnChange(e.target.value)}>
@@ -64,16 +71,13 @@ export default function Inventory({ items, sort, sortOnChange, className, onItem
                             )}
                         </select>
                     </div>
-                    <input
-                        className='border border-white p-2'
+                    <Input
+                        className='min-w-30 max-w-48'
                         type='text'
                         placeholder='Filter By Name'
                         onChange={e => setNameFilter(e.target.value)}
                     />
-                    <div className='flex flex-row items-center'>
-                        <span>Delete Mode<InfoTooltip content={'Enables deleting items from your Inventory with right click.'} />:</span>
-                        <Switch checked={sellMode} onChange={setSellMode} className='ml-2' />
-                    </div>
+
                 </div>
             </div>
 
@@ -81,7 +85,7 @@ export default function Inventory({ items, sort, sortOnChange, className, onItem
                 {[...items, null].map((itemId, i) => {
                     let filtered = false;
                     if (itemId && (tierFilter !== '' || typeFilter !== '' || nameFilter !== '')) {
-                        const equip = equips[itemId];
+                        const equip = equips[itemId as ItemId];
                         if (
                             tierFilter !== '' && tierFilter !== equip.tier.toString() ||
                             typeFilter !== '' && typeFilter !== equip.itemType ||

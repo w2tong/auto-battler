@@ -1,28 +1,103 @@
 import { LocalStorageCharacter, LocalStorageInventory, LocalStorageKey } from "@/types/LocalStorage";
-import { EquipSlot, AttributeType, ClassName, PetId, armour, ArmourId, hands, HandsId, heads, HeadId, weapons, WeaponId, shields, ShieldId, potions, PotionId, RingId, rings, waists, WaistId, Attributes, NeckId, necks, equips } from "@wholesome-sisters/auto-battler";
+import { EquipSlot, AttributeType, ClassName, PetId, armour, ArmourId, hands, HandsId, heads, HeadId, weapons, WeaponId, shields, ShieldId, potions, PotionId, RingId, rings, waists, WaistId, Attributes, NeckId, necks, equips, AbilityId } from "@wholesome-sisters/auto-battler";
 import Ajv, { JSONSchemaType } from "ajv";
 import ajvErrors from "ajv-errors";
+import { MAX_CHARACTERS, NAME_MAX_LENGTH } from "@/utils/constants";
 
 const characterSchema: JSONSchemaType<LocalStorageCharacter> = {
     type: "object",
     properties: {
-        name: { type: "string" },
+        name: {
+            type: "string",
+            maxLength: NAME_MAX_LENGTH,
+            errorMessage: { maxLength: "Character name must be 20 characters or less." }
+        },
         class: { type: "string", enum: Object.values(ClassName) },
         level: { type: "integer", minimum: 1, maximum: 20 },
         exp: { type: "integer", minimum: 0 },
         equipment: {
             type: "object",
             properties: {
-                [EquipSlot.Armour]: { type: "string", enum: [...Object.keys(armour) as ArmourId[], null], nullable: true as false },
-                [EquipSlot.Hands]: { type: "string", enum: [...Object.keys(hands) as HandsId[], null], nullable: true as false },
-                [EquipSlot.Head]: { type: "string", enum: [...Object.keys(heads) as HeadId[], null], nullable: true as false },
-                [EquipSlot.MainHand]: { type: "string", enum: [...Object.keys(weapons) as WeaponId[], null], nullable: true as false },
-                [EquipSlot.Neck]: { type: "string", enum: [...Object.keys(necks) as NeckId[], null], nullable: true as false },
-                [EquipSlot.OffHand]: { type: "string", enum: [...Object.keys(weapons) as WeaponId[], ...Object.keys(shields) as ShieldId[], null], nullable: true as false },
-                [EquipSlot.Potion]: { type: "string", enum: [...Object.keys(potions) as PotionId[], null], nullable: true as false },
-                [EquipSlot.Ring1]: { type: "string", enum: [...Object.keys(rings) as RingId[], null], nullable: true as false },
-                [EquipSlot.Ring2]: { type: "string", enum: [...Object.keys(rings) as RingId[], null], nullable: true as false },
-                [EquipSlot.Waist]: { type: "string", enum: [...Object.keys(waists) as WaistId[], null], nullable: true as false }
+                [EquipSlot.Armour]: {
+                    type: "string",
+                    enum: [...Object.keys(armour) as ArmourId[], null],
+                    nullable: true as false,
+                    errorMessage: {
+                        enum: "Invalid Armour item id: ${/equipment/Armour}."
+                    }
+                },
+                [EquipSlot.Hands]: {
+                    type: "string",
+                    enum: [...Object.keys(hands) as HandsId[], null],
+                    nullable: true as false,
+                    errorMessage: {
+                        enum: "Invalid Hands item id: ${/equipment/Hands}."
+                    }
+                },
+                [EquipSlot.Head]: {
+                    type: "string",
+                    enum: [...Object.keys(heads) as HeadId[], null],
+                    nullable: true as false,
+                    errorMessage: {
+                        enum: "Invalid Head item id: ${/equipment/Armour}."
+                    }
+                },
+                [EquipSlot.MainHand]: {
+                    type: "string",
+                    enum: [...Object.keys(weapons) as WeaponId[], null],
+                    nullable: true as false,
+                    errorMessage: {
+                        enum: "Invalid Main Hand item id: ${/equipment/Armour}."
+                    }
+                },
+                [EquipSlot.Neck]: {
+                    type: "string",
+                    enum: [...Object.keys(necks) as NeckId[], null],
+                    nullable: true as false,
+                    errorMessage: {
+                        enum: "Invalid Neck item id: ${/equipment/Armour}."
+                    }
+                },
+                [EquipSlot.OffHand]: {
+                    type: "string",
+                    enum: [...Object.keys(weapons) as WeaponId[], ...Object.keys(shields) as ShieldId[], null],
+                    nullable: true as false,
+                    errorMessage: {
+                        enum: "Invalid Off Hand item id: ${/equipment/Armour}."
+                    }
+                },
+                [EquipSlot.Potion]: {
+                    type: "string",
+                    enum: [...Object.keys(potions) as PotionId[], null],
+                    nullable: true as false,
+                    errorMessage: {
+                        enum: "Invalid Potion item id: ${/equipment/Armour}."
+                    }
+                },
+                [EquipSlot.Ring1]: {
+                    type: "string",
+                    enum: [...Object.keys(rings) as RingId[], null],
+                    nullable: true as false,
+                    errorMessage: {
+                        enum: "Invalid Ring1 item id: ${/equipment/Armour}."
+                    }
+                },
+                [EquipSlot.Ring2]: {
+                    type: "string",
+                    enum: [...Object.keys(rings) as RingId[], null],
+                    nullable: true as false,
+                    errorMessage: {
+                        enum: "Invalid Ring2 item id: ${/equipment/Armour}."
+                    }
+                },
+                [EquipSlot.Waist]: {
+                    type: "string",
+                    enum: [...Object.keys(waists) as WaistId[], null],
+                    nullable: true as false,
+                    errorMessage: {
+                        enum: "Invalid Waist item id: ${/equipment/Armour}."
+                    }
+                }
             },
             required: [
                 EquipSlot.Armour,
@@ -56,9 +131,35 @@ const characterSchema: JSONSchemaType<LocalStorageCharacter> = {
                 AttributeType.Intelligence,
                 AttributeType.Wisdom
             ],
-            additionalProperties: false
+            additionalProperties: false,
+            errorMessage: {
+                properties: {
+                    [AttributeType.Strength]: `Strength must be ${Attributes.MIN_VALUE} or greater.`,
+                    [AttributeType.Dexterity]: `Dexterity must be ${Attributes.MIN_VALUE} or greater.`,
+                    [AttributeType.Perception]: `Perception must be ${Attributes.MIN_VALUE} or greater.`,
+                    [AttributeType.Constitution]: `Constitution must be ${Attributes.MIN_VALUE} or greater.`,
+                    [AttributeType.Intelligence]: `Intelligence must be ${Attributes.MIN_VALUE} or greater.`,
+                    [AttributeType.Wisdom]: `Wisdom must be ${Attributes.MIN_VALUE} or greater.`
+                },
+                required: {
+                    [AttributeType.Strength]: "Strength attribute is required.",
+                    [AttributeType.Dexterity]: "Dexterity attribute is required.",
+                    [AttributeType.Perception]: "Perception attribute is required.",
+                    [AttributeType.Constitution]: "Constitution attribute is required.",
+                    [AttributeType.Intelligence]: "Intelligence attribute is required.",
+                    [AttributeType.Wisdom]: "Wisdom attribute is required."
+                }
+            },
         },
-        pet: { type: "string", enum: [...Object.values(PetId), null], nullable: true as false },
+        ability: {
+            type: "string",
+            enum: [...Object.values(AbilityId)]
+        },
+        pet: {
+            type: "string",
+            enum: [...Object.values(PetId), null],
+            nullable: true as false
+        },
         talents: {
             type: "object",
             additionalProperties: { type: "integer" },
@@ -72,6 +173,7 @@ const characterSchema: JSONSchemaType<LocalStorageCharacter> = {
         "exp",
         "equipment",
         "attributes",
+        "ability",
         "pet",
         "talents"
     ],
@@ -84,6 +186,7 @@ const characterSchema: JSONSchemaType<LocalStorageCharacter> = {
             exp: "Experience points must be a non-negative integer.",
             equipment: "Invalid equipment data.",
             attributes: "Invalid attributes data.",
+            ability: "Invalid ability ID.",
             pet: "Invalid pet ID.",
             talents: "Invalid talents data."
         }
@@ -96,6 +199,10 @@ const accountSchema: JSONSchemaType<{ characters: LocalStorageCharacter[], inven
         [LocalStorageKey.Characters]: {
             type: "array",
             items: characterSchema,
+            maxItems: MAX_CHARACTERS,
+            errorMessage: {
+                maxItems: `You can only have a maximum of ${MAX_CHARACTERS} characters.`
+            }
         },
         [LocalStorageKey.Inventory]: {
             type: "array",
@@ -103,6 +210,9 @@ const accountSchema: JSONSchemaType<{ characters: LocalStorageCharacter[], inven
                 type: "string",
                 nullable: true,
                 enum: [...Object.keys(equips), null],
+                errorMessage: {
+                    enum: "Inventory contains an invalid item id."
+                }
             },
         }
     },

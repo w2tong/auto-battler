@@ -6,13 +6,13 @@ import { memo } from 'react';
 import { itemIconMap } from '@utils/itemIcon';
 
 function Item({ itemId, filtered, dragging }: { itemId: string, filtered: boolean, dragging: boolean; }) {
-    const item = equips[itemId];
+    const item = equips[itemId as ItemId];
     const icon = itemIconMap[itemId as ItemId];
 
     // TODO: remove item.img when itemIconMap is filled out 
     return (
-        <ItemTooltip item={item} display={!dragging}>
-            <div className={`z-10 w-[64px] h-[64px] box-border border-solid rounded-xs bg-black ${tierBorderColor[item.tier]} ${filtered ? '' : 'border-2'}`}>
+        <ItemTooltip className='w-full h-full' item={item} display={!dragging}>
+            <div className={`z-10 box-border border-solid rounded-xs bg-black ${tierBorderColor[item.tier]} ${filtered ? '' : 'border-2'}`}>
                 <img src={icon ? icon.src : '/item-icons/placeholder.png'} alt={icon ? icon.alt : 'placholder icon'} className={filtered ? 'opacity-20' : 'opacity-100'} />
             </div>
         </ItemTooltip>

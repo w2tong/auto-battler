@@ -1,4 +1,4 @@
-import { ArmourId, AttributeType, ClassName, EquipSlot, HandsId, HeadId, ItemId, NeckId, PetId, PotionId, RingId, ShieldId, WaistId, WeaponId } from "@wholesome-sisters/auto-battler";
+import { AbilityId, ArmourId, AttributeType, ClassName, EquipSlot, HandsId, HeadId, ItemId, NeckId, PetId, PotionId, RingId, ShieldId, WaistId, WeaponId } from "@wholesome-sisters/auto-battler";
 
 type LocalStorageCharacter = {
     name: string;
@@ -18,6 +18,7 @@ type LocalStorageCharacter = {
         [EquipSlot.Waist]: WaistId | null;
     };
     attributes: Record<AttributeType, number>;
+    ability: AbilityId;
     pet: PetId | null;
     talents: Record<string, number>;
 };

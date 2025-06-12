@@ -1,4 +1,4 @@
-import { Character, createEquipmentImport, startingAbility } from "@wholesome-sisters/auto-battler";
+import { abilities, Character, createEquipmentImport } from "@wholesome-sisters/auto-battler";
 import CharacterSheet from "@features/CharacterSheet/CharacterSheet";
 import { useCharacters } from "@contexts/Characters/CharactersContext";
 import EquipmentInventory from "@features/EquipmentInventory/EquipmentInventory";
@@ -22,7 +22,7 @@ export default function EquipmentPage() {
         attributes: selectedChar.attributes,
         statTemplate: {},
         equipment: createEquipmentImport(selectedChar.equipment),
-        ability: startingAbility[selectedChar.class]
+        ability: abilities[selectedChar.ability]
     });
 
     return (
@@ -30,7 +30,7 @@ export default function EquipmentPage() {
             <div className='flex flex-row'>
                 <h1>Character Page</h1>
             </div>
-            <div className='flex flex-row space-x-4'>
+            <div className='flex flex-col space-x-4'>
                 <EquipmentInventory />
                 <CharacterSheet char={char} exp={selectedChar.exp} />
             </div>

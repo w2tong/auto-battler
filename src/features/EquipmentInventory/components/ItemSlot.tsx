@@ -36,7 +36,7 @@ export default function ItemSlot({ id, itemId, filtered, slot, onRightClick }: {
     if (isOver && over && active?.data.current?.itemId) {
         const activeItemId = active.data.current.itemId;
         if (isNaN(parseInt(over.id.toString()))) {
-            borderColor = isValidEquip(activeItemId, over.id as EquipSlot) ? 'border-green-700' : 'border-red-700';
+            borderColor = isValidEquip(activeItemId, over.id as EquipSlot) ? 'border-positive' : 'border-negative';
         }
         else {
             borderColor = 'border-white';
@@ -46,7 +46,7 @@ export default function ItemSlot({ id, itemId, filtered, slot, onRightClick }: {
     return (
         <div
             style={{ backgroundImage: `url(${slot ? icons[slot] : inventorySlot})` }}
-            className={`w-[68px] h-[68px] border-2 rounded-sm bg-center bg-no-repeat ${borderColor}`}
+            className={`bg-cover w-[36px] h-[36px] lg:w-[52px] lg:h-[52px] xl:w-[68px] xl:h-[68px] border-2 rounded-sm bg-center bg-no-repeat ${borderColor}`}
             ref={setNodeRef}
             onContextMenu={onRightClick}
         >

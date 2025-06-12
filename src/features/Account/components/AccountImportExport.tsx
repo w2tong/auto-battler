@@ -1,10 +1,10 @@
-import Button from "@/components/Button";
 import ImportDialog from "./ImportDialog";
 import { LocalStorageCharacter, LocalStorageInventory, LocalStorageKey } from "@/types/LocalStorage";
 import { toast } from "sonner";
 import { useCharacters, useCharactersDispatch } from "@/contexts/Characters/CharactersContext";
 import { useInventory, useInventoryDispatch } from "@/contexts/Inventory/InventoryContext";
 import { validateAccount } from "../utils/importValidator";
+import { Button } from "@/components/ui/button";
 
 type ImportExport = {
     [LocalStorageKey.Characters]: LocalStorageCharacter[],
@@ -46,11 +46,11 @@ export default function AccountImportExport() {
     }
 
     return (
-        <>
+        <div className='flex flex-col sm:flex-row space-y-1 sm:space-x-1'>
             <ImportDialog title='Import Account' description='Paste your account export string below.' warning='This will overwrite your current account data.' onImport={handleImport}>
                 <Button>Import Account</Button>
             </ImportDialog>
             <Button onClick={() => exportAccount()}>Export Account</Button>
-        </>
+        </div>
     );
 }

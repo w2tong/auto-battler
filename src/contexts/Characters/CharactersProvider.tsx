@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { LocalStorageCharacters, LocalStorageKey } from '../../types/LocalStorage';
-import { Attributes, AttributeType, ClassName, EquipSlot, PetId, startingEquipment } from '@wholesome-sisters/auto-battler';
+import { Attributes, AttributeType, ClassName, EquipSlot, PetId, startingAbility, startingEquipment } from '@wholesome-sisters/auto-battler';
 import { type Action, CharactersContext, CharactersDispatchContext } from './CharactersContext';
 import { useLocalStorage } from 'usehooks-ts';
 
@@ -52,6 +52,7 @@ function charactersReducer(characters: LocalStorageCharacters, action: Action): 
                             [AttributeType.Intelligence]: Attributes.DEFAULT_VALUE,
                             [AttributeType.Wisdom]: Attributes.DEFAULT_VALUE
                         },
+                        ability: startingAbility[action.class].id,
                         pet: action.class === ClassName.Ranger ? PetId.Wolf : null,
                         talents: {}
                     }
@@ -78,7 +79,8 @@ function charactersReducer(characters: LocalStorageCharacters, action: Action): 
                         attributes: {
                             ...c.attributes,
                             ...action.attributes
-                        }
+                        },
+                        ability: action.ability ?? c.ability
                     },
                     ...list.slice(action.index + 1)
                 ]

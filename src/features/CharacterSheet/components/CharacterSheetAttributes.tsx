@@ -7,7 +7,7 @@ export default function CharacterSheetAttributes({ level, attributes }: { level:
     const { selected } = useCharacters();
     const dispatch = useCharactersDispatch();
 
-    const unspent = (STARTING_POINTS + POINTS_PER_LEVEL * level) - Object.values(attributes).reduce((sum, curr) => sum + curr.base - Attributes.DEFAULT_VALUE, 0);
+    const unspent = (STARTING_POINTS + POINTS_PER_LEVEL * (level - 1)) - Object.values(attributes).reduce((sum, curr) => sum + curr.base - Attributes.DEFAULT_VALUE, 0);
 
     function handleChange(attr: AttributeType, num: number): void {
         let val = num;
