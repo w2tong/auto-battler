@@ -14,7 +14,11 @@ export default function BattleSpeed({ speed, onClick }: BattleSpeedProps) {
             {Object.entries(BATTLE_SPEEDS).map(([key, val], i) =>
                 <Button
                     key={key}
-                    className={cn(i === 0 ? 'rounded-l-md' : 'rounded-l-none', i === Object.values(BATTLE_SPEEDS).length - 1 ? 'rounded-r-md' : 'rounded-r-none', val === speed && 'bg-primary/50')}
+                    className={cn(
+                        i === 0 ? 'rounded-l-md' : 'rounded-l-none',
+                        i === Object.values(BATTLE_SPEEDS).length - 1 ? 'rounded-r-md' : 'rounded-r-none',
+                        val === speed && 'bg-primary/50 text-secondary-foreground'
+                    )}
                     onClick={() => onClick(val)}
                 >
                     {key}
