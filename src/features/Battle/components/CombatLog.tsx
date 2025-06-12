@@ -1,4 +1,4 @@
-import { equips, HitType, LineType, LogLine } from "@wholesome-sisters/auto-battler";
+import { equips, HitType, ItemId, LineType, LogLine } from "@wholesome-sisters/auto-battler";
 import ItemTooltip from "@components/ItemTooltip";
 import { tierTextColor } from "@utils/tierColor";
 import { formatNum } from "@utils/stats";
@@ -10,7 +10,7 @@ function lineToString(line: LogLine) {
             return line.text;
         }
         case (LineType.Loot): {
-            const item = equips[line.itemId];
+            const item = equips[line.itemId as ItemId];
             return <><b>{line.name}</b> looted <ItemTooltip item={item}><span className={`inline-block font-bold ${tierTextColor[item.tier]}`}>[{item.name}]</span></ItemTooltip>.</>;
         }
         case (LineType.Exp): {
