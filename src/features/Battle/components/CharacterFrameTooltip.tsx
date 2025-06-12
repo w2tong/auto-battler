@@ -41,6 +41,7 @@ export default function CharacterFrameTooltip({ name, attr, stats, mainHandDamag
             <Separator />
             <div className='grid grid-cols-2 gap-x-8 text-right'>
                 <Stat name={StatType.Accuracy} value={formatNum(stats[StatType.Accuracy])} />
+                <Stat name={StatType.ArmourPenetration} value={formatNum(stats[StatType.ArmourPenetration])} />
                 <Stat name={StatType.Dodge} value={`${formatNum(stats[StatType.Dodge])}%`} />
                 <Stat name={StatType.Armour} value={formatNum(stats[StatType.Armour])} />
                 <Stat name={StatType.Deflection} value={formatNum(stats[StatType.Deflection])} />
