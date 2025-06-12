@@ -42,11 +42,11 @@ export default function CreateCharacterDialog() {
 
             <div>
                 <h3 className={classTextColor[selectedClassName]}>Abilities</h3>
-                <ul className='space-y-1'>
+                <ul className='space-y-2'>
                     {selectedClass.abilities.map(ability =>
                         <li key={ability.name}>
                             <h4>{ability.name}</h4>
-                            <div className='text-foreground'>{ability.description()}</div>
+                            <div className='text-muted-foreground'>{ability.description()}</div>
                         </li>
                     )}
                 </ul>
