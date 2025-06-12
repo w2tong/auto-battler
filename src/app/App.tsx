@@ -18,7 +18,7 @@ function App() {
                     <InventoryProvider>
                         <Toaster position='top-center' />
                         <Header />
-                        <div className='px-4'>
+                        <div className=''>
                             <Routes>
                                 <Route index element={<Home />} />
                                 <Route path="equipment" element={<EquipmentPage />} />

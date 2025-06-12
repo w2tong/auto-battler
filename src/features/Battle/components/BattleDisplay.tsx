@@ -42,7 +42,7 @@ export default function BattleDisplay({ left, right, combatLog, turnOrder, turnI
                 ref={combatLogRef}
                 style={combatLogHeight ? { height: combatLogHeight, minHeight: 0 } : undefined}
             >
-                <CombatLog className='w-full h-full md:w-80 lg:w-120 xl:w-140 grow md:grow-0 overflow-y-auto' log={combatLog} />
+                <CombatLog className='w-full h-full md:w-80 lg:w-120 xl:w-140 grow md:grow-0 overflow-y-auto px-4' log={combatLog} />
             </div>
         </div>
     );

@@ -3,6 +3,17 @@ import ItemTooltip from "@components/ItemTooltip";
 import { tierTextColor } from "@utils/tierColor";
 import { formatNum } from "@utils/stats";
 import { cn } from "@utils/utils";
+import { Separator } from "@/components/ui/separator";
+
+function TurnLine({ name }: { name: string; }) {
+    return (
+        <div className='flex flex-row w-full items-center py-1'>
+            <Separator className='flex-1 border border-white' />
+            <span className='whitespace-nowrap px-4'><b>{name}'s</b> turn.</span>
+            <Separator className='flex-1 border border-white' />
+        </div>
+    );
+}
 
 function lineToString(line: LogLine) {
     switch (line.type) {
@@ -27,6 +38,12 @@ function lineToString(line: LogLine) {
         }
         case (LineType.Damage): {
             return <><b>{line.name}</b> took <b>{formatNum(line.damage)}</b> damage from <b>{line.source}</b>.</>;
+        }
+        case (LineType.Death): {
+            return <><b>{line.name}</b> died.</>;
+        }
+        case (LineType.Turn): {
+            return <TurnLine name={line.name} />;
         }
         default: {
             return `Unknown line: ${line}`;
