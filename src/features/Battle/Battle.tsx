@@ -113,7 +113,7 @@ export default function Battle({ lsChar, index, encounterLevel }: { lsChar: Loca
 
     const battle = battleRef.current;
     return (
-        <div>
+        <div className='flex flex-col justify-center w-full mx-0 xl:mx-auto 2xl:w-[1516px]'>
             <div>
                 <Button onClick={() => newBattle()}>New Battle</Button>
                 {combat === 'before' && <Button onClick={() => startCombat()}>Start Battle</Button>}
