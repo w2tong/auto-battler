@@ -5,10 +5,26 @@ import type BattleCharacter from '../types/BattleCharacter';
 import CharacterFrame from './CharacterFrame';
 import CombatLog from './CombatLog';
 import TurnOrder from './TurnOrder';
+import { useLayoutEffect, useRef, useState } from 'react';
 
 export default function BattleDisplay({ left, right, combatLog, turnOrder, turnIndex }: { left: BattleCharacter[], right: BattleCharacter[], turnOrder: string[], turnIndex: number, combatLog: LogLine[]; }) {
+    const [combatLogHeight, setCombatLogHeight] = useState<number | undefined>(undefined);
+    const combatLogRef = useRef<HTMLDivElement>(null);
+
+    useLayoutEffect(() => {
+        function updateHeight() {
+            if (combatLogRef.current) {
+                const top = combatLogRef.current.getBoundingClientRect().top;
+                setCombatLogHeight(window.innerHeight - top - 50);
+            }
+        }
+        updateHeight();
+        window.addEventListener('resize', updateHeight);
+        return () => window.removeEventListener('resize', updateHeight);
+    }, []);
+
     return (
-        <div className='h-full flex flex-col sm:flex-row'>
+        <div className='h-full flex flex-col md:flex-row'>
             <div className='flex flex-col grow'>
                 <TurnOrder chars={turnOrder} index={turnIndex} />
                 <div className='flex flex-row'>
@@ -22,8 +38,12 @@ export default function BattleDisplay({ left, right, combatLog, turnOrder, turnI
                     </div>
                 </div>
             </div>
-            {/* TODO: figure out way to have height scale dynamically with page, maybe use flexbox */}
-            <CombatLog className='w-full sm:w-64 md:w-80 lg:w-[28rem] grow sm:grow-0 h-96 sm:h-full' log={combatLog} />
+            <div
+                ref={combatLogRef}
+                style={combatLogHeight ? { height: combatLogHeight, minHeight: 0 } : undefined}
+            >
+                <CombatLog className='w-full h-full md:w-80 lg:w-120 xl:w-140 grow md:grow-0 overflow-y-auto' log={combatLog} />
+            </div>
         </div>
     );
 }
