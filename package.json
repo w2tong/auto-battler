@@ -15,7 +15,7 @@
     "@radix-ui/react-separator": "^1.1.7",
     "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/vite": "^4.1.6",
-    "@wholesome-sisters/auto-battler": "^1.3.16",
+    "@wholesome-sisters/auto-battler": "^1.3.17",
     "ajv": "^8.17.1",
     "ajv-errors": "^3.0.0",
     "class-variance-authority": "^0.7.1",
