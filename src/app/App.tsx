@@ -18,18 +18,16 @@ function App() {
                     <InventoryProvider>
                         <Toaster position='top-center' />
                         <Header />
-                        <div className=''>
-                            <Routes>
-                                <Route index element={<Home />} />
-                                <Route path="equipment" element={<EquipmentPage />} />
-                                <Route path="battle">
-                                    <Route index element={<BattleSelector />} />
-                                    <Route path=":level" element={<BattlePage />} />
-                                </Route>
-                                <Route path="account" element={<AccountPage />} />
-                                <Route path="credits" element={<Credits />} />
-                            </Routes>
-                        </div>
+                        <Routes>
+                            <Route index element={<Home />} />
+                            <Route path="equipment" element={<EquipmentPage />} />
+                            <Route path="battle">
+                                <Route index element={<BattleSelector />} />
+                                <Route path=":level" element={<BattlePage />} />
+                            </Route>
+                            <Route path="account" element={<AccountPage />} />
+                            <Route path="credits" element={<Credits />} />
+                        </Routes>
                     </InventoryProvider>
                 </CharactersProvider>
             </BrowserRouter>
