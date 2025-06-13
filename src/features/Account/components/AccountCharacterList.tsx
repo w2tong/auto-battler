@@ -40,7 +40,7 @@ export default function AccountCharacterList() {
     }
 
     return (
-        <div className='space-y-4'>
+        <div className='space-y-4 mx-auto'>
             {characters.list.length < MAX_CHARACTERS &&
                 <div className='flex flex-col sm:flex-row space-y-1 sm:space-x-1'>
                     <ImportDialog title='Import Character' description='Paste your character export string below.' onImport={handleImport}>
@@ -50,12 +50,14 @@ export default function AccountCharacterList() {
                 </div>
             }
 
-            <div className='space-y-4'>
+            <div>
                 {characters.list.map((char, i) =>
-                    <div className='flex flex-col sm:flex-row sm:space-x-1' key={i}>
-                        <span className={cn('inline-block text-lg font-bold max-w-68 flex-1 truncate', classTextColor[char.class])}>Lvl. {char.level} - {char.name}</span>
-                        <DeleteCharacterDialog name={char.name} onDelete={() => dispatch({ type: 'delete', index: i })} />
-                        <Button onClick={() => exportCharacter(i)}>Export</Button>
+                    <div className={cn('flex flex-col sm:flex-row space-x-2 py-2', i % 2 === 0 ? 'bg-secondary' : 'bg-background')} key={i}>
+                        <span className={cn('inline-block text-lg font-bold flex-1 truncate', classTextColor[char.class])}>Lvl. {char.level} - {char.name}</span>
+                        <div className='grid grid-cols-2 space-x-1'>
+                            <DeleteCharacterDialog name={char.name} onDelete={() => dispatch({ type: 'delete', index: i })} />
+                            <Button onClick={() => exportCharacter(i)}>Export</Button>
+                        </div>
                     </div>
                 )}
             </div>
