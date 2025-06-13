@@ -52,7 +52,7 @@ export default function AccountCharacterList() {
 
             <div>
                 {characters.list.map((char, i) =>
-                    <div className={cn('flex flex-col sm:flex-row space-x-2 py-2', i % 2 === 0 ? 'bg-secondary' : 'bg-background')} key={i}>
+                    <div className={cn('flex flex-col sm:flex-row space-x-2 px-2 py-2', i % 2 === 0 ? 'bg-secondary' : 'bg-background')} key={i}>
                         <span className={cn('inline-block text-lg font-bold flex-1 truncate', classTextColor[char.class])}>Lvl. {char.level} - {char.name}</span>
                         <div className='grid grid-cols-2 space-x-1'>
                             <DeleteCharacterDialog name={char.name} onDelete={() => dispatch({ type: 'delete', index: i })} />
