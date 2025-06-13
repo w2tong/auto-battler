@@ -9,9 +9,9 @@ const navLinks: { to: string, text: string; }[] = [
     { to: '/account', text: 'Account' },
 ];
 
-function Header() {
+function Header({ className }: { className?: string; }) {
     return (
-        <div className='flex justify-between w-full bg-secondary'>
+        <div className={cn('flex justify-between w-full bg-secondary', className)}>
             <nav className={'flex grow'}>
                 {navLinks.map(({ to, text }, i) =>
                     // <NavLink key={i} to={to} className={({ isActive }) => `${isActive ? 'text-primary-active' : ''} flex-1 h-full hover:text-primary-hover`}>
