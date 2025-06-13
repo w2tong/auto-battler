@@ -20,13 +20,13 @@ export default function BattlePage() {
         'Select a character for entering a battle.'
     );
     return (
-        <div className='flex flex-col'>
-            <h1>Battle</h1>
-            <div className='w-80 flex flex-row items-center space-x-2'>
+        <div className='flex flex-col w-full max-w-160 mx-auto px-2 space-y-2'>
+            <h1 className='text-center'>Battle</h1>
+            <div className=' flex flex-row items-center space-x-2'>
                 <NavLink className='grow' to={`/battle/${levelInput}`}>
                     <Button className='w-full'>Normal Encounter</Button>
                 </NavLink>
-                <label htmlFor='normal-level'>Level</label>
+                <label htmlFor='normal-level' className='font-bold text-xl'>Level</label>
                 <Input
                     id='normal-level'
                     className='w-16'
@@ -37,7 +37,7 @@ export default function BattlePage() {
                     onChange={handleLevelInputChange}
                 />
             </div>
-            <Button className='w-80' disabled>Boss Encounter</Button>
+            <Button disabled>Boss Encounter</Button>
         </div >
     );
 }
