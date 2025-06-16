@@ -114,22 +114,23 @@ export default function Battle({ lsChar, index, encounterLevel }: { lsChar: Loca
     const battle = battleRef.current;
     return (
         <div className='flex flex-col justify-center w-full mx-0 xl:mx-auto 2xl:w-[1536px]'>
-            <div className='flex flex-row justify-between'>
-                <div>
+            <div className='flex flex-row justify-between items-center h-[72px] space-x-1'>
+                <div className='flex flex-col sm:flex-row flex-wrap'>
                     <Button onClick={() => newBattle()}>New Battle</Button>
                     {combat === 'before' && <Button onClick={() => startCombat()}>Start Battle</Button>}
                 </div>
 
-                <div className='flex flex-row'>
+                <div className='flex flex-row items-center space-x-1 sm:space-x-4'>
 
                     {/* Pause Button */}
                     <PauseButton className='w-12 h-12' paused={paused} onClick={() => setPaused(prev => !prev)} />
 
-                    <BattleSpeed speed={battleSpeed} onClick={setBattleSpeed} />
+                    <BattleSpeed speed={battleSpeed} onChange={setBattleSpeed} />
 
                     {/* Auto Start Toggle */}
-                    <div className='flex flex-row items-center'>
-                        <h2>Auto Start: </h2>
+                    {/* TODO: Remove Auto Start header on mobile (show on hover or click?) */}
+                    <div className='flex flex-row items-center space-x-1'>
+                        <p className='text-xl font-bold'>Auto Start:</p>
                         <Switch checked={battleAutoStart} onChange={() => setBattleAutoStart(auto => !auto)} />
                     </div>
                 </div>

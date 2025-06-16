@@ -1,29 +1,26 @@
-import { Button } from "@/components/ui/button";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { BATTLE_SPEEDS } from "@/utils/constants";
-import { cn } from "@/utils/utils";
 
 type BattleSpeedProps = {
     speed: number;
-    onClick: (speed: number) => void;
+    onChange: (speed: number) => void;
 };
 
-export default function BattleSpeed({ speed, onClick }: BattleSpeedProps) {
+export default function BattleSpeed({ speed, onChange }: BattleSpeedProps) {
     return (
-        <div className='flex flex-row items-center'>
-            <h2 className=''>Combat Speed: </h2>
-            {Object.entries(BATTLE_SPEEDS).map(([key, val], i) =>
-                <Button
-                    key={key}
-                    className={cn(
-                        i === 0 ? 'rounded-l-md' : 'rounded-l-none',
-                        i === Object.values(BATTLE_SPEEDS).length - 1 ? 'rounded-r-md' : 'rounded-r-none',
-                        val === speed && 'bg-primary/50 text-secondary-foreground'
-                    )}
-                    onClick={() => onClick(val)}
-                >
-                    {key}
-                </Button>
-            )}
+        <div className='flex flex-row items-center flex-wrap'>
+            <p className='text-xl font-bold'>Speed: </p>
+
+            <Select value={speed.toString()} onValueChange={e => onChange(Number(e))}>
+                <SelectTrigger className='w-[80px]'>
+                    <SelectValue placeholder='Speed' />
+                </SelectTrigger>
+                <SelectContent className='w-[80px]'>
+                    {Object.entries(BATTLE_SPEEDS).map(([key, val]) => (
+                        <SelectItem key={key} value={val.toString()}>{key}</SelectItem>
+                    ))}
+                </SelectContent>
+            </Select>
         </div>
     );
 }
