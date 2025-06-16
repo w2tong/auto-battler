@@ -1,45 +1,20 @@
 import { useState } from 'react';
 import ItemSlot from './ItemSlot';
-import { ItemId, ItemType, equips } from '@wholesome-sisters/auto-battler';
-import SelectMenu from './SelectMenu';
+import { ItemId, equips } from '@wholesome-sisters/auto-battler';
 import { cn } from '@utils/utils';
 import Switch from '@components/Switch';
 import InfoTooltip from '@components/InfoTooltip';
 import { useDebounceValue } from 'usehooks-ts';
 import { Input } from '@/components/ui/input';
-
-const tierOptions = [
-    { value: '0', text: 'Tier 0' },
-    { value: '1', text: 'Tier 1' },
-    { value: '2', text: 'Tier 2' },
-    { value: '3', text: 'Tier 3' },
-    { value: '4', text: 'Tier 4' },
-    { value: '5', text: 'Tier 5' }
-];
-
-const typeOptions = [
-    { value: ItemType.Weapon, text: ItemType.Weapon },
-    { value: ItemType.Shield, text: ItemType.Shield },
-    { value: ItemType.Head, text: ItemType.Head },
-    { value: ItemType.Armour, text: ItemType.Armour },
-    { value: ItemType.Hands, text: ItemType.Hands },
-    { value: ItemType.Ring, text: ItemType.Ring },
-    { value: ItemType.Potion, text: ItemType.Potion },
-    { value: ItemType.Waist, text: ItemType.Waist },
-    { value: ItemType.Neck, text: ItemType.Neck }
-];
-
-const sortOptions = [
-    { value: 'name', text: 'Name' },
-    { value: 'type', text: 'Type' },
-    { value: 'tier-asc', text: 'Tier Asc' },
-    { value: 'tier-desc', text: 'Tier Desc' }
-];
+import InventoryTierFilter from './InventoryTierFilter';
+import { FILTER_NONE_VALUE } from '@/utils/constants';
+import InventoryTypeFilter from './InventoryTypeFilter';
+import InventorySort from './InventorySort';
 
 // TODO: add keywords thats can be used in name filter (e.g. Attributes, Stats, on hit)
 export default function Inventory({ items, sort, sortOnChange, className, onItemRightClick }: { items: (string | null)[], sort: string, sortOnChange: (val: string) => void, className?: string; onItemRightClick?: (index: number) => void; }) {
-    const [tierFilter, setTierFilter] = useState<string>('');
-    const [typeFilter, setTypeFilter] = useState<string>('');
+    const [tierFilter, setTierFilter] = useState<string>(FILTER_NONE_VALUE);
+    const [typeFilter, setTypeFilter] = useState<string>(FILTER_NONE_VALUE);
     const [nameFilter, setNameFilter] = useDebounceValue<string>('', 100);
     const [sellMode, setSellMode] = useState(false);
 
@@ -61,16 +36,9 @@ export default function Inventory({ items, sort, sortOnChange, className, onItem
                     </div>
                 </div>
                 <div className='flex flex-row py-1 items-end space-x-2 text-sm'>
-                    <SelectMenu options={tierOptions} onChange={updateTier} id='tier' label='Tier Filter' value={tierFilter} />
-                    <SelectMenu options={typeOptions} onChange={updateType} id='type' label='Type Filter' value={typeFilter} />
-                    <div className='flex flex-col'>
-                        <label htmlFor='sort'>Sort by</label>
-                        <select className='border border-white' id='sort' value={sort} onChange={e => sortOnChange(e.target.value)}>
-                            {[{ value: '', text: '-' }, ...sortOptions].map(opt =>
-                                <option className='bg-black' key={opt.value} value={opt.value}>{opt.text}</option>
-                            )}
-                        </select>
-                    </div>
+                    <InventoryTierFilter value={tierFilter} onChange={updateTier} />
+                    <InventoryTypeFilter value={typeFilter} onChange={updateType} />
+                    <InventorySort value={sort} onChange={sortOnChange} />
                     <Input
                         className='min-w-30 max-w-48'
                         type='text'
@@ -84,11 +52,11 @@ export default function Inventory({ items, sort, sortOnChange, className, onItem
             <div className='flex flex-row flex-wrap content-start gap-0.5'>
                 {[...items, null].map((itemId, i) => {
                     let filtered = false;
-                    if (itemId && (tierFilter !== '' || typeFilter !== '' || nameFilter !== '')) {
+                    if (itemId && (tierFilter !== FILTER_NONE_VALUE || typeFilter !== FILTER_NONE_VALUE || nameFilter !== '')) {
                         const equip = equips[itemId as ItemId];
                         if (
-                            tierFilter !== '' && tierFilter !== equip.tier.toString() ||
-                            typeFilter !== '' && typeFilter !== equip.itemType ||
+                            tierFilter !== FILTER_NONE_VALUE && tierFilter !== equip.tier.toString() ||
+                            typeFilter !== FILTER_NONE_VALUE && typeFilter !== equip.itemType ||
                             nameFilter !== '' && !equip.name.toLocaleLowerCase().includes(nameFilter.trim().toLocaleLowerCase())
                         ) filtered = true;
                     }

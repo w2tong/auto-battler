@@ -11,7 +11,7 @@ export default function BattleSpeed({ speed, onChange }: BattleSpeedProps) {
         <div className='flex flex-row items-center flex-wrap'>
             <p className='text-xl font-bold'>Speed: </p>
 
-            <Select value={speed.toString()} onValueChange={e => onChange(Number(e))}>
+            <Select value={speed.toString()} onValueChange={val => onChange(Number(val))}>
                 <SelectTrigger className='w-[80px]'>
                     <SelectValue placeholder='Speed' />
                 </SelectTrigger>
