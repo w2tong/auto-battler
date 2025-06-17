@@ -113,26 +113,23 @@ export default function Battle({ lsChar, index, encounterLevel }: { lsChar: Loca
 
     const battle = battleRef.current;
     return (
-        <div className='flex flex-col justify-center w-full mx-0 xl:mx-auto 2xl:w-[1536px]'>
-            <div className='flex flex-row justify-between items-center h-[72px] space-x-1'>
-                <div className='flex flex-col sm:flex-row flex-wrap'>
+        <div className='flex flex-col justify-center w-full mx-0 xl:mx-auto 2xl:w-[1536px] pt-1'>
+            <div className='flex flex-row items-center h-[72px] gap-x-1 sm:gap-x-6 justify-evenly sm:justify-start'>
+                <div className='flex flex-col sm:flex-row flex-wrap gap-1'>
                     <Button onClick={() => newBattle()}>New Battle</Button>
                     {combat === 'before' && <Button onClick={() => startCombat()}>Start Battle</Button>}
                 </div>
 
-                <div className='flex flex-row items-center space-x-1 sm:space-x-4'>
+                {/* Pause Button */}
+                <PauseButton className='w-12 h-12' paused={paused} onClick={() => setPaused(prev => !prev)} />
 
-                    {/* Pause Button */}
-                    <PauseButton className='w-12 h-12' paused={paused} onClick={() => setPaused(prev => !prev)} />
+                <BattleSpeed speed={battleSpeed} onChange={setBattleSpeed} />
 
-                    <BattleSpeed speed={battleSpeed} onChange={setBattleSpeed} />
-
-                    {/* Auto Start Toggle */}
-                    {/* TODO: Remove Auto Start header on mobile (show on hover or click?) */}
-                    <div className='flex flex-row items-center space-x-1'>
-                        <p className='text-xl font-bold'>Auto Start:</p>
-                        <Switch checked={battleAutoStart} onChange={() => setBattleAutoStart(auto => !auto)} />
-                    </div>
+                {/* Auto Start Toggle */}
+                {/* TODO: Remove Auto Start header on mobile (show on hover or click?) */}
+                <div className='flex flex-col sm:flex-row items-center space-x-1'>
+                    <p className='text-xl font-bold'>Auto Start:</p>
+                    <Switch checked={battleAutoStart} onChange={() => setBattleAutoStart(auto => !auto)} />
                 </div>
             </div>
 
