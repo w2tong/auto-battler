@@ -13,10 +13,6 @@ function formatSigned(num: number, { percent = false, multiplier = 1 }: { percen
 };
 
 const characterSheetStatFormattingRules: { [stat in StatType]?: { key: string; format: (num: number) => string; } } = {
-    [StatType.Accuracy]: {
-        key: StatType.Accuracy,
-        format: num => format(num, { signed: true })
-    },
     [StatType.BlockChance]: {
         key: StatType.BlockChance,
         format: num => format(num, { percent: true })
@@ -34,7 +30,7 @@ const characterSheetStatFormattingRules: { [stat in StatType]?: { key: string; f
         format: num => format(num, { signed: true })
     },
     [StatType.DamagePercent]: {
-        key: "Damage",
+        key: "Damage %",
         format: num => format(num, { signed: true, percent: true, multiplier: 100 })
     },
     [StatType.Dodge]: {

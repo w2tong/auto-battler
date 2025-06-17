@@ -64,6 +64,8 @@ F5853F - Orange
     --color-ranger: #AAD372;
     --color-rogue: #FFF468;
     --color-wizard: #3FC7EB;
+
+    --breakpoint-xs: 360px
 }
 
 :root {

@@ -4,6 +4,7 @@ import { cn } from "@utils/utils";
 
 const navLinks: { to: string, text: string; }[] = [
     { to: '/', text: 'Home' },
+    { to: '/character', text: 'Character' },
     { to: '/equipment', text: 'Equipment' },
     { to: '/battle', text: 'Battle' },
     { to: '/account', text: 'Account' },

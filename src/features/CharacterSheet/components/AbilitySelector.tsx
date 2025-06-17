@@ -9,7 +9,6 @@ export default function AbilitySelector({ char, className }: AbilitySelectorProp
     const abilities = classes[className].abilities;
 
     function updateAbility(id: AbilityId) {
-        console.log('updateAbility', id);
         dispatch({ type: 'update', index: selected, ability: id });
     }
 
@@ -28,7 +27,7 @@ function AbilityButton({ ability, char, updateAbility }: { ability: Ability, cha
             onClick={() => updateAbility(ability.id)}
             className={cn(
                 'w-full transition-colors cursor-pointer border',
-                isSelected && 'bg-accent text-accent-foreground border border-accent-foreground'
+                isSelected && 'bg-accent border-accent-foreground'
             )}
         >
             <div className='flex flex-col p-2 space-y-2 w-full h-full text-left'>

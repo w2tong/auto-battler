@@ -9,6 +9,7 @@ import BattleSelector from './routes/BattleSelector';
 import Credits from './routes/Credits';
 import AccountPage from './routes/AccountPage';
 import { Toaster } from '@/components/ui/sonner';
+import CharacterPage from './routes/CharacterPage';
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                         <Header />
                         <Routes>
                             <Route index element={<Home />} />
+                            <Route path="character" element={<CharacterPage />} />
                             <Route path="equipment" element={<EquipmentPage />} />
                             <Route path="battle">
                                 <Route index element={<BattleSelector />} />
