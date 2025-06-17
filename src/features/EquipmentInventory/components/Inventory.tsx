@@ -39,6 +39,7 @@ export default function Inventory({ items, sort, sortOnChange, className, onItem
                     <Input
                         className='min-w-30 max-w-48'
                         type='text'
+                        name='Name Filter'
                         placeholder='Filter By Name'
                         onChange={e => setNameFilter(e.target.value)}
                     />
