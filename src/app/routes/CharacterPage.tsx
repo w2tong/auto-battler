@@ -25,8 +25,8 @@ export default function EquipmentPage() {
     });
 
     return (
-        <div className='px-6 py-4 mx-auto'>
-            <h1 className='w-fit mx-auto sm:mx-0'>Character Sheet</h1>
+        <div className='px-6 py-4 mx-auto space-y-4'>
+            <h1 className='text-3xl font-bold w-fit mx-auto sm:mx-0'>Character Sheet</h1>
             <CharacterSheet char={char} exp={selectedChar.exp} />
         </div>
     );

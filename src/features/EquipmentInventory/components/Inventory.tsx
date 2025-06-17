@@ -29,7 +29,7 @@ export default function Inventory({ items, sort, sortOnChange, className, onItem
         <div className={cn('flex flex-col', className)}>
             <div>
                 <div className='flex flex-row'>
-                    <h2 className='py-1'>Inventory</h2>
+                    <h1 className='text-xl font-bold'>Inventory</h1>
                     <div className='flex flex-row items-center'>
                         <span>Delete Mode <InfoTooltip content={'Enables deleting items from your Inventory with right click.'} /></span>
                         <Switch checked={sellMode} onChange={setSellMode} className='ml-2' />

@@ -3,6 +3,7 @@ import Stat from "./Stat";
 import { cn } from "@/utils/utils";
 
 const COL_WIDTH = 'w-[184px]';
+const H4_CLASSES = 'text-md font-bold';
 
 // Commented stats are currently have no source from items/abilities/talents
 type CharacterSheetStats = { stats: { [stat in StatType]: number }, className?: string; };
@@ -10,7 +11,7 @@ export default function CharacterSheetStats({ stats, className }: CharacterSheet
     return (
         <div className={cn('', className)}>
             <div className={COL_WIDTH}>
-                <h4>Defensive</h4>
+                <h4 className={H4_CLASSES}>Defensive</h4>
                 <Stat stat={StatType.MaxHealth} num={stats[StatType.MaxHealth]} />
                 <Stat stat={StatType.Armour} num={stats[StatType.Armour]} />
                 <Stat stat={StatType.Deflection} num={stats[StatType.Deflection]} />
@@ -26,7 +27,7 @@ export default function CharacterSheetStats({ stats, className }: CharacterSheet
             </div>
 
             <div className={COL_WIDTH}>
-                <h4>Offensive</h4>
+                <h4 className={H4_CLASSES}>Offensive</h4>
                 <Stat stat={StatType.Accuracy} num={stats[StatType.Accuracy]} />
                 <Stat stat={StatType.OffHandAccuracy} num={stats[StatType.OffHandAccuracy]} />
                 {/* <Stat stat={StatType.MeleeAccuracy} num={stats[StatType.MeleeAccuracy]} />
@@ -46,7 +47,7 @@ export default function CharacterSheetStats({ stats, className }: CharacterSheet
             </div>
 
             <div className={COL_WIDTH}>
-                <h4>Mana</h4>
+                <h4 className={H4_CLASSES}>Mana</h4>
                 <Stat stat={StatType.ManaCost} num={stats[StatType.ManaCost]} />
                 <Stat stat={StatType.StartingMana} num={stats[StatType.StartingMana]} />
                 <Stat stat={StatType.ManaRegen} num={stats[StatType.ManaRegen]} />
@@ -54,7 +55,7 @@ export default function CharacterSheetStats({ stats, className }: CharacterSheet
             </div>
 
             <div className={COL_WIDTH}>
-                <h4>Other</h4>
+                <h4 className={H4_CLASSES}>Other</h4>
                 <Stat stat={StatType.Initiative} num={stats[StatType.Initiative]} />
 
                 <Stat stat={StatType.PotionCharges} num={stats[StatType.PotionCharges]} />

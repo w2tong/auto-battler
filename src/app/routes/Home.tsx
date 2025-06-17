@@ -1,10 +1,8 @@
 function Home() {
     return (
-        <>
-            <div>
-                This is the Home page.
-            </div>
-        </>
+        <div className='px-6 py-4'>
+            This is the Home page.
+        </div>
     );
 }
 

@@ -31,12 +31,11 @@ export default function EquipmentPage() {
 
     return (
         <>
-            <h1>Character Page</h1>
-            <div className='flex flex-col space-y-4'>
+            <div className='flex flex-col gap-y-4 px-4 py-4'>
                 <EquipmentInventory />
                 <Collapsible open={characterSheetOpen} onOpenChange={toggle}>
                     {/* TODO: replace with caret SVG */}
-                    <CollapsibleTrigger><h2>Character Sheet {characterSheetOpen ? 'v' : '^'}</h2></CollapsibleTrigger>
+                    <CollapsibleTrigger><h1 className='text-xl font-bold'>Character Sheet {characterSheetOpen ? 'v' : '^'}</h1></CollapsibleTrigger>
                     <CollapsibleContent>
                         <CharacterSheet char={char} exp={selectedChar.exp} />
                     </CollapsibleContent>

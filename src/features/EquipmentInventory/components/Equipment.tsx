@@ -5,7 +5,7 @@ import { cn } from '@utils/utils';
 export default function Equipment({ equipment, className }: { equipment: { [slot in EquipSlot]: string | null; }, className?: string; }) {
     return (
         <div className={cn(className)}>
-            <h2 className='py-1'>Equipment</h2>
+            <h1 className='pb-2 text-xl font-bold'>Equipment</h1>
             <div className='touch-none flex-col'>
                 <div className='flex flex-row justify-center'>
                     <div className='flex-col'>

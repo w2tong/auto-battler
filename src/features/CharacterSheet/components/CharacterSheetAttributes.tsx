@@ -22,16 +22,16 @@ export default function CharacterSheetAttributes({ level, attributes, className 
 
     return (
         <div className={cn('', className)}>
-            <h3>Attributes</h3>
             {Object.entries(attributes).map(([attr, { base, bonus }]) => {
                 const min = Attributes.MIN_VALUE + bonus;
                 const max = Math.min(base + unspent, LEVEL_CAPS[level as LevelRange]) + bonus;
                 return (
                     <div className='flex justify-between w-full' key={attr}>
                         <AttributeTooltip type={attr as AttributeType} base={base} bonus={bonus}>
-                            <span className='mr-4 text-tooltip-highlight font-medium'>{attr}</span>
+                            <label className='mr-4 text-tooltip-highlight font-medium' htmlFor={attr} onClick={e => e.preventDefault()}>{attr}</label>
                         </AttributeTooltip>
                         <input
+                            id={attr}
                             className='w-12 text-right border active:border-accent-foreground p-0.5'
                             type='number'
                             min={min}
@@ -43,7 +43,7 @@ export default function CharacterSheetAttributes({ level, attributes, className 
                 );
             }
             )}
-            <p className='text-md text-bold'><span className={cn('font-extrabold', unspent > 0 && 'text-positive')}>{unspent}</span> unspent points</p>
+            <p className='text-lg text-center text-bold'><span className={cn('font-extrabold', unspent > 0 && 'text-positive')}>{unspent}</span> unspent points</p>
         </div>
     );
 }

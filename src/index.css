@@ -34,7 +34,7 @@ F5853F - Orange
     --color-secondary-text-active: #1e293b;
 
     /* Tooltips */
-    --color-tooltip-highlight: #2d7abd;
+    --color-tooltip-highlight: #589edb;
 
     /* Tiers */
     --color-tier-0: #9d9d9d;
@@ -114,26 +114,6 @@ F5853F - Orange
     --sidebar-accent-foreground: oklch(0.205 0 0);
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.708 0 0);
-}
-
-h1 {
-    font-size: xx-large;
-    font-weight: bold;
-}
-
-h2 {
-    font-size: x-large;
-    font-weight: bold;
-}
-
-h3 {
-    font-size: large;
-    font-weight: bold;
-}
-
-h4 {
-    font-size: medium;
-    font-weight: bold;
 }
 
 /* 

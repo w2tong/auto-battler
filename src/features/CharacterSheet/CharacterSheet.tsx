@@ -5,6 +5,7 @@ import CharacterSheetStats from "./components/CharacterSheetStats";
 import CharacterSheetPotion from "./components/CharacterScreenPotion";
 import { classTextColor } from "../../utils/classColour";
 import AbilitySelector from "./components/AbilitySelector";
+import { cn } from "@/utils/utils";
 
 export default function CharacterSheet(
     { char, exp }: { char: Character, exp: number; }
@@ -62,22 +63,25 @@ export default function CharacterSheet(
     return (
         <div className='space-y-6'>
             <div className='w-fit mx-auto sm:mx-0'>
-                <h3 className={classColor}>{char.name}</h3>
+                <h2 className={cn('text-xl font-bold', classColor)}>{char.name}</h2>
                 <div>Level {char.level} <b className={classColor}>{char.className}</b></div>
-                <div>{exp}/{levelExp[char.level as LevelRange]} <b>Experience</b></div>
+                <div>{exp}/{levelExp[char.level as LevelRange]} Experience</div>
             </div>
 
-            <div className='flex flex-row flex-wrap gap-8 flex-1'>
-                <CharacterSheetAttributes className='mx-auto sm:mx-0' level={char.level as LevelRange} attributes={{
-                    [AttributeType.Strength]: { base: str.base, bonus: str.bonus },
-                    [AttributeType.Dexterity]: { base: dex.base, bonus: dex.bonus },
-                    [AttributeType.Perception]: { base: per.base, bonus: per.bonus },
-                    [AttributeType.Constitution]: { base: con.base, bonus: con.bonus },
-                    [AttributeType.Intelligence]: { base: int.base, bonus: int.bonus },
-                    [AttributeType.Wisdom]: { base: wis.base, bonus: wis.bonus },
-                }} />
-                <div className='gap-y-1'>
-                    <h3 className='text-center sm:text-left'>Stats</h3>
+            <div className='flex flex-row flex-wrap gap-6 flex-1'>
+                <div className='mx-auto sm:mx-0 space-y-2'>
+                    <h3 className='text-xl font-bold'>Attributes</h3>
+                    <CharacterSheetAttributes level={char.level as LevelRange} attributes={{
+                        [AttributeType.Strength]: { base: str.base, bonus: str.bonus },
+                        [AttributeType.Dexterity]: { base: dex.base, bonus: dex.bonus },
+                        [AttributeType.Perception]: { base: per.base, bonus: per.bonus },
+                        [AttributeType.Constitution]: { base: con.base, bonus: con.bonus },
+                        [AttributeType.Intelligence]: { base: int.base, bonus: int.bonus },
+                        [AttributeType.Wisdom]: { base: wis.base, bonus: wis.bonus },
+                    }} />
+                </div>
+                <div className='space-y-2'>
+                    <h3 className='text-xl font-bold text-center sm:text-left'>Stats</h3>
                     <CharacterSheetStats className='flex flex-row flex-wrap flex-1 justify-center sm:justify-start gap-4' stats={{
                         [StatType.MaxHealth]: char.stats.maxHealth,
                         [StatType.HealthPercent]: char.stats.getStat(StatType.HealthPercent),
@@ -131,18 +135,18 @@ export default function CharacterSheet(
             </div>
 
             {char.className &&
-                <div>
-                    <h3>Abilities</h3>
+                <div className='space-y-2'>
+                    <h3 className='text-xl font-bold'>Abilities</h3>
                     <AbilitySelector char={char} className={char.className} />
                 </div>
             }
 
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
                 <div className='space-y-2'>
-                    <h3>Weapons</h3>
+                    <h3 className='text-xl font-bold'>Weapons</h3>
                     <div className='grid grid-cols-1 xs:grid-cols-2 space-x-0 xs:space-x-2 space-y-2 xs:space-y-0'>
                         <div>
-                            <h4>Main-hand</h4>
+                            <h4 className='text-lg font-bold'>Main-hand</h4>
                             <Weapon
                                 name={mhProps.name}
                                 type={mhProps.type}
@@ -154,7 +158,7 @@ export default function CharacterSheet(
                         </div>
                         {ohProps &&
                             <div>
-                                <h4>Off-hand</h4>
+                                <h4 className='text-lg font-bold'>Off-hand</h4>
                                 <Weapon
                                     name={ohProps.name}
                                     type={ohProps.type}
@@ -171,4 +175,4 @@ export default function CharacterSheet(
             </div>
         </div>
     );
-}
+};
