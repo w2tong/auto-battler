@@ -5,12 +5,14 @@ export default function Tooltip({
     children,
     content,
     className,
+    contentClassName,
     display = true,
     followCursor = true,
 }: {
     children: ReactNode;
     content: ReactNode;
     className?: string;
+    contentClassName?: string;
     display?: boolean;
     followCursor?: boolean;
 }) {
@@ -52,7 +54,7 @@ export default function Tooltip({
             {display && followCursor && hovered && (
                 <div
                     ref={tooltipRef}
-                    className={cn('fixed pointer-events-none bg-black text-white px-2 py-1 rounded z-50 border text-wrap')}
+                    className={cn('fixed pointer-events-none bg-black text-white px-2 py-1 rounded z-50 border text-wrap', contentClassName)}
                     style={{
                         left,
                         top
