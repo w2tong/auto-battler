@@ -49,7 +49,7 @@ export default function Inventory({ items, sort, sortOnChange, className, onItem
                 </div>
             </div>
 
-            <div className='flex flex-row flex-wrap content-start gap-0.5'>
+            <div className='flex flex-row flex-wrap content-start gap-0.5 touch-none'>
                 {[...items, null].map((itemId, i) => {
                     let filtered = false;
                     if (itemId && (tierFilter !== FILTER_NONE_VALUE || typeFilter !== FILTER_NONE_VALUE || nameFilter !== '')) {
