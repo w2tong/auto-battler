@@ -1,4 +1,4 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { FILTER_NONE_VALUE } from "@/utils/constants";
 import { ItemType } from "@wholesome-sisters/auto-battler";
 
@@ -20,15 +20,18 @@ type InventoryTypeFilterProps = {
 };
 export default function InventoryTypeFilter({ value, onChange }: InventoryTypeFilterProps) {
     return (
-        <Select value={value} onValueChange={val => onChange(val)}>
-            <SelectTrigger className='w-[102px]'>
-                <SelectValue placeholder='Type Filter' />
-            </SelectTrigger>
-            <SelectContent className='w-[102px]'>
-                {typeOptions.map(({ value, text }) => (
-                    <SelectItem key={text} value={value}>{text}</SelectItem>
-                ))}
-            </SelectContent>
-        </Select>
+        <SelectGroup className='flex flex-row items-center'>
+            <SelectLabel className='text-foreground font-bold'>Type</SelectLabel>
+            <Select value={value} onValueChange={val => onChange(val)}>
+                <SelectTrigger className='w-[102px]'>
+                    <SelectValue placeholder='Type Filter' />
+                </SelectTrigger>
+                <SelectContent className='w-[102px]'>
+                    {typeOptions.map(({ value, text }) => (
+                        <SelectItem key={text} value={value}>{text}</SelectItem>
+                    ))}
+                </SelectContent>
+            </Select>
+        </SelectGroup>
     );
 }
