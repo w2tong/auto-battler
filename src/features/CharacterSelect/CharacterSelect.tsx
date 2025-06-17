@@ -28,7 +28,7 @@ export default function CharacterSelect() {
             </div>
 
             <div>
-                <div className={cn('absolute bg-secondary right-0', open ? 'visible' : 'invisible', matches ? 'w-60' : 'w-screen')}>
+                <div className={cn('absolute bg-secondary right-0', open ? 'block' : 'hidden', matches ? 'w-60' : 'w-screen')}>
                     {list.map((char, i) => <CharacterSelectCard name={char.name} charClass={char.class} level={char.level} exp={char.exp} index={i} selected={i === selected} setSelected={() => characterDispatch({ type: 'select', index: i })} key={i} />)}
                 </div>
             </div>
