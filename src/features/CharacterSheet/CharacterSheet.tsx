@@ -130,6 +130,13 @@ export default function CharacterSheet(
                 </div>
             </div>
 
+            {char.className &&
+                <div>
+                    <h3>Abilities</h3>
+                    <AbilitySelector char={char} className={char.className} />
+                </div>
+            }
+
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
                 <div className='space-y-2'>
                     <h3>Weapons</h3>
@@ -162,13 +169,6 @@ export default function CharacterSheet(
                 </div>
                 {potionProps && <CharacterSheetPotion name={potionProps.name} min={potionProps.min} max={potionProps.max} charges={potionProps.charges} tier={potionProps.tier} />}
             </div>
-
-            {char.className &&
-                <div>
-                    <h3>Abilities</h3>
-                    <AbilitySelector char={char} className={char.className} />
-                </div>
-            }
         </div>
     );
 }
