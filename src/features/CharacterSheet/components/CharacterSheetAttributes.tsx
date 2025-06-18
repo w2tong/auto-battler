@@ -28,7 +28,7 @@ export default function CharacterSheetAttributes({ level, attributes, className 
                 return (
                     <div className='flex justify-between w-full' key={attr}>
                         <AttributeTooltip type={attr as AttributeType} base={base} bonus={bonus}>
-                            <label className='mr-4 text-tooltip-highlight font-medium' htmlFor={attr} onClick={e => e.preventDefault()}>{attr}</label>
+                            <label className='mr-4 text-tooltip-highlight font-medium' htmlFor={attr}>{attr}</label>
                         </AttributeTooltip>
                         <input
                             id={attr}
