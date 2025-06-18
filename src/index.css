@@ -68,6 +68,11 @@ F5853F - Orange
     --breakpoint-xs: 360px
 }
 
+html body[data-scroll-locked] {
+    overflow: visible !important;
+    margin-right: 0 !important;
+}
+
 :root {
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
@@ -83,7 +88,7 @@ F5853F - Orange
     -moz-osx-font-smoothing: grayscale;
 
     scrollbar-color: grey black;
-    scrollbar-gutter: stable;
+    scrollbar-width: thin;
 
     --radius: 0.625rem;
     --background: oklch(1 0 0);
