@@ -13,7 +13,9 @@ import potion from '../assets/potion.png';
 import ring from '../assets/ring.png';
 import DraggableItem from './DraggableItem';
 
-const icons: { [key in EquipSlot]: string } = {
+import { TRASH_ID } from '@/utils/constants';
+
+const icons: Record<Slot, string> = {
     [EquipSlot.MainHand]: mainHand,
     [EquipSlot.OffHand]: offHand,
     [EquipSlot.Armour]: armour,
@@ -23,10 +25,19 @@ const icons: { [key in EquipSlot]: string } = {
     [EquipSlot.Ring2]: ring,
     [EquipSlot.Potion]: potion,
     [EquipSlot.Waist]: waist,
-    [EquipSlot.Neck]: neck
+    [EquipSlot.Neck]: neck,
+    inventory: inventorySlot,
+    trash: inventorySlot
 };
 
-export default function ItemSlot({ id, itemId, filtered, slot, onRightClick }: { id: string, itemId: string | null, filtered: boolean, slot?: EquipSlot; onRightClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void; }) {
+type Slot = EquipSlot | 'inventory' | typeof TRASH_ID;
+type ItemSlotProps = {
+    id: string,
+    itemId: string | null,
+    filtered?: boolean,
+    slot: Slot;
+};
+export default function ItemSlot({ id, itemId, filtered = false, slot }: ItemSlotProps) {
     const { isOver, setNodeRef, over, active } = useDroppable({
         id,
         data: { itemId }
@@ -35,7 +46,7 @@ export default function ItemSlot({ id, itemId, filtered, slot, onRightClick }: {
     let borderColor = 'border-zinc-700';
     if (isOver && over && active?.data.current?.itemId) {
         const activeItemId = active.data.current.itemId;
-        if (isNaN(parseInt(over.id.toString()))) {
+        if (over.id !== TRASH_ID && isNaN(parseInt(over.id.toString()))) {
             borderColor = isValidEquip(activeItemId, over.id as EquipSlot) ? 'border-positive' : 'border-negative';
         }
         else {
@@ -45,10 +56,9 @@ export default function ItemSlot({ id, itemId, filtered, slot, onRightClick }: {
 
     return (
         <div
-            style={{ backgroundImage: `url(${slot ? icons[slot] : inventorySlot})` }}
+            style={{ backgroundImage: `url(${icons[slot]})` }}
             className={`bg-cover w-[36px] h-[36px] lg:w-[52px] lg:h-[52px] xl:w-[68px] xl:h-[68px] border-2 rounded-sm bg-center bg-no-repeat ${borderColor}`}
             ref={setNodeRef}
-            onContextMenu={onRightClick}
         >
             {itemId ? <DraggableItem id={id} itemId={itemId} filtered={filtered} /> : null}
         </div>

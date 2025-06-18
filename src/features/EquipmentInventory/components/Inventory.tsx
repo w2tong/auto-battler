@@ -2,8 +2,6 @@ import { useState } from 'react';
 import ItemSlot from './ItemSlot';
 import { ItemId, equips } from '@wholesome-sisters/auto-battler';
 import { cn } from '@utils/utils';
-import Switch from '@components/Switch';
-import InfoTooltip from '@components/InfoTooltip';
 import { useDebounceValue } from 'usehooks-ts';
 import { Input } from '@/components/ui/input';
 import InventoryTierFilter from './InventoryTierFilter';
@@ -12,11 +10,11 @@ import InventoryTypeFilter from './InventoryTypeFilter';
 import InventorySort from './InventorySort';
 
 // TODO: add keywords thats can be used in name filter (e.g. Attributes, Stats, on hit)
-export default function Inventory({ items, sort, sortOnChange, className, onItemRightClick }: { items: (string | null)[], sort: string, sortOnChange: (val: string) => void, className?: string; onItemRightClick?: (index: number) => void; }) {
+type InventoryProps = { items: (string | null)[], sort: string, sortOnChange: (val: string) => void, className?: string; };
+export default function Inventory({ items, sort, sortOnChange, className }: InventoryProps) {
     const [tierFilter, setTierFilter] = useState<string>(FILTER_NONE_VALUE);
     const [typeFilter, setTypeFilter] = useState<string>(FILTER_NONE_VALUE);
     const [nameFilter, setNameFilter] = useDebounceValue<string>('', 100);
-    const [sellMode, setSellMode] = useState(false);
 
     function updateTier(tier: string) {
         setTierFilter(() => tier);
@@ -28,13 +26,7 @@ export default function Inventory({ items, sort, sortOnChange, className, onItem
     return (
         <div className={cn('flex flex-col', className)}>
             <div>
-                <div className='flex flex-row gap-x-2'>
-                    <h1 className='text-xl font-bold'>Inventory</h1>
-                    <div className='flex flex-row items-center'>
-                        <span>Delete Mode <InfoTooltip content={'Enables deleting items from your Inventory with right click.'} /></span>
-                        <Switch checked={sellMode} onChange={setSellMode} className='ml-2' />
-                    </div>
-                </div>
+                <h1 className='text-xl font-bold'>Inventory</h1>
                 <div className='flex flex-row flex-wrap py-1 items-end space-x-2 text-sm'>
                     <Input
                         className='min-w-30 max-w-48'
@@ -66,12 +58,7 @@ export default function Inventory({ items, sort, sortOnChange, className, onItem
                             key={i}
                             itemId={itemId}
                             filtered={filtered}
-                            onRightClick={onItemRightClick ? (e) => {
-                                if (sellMode) {
-                                    e.preventDefault();
-                                    onItemRightClick(i);
-                                }
-                            } : undefined}
+                            slot='inventory'
                         />
                     );
                 }

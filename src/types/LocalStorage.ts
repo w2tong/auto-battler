@@ -34,6 +34,7 @@ enum LocalStorageKey {
     BattleSpeed = 'battle-speed',
     Characters = 'characters',
     Inventory = 'inventory',
+    Trash = 'trash'
 }
 
 export { LocalStorageKey };
