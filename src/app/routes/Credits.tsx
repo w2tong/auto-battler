@@ -705,7 +705,7 @@ function CreditsGroup({ name, credits }: { name: string, credits: CreditProps[];
         <div>
             <h2 className='text-2xl font-bold pb-2'>{name}</h2>
             <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
-                {Object.values(credits).map(props => <Credit {...props} />)}
+                {Object.values(credits).map((props, i) => <Credit key={name + i} {...props} />)}
             </div>
         </div>
     );
