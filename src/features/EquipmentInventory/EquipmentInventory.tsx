@@ -35,15 +35,18 @@ export default function EquipmentInventory({ className }: { className?: string; 
     }
 
     return (
-        <div className={cn('flex flex-row space-x-4', className)}>
+        <div className={cn('flex flex-col', className)}>
             <DndContext onDragEnd={handleDragEnd}>
-                <Equipment equipment={equipment} />
+                <div className='flex flex-row gap-x-4 sm:gap-x-6'>
+                    <Equipment equipment={equipment} />
+                    <Trash itemId={trashItemId} />
+                </div>
                 <Inventory
                     items={inventory}
                     sort={inventorySort}
                     sortOnChange={handleSortOnChange}
                 />
-                <Trash itemId={trashItemId} />
+
             </DndContext>
         </div >
     );
