@@ -152,11 +152,11 @@ export default function EquipmentInventory({ className }: { className?: string; 
             inventoryDispatch({ type: 'update', index: invActiveId, itemId: null });
             setTrashItemId(itemId);
         }
-        // Trash dragged to 
+        // Trash dragged to Inventory Slot
         else if (activeIsTrash && overIsInv) {
             const overInvId = Number(overId);
-            if (inventory[overInvId] !== null) {
-                toast('You must move this item to an empty slot.');
+            if (inventory[overInvId] !== null && inventory[overInvId] !== undefined) {
+                toast('You can only move this item to an empty slot.');
             }
             else {
                 const itemId = trashItemId;
