@@ -33,6 +33,16 @@ import orangeNecklaceIconUrl from '@assets/icons/items/neck/orange-necklace.svg'
 import purpleNecklaceIconUrl from '@assets/icons/items/neck/purple-necklace.svg';
 import redNecklaceIconUrl from '@assets/icons/items/neck/red-necklace.svg';
 
+import blueRingIconUrl from '@assets/icons/items/ring/blue-ring.svg';
+import greenRingIconUrl from '@assets/icons/items/ring/green-ring.svg';
+import greyRingIconUrl from '@assets/icons/items/ring/grey-ring.svg';
+import orangeRingIconUrl from '@assets/icons/items/ring/orange-ring.svg';
+import purpleRingIconUrl from '@assets/icons/items/ring/purple-ring.svg';
+import redRingIconUrl from '@assets/icons/items/ring/red-ring.svg';
+import tealRingIconUrl from '@assets/icons/items/ring/teal-ring.svg';
+import thornsRingIconUrl from '@assets/icons/items/ring/thorns-ring.svg';
+import yellowRingIconUrl from '@assets/icons/items/ring/yellow-ring.svg';
+
 import roundShieldIconUrl from '@assets/icons/items/shields/round-shield.svg';
 import spikedShieldIconUrl from '@assets/icons/items/shields/spiked-shield.svg';
 
@@ -44,6 +54,7 @@ import longbowIconUrl from '@assets/icons/items/weapons/longbow.svg';
 import maceIconUrl from '@assets/icons/items/weapons/mace.svg';
 import poisonBiteIconUrl from '@assets/icons/items/weapons/poison-bite.svg';
 import wandIconUrl from '@assets/icons/items/weapons/wand.svg';
+import quarterstaffIconUrl from '@assets/icons/items/weapons/quarterstaff.svg';
 
 
 import goblinIconUrl from '@assets/icons/npcs/goblin.svg';
@@ -83,7 +94,7 @@ const licenses: Record<string, License> = {
 };
 
 type Artist = { name: string, link: string; };
-type ArtistId = 'Lorc' | 'Delapouite' | 'CarlOlsen' | 'Willdabeast' | 'JohnRedman' | 'HeavenlyDog' | 'Lucas' | 'sbed' | 'CaroAsercion';
+type ArtistId = 'Lorc' | 'Delapouite' | 'CarlOlsen' | 'Willdabeast' | 'JohnRedman' | 'HeavenlyDog' | 'Lucas' | 'sbed' | 'CaroAsercion' | 'Skoll';
 const artists: Record<ArtistId, Artist> = {
     Lorc: {
         name: 'Lorc',
@@ -119,6 +130,10 @@ const artists: Record<ArtistId, Artist> = {
     },
     CaroAsercion: {
         name: 'Caro Asercion',
+        link: 'https://game-icons.net/'
+    },
+    Skoll: {
+        name: 'Skoll',
         link: 'https://game-icons.net/'
     }
 } as const;
@@ -357,6 +372,88 @@ const necks: CreditProps[] = [
 
 
 ];
+const rings: CreditProps[] = [
+    {
+        src: blueRingIconUrl,
+        alt: 'Mana Regen Ring icon',
+        imgName: 'Big diamond ring',
+        imgLink: 'https://game-icons.net/1x1/skoll/big-diamond-ring.html',
+        artist: artists.Skoll,
+        license: licenses.CCBY30
+    },
+    {
+        src: greenRingIconUrl,
+        alt: 'Dodge Ring icon',
+        imgName: 'Big diamond ring',
+        imgLink: 'https://game-icons.net/1x1/skoll/big-diamond-ring.html',
+        artist: artists.Skoll,
+        license: licenses.CCBY30
+    },
+    {
+        src: greyRingIconUrl,
+        alt: 'Accuracy Ring icon',
+        imgName: 'Big diamond ring',
+        imgLink: 'https://game-icons.net/1x1/skoll/big-diamond-ring.html',
+        artist: artists.Skoll,
+        license: licenses.CCBY30
+    },
+    {
+        src: orangeRingIconUrl,
+        alt: 'Critical Damage Ring icon',
+        imgName: 'Big diamond ring',
+        imgLink: 'https://game-icons.net/1x1/skoll/big-diamond-ring.html',
+        artist: artists.Skoll,
+        license: licenses.CCBY30
+    },
+    {
+        src: purpleRingIconUrl,
+        alt: 'Mana Hit Ring icon',
+        imgName: 'Big diamond ring',
+        imgLink: 'https://game-icons.net/1x1/skoll/big-diamond-ring.html',
+        artist: artists.Skoll,
+        license: licenses.CCBY30
+    },
+    {
+        src: redRingIconUrl,
+        alt: 'Damage Ring icon',
+        imgName: 'Big diamond ring',
+        imgLink: 'https://game-icons.net/1x1/skoll/big-diamond-ring.html',
+        artist: artists.Skoll,
+        license: licenses.CCBY30
+    },
+    {
+        src: tealRingIconUrl,
+        alt: 'Mana Cost Ring icon',
+        imgName: 'Big diamond ring',
+        imgLink: 'https://game-icons.net/1x1/skoll/big-diamond-ring.html',
+        artist: artists.Skoll,
+        license: licenses.CCBY30
+    },
+    {
+        src: thornsRingIconUrl,
+        alt: 'Thorns Ring icon',
+        imgName: 'Crown of thorns',
+        imgLink: 'https://game-icons.net/1x1/lorc/crown-of-thorns.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: tealRingIconUrl,
+        alt: 'Mana Cost Ring icon',
+        imgName: 'Big diamond ring',
+        imgLink: 'https://game-icons.net/1x1/skoll/big-diamond-ring.html',
+        artist: artists.Skoll,
+        license: licenses.CCBY30
+    },
+    {
+        src: yellowRingIconUrl,
+        alt: 'Critical Chance Ring icon',
+        imgName: 'Big diamond ring',
+        imgLink: 'https://game-icons.net/1x1/skoll/big-diamond-ring.html',
+        artist: artists.Skoll,
+        license: licenses.CCBY30
+    },
+];
 const shields: CreditProps[] = [
     {
         src: roundShieldIconUrl,
@@ -438,6 +535,14 @@ const weapons: CreditProps[] = [
         imgName: 'Orb wand',
         imgLink: 'https://game-icons.net/1x1/willdabeast/orb-wand.html',
         artist: artists.Willdabeast,
+        license: licenses.CCBY30
+    },
+    {
+        src: quarterstaffIconUrl,
+        alt: 'Quarterstaff icon',
+        imgName: 'Bo',
+        imgLink: 'https://game-icons.net/1x1/delapouite/bo.html',
+        artist: artists.Delapouite,
         license: licenses.CCBY30
     },
 ];
@@ -616,6 +721,7 @@ export default function Credits() {
                 <CreditsGroup name={'Armour'} credits={armour} />
                 <CreditsGroup name={'Heads'} credits={heads} />
                 <CreditsGroup name={'Necks'} credits={necks} />
+                <CreditsGroup name={'Rings'} credits={rings} />
                 <CreditsGroup name={'Shields'} credits={shields} />
                 <CreditsGroup name={'Weapons'} credits={weapons} />
                 <CreditsGroup name={'NPCs'} credits={npcs} />
