@@ -17,7 +17,7 @@ export default function CharacterSelectCard({ name, charClass, level, index, sel
     const classColor = classTextColor[charClass];
 
     return (
-        <button className={cn('hover:bg-card w-full', selected && 'bg-card')} onClick={() => setSelected(index)}>
+        <button className={cn('w-full cursor-pointer hover:bg-card', selected && 'bg-card')} onClick={() => setSelected(index)}>
             <div className='flex flex-row items-center p-2'>
                 <ClassIcon className='w-[48px] h-[48px]' charClass={charClass} />
                 <div className='flex flex-col text-left my-auto ml-4 min-w-0'>
