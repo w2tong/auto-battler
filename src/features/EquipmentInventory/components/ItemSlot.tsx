@@ -1,17 +1,18 @@
 import { useDroppable } from '@dnd-kit/core';
 import { EquipSlot, isValidEquip } from '@wholesome-sisters/auto-battler';
 import DraggableItem from './DraggableItem';
-import neck from '../assets/neck.png';
-import armour from '../assets/armour.png';
-import waist from '../assets/waist.png';
-import hands from '../assets/hands.png';
-import head from '../assets/head.png';
-import mainHand from '../assets/mainhand.png';
-import offHand from '../assets/offHand.png';
-import potion from '../assets/potion.png';
-import ring from '../assets/ring.png';
+
+import mainHand from '@/assets/icons/items/slots/main-hand.png';
+import offHand from '@/assets/icons/items/slots/off-hand.png';
+import armour from '@/assets/icons/items/slots/armour.png';
+import head from '@/assets/icons/items/slots/head.png';
+import hands from '@/assets/icons/items/slots/hands.png';
+import potion from '@/assets/icons/items/slots/potion.png';
+import ring from '@/assets/icons/items/slots/ring.png';
+import waist from '@/assets/icons/items/slots/waist.png';
+import neck from '@/assets/icons/items/slots/neck.png';
 import inventorySlot from '../assets/inventory.png';
-import trashCan from '@/assets/icons/items/trash-can.png';
+import trashCan from '@/assets/icons/items/slots/trash-can.png';
 
 import { TRASH_ID } from '@/utils/constants';
 

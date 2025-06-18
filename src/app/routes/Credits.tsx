@@ -53,7 +53,16 @@ import ratIconUrl from '@assets/icons/npcs/rat.svg';
 import wolfIconUrl from '@assets/icons/npcs/wolf.svg';
 import zombieIconUrl from '@assets/icons/npcs/zombie.svg';
 
-import trashCanIconUrl from '@assets/icons/items/trash-can.png';
+import mainHandIconUrl from '@assets/icons/items/slots/main-hand.png';
+import offHandIconUrl from '@assets/icons/items/slots/off-hand.png';
+import headIconUrl from '@assets/icons/items/slots/head.png';
+import amrourIconUrl from '@assets/icons/items/slots/armour.png';
+import handsIconUrl from '@assets/icons/items/slots/hands.png';
+import ringIconUrl from '@assets/icons/items/slots/ring.png';
+import potionIconUrl from '@assets/icons/items/slots/potion.png';
+import waistIconUrl from '@assets/icons/items/slots/waist.png';
+import neckIconUrl from '@assets/icons/items/slots/neck.png';
+import trashCanIconUrl from '@assets/icons/items/slots/trash-can.png';
 
 type CreditProps = {
     src: string,
@@ -73,7 +82,7 @@ const licenses: Record<string, License> = {
 };
 
 type Artist = { name: string, link: string; };
-type ArtistId = 'Lorc' | 'Delapouite' | 'CarlOlsen' | 'Willdabeast' | 'JohnRedman' | 'HeavenlyDog';
+type ArtistId = 'Lorc' | 'Delapouite' | 'CarlOlsen' | 'Willdabeast' | 'JohnRedman' | 'HeavenlyDog' | 'Lucas' | 'sbed' | 'CaroAsercion';
 const artists: Record<ArtistId, Artist> = {
     Lorc: {
         name: 'Lorc',
@@ -99,11 +108,22 @@ const artists: Record<ArtistId, Artist> = {
         name: 'HeavenlyDog',
         link: 'https://gnomosygoblins.blogspot.com/'
     },
+    Lucas: {
+        name: 'Lucas',
+        link: 'https://game-icons.net/'
+    },
+    sbed: {
+        name: 'sbed',
+        link: 'http://opengameart.org/content/95-game-icons'
+    },
+    CaroAsercion: {
+        name: 'Caro Asercion',
+        link: 'https://game-icons.net/'
+    }
 } as const;
 
 // Classes
 const classes: CreditProps[] = [
-
     {
         src: fighterIconUrl,
         alt: 'Fighter icon',
@@ -473,8 +493,80 @@ const npcs: CreditProps[] = [
     },
 ];
 
-// Other
-const other: CreditProps[] = [
+// Item Slots
+const itemSlots: CreditProps[] = [
+    {
+        src: mainHandIconUrl,
+        alt: 'Main-hand icon',
+        imgName: 'Crossed swords',
+        imgLink: 'https://game-icons.net/1x1/lorc/crossed-swords.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: offHandIconUrl,
+        alt: 'Off-hand icon',
+        imgName: 'Shield',
+        imgLink: 'https://game-icons.net/1x1/sbed/shield.html',
+        artist: artists.sbed,
+        license: licenses.CCBY30
+    },
+    {
+        src: headIconUrl,
+        alt: 'Head icon',
+        imgName: 'Barbute',
+        imgLink: 'https://game-icons.net/1x1/lorc/barbute.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: amrourIconUrl,
+        alt: 'Armour icon',
+        imgName: 'Chest armor',
+        imgLink: 'https://game-icons.net/1x1/delapouite/chest-armor.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
+    {
+        src: handsIconUrl,
+        alt: 'Hands icon',
+        imgName: 'Gloves',
+        imgLink: 'https://game-icons.net/1x1/delapouite/chest-armor.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
+    {
+        src: ringIconUrl,
+        alt: 'Ring icon',
+        imgName: 'Diamond ring',
+        imgLink: 'https://game-icons.net/1x1/delapouite/diamond-ring.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
+    {
+        src: potionIconUrl,
+        alt: 'Potion icon',
+        imgName: 'Round potion',
+        imgLink: 'https://game-icons.net/1x1/caro-asercion/round-potion.html',
+        artist: artists.CaroAsercion,
+        license: licenses.CCBY30
+    },
+    {
+        src: waistIconUrl,
+        alt: 'Waist icon',
+        imgName: 'Belt',
+        imgLink: 'https://game-icons.net/1x1/lucasms/belt.html',
+        artist: artists.Lucas,
+        license: licenses.CCBY30
+    },
+    {
+        src: neckIconUrl,
+        alt: 'Neck icon',
+        imgName: 'Belt',
+        imgLink: 'https://game-icons.net/1x1/delapouite/emerald-necklace.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
     {
         src: trashCanIconUrl,
         alt: 'Trash can icon',
@@ -514,7 +606,7 @@ export default function Credits() {
             <CreditsGroup name={'Shields'} credits={shields} />
             <CreditsGroup name={'Weapons'} credits={weapons} />
             <CreditsGroup name={'NPCs'} credits={npcs} />
-            <CreditsGroup name={'Other'} credits={other} />
+            <CreditsGroup name={'Item Slots'} credits={itemSlots} />
         </div>
     );
 }
