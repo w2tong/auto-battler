@@ -53,6 +53,8 @@ import ratIconUrl from '@assets/icons/npcs/rat.svg';
 import wolfIconUrl from '@assets/icons/npcs/wolf.svg';
 import zombieIconUrl from '@assets/icons/npcs/zombie.svg';
 
+import trashCanIconUrl from '@assets/icons/items/trash-can.png';
+
 type CreditProps = {
     src: string,
     alt: string,
@@ -471,6 +473,18 @@ const npcs: CreditProps[] = [
     },
 ];
 
+// Other
+const other: CreditProps[] = [
+    {
+        src: trashCanIconUrl,
+        alt: 'Trash can icon',
+        imgName: 'Trash can',
+        imgLink: 'https://game-icons.net/1x1/delapouite/trash-can.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    }
+];
+
 function Credit({ src, alt, imgName, imgLink, artist, license }: CreditProps) {
     return (
         <div className='flex items-center'>
@@ -500,6 +514,7 @@ export default function Credits() {
             <CreditsGroup name={'Shields'} credits={shields} />
             <CreditsGroup name={'Weapons'} credits={weapons} />
             <CreditsGroup name={'NPCs'} credits={npcs} />
+            <CreditsGroup name={'Other'} credits={other} />
         </div>
     );
 }

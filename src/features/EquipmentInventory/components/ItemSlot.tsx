@@ -1,7 +1,6 @@
 import { useDroppable } from '@dnd-kit/core';
 import { EquipSlot, isValidEquip } from '@wholesome-sisters/auto-battler';
-import inventorySlot from '../assets/inventory.png';
-
+import DraggableItem from './DraggableItem';
 import neck from '../assets/neck.png';
 import armour from '../assets/armour.png';
 import waist from '../assets/waist.png';
@@ -11,7 +10,8 @@ import mainHand from '../assets/mainhand.png';
 import offHand from '../assets/offHand.png';
 import potion from '../assets/potion.png';
 import ring from '../assets/ring.png';
-import DraggableItem from './DraggableItem';
+import inventorySlot from '../assets/inventory.png';
+import trashCan from '@/assets/icons/items/trash-can.png';
 
 import { TRASH_ID } from '@/utils/constants';
 
@@ -27,7 +27,7 @@ const icons: Record<Slot, string> = {
     [EquipSlot.Waist]: waist,
     [EquipSlot.Neck]: neck,
     inventory: inventorySlot,
-    trash: inventorySlot
+    trash: trashCan
 };
 
 type Slot = EquipSlot | 'inventory' | typeof TRASH_ID;
@@ -53,6 +53,8 @@ export default function ItemSlot({ id, itemId, filtered = false, slot }: ItemSlo
             borderColor = 'border-white';
         }
     }
+
+    if (slot === TRASH_ID) console.log(icons[slot]);
 
     return (
         <div
