@@ -55,12 +55,10 @@ export default function ItemSlot({ id, itemId, filtered = false, slot }: ItemSlo
         }
     }
 
-    if (slot === TRASH_ID) console.log(icons[slot]);
-
     return (
         <div
             style={{ backgroundImage: `url(${icons[slot]})` }}
-            className={`bg-cover w-[36px] h-[36px] lg:w-[52px] lg:h-[52px] xl:w-[68px] xl:h-[68px] border-2 rounded-sm bg-center bg-no-repeat ${borderColor}`}
+            className={`bg-cover w-[52px] h-[52px] lg:w-[68px] lg:h-[68px] border-2 rounded-sm bg-center bg-no-repeat ${borderColor}`}
             ref={setNodeRef}
         >
             {itemId ? <DraggableItem id={id} itemId={itemId} filtered={filtered} /> : null}
