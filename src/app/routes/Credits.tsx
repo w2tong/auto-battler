@@ -62,6 +62,7 @@ import ringIconUrl from '@assets/icons/items/slots/ring.png';
 import potionIconUrl from '@assets/icons/items/slots/potion.png';
 import waistIconUrl from '@assets/icons/items/slots/waist.png';
 import neckIconUrl from '@assets/icons/items/slots/neck.png';
+import inventoryIconUrl from '@assets/icons/items/slots/inventory.png';
 import trashCanIconUrl from '@assets/icons/items/slots/trash-can.png';
 
 type CreditProps = {
@@ -568,45 +569,58 @@ const itemSlots: CreditProps[] = [
         license: licenses.CCBY30
     },
     {
+        src: inventoryIconUrl,
+        alt: 'Inventory icon',
+        imgName: 'Swap bag',
+        imgLink: 'https://game-icons.net/1x1/lorc/swap-bag.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
+    {
         src: trashCanIconUrl,
         alt: 'Trash can icon',
         imgName: 'Trash can',
         imgLink: 'https://game-icons.net/1x1/delapouite/trash-can.html',
-        artist: artists.Delapouite,
+        artist: artists.Lorc,
         license: licenses.CCBY30
     }
 ];
 
 function Credit({ src, alt, imgName, imgLink, artist, license }: CreditProps) {
     return (
-        <div className='flex items-center'>
-            <span><img className='h-8 inline' src={src} alt={alt} /><a className='font-bold text-tooltip-highlight' href={imgLink}>{imgName}</a> by <a className='font-bold text-tooltip-highlight' href={artist.link}> {artist.name}</a> under <a className='font-bold text-tooltip-highlight' href={license.link}>{license.name}</a>.</span>
+        <div className='flex items-center text-xl'>
+            <span>
+                <img className='h-12 inline pr-2' src={src} alt={alt} /><a className='font-bold text-tooltip-highlight' href={imgLink}>{imgName}</a> by <a className='font-bold text-tooltip-highlight' href={artist.link}> {artist.name}</a> under <a className='font-bold text-tooltip-highlight' href={license.link}>{license.name}</a>.</span>
         </div>
     );
 }
 
 function CreditsGroup({ name, credits }: { name: string, credits: CreditProps[]; }) {
     return (
-        <>
-            <h2>{name}</h2>
-            {Object.values(credits).map(props => <Credit {...props} />)}
-        </>
+        <div>
+            <h2 className='text-2xl font-bold pb-2'>{name}</h2>
+            <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
+                {Object.values(credits).map(props => <Credit {...props} />)}
+            </div>
+        </div>
     );
 }
 
 export default function Credits() {
     return (
-        <div>
-            <h1>Credits</h1>
-            <CreditsGroup name={'Classes'} credits={classes} />
-            <CreditsGroup name={'Status Effects'} credits={statusEffects} />
-            <CreditsGroup name={'Armour'} credits={armour} />
-            <CreditsGroup name={'Heads'} credits={heads} />
-            <CreditsGroup name={'Necks'} credits={necks} />
-            <CreditsGroup name={'Shields'} credits={shields} />
-            <CreditsGroup name={'Weapons'} credits={weapons} />
-            <CreditsGroup name={'NPCs'} credits={npcs} />
-            <CreditsGroup name={'Item Slots'} credits={itemSlots} />
+        <div className='px-6 py-4 space-y-4'>
+            <h1 className='text-3xl font-bold'>Credits</h1>
+            <div className='space-y-10'>
+                <CreditsGroup name={'Classes'} credits={classes} />
+                <CreditsGroup name={'Status Effects'} credits={statusEffects} />
+                <CreditsGroup name={'Armour'} credits={armour} />
+                <CreditsGroup name={'Heads'} credits={heads} />
+                <CreditsGroup name={'Necks'} credits={necks} />
+                <CreditsGroup name={'Shields'} credits={shields} />
+                <CreditsGroup name={'Weapons'} credits={weapons} />
+                <CreditsGroup name={'NPCs'} credits={npcs} />
+                <CreditsGroup name={'Item Slots'} credits={itemSlots} />
+            </div>
         </div>
     );
 }

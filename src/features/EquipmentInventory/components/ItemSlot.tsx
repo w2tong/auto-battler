@@ -11,7 +11,7 @@ import potion from '@/assets/icons/items/slots/potion.png';
 import ring from '@/assets/icons/items/slots/ring.png';
 import waist from '@/assets/icons/items/slots/waist.png';
 import neck from '@/assets/icons/items/slots/neck.png';
-import inventorySlot from '../assets/inventory.png';
+import inventory from '@/assets/icons/items/slots/inventory.png';
 import trashCan from '@/assets/icons/items/slots/trash-can.png';
 
 import { TRASH_ID } from '@/utils/constants';
@@ -27,7 +27,7 @@ const icons: Record<Slot, string> = {
     [EquipSlot.Potion]: potion,
     [EquipSlot.Waist]: waist,
     [EquipSlot.Neck]: neck,
-    inventory: inventorySlot,
+    inventory: inventory,
     trash: trashCan
 };
 
