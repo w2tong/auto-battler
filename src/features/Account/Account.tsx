@@ -5,7 +5,7 @@ import { cn } from "@/utils/utils";
 type AccountProps = { className?: string; };
 export default function Account({ className }: AccountProps) {
     return (
-        <div className={cn('mx-auto w-full sm:w-fit space-y-4', className)}>
+        <div className={cn('mx-auto w-full sm:w-[640px] space-y-4', className)}>
             <h1 className='text-3xl font-bold text-center sm:text-left'>Account</h1>
             <AccountImportExport />
 

@@ -42,7 +42,7 @@ export default function AccountCharacterList() {
     return (
         <div className='space-y-4 mx-auto'>
             {characters.list.length < MAX_CHARACTERS &&
-                <div className='flex flex-col sm:flex-row space-y-1 sm:space-x-1'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 gap-1'>
                     <ImportDialog title='Import Character' description='Paste your character export string below.' onImport={handleImport}>
                         <Button>Import Character</Button>
                     </ImportDialog>
