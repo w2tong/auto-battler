@@ -5,6 +5,9 @@ import EquipmentInventory from "@features/EquipmentInventory/EquipmentInventory"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { useToggle } from "usehooks-ts";
 
+import caretDown from '@assets/ui/caret-down.svg';
+import caretUp from '@assets/ui/caret-up.svg';
+
 export default function EquipmentPage() {
     const { list, selected } = useCharacters();
     const selectedChar = list[selected];
@@ -31,7 +34,11 @@ export default function EquipmentPage() {
                 <EquipmentInventory />
                 <Collapsible open={characterSheetOpen} onOpenChange={toggle}>
                     {/* TODO: replace with caret SVG */}
-                    <CollapsibleTrigger><h1 className='text-xl font-bold'>Character Sheet {characterSheetOpen ? 'v' : '^'}</h1></CollapsibleTrigger>
+                    <CollapsibleTrigger>
+                        <h1 className='text-xl font-bold flex flex-row items-center gap-0.5 cursor-pointer'>
+                            <span>Character Sheet</span><img className='mt-[2px] w-8 h-8' src={characterSheetOpen ? caretUp : caretDown} />
+                        </h1>
+                    </CollapsibleTrigger>
                     <CollapsibleContent>
                         <CharacterSheet char={char} exp={selectedChar.exp} />
                     </CollapsibleContent>
