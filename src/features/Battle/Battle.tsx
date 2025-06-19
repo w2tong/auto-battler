@@ -127,12 +127,12 @@ export default function Battle({ lsChar, index, encounterLevel }: { lsChar: Loca
     const battle = battleRef.current;
     return (
         <div className='flex flex-col justify-center w-full mx-0 xl:mx-auto 2xl:w-[1536px] pt-1'>
-            <div className='flex flex-row items-center h-[72px] gap-x-1 sm:gap-x-6 justify-evenly sm:justify-start'>
-                <div className='flex flex-col sm:flex-row flex-wrap gap-1'>
+            <div className='flex flex-row items-center h-[72px] gap-x-1 sm:gap-x-8 justify-evenly sm:justify-start'>
+                <div className='flex flex-col sm:flex-row flex-wrap w-fit sm:w-[210px] gap-1'>
                     <Button onClick={() => newBattle()}>New Battle</Button>
                     {combat === 'before' && <Button onClick={() => startCombat()}>Start Battle</Button>}
                 </div>
-                <PauseButton className='w-12 h-12' paused={paused} onClick={() => setPaused(prev => !prev)} />
+                <PauseButton className='w-9 h-9' paused={paused} onClick={() => setPaused(prev => !prev)} />
                 <BattleSpeed speed={battleSpeed} onChange={setBattleSpeed} />
                 <AutoStart checked={autoStart} onChange={() => setAutoStart(auto => !auto)} />
             </div>
