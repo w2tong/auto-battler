@@ -29,7 +29,7 @@ export default function Inventory({ items, sort, sortOnChange, className }: Inve
                 <h1 className='text-xl font-bold'>Inventory</h1>
                 <div className='flex flex-row flex-wrap py-1 items-end space-x-2 text-sm'>
                     <Input
-                        className='min-w-30 max-w-48'
+                        className='min-w-30 max-w-48 h-8'
                         type='text'
                         name='Name Filter'
                         placeholder='Filter By Name'
