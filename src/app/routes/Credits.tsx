@@ -76,6 +76,10 @@ import neckIconUrl from '@assets/icons/items/slots/neck.png';
 import inventoryIconUrl from '@assets/icons/items/slots/inventory.png';
 import trashCanIconUrl from '@assets/icons/items/slots/trash-can.png';
 
+
+import questionMarkIconUrl from '@assets/icons/gui/question-mark.svg';
+import equipmentIconUrl from '@assets/icons/gui/equipment.svg';
+
 type CreditProps = {
     src: string,
     alt: string,
@@ -691,6 +695,26 @@ const itemSlots: CreditProps[] = [
     }
 ];
 
+// GUI
+const gui: CreditProps[] = [
+    {
+        src: questionMarkIconUrl,
+        alt: 'Question mark icon',
+        imgName: 'Uncertainty',
+        imgLink: 'https://game-icons.net/1x1/lorc/uncertainty.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: equipmentIconUrl,
+        alt: 'Equipment icon',
+        imgName: 'Cape armor',
+        imgLink: 'https://game-icons.net/1x1/delapouite/cape-armor.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    }
+];
+
 function Credit({ src, alt, imgName, imgLink, artist, license }: CreditProps) {
     return (
         <div className='flex items-center text-xl'>
@@ -726,6 +750,7 @@ export default function Credits() {
                 <CreditsGroup name={'Weapons'} credits={weapons} />
                 <CreditsGroup name={'NPCs'} credits={npcs} />
                 <CreditsGroup name={'Item Slots'} credits={itemSlots} />
+                <CreditsGroup name={'GUI'} credits={gui} />
             </div>
         </div>
     );
