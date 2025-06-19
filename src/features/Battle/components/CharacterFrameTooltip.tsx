@@ -27,7 +27,7 @@ function Stat({ name, value }: { name: string, value: number | string; }) {
 
 export default function CharacterFrameTooltip({ name, attr, stats, mainHandDamage, offHandDamage, onHit, ability, classColor, children }: CharacterFrameTooltipProps) {
     const content =
-        <div className='w-60 space-y-2 p-1'>
+        <div className='w-70 space-y-2 p-1'>
             <div className={cn('font-extrabold', classColor)}>{name}</div>
             <Separator />
             <div className='grid grid-cols-3 gap-x-0.5 text-center'>
@@ -41,22 +41,22 @@ export default function CharacterFrameTooltip({ name, attr, stats, mainHandDamag
             <Separator />
             <div className='grid grid-cols-2 gap-x-8 text-right'>
                 <Stat name={StatType.Accuracy} value={formatNum(stats[StatType.Accuracy])} />
-                <Stat name={StatType.ArmourPenetration} value={formatNum(stats[StatType.ArmourPenetration])} />
                 <Stat name={StatType.Dodge} value={`${formatNum(stats[StatType.Dodge])}%`} />
                 <Stat name={StatType.Armour} value={formatNum(stats[StatType.Armour])} />
+                <Stat name={StatType.ArmourPenetration} value={formatNum(stats[StatType.ArmourPenetration])} />
                 <Stat name={StatType.Deflection} value={formatNum(stats[StatType.Deflection])} />
             </div>
             <Separator />
             <div className='flex flex-row justify-between'>
                 <div>
                     <div className='font-bold'>Main-hand</div>
-                    <div>{formatNum(mainHandDamage.min)} - {formatNum(mainHandDamage.max)}</div>
+                    <div><b>{formatNum(mainHandDamage.min)}</b> - <b>{formatNum(mainHandDamage.max)}</b> damage</div>
                 </div>
                 <div>
                     {offHandDamage &&
                         <>
                             <div className='font-bold'>Off-hand</div>
-                            <div>{formatNum(offHandDamage.min)} - {formatNum(offHandDamage.max)}</div>
+                            <div><b>{formatNum(offHandDamage.min)}</b> - <b>{formatNum(offHandDamage.max)}</b> damage</div>
                         </>
                     }
                 </div>
