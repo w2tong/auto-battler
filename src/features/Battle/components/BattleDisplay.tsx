@@ -8,7 +8,8 @@ import TurnOrder from './TurnOrder';
 import { useLayoutEffect, useRef, useState } from 'react';
 import TurnOrderType from '../types/TurnOrderType';
 
-export default function BattleDisplay({ left, right, combatLog, turnOrder, turnIndex }: { left: BattleCharacter[], right: BattleCharacter[], turnOrder: TurnOrderType, turnIndex: number, combatLog: LogLine[]; }) {
+type BattleDisplayProps = { left: BattleCharacter[], right: BattleCharacter[], turnOrder: TurnOrderType, turnIndex: number, combatLog: LogLine[]; };
+export default function BattleDisplay({ left, right, combatLog, turnOrder, turnIndex }: BattleDisplayProps) {
     const [combatLogHeight, setCombatLogHeight] = useState<number | undefined>(undefined);
     const combatLogRef = useRef<HTMLDivElement>(null);
 
@@ -28,7 +29,7 @@ export default function BattleDisplay({ left, right, combatLog, turnOrder, turnI
         <div className='h-full flex flex-col md:flex-row'>
             <div className='flex flex-col grow'>
                 <TurnOrder chars={turnOrder} index={turnIndex} />
-                {/* TODO: shrink character frames on lower resolution (3 rats shrinks combat log too much) */}
+                {/* TODO:  shrink character frames on lower resolution (3 rats shrinks combat log too much) */}
                 <div className='flex flex-row'>
                     <div className='flex-1 flex-col p-2 space-y-1 w-1/2'>
                         <h2 className='text-xl font-bold text-center'>Left</h2>

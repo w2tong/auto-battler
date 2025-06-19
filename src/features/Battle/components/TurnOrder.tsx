@@ -1,6 +1,7 @@
 import TurnOrderType from "../types/TurnOrderType";
 
-export default function TurnOrder({ chars, index }: { chars: TurnOrderType, index: number; }) {
+type TurnOrderProps = { chars: TurnOrderType, index: number; };
+export default function TurnOrder({ chars, index }: TurnOrderProps) {
     return (
         <div>
             <h2 className='text-xl font-bold'>Turn Order</h2>

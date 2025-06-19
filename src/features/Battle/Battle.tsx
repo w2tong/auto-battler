@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useCharactersDispatch } from "@contexts/Characters/CharactersContext";
 import BattleDisplay from "./components/BattleDisplay";
-import { abilities, AttributeType, Battle as AutoBattle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, StatType } from "@wholesome-sisters/auto-battler";
+import { abilities, AttributeType, Battle as AutoBattle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, StatType, TurnRes } from "@wholesome-sisters/auto-battler";
 import BattleCharacter from "./types/BattleCharacter";
 import { useInventoryDispatch } from "@contexts/Inventory/InventoryContext";
 import { LocalStorageCharacter, LocalStorageKey } from "../../types/LocalStorage";
@@ -76,7 +76,11 @@ export default function Battle({ lsChar, index, encounterLevel }: { lsChar: Loca
 
     useInterval(() => {
         if (battleRef.current) {
-            const turnRes = battleRef.current.nextTurn();
+            const battle = battleRef.current;
+            let turnRes: TurnRes = { combatEnded: false };
+
+            turnRes = battle.nextTurn();
+
             if (turnRes.combatEnded) {
                 setCombat('after');
                 if (turnRes.winner && turnRes.winner === Side.Left) {
@@ -89,8 +93,8 @@ export default function Battle({ lsChar, index, encounterLevel }: { lsChar: Loca
                         newExp = newExp - expReq;
                         newLevel += 1;
                     }
-                    battleRef.current.log.addExp(lsChar.name, expGain);
-                    if (newLevel > lsChar.level) battleRef.current.log.addLevelUp(lsChar.name, newLevel);
+                    battle.log.addExp(lsChar.name, expGain);
+                    if (newLevel > lsChar.level) battle.log.addLevelUp(lsChar.name, newLevel);
                     characterDispatch({ type: 'update', index, level: newLevel, exp: newExp });
 
                     // Add loot
@@ -98,9 +102,18 @@ export default function Battle({ lsChar, index, encounterLevel }: { lsChar: Loca
                     const lootTable = Math.random() <= leveledLootTable.rareChance ? leveledLootTable.rare : leveledLootTable.normal;
                     const itemId = lootTable[Math.floor(Math.random() * lootTable.length)];
                     inventoryDispatch({ type: 'update', itemId });
-                    battleRef.current.log.addLoot(lsChar.name, itemId);
+                    battle.log.addLoot(lsChar.name, itemId);
                 }
             }
+
+            // Do turns of dead characters without delay (waiting for interval)
+            let char = battle.turnOrder[battle.turnIndex].char;
+            while (char.isDead()) {
+                turnRes = battle.nextTurn();
+                char = battle.turnOrder[battle.turnIndex].char;
+                if (turnRes.combatEnded === true) break;
+            }
+
             setTurn(t => t + 1); // Force rerender
         }
     }, combat === 'in' && !paused ? DEFAULT_DELAY / battleSpeed : null);
