@@ -27,7 +27,7 @@ export default function CharacterSelect({ className }: CharacterSelectProps) {
 
     return (
         <div
-            className={cn('w-fit sm:w-60 md:w-70 lg:w-80 relative flex flex-col z-10 cursor-pointer bg-secondary hover:bg-card', className)}
+            className={cn('relative z-10 cursor-pointer bg-secondary hover:bg-card', className)}
             onClick={handleOpen}
         >
             {selectedChar ?
