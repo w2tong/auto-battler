@@ -28,16 +28,17 @@ export default function Inventory({ items, sort, sortOnChange, className }: Inve
             <div>
                 <h1 className='text-xl font-bold'>Inventory</h1>
                 <div className='flex flex-row flex-wrap py-1 items-end space-x-2 text-sm'>
+                    <InventoryTierFilter value={tierFilter} onChange={updateTier} />
+                    <InventoryTypeFilter value={typeFilter} onChange={updateType} />
                     <Input
-                        className='min-w-30 max-w-48 h-8'
+                        className='min-w-30 max-w-40 h-8'
                         type='text'
                         name='Name Filter'
                         placeholder='Filter By Name'
                         onChange={e => setNameFilter(e.target.value)}
                     />
                     <InventorySort value={sort} onChange={sortOnChange} />
-                    <InventoryTierFilter value={tierFilter} onChange={updateTier} />
-                    <InventoryTypeFilter value={typeFilter} onChange={updateType} />
+
                 </div>
             </div>
 
