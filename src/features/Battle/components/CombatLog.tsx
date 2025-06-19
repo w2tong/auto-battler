@@ -76,8 +76,8 @@ function lineToString(line: LogLine) {
 type CombatLogProps = { log: LogLine[], className?: string, ref?: React.Ref<HTMLDivElement>; };
 export default function CombatLog({ log, className, ref }: CombatLogProps) {
     return (
-        <div ref={ref} className={cn('flex flex-col', className)}>
-            <h2 className='grow-0'>Combat Log</h2>
+        <div ref={ref} className={cn('flex flex-col gap-y-2', className)}>
+            <h2 className='text-xl font-bold grow-0'>Combat Log</h2>
             <div className='grow overflow-y-auto flex flex-col-reverse'>
                 <div className='flex flex-col'>
                     {log.map((line, i) => {

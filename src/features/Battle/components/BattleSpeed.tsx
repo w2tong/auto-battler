@@ -1,6 +1,7 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { BATTLE_SPEEDS } from "@/utils/constants";
 import { cn } from "@/utils/utils";
+import { SelectGroup, SelectLabel } from "@radix-ui/react-select";
 
 type BattleSpeedProps = {
     speed: number;
@@ -10,9 +11,8 @@ type BattleSpeedProps = {
 
 export default function BattleSpeed({ speed, onChange, className }: BattleSpeedProps) {
     return (
-        <div className={cn('flex flex-col sm:flex-row items-center', className)}>
-            <p className='text-xl font-bold'>Speed: </p>
-
+        <SelectGroup className={cn('flex flex-col sm:flex-row items-center gap-x-2', className)}>
+            <SelectLabel className='text-lg font-bold'>Speed</SelectLabel>
             <Select value={speed.toString()} onValueChange={val => onChange(Number(val))}>
                 <SelectTrigger className='w-[80px]'>
                     <SelectValue placeholder='Speed' />
@@ -23,6 +23,6 @@ export default function BattleSpeed({ speed, onChange, className }: BattleSpeedP
                     ))}
                 </SelectContent>
             </Select>
-        </div>
+        </SelectGroup>
     );
 }

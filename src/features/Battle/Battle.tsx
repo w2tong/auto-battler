@@ -4,7 +4,6 @@ import BattleDisplay from "./components/BattleDisplay";
 import { abilities, AttributeType, Battle as AutoBattle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, StatType } from "@wholesome-sisters/auto-battler";
 import BattleCharacter from "./types/BattleCharacter";
 import { useInventoryDispatch } from "@contexts/Inventory/InventoryContext";
-import Switch from "@components/Switch";
 import { LocalStorageCharacter, LocalStorageKey } from "../../types/LocalStorage";
 import { BuffBar, DebuffBar } from "../../types/StatusEffectBar";
 import PauseButton from "./components/PauseButton";
@@ -12,6 +11,7 @@ import { useInterval, useLocalStorage } from "usehooks-ts";
 import { Button } from "@/components/ui/button";
 import { BATTLE_SPEEDS } from "@/utils/constants";
 import BattleSpeed from "./components/BattleSpeed";
+import AutoStart from "./components/AutoStart";
 
 const DEFAULT_DELAY = 1000;
 
@@ -22,7 +22,7 @@ export default function Battle({ lsChar, index, encounterLevel }: { lsChar: Loca
     const [paused, setPaused] = useState<boolean>(false);
 
     const [battleSpeed, setBattleSpeed] = useLocalStorage<number>(LocalStorageKey.BattleSpeed, BATTLE_SPEEDS['1x']);
-    const [battleAutoStart, setBattleAutoStart] = useLocalStorage<boolean>(LocalStorageKey.BattleAutoStart, false);
+    const [autoStart, setAutoStart] = useLocalStorage<boolean>(LocalStorageKey.BattleAutoStart, false);
 
     const [combat, setCombat] = useState<'before' | 'in' | 'after'>('before');
 
@@ -106,10 +106,10 @@ export default function Battle({ lsChar, index, encounterLevel }: { lsChar: Loca
     }, combat === 'in' && !paused ? DEFAULT_DELAY / battleSpeed : null);
 
     useEffect(() => {
-        if (battleAutoStart && combat === 'before') {
+        if (autoStart && combat === 'before') {
             startCombat();
         }
-    }, [battleAutoStart, combat]);
+    }, [autoStart, combat]);
 
     const battle = battleRef.current;
     return (
@@ -127,17 +127,15 @@ export default function Battle({ lsChar, index, encounterLevel }: { lsChar: Loca
 
                 {/* Auto Start Toggle */}
                 {/* TODO: Remove Auto Start header on mobile (show on hover or click?) */}
-                <div className='flex flex-col sm:flex-row items-center space-x-1'>
-                    <p className='text-xl font-bold'>Auto Start:</p>
-                    <Switch checked={battleAutoStart} onChange={() => setBattleAutoStart(auto => !auto)} />
-                </div>
+                {/* TODO: replace with shadcn switch */}
+                <AutoStart checked={autoStart} onChange={() => setAutoStart(auto => !auto)} />
             </div>
 
             {battle && (
                 <BattleDisplay
                     left={battle.left.map(char => toBattleCharacter(char))}
                     right={battle.right.map(char => toBattleCharacter(char))}
-                    turnOrder={battle.turnOrder.map(char => char.char.name)}
+                    turnOrder={battle.aliveTurnOrder.map(c => { return { name: c.char.name, index: c.index }; })}
                     turnIndex={battle.turnIndex}
                     combatLog={battle.log.flatLog}
                 />

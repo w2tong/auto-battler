@@ -25,13 +25,13 @@ function Header({ className }: { className?: string; }) {
                             isActive && 'text-primary-text-active'
                         )}
                     >
-                        <button className='w-full h-full cursor-pointer text-[4vw] sm:text-[3vw] md:text-xl  font-extrabold flex items-center justify-center'>
+                        <button className='w-full h-full cursor-pointer text-[3vw] sm:text-[3vw] md:text-xl  font-extrabold flex items-center justify-center'>
                             {text}
                         </button>
                     </NavLink>
                 )}
             </nav>
-            <CharacterSelect className='w-fit sm:w-50 md:w-60 lg:w-70' />
+            <CharacterSelect className='min-w-[64px] w-fit sm:w-50 md:w-60 lg:w-70' />
         </div >
     );
 }
