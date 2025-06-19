@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router';
-import Header from '@/features/Header/Header';
+import Header from '@/app/routes/Header';
 import BattlePage from './routes/BattlePage';
 import EquipmentPage from './routes/EquipmentPage';
 import Home from './routes/Home';
