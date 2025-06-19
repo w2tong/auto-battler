@@ -119,15 +119,8 @@ export default function Battle({ lsChar, index, encounterLevel }: { lsChar: Loca
                     <Button onClick={() => newBattle()}>New Battle</Button>
                     {combat === 'before' && <Button onClick={() => startCombat()}>Start Battle</Button>}
                 </div>
-
-                {/* Pause Button */}
                 <PauseButton className='w-12 h-12' paused={paused} onClick={() => setPaused(prev => !prev)} />
-
                 <BattleSpeed speed={battleSpeed} onChange={setBattleSpeed} />
-
-                {/* Auto Start Toggle */}
-                {/* TODO: Remove Auto Start header on mobile (show on hover or click?) */}
-                {/* TODO: replace with shadcn switch */}
                 <AutoStart checked={autoStart} onChange={() => setAutoStart(auto => !auto)} />
             </div>
 
