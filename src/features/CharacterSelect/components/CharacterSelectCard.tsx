@@ -8,7 +8,6 @@ type CharacterSelectCardProps = {
     name: string,
     charClass: ClassName,
     level: number,
-    exp: number,
     index: number,
     selected: boolean,
     setSelected: Dispatch<SetStateAction<number>>;

@@ -11,27 +11,23 @@ export default function EquipmentPage() {
 
     const [characterSheetOpen, toggle] = useToggle(false);
 
-    if (!selectedChar) {
-        return (
+    let content = (<>
+        <h1 className='text-3xl font-bold w-fit mx-auto sm:mx-0'>Equipment</h1>
+        <p className='w-fit mx-auto sm:mx-0'>Select a character to use this page.</p>
+    </>);
+    if (selectedChar) {
+        const char = new Character({
+            name: selectedChar.name,
+            level: selectedChar.level,
+            className: selectedChar.class,
+            attributes: selectedChar.attributes,
+            statTemplate: {},
+            equipment: createEquipmentImport(selectedChar.equipment),
+            ability: abilities[selectedChar.ability],
+            petId: selectedChar.pet ?? undefined
+        });
+        content = (
             <>
-                Select a character.
-            </>
-        );
-    }
-
-    const char = new Character({
-        name: selectedChar.name,
-        level: selectedChar.level,
-        className: selectedChar.class,
-        attributes: selectedChar.attributes,
-        statTemplate: {},
-        equipment: createEquipmentImport(selectedChar.equipment),
-        ability: abilities[selectedChar.ability]
-    });
-
-    return (
-        <>
-            <div className='flex flex-col gap-y-4 px-4 py-4'>
                 <EquipmentInventory />
                 <Collapsible open={characterSheetOpen} onOpenChange={toggle}>
                     {/* TODO: replace with caret SVG */}
@@ -40,9 +36,13 @@ export default function EquipmentPage() {
                         <CharacterSheet char={char} exp={selectedChar.exp} />
                     </CollapsibleContent>
                 </Collapsible>
+            </>
+        );
+    }
 
-            </div>
-
-        </>
+    return (
+        <div className='flex flex-col gap-y-4 px-4 py-4'>
+            {content}
+        </div>
     );
 }

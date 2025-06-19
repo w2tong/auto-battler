@@ -12,18 +12,26 @@ const navLinks: { to: string, text: string; }[] = [
 
 function Header({ className }: { className?: string; }) {
     return (
-        <div className={cn('flex justify-between w-full bg-secondary', className)}>
-            <nav className={'flex grow'}>
+        <div className={cn('flex justify-between w-full bg-secondary h-[68px]', className)}>
+            <nav className='flex grow gap-2'>
                 {navLinks.map(({ to, text }, i) =>
-                    // <NavLink key={i} to={to} className={({ isActive }) => `${isActive ? 'text-primary-active' : ''} flex-1 h-full hover:text-primary-hover`}>
-                    <NavLink key={i} to={to} className={({ isActive }) => cn('flex-1 h-full text-primary-text hover:text-primary-text-hover', isActive && 'text-primary-text-active')}>
-                        <button className='w-full h-full cursor-pointer text-md sm:text-xl md:text-3xl  font-extrabold flex items-center justify-center'>
+                    // TODO: adjust text size at breakpoints to add space
+                    // TODO: adjust colors
+                    <NavLink
+                        key={i}
+                        to={to}
+                        className={({ isActive }) => cn(
+                            'flex-1 h-full text-primary-text hover:text-primary-text-hover',
+                            isActive && 'text-primary-text-active'
+                        )}
+                    >
+                        <button className='w-full h-full cursor-pointer text-[4vw] sm:text-[3vw] md:text-xl  font-extrabold flex items-center justify-center'>
                             {text}
                         </button>
                     </NavLink>
                 )}
             </nav>
-            <CharacterSelect />
+            <CharacterSelect className='w-fit sm:w-50 md:w-60 lg:w-70' />
         </div >
     );
 }

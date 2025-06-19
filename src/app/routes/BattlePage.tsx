@@ -10,17 +10,21 @@ export default function BattlePage() {
     const { list, selected } = useCharacters();
     const lsChar = list[selected];
 
-    if (!lsChar) {
-        return 'Select a character to battle.';
-    }
     if (isNaN(level) || level < 1 || level > 20) {
         return <div>Invalid level: <b>{param.level}</b>. Choose a level between <b>1</b> and <b>20</b>.</div>;
     }
     return (
-        <Battle
-            lsChar={lsChar}
-            index={selected}
-            encounterLevel={level as LevelRange}
-        />
+        <div className='px-6 py-4'>
+            {lsChar ?
+                <Battle
+                    lsChar={lsChar}
+                    index={selected}
+                    encounterLevel={level as LevelRange}
+                />
+                :
+                <p className='text-center'>Select a character to use this page.</p>
+            }
+
+        </div>
     );
 }
