@@ -36,7 +36,7 @@ export default function BattlePage() {
                             onChange={handleLevelInputChange}
                         />
                     </div>
-                    <Button disabled>Boss Encounter</Button>
+                    <Button className='w-full' disabled>Boss Encounter</Button>
                 </div>
                 :
                 <p className='w-fit mx-auto sm:mx-0'>Select a character to use this page.</p>
