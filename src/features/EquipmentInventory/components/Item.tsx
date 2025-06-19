@@ -9,7 +9,6 @@ function Item({ itemId, filtered, dragging }: { itemId: string, filtered: boolea
     const item = equips[itemId as ItemId];
     const icon = itemIconMap[itemId as ItemId];
 
-    // TODO: remove item.img when itemIconMap is filled out 
     return (
         <ItemTooltip className='w-full h-full' item={item} display={!dragging}>
             <div className={`z-10 box-border border-solid rounded-xs bg-black ${tierBorderColor[item.tier]} ${filtered ? '' : 'border-2'}`}>
