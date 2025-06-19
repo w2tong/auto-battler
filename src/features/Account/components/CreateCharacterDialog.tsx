@@ -69,7 +69,7 @@ export default function CreateCharacterDialog() {
             <AlertDialogTrigger asChild>
                 <Button>Create Character</Button>
             </AlertDialogTrigger>
-            <AlertDialogContent className='min-h-170'>
+            <AlertDialogContent className='min-h-0 md:min-h-170 overflow-y-auto max-h-[98vh]'>
                 <AlertDialogHeader>
                     <AlertDialogTitle>Create Character</AlertDialogTitle>
                     <AlertDialogDescription>
