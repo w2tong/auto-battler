@@ -1,4 +1,4 @@
-import { DndContext, DragEndEvent } from "@dnd-kit/core";
+import { DndContext, DragEndEvent, MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { ActionUpdateEquipment, useCharacters, useCharactersDispatch } from "@contexts/Characters/CharactersContext";
 import Equipment from "./components/Equipment";
 import Inventory from "./components/Inventory";
@@ -34,9 +34,22 @@ export default function EquipmentInventory({ className }: { className?: string; 
         setInventorySort(() => '');
     }
 
+    const mouseSensor = useSensor(MouseSensor);
+    const touchSensor = useSensor(TouchSensor, {
+        activationConstraint: {
+            delay: 250,
+            tolerance: 20,
+        },
+    });
+
+    const sensors = useSensors(
+        mouseSensor,
+        touchSensor,
+    );
+
     return (
         <div className={cn('flex flex-col', className)}>
-            <DndContext onDragEnd={handleDragEnd}>
+            <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
                 <div className='flex flex-row gap-x-4 sm:gap-x-6'>
                     <Equipment equipment={equipment} />
                     <Trash itemId={trashItemId} />

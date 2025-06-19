@@ -41,7 +41,7 @@ export default function Inventory({ items, sort, sortOnChange, className }: Inve
                 </div>
             </div>
 
-            <div className='flex flex-row flex-wrap content-start gap-0.5 touch-none'>
+            <div className='flex flex-row flex-wrap content-start gap-0.5 touch-manipulation'>
                 {[...items, null].map((itemId, i) => {
                     let filtered = false;
                     if (itemId && (tierFilter !== FILTER_NONE_VALUE || typeFilter !== FILTER_NONE_VALUE || nameFilter !== '')) {

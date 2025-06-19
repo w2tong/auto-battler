@@ -6,7 +6,7 @@ export default function Equipment({ equipment, className }: { equipment: { [slot
     return (
         <div className={cn(className)}>
             <h1 className='text-xl font-bold pb-2'>Equipment</h1>
-            <div className='flex flex-row flex-wrap touch-none'>
+            <div className='flex flex-row flex-wrap touch-manipulation'>
                 <ItemSlot id={EquipSlot.Head} itemId={equipment[EquipSlot.Head]} slot={EquipSlot.Head} />
                 <ItemSlot id={EquipSlot.Armour} itemId={equipment[EquipSlot.Armour]} slot={EquipSlot.Armour} />
                 <ItemSlot id={EquipSlot.Hands} itemId={equipment[EquipSlot.Hands]} slot={EquipSlot.Hands} />
