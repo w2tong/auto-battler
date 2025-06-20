@@ -21,7 +21,7 @@ function Home() {
     return (
         <div className="flex flex-col items-center justify-center min-h-[60vh] px-6 py-8 gap-8">
             <div className="flex flex-col items-center gap-2">
-                <h1 className="text-4xl font-extrabold tracking-tight">Auto Battler</h1>
+                <h1 className="text-4xl font-extrabold">Auto Battler</h1>
                 <p className="text-lg text-muted-foreground max-w-xl text-center">
                     Build your team, equip your heroes, and battle your way to the top. Manage your account, customize your characters, and challenge powerful enemies in this strategic auto-battler experience.
                 </p>
