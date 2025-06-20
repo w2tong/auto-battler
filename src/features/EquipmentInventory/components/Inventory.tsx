@@ -26,7 +26,7 @@ export default function Inventory({ items, sort, sortOnChange, className }: Inve
     return (
         <div className={cn('flex flex-col', className)}>
             <div>
-                <h1 className='text-xl font-bold'>Inventory</h1>
+                <h1 className='text-xl sm:text-2xl font-bold'>Inventory</h1>
                 <div className='flex flex-row flex-wrap py-1 items-end space-x-2 text-sm'>
                     <InventoryTierFilter value={tierFilter} onChange={updateTier} />
                     <InventoryTypeFilter value={typeFilter} onChange={updateType} />

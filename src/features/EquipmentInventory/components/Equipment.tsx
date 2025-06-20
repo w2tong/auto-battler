@@ -5,7 +5,7 @@ import { cn } from '@utils/utils';
 export default function Equipment({ equipment, className }: { equipment: { [slot in EquipSlot]: string | null; }, className?: string; }) {
     return (
         <div className={cn(className)}>
-            <h1 className='text-xl font-bold pb-2'>Equipment</h1>
+            <h1 className='text-xl sm:text-2xl font-bold pb-2'>Equipment</h1>
             <div className='flex flex-row flex-wrap touch-manipulation'>
                 <ItemSlot id={EquipSlot.Head} itemId={equipment[EquipSlot.Head]} slot={EquipSlot.Head} />
                 <ItemSlot id={EquipSlot.Armour} itemId={equipment[EquipSlot.Armour]} slot={EquipSlot.Armour} />

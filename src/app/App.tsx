@@ -13,27 +13,29 @@ import CharacterPage from './routes/CharacterPage';
 
 function App() {
     return (
-        <>
+        <div className='flex flex-col h-full'>
             <BrowserRouter basename='/auto-battler'>
                 <CharactersProvider>
                     <InventoryProvider>
                         <Toaster position='top-center' />
                         <Header />
-                        <Routes>
-                            <Route index element={<Home />} />
-                            <Route path="character" element={<CharacterPage />} />
-                            <Route path="equipment" element={<EquipmentPage />} />
-                            <Route path="battle">
-                                <Route index element={<BattleSelector />} />
-                                <Route path=":level" element={<BattlePage />} />
-                            </Route>
-                            <Route path="account" element={<AccountPage />} />
-                            <Route path="credits" element={<Credits />} />
-                        </Routes>
+                        <div className='flex-1'>
+                            <Routes>
+                                <Route index element={<Home />} />
+                                <Route path="character" element={<CharacterPage />} />
+                                <Route path="equipment" element={<EquipmentPage />} />
+                                <Route path="battle">
+                                    <Route index element={<BattleSelector />} />
+                                    <Route path=":level" element={<BattlePage />} />
+                                </Route>
+                                <Route path="account" element={<AccountPage />} />
+                                <Route path="credits" element={<Credits />} />
+                            </Routes>
+                        </div>
                     </InventoryProvider>
                 </CharactersProvider>
             </BrowserRouter>
-        </>
+        </div>
     );
 }
 
