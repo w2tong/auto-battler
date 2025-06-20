@@ -2,17 +2,11 @@ import { abilities, Character, createEquipmentImport } from "@wholesome-sisters/
 import CharacterSheet from "@features/CharacterSheet/CharacterSheet";
 import { useCharacters } from "@contexts/Characters/CharactersContext";
 import EquipmentInventory from "@features/EquipmentInventory/EquipmentInventory";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { useToggle } from "usehooks-ts";
-
-import caretDown from '@assets/ui/caret-down.svg';
-import caretUp from '@assets/ui/caret-up.svg';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 export default function EquipmentPage() {
     const { list, selected } = useCharacters();
     const selectedChar = list[selected];
-
-    const [characterSheetOpen, toggle] = useToggle(false);
 
     let content = (<>
         <h1 className='text-3xl font-bold w-fit mx-auto sm:mx-0'>Equipment</h1>
@@ -32,16 +26,16 @@ export default function EquipmentPage() {
         content = (
             <>
                 <EquipmentInventory />
-                <Collapsible open={characterSheetOpen} onOpenChange={toggle}>
-                    <CollapsibleTrigger>
-                        <h1 className='text-xl font-bold flex flex-row items-center gap-0.5 cursor-pointer'>
-                            <span>Character Sheet</span><img className='mt-[2px] w-8 h-8' src={characterSheetOpen ? caretUp : caretDown} />
-                        </h1>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent>
-                        <CharacterSheet char={char} exp={selectedChar.exp} />
-                    </CollapsibleContent>
-                </Collapsible>
+                <Accordion type="single" collapsible>
+                    <AccordionItem value="item-1">
+                        <AccordionTrigger className='justify-start items-center cursor-pointer gap-2'>
+                            <h1 className='text-lg font-bold'>Character Sheet</h1>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                            <CharacterSheet char={char} exp={selectedChar.exp} />
+                        </AccordionContent>
+                    </AccordionItem>
+                </Accordion>
             </>
         );
     }
