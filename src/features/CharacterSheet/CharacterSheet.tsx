@@ -6,11 +6,15 @@ import CharacterSheetPotion from "./components/CharacterScreenPotion";
 import { classTextColor } from "../../utils/classColour";
 import AbilitySelector from "./components/AbilitySelector";
 import { cn } from "@/utils/utils";
+import Pet from "./components/Pet";
+import { useToggle } from "usehooks-ts";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
-export default function CharacterSheet(
-    { char, exp }: { char: Character, exp: number; }
-) {
+import caretDown from '@assets/ui/caret-down.svg';
+import caretUp from '@assets/ui/caret-up.svg';
 
+type CharacterSheetProps = { char: Character, exp: number; };
+export default function CharacterSheet({ char, exp }: CharacterSheetProps) {
     // Attributes
     const str = char.attributes[AttributeType.Strength];
     const dex = char.attributes[AttributeType.Dexterity];
@@ -57,6 +61,8 @@ export default function CharacterSheet(
             tier: potion.tier
         };
     }
+
+    const [petOpen, togglePetOpen] = useToggle(false);
 
     const classColor = char.className ? classTextColor[char.className] : '';
 
@@ -173,6 +179,20 @@ export default function CharacterSheet(
                 </div>
                 {potionProps && <CharacterSheetPotion name={potionProps.name} min={potionProps.min} max={potionProps.max} charges={potionProps.charges} tier={potionProps.tier} />}
             </div>
+
+            {char.pet &&
+                <Collapsible open={petOpen} onOpenChange={togglePetOpen}>
+                    <CollapsibleTrigger>
+                        <h1 className='text-xl font-bold flex flex-row items-center gap-0.5 cursor-pointer'>
+                            <span>Pet</span><img className='mt-[2px] w-8 h-8' src={petOpen ? caretUp : caretDown} />
+                        </h1>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent>
+                        <Pet pet={char.pet} />
+                    </CollapsibleContent>
+                </Collapsible>
+
+            }
         </div>
     );
 };
