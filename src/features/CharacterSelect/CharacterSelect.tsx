@@ -45,7 +45,7 @@ export default function CharacterSelect({ className }: CharacterSelectProps) {
                         {matches ?
                             <button className={cn('w-full h-full cursor-pointer hover:bg-card')}>
                                 <div className='flex flex-row items-center p-2'>
-                                    <img className='w-[48px] h-[48px]' src={questionMark} />
+                                    <img className='w-[48px] h-[48px]' src={questionMark} alt='Unselected character icon' />
                                     <div className='flex flex-col text-left my-auto ml-4 min-w-0 font-bold'>
                                         Select or Create a character
                                     </div>
@@ -53,7 +53,7 @@ export default function CharacterSelect({ className }: CharacterSelectProps) {
                             </button>
                             :
                             <div className='p-2' onClick={() => { if (list.length === 0) toast('Create a character.'); }}>
-                                <img className=' rounded-full w-[48px] h-[48px]' src={questionMark} />
+                                <img className=' rounded-full w-[48px] h-[48px]' src={questionMark} alt='Unselected character icon' />
                             </div>
                         }
                     </div>
