@@ -28,7 +28,7 @@ export default function CreateCharacterDialog() {
                     {Object.values(ClassName).map(charClass =>
                         <div key={charClass} className='bg-black'>
                             <button className={`${selectedClassName === charClass ? 'opacity-100' : 'opacity-25'} transition duration-250 ease-in-out hover:opacity-100`} key={charClass} onClick={() => setSelectedClassName(charClass)}>
-                                <ClassIcon class={charClass} width={64} height={64} />
+                                <ClassIcon className='w-[64px] h-[64px]' charClass={charClass} />
                             </button>
                         </div>
                     )}
@@ -69,7 +69,7 @@ export default function CreateCharacterDialog() {
             <AlertDialogTrigger asChild>
                 <Button>Create Character</Button>
             </AlertDialogTrigger>
-            <AlertDialogContent className='min-h-170'>
+            <AlertDialogContent className='min-h-0 md:min-h-170 overflow-y-auto max-h-[98vh]'>
                 <AlertDialogHeader>
                     <AlertDialogTitle>Create Character</AlertDialogTitle>
                     <AlertDialogDescription>

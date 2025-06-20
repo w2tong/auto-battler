@@ -1,6 +1,7 @@
 import { useCharacters, useCharactersDispatch } from "@/contexts/Characters/CharactersContext";
 import { cn } from "@/utils/utils";
 import { Ability, AbilityId, Character, classes, ClassName } from "@wholesome-sisters/auto-battler";
+import AbilityCard from "./AbilityCard";
 
 type AbilitySelectorProps = { char: Character, className: ClassName, };
 export default function AbilitySelector({ char, className }: AbilitySelectorProps) {
@@ -9,7 +10,6 @@ export default function AbilitySelector({ char, className }: AbilitySelectorProp
     const abilities = classes[className].abilities;
 
     function updateAbility(id: AbilityId) {
-        console.log('updateAbility', id);
         dispatch({ type: 'update', index: selected, ability: id });
     }
 
@@ -27,18 +27,11 @@ function AbilityButton({ ability, char, updateAbility }: { ability: Ability, cha
         <button
             onClick={() => updateAbility(ability.id)}
             className={cn(
-                'w-full transition-colors cursor-pointer border',
-                isSelected && 'bg-accent text-accent-foreground border border-accent-foreground'
+                'w-full transition-colors cursor-pointer border px-4 py-2',
+                isSelected && 'bg-accent border-accent-foreground'
             )}
         >
-            <div className='flex flex-col p-2 space-y-2 w-full h-full text-left'>
-                <p className='font-bold'>{ability.name}</p>
-                <p className='text-foreground'>{ability.description(char)}</p>
-                <div className='mt-auto'>
-                    {ability.attackType && <p className='text-sm'><b>Attack</b>: {ability.attackType}</p>}
-                    {ability.scaling && <p className='text-sm'><b>Scaling</b>: [{ability.scaling.join(', ')}]</p>}
-                </div>
-            </div>
+            <AbilityCard ability={ability} description={ability.description(char)} />
         </button>
     );
 }

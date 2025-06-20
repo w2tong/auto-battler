@@ -3,6 +3,7 @@ import { StatType } from "@wholesome-sisters/auto-battler";
 type CharacterFrameStats = {
     [StatType.Accuracy]: number;
     [StatType.Dodge]: number;
+    [StatType.ArmourPenetration]: number;
     [StatType.Armour]: number;
     [StatType.Deflection]: number;
 };

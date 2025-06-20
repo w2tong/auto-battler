@@ -1,3 +1,5 @@
+import { cn } from "@/utils/utils";
+
 enum Resource {
     Health = 'Health',
     Mana = 'Mana'
@@ -25,9 +27,9 @@ export default function ResourceBar(props: ResourceBarProps) {
     const width = `${props.curr >= 0 ? Math.min(props.curr / props.max * 100, 100) : 0}%`;
 
     return (
-        <div className={`w-full ${resource.bgColor} h-6`}>
-            <span className='absolute font-bold pl-2'>{`${props.curr} / ${props.max}`}</span>
-            <div className={`${resource.color} h-6`} style={{ width }}>
+        <div className={cn('w-full h-6', resource.bgColor)}>
+            <span className='absolute font-bold pl-2 align-middle'>{`${props.curr} / ${props.max}`}</span>
+            <div className={cn('h-6 align-middle', resource.color)} style={{ width }}>
             </div>
         </div>
     );

@@ -30,15 +30,15 @@ import redNecklaceIconUrl from '@assets/icons/items/neck/red-necklace.svg';
 import healingPotionIconUrl from '@assets/icons/items/potion/healing-potion.png';
 
 // Ring
-import blackRingIconUrl from '@assets/icons/items/ring/black-ring.png';
-import blueRingIconUrl from '@assets/icons/items/ring/blue-ring.png';
-import greyRingIconUrl from '@assets/icons/items/ring/grey-ring.png';
-import orangeRingIconUrl from '@assets/icons/items/ring/orange-ring.png';
-import purpleRingIconUrl from '@assets/icons/items/ring/purple-ring.png';
-import redRingIconUrl from '@assets/icons/items/ring/red-ring.png';
-import shieldRingIconUrl from '@assets/icons/items/ring/shield-ring.png';
-import tealRingIconUrl from '@assets/icons/items/ring/teal-ring.png';
-import thornsRingIconUrl from '@assets/icons/items/ring/thorns-ring.png';
+import blueRingIconUrl from '@assets/icons/items/ring/blue-ring.svg';
+import greenRingIconUrl from '@assets/icons/items/ring/green-ring.svg';
+import greyRingIconUrl from '@assets/icons/items/ring/grey-ring.svg';
+import orangeRingIconUrl from '@assets/icons/items/ring/orange-ring.svg';
+import purpleRingIconUrl from '@assets/icons/items/ring/purple-ring.svg';
+import redRingIconUrl from '@assets/icons/items/ring/red-ring.svg';
+import tealRingIconUrl from '@assets/icons/items/ring/teal-ring.svg';
+import thornsRingIconUrl from '@assets/icons/items/ring/thorns-ring.svg';
+import yellowRingIconUrl from '@assets/icons/items/ring/yellow-ring.svg';
 
 // Shield
 import roundShieldIconUrl from '@assets/icons/items/shields/round-shield.svg';
@@ -59,7 +59,7 @@ import longbowIconUrl from '@assets/icons/items/weapons/longbow.svg';
 import longswordIconUrl from '@assets/icons/items/weapons/longsword.png';
 import maceIconUrl from '@assets/icons/items/weapons/mace.svg';
 import poisonBiteIconUrl from '@assets/icons/items/weapons/poison-bite.svg';
-import quarterIconUrl from '@assets/icons/items/weapons/quarterstaff.png';
+import quarterstaffIconUrl from '@assets/icons/items/weapons/quarterstaff.svg';
 import wandIconUrl from '@assets/icons/items/weapons/wand.svg';
 
 // Armour
@@ -91,15 +91,16 @@ const wisdomNecklaceIcon: Icon = { src: purpleNecklaceIconUrl, alt: 'Wisdom Neck
 const healingPotionIcon: Icon = { src: healingPotionIconUrl, alt: 'Healing Potion icon' };
 
 // Ring
-const accuracyRingIcon: Icon = { src: redRingIconUrl, alt: 'Accuracy Ring icon' };
-const damageRingIcon: Icon = { src: orangeRingIconUrl, alt: 'Damage Ring icon' };
-const critChanceRingIcon: Icon = { src: blackRingIconUrl, alt: 'Critical Chance Ring icon' };
-const critDamageRingIcon: Icon = { src: greyRingIconUrl, alt: 'Critical Damage icon' };
-const dodgeRingIcon: Icon = { src: shieldRingIconUrl, alt: 'Dodge Ring icon' }; // TODO replace this icon
+// try to have these somewhat match necks
+const accuracyRingIcon: Icon = { src: greyRingIconUrl, alt: 'Accuracy Ring icon' }; // black
+const damageRingIcon: Icon = { src: redRingIconUrl, alt: 'Damage Ring icon' }; // red
+const critChanceRingIcon: Icon = { src: yellowRingIconUrl, alt: 'Critical Chance Ring icon' };
+const critDamageRingIcon: Icon = { src: orangeRingIconUrl, alt: 'Critical Damage Ring icon' };
+const dodgeRingIcon: Icon = { src: greenRingIconUrl, alt: 'Dodge Ring icon' }; // green
 const thornsRingIcon: Icon = { src: thornsRingIconUrl, alt: 'Thorns Ring icon' };
-const mpHitRingIcon: Icon = { src: purpleRingIconUrl, alt: 'Mana Hit icon' };
-const mpRegenRingIcon: Icon = { src: blueRingIconUrl, alt: 'Mana Regen icon' };
-const mpCostRingIcon: Icon = { src: tealRingIconUrl, alt: 'Mana Cost Ring icon' };
+const mpHitRingIcon: Icon = { src: purpleRingIconUrl, alt: 'Mana Hit Ring icon' }; // purple
+const mpRegenRingIcon: Icon = { src: blueRingIconUrl, alt: 'Mana Regen Ring icon' }; // blue
+const mpCostRingIcon: Icon = { src: tealRingIconUrl, alt: 'Mana Cost Ring icon' }; // teal
 
 // Shield
 const roundShieldIcon: Icon = { src: roundShieldIconUrl, alt: 'Round Shield icon' };
@@ -120,9 +121,8 @@ const longbowIcon: Icon = { src: longbowIconUrl, alt: 'Longbow icon' };
 const longswordIcon: Icon = { src: longswordIconUrl, alt: 'Longsword icon' };
 const maceIcon: Icon = { src: maceIconUrl, alt: 'Mace icon' };
 const poisonBiteIcon: Icon = { src: poisonBiteIconUrl, alt: 'Poison bite icon' };
-const quarterstaffIcon: Icon = { src: quarterIconUrl, alt: 'Quarterstaff icon' };
+const quarterstaffIcon: Icon = { src: quarterstaffIconUrl, alt: 'Quarterstaff icon' };
 const wandIcon: Icon = { src: wandIconUrl, alt: 'Wand icon' };
-
 
 
 // Maps
@@ -333,6 +333,10 @@ const weaponIconMap: Record<WeaponId, Icon> = {
 
     poisonbite0: poisonBiteIcon,
     poisonbite1: poisonBiteIcon,
+    poisonbite2: poisonBiteIcon,
+    poisonbite3: poisonBiteIcon,
+    poisonbite4: poisonBiteIcon,
+    poisonbite5: poisonBiteIcon,
 
     quarterstaff0: quarterstaffIcon,
     quarterstaff1: quarterstaffIcon,

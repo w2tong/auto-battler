@@ -7,5 +7,7 @@ const BATTLE_SPEEDS = {
     '4x': 4,
     '10x': 10,
 };
+const FILTER_NONE_VALUE = 'none';
+const TRASH_ID = 'trash';
 
-export { MAX_CHARACTERS, NAME_MAX_LENGTH, BATTLE_SPEEDS };
+export { MAX_CHARACTERS, NAME_MAX_LENGTH, BATTLE_SPEEDS, FILTER_NONE_VALUE, TRASH_ID };

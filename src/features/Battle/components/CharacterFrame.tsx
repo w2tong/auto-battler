@@ -1,7 +1,7 @@
 import ResourceBar, { Resource } from './ResourceBar';
 import StatusEffectBar from './StatusEffectBar';
 import { formatNum } from '@/utils/stats';
-import { cn } from '@utils/utils';
+import { cn, textOutlineStyle } from '@utils/utils';
 import CharacterFrameTooltip from './CharacterFrameTooltip';
 import BattleCharacter from '../types/BattleCharacter';
 import classIconMap from '@utils/classIconMap';
@@ -27,14 +27,21 @@ export default function CharacterFrame({ name, level, className, npcId, currHeal
             >
                 <div className='flex flex-row w-full h-18'>
                     <div className='relative h-full'>
+                        {/* text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; */}
+                        <span
+                            className='absolute font-bold'
+                            style={textOutlineStyle}
+                        >
+                            Lvl. {level}
+                        </span>
                         <img className='h-full' src={icon.src} alt={icon.alt} />
                         {isDead && (
                             <div className="absolute inset-0 bg-negative opacity-50 pointer-events-none" />
                         )}
                     </div>
-                    <div className='flex-1 truncate'>
-                        <div className={cn('font-bold truncate', isDead && 'text-negative')}>
-                            Lvl. {level} <span className={classColor}>{className}</span> - <span className={classColor}>{name}</span>
+                    <div className='flex-1 truncate text-sm'>
+                        <div className={cn('font-bold truncate', isDead && 'text-negative', classColor)}>
+                            {name}
                         </div>
                         <ResourceBar resource={Resource.Health} curr={formatNum(currHealth)} max={formatNum(maxHealth)} />
                         {manaCost > 0 && <ResourceBar resource={Resource.Mana} curr={formatNum(currMana)} max={formatNum(manaCost)} />}

@@ -1,12 +1,17 @@
-import { DndContext, DragEndEvent } from "@dnd-kit/core";
+import { DndContext, DragEndEvent, MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { ActionUpdateEquipment, useCharacters, useCharactersDispatch } from "@contexts/Characters/CharactersContext";
 import Equipment from "./components/Equipment";
 import Inventory from "./components/Inventory";
-import { equips, EquipSlot, isValidEquip, ItemType, WeaponTypeProperties } from "@wholesome-sisters/auto-battler";
+import { equips, EquipSlot, isValidEquip, ItemId, ItemType, WeaponTypeProperties } from "@wholesome-sisters/auto-battler";
 import { useInventory, useInventoryDispatch } from "@contexts/Inventory/InventoryContext";
 import { useState } from "react";
 import ItemSort from "../../types/ItemSort";
 import { cn } from "@utils/utils";
+import Trash from "./components/Trash";
+import { TRASH_ID } from "@/utils/constants";
+import { toast } from "sonner";
+import { useLocalStorage } from "usehooks-ts";
+import { LocalStorageKey } from "@/types/LocalStorage";
 
 export default function EquipmentInventory({ className }: { className?: string; }) {
     const { list, selected } = useCharacters();
@@ -18,6 +23,8 @@ export default function EquipmentInventory({ className }: { className?: string; 
 
     const [inventorySort, setInventorySort] = useState<string>('');
 
+    const [trashItemId, setTrashItemId] = useLocalStorage<ItemId | null>(LocalStorageKey.Trash, null);
+
     function handleSortOnChange(sort: string) {
         setInventorySort(() => sort);
         inventoryDispatch({ type: 'sort', sort: sort as ItemSort });
@@ -27,16 +34,32 @@ export default function EquipmentInventory({ className }: { className?: string; 
         setInventorySort(() => '');
     }
 
+    const mouseSensor = useSensor(MouseSensor);
+    const touchSensor = useSensor(TouchSensor, {
+        activationConstraint: {
+            delay: 250,
+            tolerance: 20,
+        },
+    });
+
+    const sensors = useSensors(
+        mouseSensor,
+        touchSensor,
+    );
+
     return (
-        <div className={cn('flex flex-row space-x-4', className)}>
-            <DndContext onDragEnd={handleDragEnd}>
-                <Equipment equipment={equipment} />
+        <div className={cn('flex flex-col', className)}>
+            <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
+                <div className='flex flex-row gap-x-4 sm:gap-x-6'>
+                    <Equipment equipment={equipment} />
+                    <Trash itemId={trashItemId} />
+                </div>
                 <Inventory
                     items={inventory}
                     sort={inventorySort}
                     sortOnChange={handleSortOnChange}
-                    onItemRightClick={handleItemRightClick}
                 />
+
             </DndContext>
         </div >
     );
@@ -47,10 +70,16 @@ export default function EquipmentInventory({ className }: { className?: string; 
 
         const activeId = event.active.id;
         const overId = event.over.id;
-        if (event.active.id === event.over.id) return;
+        if (activeId === overId) return;
 
-        const activeIsEquip = equipSlots.includes(event.active.id as EquipSlot);
-        const overIsEquip = equipSlots.includes(event.over.id as EquipSlot);
+        const activeIsEquip = equipSlots.includes(activeId as EquipSlot);
+        const overIsEquip = equipSlots.includes(overId as EquipSlot);
+
+        const activeIsInv = !isNaN(Number(activeId));
+        const overIsInv = !isNaN(Number(overId));
+
+        const activeIsTrash = activeId === TRASH_ID;
+        const overIsTrash = overId === TRASH_ID;
 
         // Equipment Item dragged to Equipment Slot 
         if (activeIsEquip && overIsEquip) {
@@ -63,22 +92,22 @@ export default function EquipmentInventory({ className }: { className?: string; 
             charactersDispatch({ type: 'swapEquipment', index: selected, slot1: equipActiveId, slot2: equipOverId });
         }
         // Equipment Item dragged to Inventory Slot
-        else if (activeIsEquip) {
-            const activeEquipId = activeId as EquipSlot;
-            const iOverId = Number(overId);
-            const equipItem = equipment[activeEquipId];
-            const invItem = inventory[iOverId] ?? null;
+        else if (activeIsEquip && overIsInv) {
+            const equipActiveId = activeId as EquipSlot;
+            const invOverId = Number(overId);
+            const equipItem = equipment[equipActiveId];
+            const invItem = inventory[invOverId] ?? null;
 
             if (!equipItem) return;
 
-            const equipChanges: ActionUpdateEquipment = { [activeEquipId]: invItem };
+            const equipChanges: ActionUpdateEquipment = { [equipActiveId]: invItem };
             resetInventorySort();
-            inventoryDispatch({ type: 'update', index: iOverId, itemId: equipItem });
+            inventoryDispatch({ type: 'update', index: invOverId, itemId: equipItem });
 
             if (equipItem && invItem) {
-                if (!isValidEquip(invItem, activeEquipId)) return;
+                if (!isValidEquip(invItem, equipActiveId)) return;
                 // Unequip off hand if equipping two-handed weapon
-                if (activeEquipId === EquipSlot.MainHand) {
+                if (equipActiveId === EquipSlot.MainHand) {
                     const item = equips[invItem];
                     if (item.itemType === ItemType.Weapon && WeaponTypeProperties[item.type].twoHanded && equipment[EquipSlot.OffHand]) {
                         inventoryDispatch({ type: 'update', itemId: equipment[EquipSlot.OffHand] });
@@ -90,21 +119,21 @@ export default function EquipmentInventory({ className }: { className?: string; 
             charactersDispatch({ type: 'update', index: selected, equipment: equipChanges });
         }
         // Inventory Item dragged to Equipment Slot
-        else if (overIsEquip) {
-            const iActiveId = Number(activeId);
-            const overEquipId = overId as EquipSlot;
-            const equipItem = equipment[overEquipId];
-            const invItem = inventory[iActiveId];
+        else if (activeIsInv && overIsEquip) {
+            const invActiveId = Number(activeId);
+            const equipOverId = overId as EquipSlot;
+            const equipItem = equipment[equipOverId];
+            const invItem = inventory[invActiveId];
 
             if (invItem === null) return;
-            if (!isValidEquip(invItem, overEquipId)) return;
+            if (!isValidEquip(invItem, equipOverId)) return;
 
-            const equipChanges: ActionUpdateEquipment = { [overEquipId]: invItem };
+            const equipChanges: ActionUpdateEquipment = { [equipOverId]: invItem };
             resetInventorySort();
-            inventoryDispatch({ type: 'update', index: iActiveId, itemId: equipItem });
+            inventoryDispatch({ type: 'update', index: invActiveId, itemId: equipItem });
 
             // Unequip off hand if equipping two-handed weapon
-            if (overEquipId === EquipSlot.MainHand) {
+            if (equipOverId === EquipSlot.MainHand) {
                 const item = equips[invItem];
                 if (item.itemType === ItemType.Weapon && WeaponTypeProperties[item.type].twoHanded && equipment[EquipSlot.OffHand]) {
                     inventoryDispatch({ type: 'update', itemId: equipment[EquipSlot.OffHand] });
@@ -112,7 +141,7 @@ export default function EquipmentInventory({ className }: { className?: string; 
                 }
             }
             // Unequip main hand if its two-handed
-            else if (overEquipId === EquipSlot.OffHand && equipment[EquipSlot.MainHand]) {
+            else if (equipOverId === EquipSlot.OffHand && equipment[EquipSlot.MainHand]) {
                 const mainHand = equips[equipment[EquipSlot.MainHand]];
                 if (mainHand.itemType === ItemType.Weapon && WeaponTypeProperties[mainHand.type].twoHanded) {
                     inventoryDispatch({ type: 'update', itemId: equipment[EquipSlot.MainHand] });
@@ -123,18 +152,33 @@ export default function EquipmentInventory({ className }: { className?: string; 
             charactersDispatch({ type: 'update', index: selected, equipment: equipChanges });
         }
         // Inventory Item dragged to Inventory Slot
-        else {
-            const iActiveId = Number(activeId);
-            const iOverId = Number(overId);
+        else if (activeIsInv && overIsInv) {
+            const invActiveId = Number(activeId);
+            const invOverId = Number(overId);
             resetInventorySort();
-            inventoryDispatch({ type: 'swap', index1: iActiveId, index2: iOverId });
+            inventoryDispatch({ type: 'swap', index1: invActiveId, index2: invOverId });
         }
-    }
-
-    function handleItemRightClick(index: number) {
-        if (inventory[index] != null) {
-            inventoryDispatch({ type: 'update', index, itemId: null });
-            resetInventorySort();
+        // Inventory Item dragged to Inventory Slot
+        else if (activeIsInv && overIsTrash) {
+            const invActiveId = Number(activeId);
+            const itemId = inventory[invActiveId];
+            inventoryDispatch({ type: 'update', index: invActiveId, itemId: null });
+            setTrashItemId(itemId);
+        }
+        // Trash dragged to Inventory Slot
+        else if (activeIsTrash && overIsInv) {
+            const overInvId = Number(overId);
+            if (inventory[overInvId] !== null && inventory[overInvId] !== undefined) {
+                toast('You can only move this item to an empty slot.');
+            }
+            else {
+                const itemId = trashItemId;
+                inventoryDispatch({ type: 'update', index: overInvId, itemId });
+                setTrashItemId(null);
+            }
+        }
+        else {
+            toast('You cannot move items between Equipment and Trash.');
         }
     }
 }

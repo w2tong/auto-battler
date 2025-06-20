@@ -33,6 +33,16 @@ import orangeNecklaceIconUrl from '@assets/icons/items/neck/orange-necklace.svg'
 import purpleNecklaceIconUrl from '@assets/icons/items/neck/purple-necklace.svg';
 import redNecklaceIconUrl from '@assets/icons/items/neck/red-necklace.svg';
 
+import blueRingIconUrl from '@assets/icons/items/ring/blue-ring.svg';
+import greenRingIconUrl from '@assets/icons/items/ring/green-ring.svg';
+import greyRingIconUrl from '@assets/icons/items/ring/grey-ring.svg';
+import orangeRingIconUrl from '@assets/icons/items/ring/orange-ring.svg';
+import purpleRingIconUrl from '@assets/icons/items/ring/purple-ring.svg';
+import redRingIconUrl from '@assets/icons/items/ring/red-ring.svg';
+import tealRingIconUrl from '@assets/icons/items/ring/teal-ring.svg';
+import thornsRingIconUrl from '@assets/icons/items/ring/thorns-ring.svg';
+import yellowRingIconUrl from '@assets/icons/items/ring/yellow-ring.svg';
+
 import roundShieldIconUrl from '@assets/icons/items/shields/round-shield.svg';
 import spikedShieldIconUrl from '@assets/icons/items/shields/spiked-shield.svg';
 
@@ -44,6 +54,7 @@ import longbowIconUrl from '@assets/icons/items/weapons/longbow.svg';
 import maceIconUrl from '@assets/icons/items/weapons/mace.svg';
 import poisonBiteIconUrl from '@assets/icons/items/weapons/poison-bite.svg';
 import wandIconUrl from '@assets/icons/items/weapons/wand.svg';
+import quarterstaffIconUrl from '@assets/icons/items/weapons/quarterstaff.svg';
 
 
 import goblinIconUrl from '@assets/icons/npcs/goblin.svg';
@@ -52,6 +63,22 @@ import orcIconUrl from '@assets/icons/npcs/orc.svg';
 import ratIconUrl from '@assets/icons/npcs/rat.svg';
 import wolfIconUrl from '@assets/icons/npcs/wolf.svg';
 import zombieIconUrl from '@assets/icons/npcs/zombie.svg';
+
+import mainHandIconUrl from '@assets/icons/items/slots/main-hand.png';
+import offHandIconUrl from '@assets/icons/items/slots/off-hand.png';
+import headIconUrl from '@assets/icons/items/slots/head.png';
+import amrourIconUrl from '@assets/icons/items/slots/armour.png';
+import handsIconUrl from '@assets/icons/items/slots/hands.png';
+import ringIconUrl from '@assets/icons/items/slots/ring.png';
+import potionIconUrl from '@assets/icons/items/slots/potion.png';
+import waistIconUrl from '@assets/icons/items/slots/waist.png';
+import neckIconUrl from '@assets/icons/items/slots/neck.png';
+import inventoryIconUrl from '@assets/icons/items/slots/inventory.png';
+import trashCanIconUrl from '@assets/icons/items/slots/trash-can.png';
+
+
+import questionMarkIconUrl from '@assets/icons/gui/question-mark.svg';
+import equipmentIconUrl from '@assets/icons/gui/equipment.svg';
 
 type CreditProps = {
     src: string,
@@ -71,7 +98,7 @@ const licenses: Record<string, License> = {
 };
 
 type Artist = { name: string, link: string; };
-type ArtistId = 'Lorc' | 'Delapouite' | 'CarlOlsen' | 'Willdabeast' | 'JohnRedman' | 'HeavenlyDog';
+type ArtistId = 'Lorc' | 'Delapouite' | 'CarlOlsen' | 'Willdabeast' | 'JohnRedman' | 'HeavenlyDog' | 'Lucas' | 'sbed' | 'CaroAsercion' | 'Skoll';
 const artists: Record<ArtistId, Artist> = {
     Lorc: {
         name: 'Lorc',
@@ -97,11 +124,26 @@ const artists: Record<ArtistId, Artist> = {
         name: 'HeavenlyDog',
         link: 'https://gnomosygoblins.blogspot.com/'
     },
+    Lucas: {
+        name: 'Lucas',
+        link: 'https://game-icons.net/'
+    },
+    sbed: {
+        name: 'sbed',
+        link: 'http://opengameart.org/content/95-game-icons'
+    },
+    CaroAsercion: {
+        name: 'Caro Asercion',
+        link: 'https://game-icons.net/'
+    },
+    Skoll: {
+        name: 'Skoll',
+        link: 'https://game-icons.net/'
+    }
 } as const;
 
 // Classes
 const classes: CreditProps[] = [
-
     {
         src: fighterIconUrl,
         alt: 'Fighter icon',
@@ -334,6 +376,88 @@ const necks: CreditProps[] = [
 
 
 ];
+const rings: CreditProps[] = [
+    {
+        src: blueRingIconUrl,
+        alt: 'Mana Regen Ring icon',
+        imgName: 'Big diamond ring',
+        imgLink: 'https://game-icons.net/1x1/skoll/big-diamond-ring.html',
+        artist: artists.Skoll,
+        license: licenses.CCBY30
+    },
+    {
+        src: greenRingIconUrl,
+        alt: 'Dodge Ring icon',
+        imgName: 'Big diamond ring',
+        imgLink: 'https://game-icons.net/1x1/skoll/big-diamond-ring.html',
+        artist: artists.Skoll,
+        license: licenses.CCBY30
+    },
+    {
+        src: greyRingIconUrl,
+        alt: 'Accuracy Ring icon',
+        imgName: 'Big diamond ring',
+        imgLink: 'https://game-icons.net/1x1/skoll/big-diamond-ring.html',
+        artist: artists.Skoll,
+        license: licenses.CCBY30
+    },
+    {
+        src: orangeRingIconUrl,
+        alt: 'Critical Damage Ring icon',
+        imgName: 'Big diamond ring',
+        imgLink: 'https://game-icons.net/1x1/skoll/big-diamond-ring.html',
+        artist: artists.Skoll,
+        license: licenses.CCBY30
+    },
+    {
+        src: purpleRingIconUrl,
+        alt: 'Mana Hit Ring icon',
+        imgName: 'Big diamond ring',
+        imgLink: 'https://game-icons.net/1x1/skoll/big-diamond-ring.html',
+        artist: artists.Skoll,
+        license: licenses.CCBY30
+    },
+    {
+        src: redRingIconUrl,
+        alt: 'Damage Ring icon',
+        imgName: 'Big diamond ring',
+        imgLink: 'https://game-icons.net/1x1/skoll/big-diamond-ring.html',
+        artist: artists.Skoll,
+        license: licenses.CCBY30
+    },
+    {
+        src: tealRingIconUrl,
+        alt: 'Mana Cost Ring icon',
+        imgName: 'Big diamond ring',
+        imgLink: 'https://game-icons.net/1x1/skoll/big-diamond-ring.html',
+        artist: artists.Skoll,
+        license: licenses.CCBY30
+    },
+    {
+        src: thornsRingIconUrl,
+        alt: 'Thorns Ring icon',
+        imgName: 'Crown of thorns',
+        imgLink: 'https://game-icons.net/1x1/lorc/crown-of-thorns.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: tealRingIconUrl,
+        alt: 'Mana Cost Ring icon',
+        imgName: 'Big diamond ring',
+        imgLink: 'https://game-icons.net/1x1/skoll/big-diamond-ring.html',
+        artist: artists.Skoll,
+        license: licenses.CCBY30
+    },
+    {
+        src: yellowRingIconUrl,
+        alt: 'Critical Chance Ring icon',
+        imgName: 'Big diamond ring',
+        imgLink: 'https://game-icons.net/1x1/skoll/big-diamond-ring.html',
+        artist: artists.Skoll,
+        license: licenses.CCBY30
+    },
+];
 const shields: CreditProps[] = [
     {
         src: roundShieldIconUrl,
@@ -417,6 +541,14 @@ const weapons: CreditProps[] = [
         artist: artists.Willdabeast,
         license: licenses.CCBY30
     },
+    {
+        src: quarterstaffIconUrl,
+        alt: 'Quarterstaff icon',
+        imgName: 'Bo',
+        imgLink: 'https://game-icons.net/1x1/delapouite/bo.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
 ];
 
 // NPCS
@@ -471,35 +603,155 @@ const npcs: CreditProps[] = [
     },
 ];
 
+// Item Slots
+const itemSlots: CreditProps[] = [
+    {
+        src: mainHandIconUrl,
+        alt: 'Main-hand icon',
+        imgName: 'Crossed swords',
+        imgLink: 'https://game-icons.net/1x1/lorc/crossed-swords.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: offHandIconUrl,
+        alt: 'Off-hand icon',
+        imgName: 'Shield',
+        imgLink: 'https://game-icons.net/1x1/sbed/shield.html',
+        artist: artists.sbed,
+        license: licenses.CCBY30
+    },
+    {
+        src: headIconUrl,
+        alt: 'Head icon',
+        imgName: 'Barbute',
+        imgLink: 'https://game-icons.net/1x1/lorc/barbute.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: amrourIconUrl,
+        alt: 'Armour icon',
+        imgName: 'Chest armor',
+        imgLink: 'https://game-icons.net/1x1/delapouite/chest-armor.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
+    {
+        src: handsIconUrl,
+        alt: 'Hands icon',
+        imgName: 'Gloves',
+        imgLink: 'https://game-icons.net/1x1/delapouite/chest-armor.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
+    {
+        src: ringIconUrl,
+        alt: 'Ring icon',
+        imgName: 'Diamond ring',
+        imgLink: 'https://game-icons.net/1x1/delapouite/diamond-ring.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
+    {
+        src: potionIconUrl,
+        alt: 'Potion icon',
+        imgName: 'Round potion',
+        imgLink: 'https://game-icons.net/1x1/caro-asercion/round-potion.html',
+        artist: artists.CaroAsercion,
+        license: licenses.CCBY30
+    },
+    {
+        src: waistIconUrl,
+        alt: 'Waist icon',
+        imgName: 'Belt',
+        imgLink: 'https://game-icons.net/1x1/lucasms/belt.html',
+        artist: artists.Lucas,
+        license: licenses.CCBY30
+    },
+    {
+        src: neckIconUrl,
+        alt: 'Neck icon',
+        imgName: 'Belt',
+        imgLink: 'https://game-icons.net/1x1/delapouite/emerald-necklace.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
+    {
+        src: inventoryIconUrl,
+        alt: 'Inventory icon',
+        imgName: 'Swap bag',
+        imgLink: 'https://game-icons.net/1x1/lorc/swap-bag.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    },
+    {
+        src: trashCanIconUrl,
+        alt: 'Trash can icon',
+        imgName: 'Trash can',
+        imgLink: 'https://game-icons.net/1x1/delapouite/trash-can.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    }
+];
+
+// GUI
+const gui: CreditProps[] = [
+    {
+        src: questionMarkIconUrl,
+        alt: 'Question mark icon',
+        imgName: 'Uncertainty',
+        imgLink: 'https://game-icons.net/1x1/lorc/uncertainty.html',
+        artist: artists.Lorc,
+        license: licenses.CCBY30
+    },
+    {
+        src: equipmentIconUrl,
+        alt: 'Equipment icon',
+        imgName: 'Cape armor',
+        imgLink: 'https://game-icons.net/1x1/delapouite/cape-armor.html',
+        artist: artists.Delapouite,
+        license: licenses.CCBY30
+    }
+];
+
 function Credit({ src, alt, imgName, imgLink, artist, license }: CreditProps) {
     return (
-        <div className='flex items-center'>
-            <span><img className='h-8 inline' src={src} alt={alt} /><a className='font-bold text-tooltip-highlight' href={imgLink}>{imgName}</a> by <a className='font-bold text-tooltip-highlight' href={artist.link}> {artist.name}</a> under <a className='font-bold text-tooltip-highlight' href={license.link}>{license.name}</a>.</span>
+        <div className='flex items-center text-xl'>
+            <span>
+                <img className='h-12 inline pr-2' src={src} alt={alt} /><a className='font-bold text-tooltip-highlight' href={imgLink}>{imgName}</a> by <a className='font-bold text-tooltip-highlight' href={artist.link}> {artist.name}</a> under <a className='font-bold text-tooltip-highlight' href={license.link}>{license.name}</a>.</span>
         </div>
     );
 }
 
 function CreditsGroup({ name, credits }: { name: string, credits: CreditProps[]; }) {
     return (
-        <>
-            <h2>{name}</h2>
-            {Object.values(credits).map(props => <Credit {...props} />)}
-        </>
+        <div>
+            <h2 className='text-2xl font-bold pb-2'>{name}</h2>
+            <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3'>
+                {Object.values(credits).map((props, i) => <Credit key={name + i} {...props} />)}
+            </div>
+        </div>
     );
 }
 
 export default function Credits() {
     return (
-        <div>
-            <h1>Credits</h1>
-            <CreditsGroup name={'Classes'} credits={classes} />
-            <CreditsGroup name={'Status Effects'} credits={statusEffects} />
-            <CreditsGroup name={'Armour'} credits={armour} />
-            <CreditsGroup name={'Heads'} credits={heads} />
-            <CreditsGroup name={'Necks'} credits={necks} />
-            <CreditsGroup name={'Shields'} credits={shields} />
-            <CreditsGroup name={'Weapons'} credits={weapons} />
-            <CreditsGroup name={'NPCs'} credits={npcs} />
+        <div className='px-6 py-4 space-y-4'>
+            <h1 className='text-3xl font-bold'>Credits</h1>
+            <div className='space-y-10'>
+                <CreditsGroup name={'Classes'} credits={classes} />
+                <CreditsGroup name={'Status Effects'} credits={statusEffects} />
+                <CreditsGroup name={'Armour'} credits={armour} />
+                <CreditsGroup name={'Heads'} credits={heads} />
+                <CreditsGroup name={'Necks'} credits={necks} />
+                <CreditsGroup name={'Rings'} credits={rings} />
+                <CreditsGroup name={'Shields'} credits={shields} />
+                <CreditsGroup name={'Weapons'} credits={weapons} />
+                <CreditsGroup name={'NPCs'} credits={npcs} />
+                <CreditsGroup name={'Item Slots'} credits={itemSlots} />
+                <CreditsGroup name={'GUI'} credits={gui} />
+            </div>
         </div>
     );
 }

@@ -3,7 +3,8 @@ import { useCharacters, useCharactersDispatch } from "@contexts/Characters/Chara
 import AttributeTooltip from "@components/AttributeTooltip";
 import { cn } from "@utils/utils";
 
-export default function CharacterSheetAttributes({ level, attributes }: { level: LevelRange, attributes: { [key in AttributeType]: { base: number, bonus: number; } }; }) {
+type CharacterSheetAttributesProps = { level: LevelRange, attributes: { [key in AttributeType]: { base: number, bonus: number; } }, className?: string; };
+export default function CharacterSheetAttributes({ level, attributes, className }: CharacterSheetAttributesProps) {
     const { selected } = useCharacters();
     const dispatch = useCharactersDispatch();
 
@@ -20,18 +21,18 @@ export default function CharacterSheetAttributes({ level, attributes }: { level:
     }
 
     return (
-        <div>
-            <h3>Attributes</h3>
+        <div className={cn('', className)}>
             {Object.entries(attributes).map(([attr, { base, bonus }]) => {
                 const min = Attributes.MIN_VALUE + bonus;
                 const max = Math.min(base + unspent, LEVEL_CAPS[level as LevelRange]) + bonus;
                 return (
                     <div className='flex justify-between w-full' key={attr}>
                         <AttributeTooltip type={attr as AttributeType} base={base} bonus={bonus}>
-                            <span className='mr-4 text-tooltip-highlight font-medium'>{attr}</span>
+                            <label className='mr-4 text-tooltip-highlight font-medium' htmlFor={attr}>{attr}</label>
                         </AttributeTooltip>
                         <input
-                            className='w-12 text-right border border-white p-0.5'
+                            id={attr}
+                            className='w-12 text-right border active:border-accent-foreground p-0.5'
                             type='number'
                             min={min}
                             max={max}
@@ -42,7 +43,7 @@ export default function CharacterSheetAttributes({ level, attributes }: { level:
                 );
             }
             )}
-            <p className='text-md text-bold'><span className={cn('font-extrabold', unspent > 0 && 'text-positive')}>{unspent}</span> unspent points</p>
+            <p className='text-lg text-center text-bold'><span className={cn('font-extrabold', unspent > 0 && 'text-positive')}>{unspent}</span> unspent points</p>
         </div>
     );
 }

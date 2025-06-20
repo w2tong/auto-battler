@@ -1,10 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { useCharactersDispatch } from "@contexts/Characters/CharactersContext";
 import BattleDisplay from "./components/BattleDisplay";
-import { abilities, AttributeType, Battle as AutoBattle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, StatType } from "@wholesome-sisters/auto-battler";
+import { abilities, AttributeType, Battle as AutoBattle, Character, createEquipmentImport, encounterExp, getRandomEncounter, levelExp, LevelRange, lootTables, Side, StatType, TurnRes } from "@wholesome-sisters/auto-battler";
 import BattleCharacter from "./types/BattleCharacter";
 import { useInventoryDispatch } from "@contexts/Inventory/InventoryContext";
-import Switch from "@components/Switch";
 import { LocalStorageCharacter, LocalStorageKey } from "../../types/LocalStorage";
 import { BuffBar, DebuffBar } from "../../types/StatusEffectBar";
 import PauseButton from "./components/PauseButton";
@@ -12,6 +11,7 @@ import { useInterval, useLocalStorage } from "usehooks-ts";
 import { Button } from "@/components/ui/button";
 import { BATTLE_SPEEDS } from "@/utils/constants";
 import BattleSpeed from "./components/BattleSpeed";
+import AutoStart from "./components/AutoStart";
 
 const DEFAULT_DELAY = 1000;
 
@@ -22,7 +22,7 @@ export default function Battle({ lsChar, index, encounterLevel }: { lsChar: Loca
     const [paused, setPaused] = useState<boolean>(false);
 
     const [battleSpeed, setBattleSpeed] = useLocalStorage<number>(LocalStorageKey.BattleSpeed, BATTLE_SPEEDS['1x']);
-    const [battleAutoStart, setBattleAutoStart] = useLocalStorage<boolean>(LocalStorageKey.BattleAutoStart, false);
+    const [autoStart, setAutoStart] = useLocalStorage<boolean>(LocalStorageKey.BattleAutoStart, false);
 
     const [combat, setCombat] = useState<'before' | 'in' | 'after'>('before');
 
@@ -76,7 +76,11 @@ export default function Battle({ lsChar, index, encounterLevel }: { lsChar: Loca
 
     useInterval(() => {
         if (battleRef.current) {
-            const turnRes = battleRef.current.nextTurn();
+            const battle = battleRef.current;
+            let turnRes: TurnRes = { combatEnded: false };
+
+            turnRes = battle.nextTurn();
+
             if (turnRes.combatEnded) {
                 setCombat('after');
                 if (turnRes.winner && turnRes.winner === Side.Left) {
@@ -89,8 +93,8 @@ export default function Battle({ lsChar, index, encounterLevel }: { lsChar: Loca
                         newExp = newExp - expReq;
                         newLevel += 1;
                     }
-                    battleRef.current.log.addExp(lsChar.name, expGain);
-                    if (newLevel > lsChar.level) battleRef.current.log.addLevelUp(lsChar.name, newLevel);
+                    battle.log.addExp(lsChar.name, expGain);
+                    if (newLevel > lsChar.level) battle.log.addLevelUp(lsChar.name, newLevel);
                     characterDispatch({ type: 'update', index, level: newLevel, exp: newExp });
 
                     // Add loot
@@ -98,46 +102,47 @@ export default function Battle({ lsChar, index, encounterLevel }: { lsChar: Loca
                     const lootTable = Math.random() <= leveledLootTable.rareChance ? leveledLootTable.rare : leveledLootTable.normal;
                     const itemId = lootTable[Math.floor(Math.random() * lootTable.length)];
                     inventoryDispatch({ type: 'update', itemId });
-                    battleRef.current.log.addLoot(lsChar.name, itemId);
+                    battle.log.addLoot(lsChar.name, itemId);
                 }
             }
+            else {
+                // Do turns of dead characters without delay (waiting for interval)
+                let char = battle.turnOrder[battle.turnIndex].char;
+                while (char.isDead()) {
+                    turnRes = battle.nextTurn();
+                    char = battle.turnOrder[battle.turnIndex].char;
+                    if (turnRes.combatEnded === true) break;
+                }
+            }
+
             setTurn(t => t + 1); // Force rerender
         }
     }, combat === 'in' && !paused ? DEFAULT_DELAY / battleSpeed : null);
 
     useEffect(() => {
-        if (battleAutoStart && combat === 'before') {
+        if (autoStart && combat === 'before') {
             startCombat();
         }
-    }, [battleAutoStart, combat]);
+    }, [autoStart, combat]);
 
     const battle = battleRef.current;
     return (
-        <div>
-            <div>
-                <Button onClick={() => newBattle()}>New Battle</Button>
-                {combat === 'before' && <Button onClick={() => startCombat()}>Start Battle</Button>}
-            </div>
-
-            <div className='flex flex-row'>
-
-                {/* Pause Button */}
-                <PauseButton className='w-12 h-12' paused={paused} onClick={() => setPaused(prev => !prev)} />
-
-                <BattleSpeed speed={battleSpeed} onClick={setBattleSpeed} />
-
-                {/* Auto Start Toggle */}
-                <div className='flex flex-row items-center'>
-                    <h2>Auto Start: </h2>
-                    <Switch checked={battleAutoStart} onChange={() => setBattleAutoStart(auto => !auto)} />
+        <div className='flex flex-col justify-center w-full mx-0 xl:mx-auto 2xl:w-[1536px] pt-1'>
+            <div className='flex flex-row items-center h-[72px] gap-x-1 sm:gap-x-8 justify-evenly sm:justify-start'>
+                <div className='flex flex-col sm:flex-row flex-wrap w-fit sm:w-[210px] gap-1'>
+                    <Button onClick={() => newBattle()}>New Battle</Button>
+                    {combat === 'before' && <Button onClick={() => startCombat()}>Start Battle</Button>}
                 </div>
+                <PauseButton className='w-9 h-9' paused={paused} onClick={() => setPaused(prev => !prev)} />
+                <BattleSpeed speed={battleSpeed} onChange={setBattleSpeed} />
+                <AutoStart checked={autoStart} onChange={() => setAutoStart(auto => !auto)} />
             </div>
 
             {battle && (
                 <BattleDisplay
                     left={battle.left.map(char => toBattleCharacter(char))}
                     right={battle.right.map(char => toBattleCharacter(char))}
-                    turnOrder={battle.turnOrder.map(char => char.char.name)}
+                    turnOrder={battle.aliveTurnOrder.map(c => { return { name: c.char.name, index: c.index }; })}
                     turnIndex={battle.turnIndex}
                     combatLog={battle.log.flatLog}
                 />
@@ -188,9 +193,10 @@ function toBattleCharacter(char: Character): BattleCharacter {
         },
         stats: {
             [StatType.Accuracy]: char.stats.getAccuracy(char.equipment.mainHand.attackType),
-            [StatType.Dodge]: char.stats.dodge,
             [StatType.Armour]: char.stats.getStat(StatType.Armour),
+            [StatType.ArmourPenetration]: char.stats.getStat(StatType.ArmourPenetration),
             [StatType.Deflection]: char.stats.getStat(StatType.Deflection),
+            [StatType.Dodge]: char.stats.dodge,
         },
         mainHandDamage,
         offHandDamage,

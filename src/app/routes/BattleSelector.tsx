@@ -16,28 +16,31 @@ export default function BattlePage() {
         setLevelInput(() => Number(level));
     }
 
-    if (!lsChar) return (
-        'Select a character for entering a battle.'
-    );
     return (
-        <div className='flex flex-col'>
-            <h1>Battle</h1>
-            <div className='w-80 flex flex-row items-center space-x-2'>
-                <NavLink className='grow' to={`/battle/${levelInput}`}>
-                    <Button className='w-full'>Normal Encounter</Button>
-                </NavLink>
-                <label htmlFor='normal-level'>Level</label>
-                <Input
-                    id='normal-level'
-                    className='w-16'
-                    type='number'
-                    value={levelInput}
-                    min={1}
-                    max={20}
-                    onChange={handleLevelInputChange}
-                />
-            </div>
-            <Button className='w-80' disabled>Boss Encounter</Button>
+        <div className='flex flex-col w-full max-w-160 mx-auto gap-y-4 px-6 py-4'>
+            <h1 className='text-3xl font-bold text-center'>Battle</h1>
+            {lsChar ?
+                <div className='space-y-2'>
+                    <div className=' flex flex-row items-center space-x-2'>
+                        <NavLink className='grow' to={`/battle/${levelInput}`}>
+                            <Button className='w-full'>Normal Encounter</Button>
+                        </NavLink>
+                        <label htmlFor='normal-level' className='font-bold text-xl'>Level</label>
+                        <Input
+                            id='normal-level'
+                            className='w-16'
+                            type='number'
+                            value={levelInput}
+                            min={1}
+                            max={20}
+                            onChange={handleLevelInputChange}
+                        />
+                    </div>
+                    <Button className='w-full' disabled>Boss Encounter</Button>
+                </div>
+                :
+                <p className='w-fit mx-auto sm:mx-0'>Select a character to use this page.</p>
+            }
         </div >
     );
 }
