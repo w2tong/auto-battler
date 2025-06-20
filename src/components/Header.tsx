@@ -3,11 +3,11 @@ import CharacterSelect from "@features/CharacterSelect/CharacterSelect";
 import { cn } from "@utils/utils";
 
 import { ReactNode } from "react";
-import HomeIcon from '../../components/svgs/HomeIcon';
-import CharacterIcon from '../../components/svgs/CharacterIcon';
-import EquipmentIcon from '../../components/svgs/EquipmentIcon';
-import BattleIcon from '../../components/svgs/BattleIcon';
-import AccountIcon from '../../components/svgs/AccountIcon';
+import HomeIcon from './svgs/HomeIcon';
+import CharacterIcon from './svgs/CharacterIcon';
+import EquipmentIcon from './svgs/EquipmentIcon';
+import BattleIcon from './svgs/BattleIcon';
+import AccountIcon from './svgs/AccountIcon';
 
 const iconClassName = 'w-6 sm:w-8 h-6 sm:h-8';
 const navLinks: { to: string, text: string, icon: ReactNode; }[] = [
