@@ -33,7 +33,6 @@ export default function EquipmentPage() {
             <>
                 <EquipmentInventory />
                 <Collapsible open={characterSheetOpen} onOpenChange={toggle}>
-                    {/* TODO: replace with caret SVG */}
                     <CollapsibleTrigger>
                         <h1 className='text-xl font-bold flex flex-row items-center gap-0.5 cursor-pointer'>
                             <span>Character Sheet</span><img className='mt-[2px] w-8 h-8' src={characterSheetOpen ? caretUp : caretDown} />
