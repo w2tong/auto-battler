@@ -7,11 +7,8 @@ import { classTextColor } from "../../utils/classColour";
 import AbilitySelector from "./components/AbilitySelector";
 import { cn } from "@/utils/utils";
 import Pet from "./components/Pet";
-import { useToggle } from "usehooks-ts";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-
-import caretDown from '@assets/ui/caret-down.svg';
-import caretUp from '@assets/ui/caret-up.svg';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Separator } from "@/components/ui/separator";
 
 type CharacterSheetProps = { char: Character, exp: number; };
 export default function CharacterSheet({ char, exp }: CharacterSheetProps) {
@@ -62,8 +59,6 @@ export default function CharacterSheet({ char, exp }: CharacterSheetProps) {
         };
     }
 
-    const [petOpen, togglePetOpen] = useToggle(false);
-
     const classColor = char.className ? classTextColor[char.className] : '';
 
     return (
@@ -73,6 +68,8 @@ export default function CharacterSheet({ char, exp }: CharacterSheetProps) {
                 <div>Level {char.level} <b className={classColor}>{char.className}</b></div>
                 <div>{exp}/{levelExp[char.level as LevelRange]} Experience</div>
             </div>
+
+            <Separator />
 
             <div className='flex flex-row flex-wrap gap-6 flex-1'>
                 <div className='mx-auto sm:mx-0 space-y-2'>
@@ -86,6 +83,7 @@ export default function CharacterSheet({ char, exp }: CharacterSheetProps) {
                         [AttributeType.Wisdom]: { base: wis.base, bonus: wis.bonus },
                     }} />
                 </div>
+
                 <div className='space-y-2'>
                     <h3 className='text-xl font-bold text-center sm:text-left'>Stats</h3>
                     <CharacterSheetStats className='flex flex-row flex-wrap flex-1 justify-center sm:justify-start gap-4' stats={{
@@ -141,11 +139,16 @@ export default function CharacterSheet({ char, exp }: CharacterSheetProps) {
             </div>
 
             {char.className &&
-                <div className='space-y-2'>
-                    <h3 className='text-xl font-bold'>Abilities</h3>
-                    <AbilitySelector char={char} className={char.className} />
-                </div>
+                <>
+                    <Separator />
+                    <div className='space-y-2'>
+                        <h3 className='text-xl font-bold'>Abilities</h3>
+                        <AbilitySelector char={char} className={char.className} />
+                    </div>
+                </>
             }
+
+            <Separator />
 
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
                 <div className='space-y-2'>
@@ -181,17 +184,19 @@ export default function CharacterSheet({ char, exp }: CharacterSheetProps) {
             </div>
 
             {char.pet &&
-                <Collapsible open={petOpen} onOpenChange={togglePetOpen}>
-                    <CollapsibleTrigger>
-                        <h1 className='text-xl font-bold flex flex-row items-center gap-0.5 cursor-pointer'>
-                            <span>Pet</span><img className='mt-[2px] w-8 h-8' src={petOpen ? caretUp : caretDown} />
-                        </h1>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent>
-                        <Pet pet={char.pet} />
-                    </CollapsibleContent>
-                </Collapsible>
-
+                <>
+                    <Separator />
+                    <Accordion type="single" collapsible>
+                        <AccordionItem value="item-1">
+                            <AccordionTrigger className='justify-start items-center cursor-pointer gap-2'>
+                                <h3 className='text-lg font-bold'>Pet</h3>
+                            </AccordionTrigger>
+                            <AccordionContent>
+                                <Pet pet={char.pet} />
+                            </AccordionContent>
+                        </AccordionItem>
+                    </Accordion>
+                </>
             }
         </div>
     );
