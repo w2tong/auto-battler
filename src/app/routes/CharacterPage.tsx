@@ -15,7 +15,8 @@ export default function EquipmentPage() {
             attributes: selectedChar.attributes,
             statTemplate: {},
             equipment: createEquipmentImport(selectedChar.equipment),
-            ability: abilities[selectedChar.ability]
+            ability: abilities[selectedChar.ability],
+            petId: selectedChar.pet ?? undefined
         });
         content = <CharacterSheet char={char} exp={selectedChar.exp} />;
     }
