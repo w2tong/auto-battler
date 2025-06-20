@@ -105,13 +105,14 @@ export default function Battle({ lsChar, index, encounterLevel }: { lsChar: Loca
                     battle.log.addLoot(lsChar.name, itemId);
                 }
             }
-
-            // Do turns of dead characters without delay (waiting for interval)
-            let char = battle.turnOrder[battle.turnIndex].char;
-            while (char.isDead()) {
-                turnRes = battle.nextTurn();
-                char = battle.turnOrder[battle.turnIndex].char;
-                if (turnRes.combatEnded === true) break;
+            else {
+                // Do turns of dead characters without delay (waiting for interval)
+                let char = battle.turnOrder[battle.turnIndex].char;
+                while (char.isDead()) {
+                    turnRes = battle.nextTurn();
+                    char = battle.turnOrder[battle.turnIndex].char;
+                    if (turnRes.combatEnded === true) break;
+                }
             }
 
             setTurn(t => t + 1); // Force rerender
