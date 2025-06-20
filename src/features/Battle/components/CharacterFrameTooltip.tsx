@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Tooltip from "@components/Tooltip";
+import Tooltip from "@components/tooltip/Tooltip";
 import { AttributeType, StatType } from "@wholesome-sisters/auto-battler";
 import CharacterFrameStats from "../types/CharacterFrameStats";
 import CharacterFrameAttributes from "../types/CharacterFrameAttributes";
