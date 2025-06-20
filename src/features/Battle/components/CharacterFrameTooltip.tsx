@@ -50,13 +50,13 @@ export default function CharacterFrameTooltip({ name, attr, stats, mainHandDamag
             <div className='flex flex-row justify-between'>
                 <div>
                     <div className='font-bold'>Main-hand</div>
-                    <div><b>{formatNum(mainHandDamage.min)}</b> - <b>{formatNum(mainHandDamage.max)}</b> damage</div>
+                    <div><b>{formatNum(mainHandDamage.min)}</b> - <b>{formatNum(mainHandDamage.max)}</b> Damage</div>
                 </div>
                 <div>
                     {offHandDamage &&
                         <>
                             <div className='font-bold'>Off-hand</div>
-                            <div><b>{formatNum(offHandDamage.min)}</b> - <b>{formatNum(offHandDamage.max)}</b> damage</div>
+                            <div><b>{formatNum(offHandDamage.min)}</b> - <b>{formatNum(offHandDamage.max)}</b> Damage</div>
                         </>
                     }
                 </div>
