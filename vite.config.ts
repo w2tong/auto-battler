@@ -5,7 +5,7 @@ import path from 'path';
 
 // https://vite.dev/config/
 export default defineConfig({
-    base: "/auto-battler-client",
+    base: "/auto-battler",
     plugins: [
         react(),
         tailwindcss(),

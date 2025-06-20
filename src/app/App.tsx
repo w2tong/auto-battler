@@ -14,7 +14,7 @@ import CharacterPage from './routes/CharacterPage';
 function App() {
     return (
         <>
-            <BrowserRouter basename='/auto-battler-client'>
+            <BrowserRouter basename='/auto-battler'>
                 <CharactersProvider>
                     <InventoryProvider>
                         <Toaster position='top-center' />

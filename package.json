@@ -1,6 +1,6 @@
 {
-  "name": "auto-battler-client",
-  "homepage": "https://w2tong.github.io/auto-battler-client/",
+  "name": "auto-battler",
+  "homepage": "https://w2tong.github.io/auto-battler/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
