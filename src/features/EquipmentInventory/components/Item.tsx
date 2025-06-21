@@ -1,7 +1,7 @@
 import { equips, ItemId } from '@wholesome-sisters/auto-battler';
 
 import { tierBorderColor } from '@utils/tierColor';
-import ItemTooltip from '@components/ItemTooltip';
+import ItemTooltip from '@components/tooltip/ItemTooltip';
 import { memo } from 'react';
 import { itemIconMap } from '@utils/itemIcon';
 

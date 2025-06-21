@@ -1,6 +1,6 @@
 import { AttributeType, POINTS_PER_LEVEL, STARTING_POINTS, LEVEL_CAPS, LevelRange, Attributes } from "@wholesome-sisters/auto-battler";
 import { useCharacters, useCharactersDispatch } from "@contexts/Characters/CharactersContext";
-import AttributeTooltip from "@components/AttributeTooltip";
+import AttributeTooltip from "@components/tooltip/AttributeTooltip";
 import { cn } from "@utils/utils";
 
 type CharacterSheetAttributesProps = { level: LevelRange, attributes: { [key in AttributeType]: { base: number, bonus: number; } }, className?: string; };

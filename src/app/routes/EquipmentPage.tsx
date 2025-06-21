@@ -29,7 +29,7 @@ export default function EquipmentPage() {
                 <Accordion type="single" collapsible>
                     <AccordionItem value="item-1">
                         <AccordionTrigger className='justify-start items-center cursor-pointer gap-2'>
-                            <h1 className='text-lg font-bold'>Character Sheet</h1>
+                            <h1 className='text-xl sm:text-2xl font-bold'>Character Sheet</h1>
                         </AccordionTrigger>
                         <AccordionContent>
                             <CharacterSheet char={char} exp={selectedChar.exp} />
@@ -41,7 +41,7 @@ export default function EquipmentPage() {
     }
 
     return (
-        <div className='flex flex-col gap-y-4 px-4 py-4'>
+        <div className='flex flex-col gap-y-4 px-6 py-4'>
             {content}
         </div>
     );

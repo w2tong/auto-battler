@@ -1,5 +1,5 @@
 import { AbilityLine, AttackLine, DamageLine, DeathLine, equips, ExpLine, HitType, ItemId, LevelUpLine, LineType, LogLine, LootLine, NoTargetLine, PotionLine, ResultLine, TextLine, TurnLine } from "@wholesome-sisters/auto-battler";
-import ItemTooltip from "@components/ItemTooltip";
+import ItemTooltip from "@components/tooltip/ItemTooltip";
 import { tierTextColor } from "@utils/tierColor";
 import { formatNum } from "@utils/stats";
 import { cn } from "@utils/utils";

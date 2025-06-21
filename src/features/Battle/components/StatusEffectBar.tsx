@@ -2,7 +2,7 @@ import { Bleeding, Blessed, Buff, BuffId, Burning, Debuff, DebuffId, EnvenomWeap
 import Icon from "../../../types/Icon";
 import { buffIconMap, debuffIconMap } from "@utils/statusEffectIcon";
 import { BuffBar, DebuffBar } from "../../../types/StatusEffectBar";
-import Tooltip from "@components/Tooltip";
+import Tooltip from "@components/tooltip/Tooltip";
 import { cn } from "@utils/utils";
 import { ReactNode } from "react";
 import { formatNum } from "@utils/stats";

@@ -6,10 +6,10 @@ type AccountProps = { className?: string; };
 export default function Account({ className }: AccountProps) {
     return (
         <div className={cn('mx-auto w-full sm:w-[640px] space-y-4', className)}>
-            <h1 className='text-3xl font-bold text-center sm:text-left'>Account</h1>
+            <h1 className='text-3xl font-bold text-center'>Account</h1>
             <AccountImportExport />
 
-            <h2 className='text-2xl font-bold text-center sm:text-left'>Characters</h2>
+            <h2 className='text-2xl font-bold text-center'>Characters</h2>
             <AccountCharacterList />
         </div>
     );
