@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 type CardProps = { to: string, header: string, text: string, icon: ReactNode; };
 function Card({ to, header, text, icon }: CardProps) {
     return (
-        <NavLink to={to} className="flex flex-col items-center gap-2 p-6 rounded-lg border shadow bg-card hover:bg-hover-background fill-primary hover:fill-hover-foreground hover:text-hover-foreground">
+        <NavLink to={to} className="flex flex-col items-center gap-2 p-6 rounded-lg border shadow bg-card hover:bg-hover-background fill-primary hover:fill-active-foreground hover:text-active-foreground hover:border-active-foreground">
             {icon}
             <h2 className="text-xl font-semibold">{header}</h2>
             <p className="text-sm text-muted-foreground text-center">{text}</p>
