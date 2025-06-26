@@ -12,7 +12,7 @@ export default function CharacterSheetStats({ stats, className }: CharacterSheet
     const blockPower = stats.getStat(StatType.BlockPower);
 
     return (
-        <div className={cn('', className)}>
+        <div className={cn('text-base', className)}>
             <div className={COL_WIDTH}>
                 <h4 className={H4_CLASSES}>Defensive</h4>
                 <Stat stat={StatType.MaxHealth} num={stats.maxHealth} />

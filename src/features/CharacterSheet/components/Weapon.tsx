@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator";
 type WeaponProps = { name: string, type: WeaponType, min: number, max: number, accuracy: number, tier: Tier; };
 function Weapon({ name, type, min, max, accuracy, tier }: WeaponProps) {
     return (
-        <div>
+        <div className='text-base'>
             <div className={`font-bold ${tierTextColor[tier]}`}>{name}</div>
             <Separator className='my-1' />
             <div>{type}</div>

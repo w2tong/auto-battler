@@ -38,7 +38,7 @@ export default function Pet({ pet }: PetProps) {
 
             <div>
                 <h3 className='text-xl font-bold'>{pet.name}</h3>
-                <p>Pets inherit 50% of the owner's stats from attributes and items.</p>
+                <p className='text-base'>Pets inherit 50% of the owner's stats from attributes and items.</p>
             </div>
 
             <Separator />
