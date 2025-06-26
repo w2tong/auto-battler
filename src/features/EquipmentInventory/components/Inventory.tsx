@@ -31,7 +31,7 @@ export default function Inventory({ items, sort, sortOnChange, className }: Inve
                     <InventoryTierFilter value={tierFilter} onChange={updateTier} />
                     <InventoryTypeFilter value={typeFilter} onChange={updateType} />
                     <Input
-                        className='min-w-30 max-w-40 h-8'
+                        className='min-w-30 max-w-40'
                         type='text'
                         name='Name Filter'
                         placeholder='Filter By Name'
