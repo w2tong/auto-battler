@@ -9,6 +9,7 @@ import { cn } from "@/utils/utils";
 import Pet from "./components/Pet";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Separator } from "@/components/ui/separator";
+import AttributeInfoTooltip from "./components/AttributeInfoTooltip";
 
 type CharacterSheetProps = { char: Character, exp: number; };
 export default function CharacterSheet({ char, exp }: CharacterSheetProps) {
@@ -73,7 +74,10 @@ export default function CharacterSheet({ char, exp }: CharacterSheetProps) {
 
             <div className='flex flex-row flex-wrap gap-6 flex-1'>
                 <div className='mx-auto sm:mx-0 space-y-2'>
-                    <h3 className='text-xl font-bold'>Attributes</h3>
+                    <div className='flex flex-row items-center gap-1'>
+                        <h3 className='text-xl font-bold'>Attributes</h3>
+                        <AttributeInfoTooltip />
+                    </div>
                     <CharacterSheetAttributes level={char.level as LevelRange} attributes={{
                         [AttributeType.Strength]: { base: str.base, bonus: str.bonus },
                         [AttributeType.Dexterity]: { base: dex.base, bonus: dex.bonus },
