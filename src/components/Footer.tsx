@@ -1,9 +1,9 @@
 import { cn } from "@/utils/utils";
 import { NavLink } from "react-router";
 
-import info from '@assets/ui/info.svg';
 import githubLogo from '@assets/github/github-logo-white.png';
 import githubMark from '@assets/github/github-mark-white.svg';
+import InfoIcon from "./svgs/InfoIcon";
 
 type FooterProps = { className?: string; };
 export default function Footer({ className }: FooterProps) {
@@ -14,7 +14,7 @@ export default function Footer({ className }: FooterProps) {
 
                     <NavLink className='hover:underline' to={'/credits'}>
                         <div className='flex flex-col items-center gap-2 px-1 sm:px-6'>
-                            <img className='h-8' src={info} />
+                            <InfoIcon className='fill-foreground h-8' />
                             Credits
                         </div>
                     </NavLink>
