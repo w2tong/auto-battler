@@ -41,5 +41,5 @@ const attributeInfo =
 
 
 export default function AttributeInfoTooltip() {
-    return <InfoTooltip content={attributeInfo} />;
+    return <InfoTooltip content={attributeInfo} size={24} />;
 }
