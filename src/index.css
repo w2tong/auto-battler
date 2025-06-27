@@ -24,6 +24,13 @@ F5853F - Orange
     --color-secondary-hover: #1d4ed8;
     --color-secondary-active: #60a5fa;
 
+    /* Hover */
+    --color-hover-foreground: oklch(58.8% 0.158 241.966);
+    --color-hover-background: oklch(29.3% 0.066 243.157);
+    /* Active */
+    --color-active-foreground: oklch(74.6% 0.16 232.661);
+    --color-active-background: oklch(44.3% 0.11 240.79);
+
     /* Text Colors */
     --color-primary-text: #b5b5b5;
     --color-primary-text-hover: #e8e8e8;

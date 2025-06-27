@@ -1,11 +1,16 @@
 import { EquipSlot } from '@wholesome-sisters/auto-battler';
 import ItemSlot from './ItemSlot';
 import { cn } from '@utils/utils';
+import EquipmentInfoTooltip from './EquipmentInfoTooltip';
 
 export default function Equipment({ equipment, className }: { equipment: { [slot in EquipSlot]: string | null; }, className?: string; }) {
     return (
         <div className={cn(className)}>
-            <h1 className='text-xl sm:text-2xl font-bold pb-2'>Equipment</h1>
+            <div className='flex flex-row items-center gap-1 pb-2'>
+                <h1 className='text-xl sm:text-2xl font-bold align-middle'>Equipment</h1>
+                <EquipmentInfoTooltip />
+            </div>
+
             <div className='flex flex-row flex-wrap touch-manipulation'>
                 <ItemSlot id={EquipSlot.Head} itemId={equipment[EquipSlot.Head]} slot={EquipSlot.Head} />
                 <ItemSlot id={EquipSlot.Armour} itemId={equipment[EquipSlot.Armour]} slot={EquipSlot.Armour} />

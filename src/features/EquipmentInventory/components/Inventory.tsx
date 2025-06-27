@@ -8,6 +8,7 @@ import InventoryTierFilter from './InventoryTierFilter';
 import { FILTER_NONE_VALUE } from '@/utils/constants';
 import InventoryTypeFilter from './InventoryTypeFilter';
 import InventorySort from './InventorySort';
+import InventoryInfoTooltip from './InventoryInfoTooltip';
 
 // TODO: add keywords thats can be used in name filter (e.g. Attributes, Stats, on hit)
 type InventoryProps = { items: (string | null)[], sort: string, sortOnChange: (val: string) => void, className?: string; };
@@ -26,12 +27,15 @@ export default function Inventory({ items, sort, sortOnChange, className }: Inve
     return (
         <div className={cn('flex flex-col', className)}>
             <div>
-                <h1 className='text-xl sm:text-2xl font-bold'>Inventory</h1>
+                <div className='flex flex-row items-center gap-1'>
+                    <h1 className='text-xl sm:text-2xl font-bold'>Inventory</h1>
+                    <InventoryInfoTooltip />
+                </div>
                 <div className='flex flex-row flex-wrap py-1 items-end space-x-2 text-sm'>
                     <InventoryTierFilter value={tierFilter} onChange={updateTier} />
                     <InventoryTypeFilter value={typeFilter} onChange={updateType} />
                     <Input
-                        className='min-w-30 max-w-40 h-8'
+                        className='min-w-30 max-w-40'
                         type='text'
                         name='Name Filter'
                         placeholder='Filter By Name'

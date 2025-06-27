@@ -14,7 +14,7 @@ export default function AbilitySelector({ char, className }: AbilitySelectorProp
     }
 
     return (
-        <div className='grid grid-cols-2'>
+        <div className='grid grid-cols-1 sm:grid-cols-2'>
             {abilities.map(ability => <AbilityButton key={ability.name} ability={ability} char={char} updateAbility={updateAbility} />)}
         </div>
     );
@@ -28,7 +28,7 @@ function AbilityButton({ ability, char, updateAbility }: { ability: Ability, cha
             onClick={() => updateAbility(ability.id)}
             className={cn(
                 'w-full transition-colors cursor-pointer border px-4 py-2',
-                isSelected && 'bg-accent border-accent-foreground'
+                isSelected && 'bg-active-background border-active-foreground'
             )}
         >
             <AbilityCard ability={ability} description={ability.description(char)} />

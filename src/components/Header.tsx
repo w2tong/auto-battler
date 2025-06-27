@@ -29,8 +29,8 @@ function Header({ className }: { className?: string; }) {
                         key={i}
                         to={to}
                         className={({ isActive }) => cn(
-                            'flex-1 h-full text-primary-text hover:text-primary-text-hover fill-primary-text hover:fill-primary-text-hover',
-                            isActive && 'text-primary-text-active fill-primary-text-active'
+                            'flex-1 h-full text-foreground hover:text-hover-foreground fill-foreground hover:fill-hover-foreground',
+                            isActive && 'text-active-foreground fill-active-foreground'
                         )}
                     >
                         <button className='w-full h-full cursor-pointer text-[3vw] sm:text-[2vw] md:text-lg font-extrabold flex flex-col md:flex-row items-center justify-center gap-0 md:gap-1'>

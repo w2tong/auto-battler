@@ -14,7 +14,7 @@ type InventorySortProps = {
 export default function InventorySort({ value, onChange }: InventorySortProps) {
     return (
         <Select value={value} onValueChange={val => onChange(val)}>
-            <SelectTrigger className='w-[108px]' size='sm'>
+            <SelectTrigger className='w-[108px]'>
                 <SelectValue placeholder='Sort' />
             </SelectTrigger>
             <SelectContent className='w-[108px]'>

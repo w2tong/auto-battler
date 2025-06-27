@@ -1,4 +1,4 @@
-import { Character, StatType } from "@wholesome-sisters/auto-battler";
+import { Character, PET_STAT_RATIO, StatType } from "@wholesome-sisters/auto-battler";
 import AbilityCard from "./AbilityCard";
 import CharacterSheetStats from "./CharacterSheetStats";
 import { Separator } from "@/components/ui/separator";
@@ -38,7 +38,7 @@ export default function Pet({ pet }: PetProps) {
 
             <div>
                 <h3 className='text-xl font-bold'>{pet.name}</h3>
-                <p>Pets inherit 50% of the owner's stats from attributes and items.</p>
+                <p className='text-base'>Pets inherit <b>{PET_STAT_RATIO * 100}%</b> of the owner's stats from attributes and items.</p>
             </div>
 
             <Separator />
