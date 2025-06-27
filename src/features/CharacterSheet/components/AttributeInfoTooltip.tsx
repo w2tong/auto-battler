@@ -1,5 +1,5 @@
 import InfoTooltip from "@/components/tooltip/InfoTooltip";
-import { Separator } from "@radix-ui/react-separator";
+import { Separator } from "@/components/ui/separator";
 import { Attributes, LEVEL_CAPS, POINTS_PER_LEVEL, STARTING_POINTS } from "@wholesome-sisters/auto-battler";
 
 const map: Record<number, number[]> = {};
@@ -18,8 +18,8 @@ const caps = Object.entries(map).map(([cap, levels]) => {
     };
 });
 
-const attributeInfo =
-    <div className='text-pretty'>
+const content =
+    <div className='w-max max-w-80 space-y-1'>
         <div className='font-bold'>Attributes</div>
         <Separator />
         <div className='whitespace-pre-wrap space-y-3'>
@@ -41,5 +41,5 @@ const attributeInfo =
 
 
 export default function AttributeInfoTooltip() {
-    return <InfoTooltip content={attributeInfo} size={24} />;
+    return <InfoTooltip content={content} size={24} />;
 }

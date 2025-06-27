@@ -7,7 +7,7 @@ type TrashProps = { itemId: string | null; };
 export default function Trash({ itemId }: TrashProps) {
     return (
         <div>
-            <div className='flex flex-row items-center gap-1'>
+            <div className='flex flex-row items-center gap-1 pb-2'>
                 <h1 className='text-xl sm:text-2xl font-bold'>Trash</h1>
                 <TrashInfoTooltip />
             </div>

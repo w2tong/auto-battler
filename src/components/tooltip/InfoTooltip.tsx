@@ -5,7 +5,7 @@ import InfoIcon from "@components/svgs/InfoIcon";
 type InfoTooltip = { content: ReactNode, size: number; };
 export default function InfoTooltip({ content, size }: InfoTooltip) {
     return (
-        <Tooltip contentClassName='max-w-80' content={content}>
+        <Tooltip content={content}>
             <InfoIcon className='fill-foreground hover:fill-active-foreground' width={size} height={size} />
         </Tooltip>
     );
