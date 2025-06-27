@@ -90,7 +90,7 @@ export default function CharacterSheet({ char, exp }: CharacterSheetProps) {
 
                 <div className='space-y-2'>
                     <h3 className='text-xl font-bold text-center sm:text-left'>Stats</h3>
-                    <CharacterSheetStats className='flex flex-row flex-wrap flex-1 justify-center sm:justify-start gap-4' stats={char.stats} />
+                    <CharacterSheetStats className='flex flex-row flex-wrap flex-1 justify-center sm:justify-start gap-6' stats={char.stats} />
                 </div>
             </div>
 
