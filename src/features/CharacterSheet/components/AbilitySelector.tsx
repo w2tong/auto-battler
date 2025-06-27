@@ -14,7 +14,7 @@ export default function AbilitySelector({ char, className }: AbilitySelectorProp
     }
 
     return (
-        <div className='grid grid-cols-2'>
+        <div className='grid grid-cols-1 sm:grid-cols-2'>
             {abilities.map(ability => <AbilityButton key={ability.name} ability={ability} char={char} updateAbility={updateAbility} />)}
         </div>
     );
